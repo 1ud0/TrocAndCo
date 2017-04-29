@@ -1,0 +1,854 @@
+/* Tests pour les soucis de styles */
+
+
+table {
+   font-size: 14px !important;
+}
+
+
+/* your styles go here */
+
+#top .login a {
+    margin-left: 15px;
+    margin-right: 0;
+}
+
+.form-control {
+	border-width: 0px;
+}
+
+
+
+#search{
+padding: 20px 10px;
+margin-bottom: 20px;
+}
+
+select{
+	border: none;
+	margin-top: 2px;
+	background: transparent url("img/custom/flecheselect.png") no-repeat right center;
+}
+
+
+#search_button{
+	background-color: #fab414;
+	text-transform: none;
+	color: white;
+	font-weight: normal;
+	border-radius: 20px;
+	border: none;
+}
+
+#string_search{
+	margin-bottom: 10px;
+}
+
+
+.form-control:focus, .btn:focus, .btn:active:focus, .btn.active:focus{
+    border-color: transparent;
+    outline: 0;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+}
+
+
+.selecteur{
+	border-radius: 20px;
+	border: 1px solid #b7b7b7;
+	height: 3em;
+	padding: 0 20px;
+	margin-bottom: 10px;
+}
+
+
+.input-group-addon{
+	border: none;
+	background-color: transparent;
+}
+
+.btn-custom{
+	background-color: #fab414;
+	color: white;
+	border-radius: 20px;
+	text-transform: none;
+	font-weight: normal;
+	padding-left: 40px;
+	padding-right: 30px;
+}
+
+.btn-custom .glyphicon, .btn-vert .glyphicon{
+	margin-left: 10px;
+}
+
+
+
+#navbar {
+	border-bottom: 1px solid #e0e0e0;
+	padding: 20px 0;
+}
+
+#navbar li > a{
+font-size: 14px;
+font-style: bold;
+color: black;
+text-decoration: none;
+}
+
+.navbar .yamm-content h5{
+	font-weight: 600;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+}
+
+.navbar-header{
+	display: flex;
+	align-items: center;
+}
+
+input[type="text"], input[type="password"], input[type="date"] {
+	border-radius: 20px;
+	border: 1px solid #b7b7b7;
+	height: 3em;
+
+}
+
+
+input[type="text"]:focus, input[type="password"]:focus, input[type="date"]:focus {   
+  border-color: #80baac;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px #80baac;
+  outline: 0 none;
+}
+
+
+
+.logo{
+	font-weight: 700;
+  font-family: "Montserrat", Helvetica, Arial, sans-serif;
+font-size: 3em;
+color:black;
+}
+
+.logo:hover{
+color:grey;
+text-decoration: none;
+}
+
+
+
+/*  ENTETE */
+.entete{
+	background: url('../img/custom/entete.jpg') center;
+	background-size: cover;
+    height: 560px;
+    text-align: center;
+    display: flex;
+    align-items: center;
+}
+
+.entete h1{
+	font-weight: 700;
+	font-size: 4.2em;
+	color: white;
+	letter-spacing: 0.05em;
+	margin: 10px 0;
+	text-shadow: none;
+	
+}
+
+.entete p{
+	color: white;
+	font-size: 2em;
+	font-weight: 300;
+	margin-bottom: 32px;
+}
+
+.btn-vert{
+	background-color: #00ba8c;
+	color: white;
+	border-radius: 20px;
+	text-transform: none;
+	font-weight: normal;
+	padding-left: 40px;
+	padding-right: 30px;
+}
+
+/*M Manières de troquer */
+
+.heading h2{
+	font-weight: 600;
+  	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+	font-size: 2.3em;
+	color:black;
+	letter-spacing: .2em;
+	border: none;
+}
+
+.heading p{
+	font-weight: 300;
+	font-size: 1.5em;
+	color: #7c7c7c;
+}
+
+.etape{
+	height: 442px;
+	box-shadow: inset 0px 0px 2px 2px #EEEEEE;
+	border-radius: 10px;
+	padding: 60px 55px 80px 55px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+box-sizing: border-box;         /* Opera/IE 8+ */
+
+}
+
+.etape h4 a{
+	font-weight: 600;
+  	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+	font-size: 1.3em;
+	color: black;
+}
+
+.etape.active{
+	box-shadow: 0px 0px 5px 2px #DDDDDD;
+	background: url('../img/custom/selected.png') no-repeat right bottom;
+}
+
+.intro {
+	margin-top: 20px;
+}
+
+/* articles */
+
+.dernieresEntrees{
+	margin-bottom: 50px;
+}
+
+.article{
+	height: 400px;
+	box-shadow: inset 0px 0px 2px 2px #EEEEEE;
+	border-radius: 10px;
+	-webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+-moz-box-sizing: border-box;    /* Firefox, other Gecko */
+box-sizing: border-box;    
+
+}
+
+.article img{
+	border-top-left-radius: 10px;
+	border-top-right-radius: 10px;
+}
+
+.categorie{
+	display: block;
+	color: #04c092;
+	margin: 30px 0 15px 0;
+	font-weight: 400;
+	font-size: 1.5em;
+}
+
+.texteArticle{
+	padding: 0 20px;
+}
+
+.nomArticle{
+	font-weight: 600;
+	font-size: 1.2em;
+}
+
+.timer{
+	display: inline-block;
+	position: absolute;
+	bottom: 15px;
+	width: 100%
+}
+
+.bar{
+	border-bottom: 1px solid #EEEEEE;
+}
+
+.btn-blanc, .btn-blanc:hover, .btn-blanc:focus{
+	background-color: transparent;
+	color: #04c092;
+	border: 2px solid #04c092;
+	border-radius: 20px;
+	font-weight: normal;
+	padding-left: 40px;
+	padding-right: 30px;
+}
+
+.showcase{
+	height: 250px;
+	display: flex;
+	align-items: center;
+}
+
+.showcase .item h4, .showcase .item .icon{
+	color: white;
+	border-color: white;
+}
+
+.showcase .item .icon{
+	padding-top: 14px;
+}
+
+
+/* ---------------------- PRESENTATION  ---------------------- */
+
+.presentation{
+	display: flex;
+	align-items: center;
+	padding: 40px;
+}
+
+.presentation h2{
+	font-weight: 600;
+  	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+	font-size: 2.3em;
+	color:#064836;
+	border: none;
+}
+
+.presentation p{
+	font-size: 1.1em;
+	color:white;
+}
+
+.fond{
+	background-color: #42d1a7;
+}
+
+
+/* ---------------------- FOOTER  ---------------------- */
+
+footer .navbar-default {
+  border-color: transparent;
+  border-bottom: none;
+}
+
+
+
+/* ---------------------- MON COMPTE - MES INFOS  ---------------------- */
+
+.adresse {
+	border: 1px solid #BBBBBB;
+	box-sizing: border-box;
+	margin: 0 20px 20px 0;
+	padding: 10px 20px;
+	height: 150px;
+}
+
+.adresse.ajouter{
+	border-style: dotted;
+}
+
+.adresse h5{
+	font-weight: 600;
+  	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+	font-size: 1.2em;
+}
+
+.adresse li{
+	list-style: none;
+}
+
+.adresse ul{
+	padding-left: 0;
+}
+
+.adresse h5 a{
+	color: black;	
+}
+
+.avatar{
+	margin-bottom: 20px;
+}
+
+.avatar img{
+	border: 1px solid #DDDDDD;
+	margin-bottom: 10px;
+}
+
+
+/* ---------------------- MON COMPTE - MES ECHANGES  ---------------------- */
+
+#echanges img {
+	height: 80px;
+}
+
+
+#echanges td {
+    height: 50px;
+    vertical-align: middle !important;
+}
+
+
+/* ---------------------- MON COMPTE - MES MESSAGES  ---------------------- */
+
+.mailbox-messages .lu {
+	background-color: #EEEEEE;
+}
+
+.mailbox-messages tr:hover {
+	background-color: #DDDDDD !important;
+}
+
+.mailbox-controls {
+	margin-left: 8px;
+}
+
+
+/* ---------------------- MON COMPTE - MES EVALUATIONS  ---------------------- */
+
+.pages {
+    display: flex;
+    justify-content: center;
+}
+
+
+/* ---------------------- MENU COMPTE  ---------------------- */
+
+.icone {
+	display: inline-block;
+    width: 35px;
+    text-align: right;
+}
+
+
+
+/* ------------------------------ CAROUSSEL ----------------------------------------  */
+
+.carousel-inner .active.left { left: -25%; }
+.carousel-inner .next        { left:  25%; }
+.carousel-inner .prev		 { left: -25%; }
+.carousel-control 			 { width:  4%; }
+.carousel-control.left,.carousel-control.right {margin-left:15px;background-image:none;}
+
+
+
+/* ------------------------------- FOOTER   ------------------------------- */
+
+#copyright img {
+    height: 18px;
+    margin-left: 5px;
+}
+
+#liens-footer ul {
+    list-style: none;
+    display: flex;
+}
+
+#liens-footer li>a {
+    color: #ccc;
+    margin-right: 35px;
+}
+
+/* ------------------------------- CHAT   ------------------------------- */
+
+
+
+
+.chat_box .chat_message_wrapper ul.chat_message > li + li {
+    margin-top: 4px;
+}
+.popup-box-on {
+    display: block !important;
+}
+
+.popup-head-left a {
+	display: flex;
+	align-items: center;
+}
+
+.popup-head-left a:hover {
+	text-decoration: none;
+}
+
+.popup-head-left.pull-left h1 {
+    color: #fff;
+    float: left;
+    font-size: 18px;
+    margin: 2px 0 0 5px;
+   
+}
+.popup-head-left a small {
+    display: table;
+    font-size: 11px;
+    color: #fff;
+    line-height: 4px;
+    opacity: 0.5;
+    padding: 0 0 0 7px;
+    display: flex;
+    align-items: center;
+}
+.chat-header-button {
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid #fff;
+    border-radius: 7px;
+    font-size: 15px;
+    height: 26px;
+    opacity: 0.9;
+    padding: 0;
+    text-align: center;
+    width: 26px;
+}
+
+.popup-head .btn-group {
+    margin: -5px 3px 0 -1px;
+}
+.gurdeepoushan .dropdown-menu {
+    padding: 6px;
+}
+.gurdeepoushan .dropdown-menu li a span {
+    border: 1px solid;
+    border-radius: 50px;
+    display: list-item;
+    font-size: 19px;
+    height: 40px;
+    line-height: 36px;
+    margin: auto;
+    text-align: center;
+    width: 40px;
+}
+.gurdeepoushan .dropdown-menu li {
+    float: left;
+    text-align: center;
+    width: 33%;
+}
+.gurdeepoushan .dropdown-menu li a {
+    border-radius: 7px;
+    padding: 3px;
+   transition: all 0.3s ease-in-out 0s;
+}
+.gurdeepoushan .dropdown-menu li a:hover {
+    background:#333333 none repeat scroll 0 0 !important;
+    color: #fff;
+}
+.popup-head {
+    background: #20bb8e none repeat scroll 0 0 !important;
+    border-bottom: 3px solid #ccc;
+    color: #fff;
+    display: table;
+    width: 100%;
+    padding: 8px;
+}
+.popup-head .md-user-image {
+    border: 2px solid #5a7172;
+    float: left;
+    width: 50px;
+}
+.uk-input-group-addon .glyphicon.glyphicon-send {
+    color: #ffffff;
+    font-size: 21px;
+    line-height: 36px;
+    padding: 0 6px;
+}
+.chat_box_wrapper.chat_box_small.chat_box_active {
+    
+    height: 342px;
+    overflow-y: scroll;
+    width: 338px;
+}
+aside {
+	font-family: "Montserrat", Helvetica, Arial, sans-serif;
+    background-attachment: fixed;
+    background-clip: border-box;
+    background-color: white !important;
+    background-color: rgba(0, 0, 0, 0);
+    background-origin: padding-box;
+    background-position: center top;
+    background-repeat: repeat;
+    border: 1px solid #20bb8e;
+    bottom: 0;
+    display: none;
+    height: 466px;
+    position: fixed;
+    right: 70px;
+    width: 340px;
+    font-family: 'Open Sans', sans-serif;
+    z-index: 1000;
+}
+.chat_box {
+    padding: 16px;
+}
+.chat_box .chat_message_wrapper::after {
+    clear: both;
+}
+.chat_box .chat_message_wrapper::after, .chat_box .chat_message_wrapper::before {
+    content: " ";
+    display: table;
+}
+.chat_box .chat_message_wrapper .chat_user_avatar {
+    float: left;
+}
+.chat_box .chat_message_wrapper {
+    margin-bottom: 32px;
+}
+.md-user-image {
+    border-radius: 50%;
+    width: 47px;
+}
+.md-user-image.md-object {
+	border-radius: 0px;
+	margin-right: 10px;
+}
+
+.chat_sidebar img {
+    border: 0 none;
+    box-sizing: border-box;
+    height: auto;
+    max-width: 100%;
+    vertical-align: middle;
+}
+.chat_box .chat_message_wrapper ul.chat_message, .chat_box .chat_message_wrapper ul.chat_message > li {
+    list-style: outside none none;
+    padding: 0;
+}
+.chat_box .chat_message_wrapper ul.chat_message {
+    float: left;
+    margin: 0 0 0 12px;
+    max-width: 77%;
+}
+.chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li:first-child::before {
+    border-right-color: #616161;
+}
+.chat_box .chat_message_wrapper ul.chat_message > li:first-child::before {
+    border-color: transparent #ededed transparent transparent;
+    border-style: solid;
+    border-width: 0 16px 16px 0;
+    content: "";
+    height: 0;
+    left: -14px;
+    position: absolute;
+    top: 0;
+    width: 0;
+}
+.chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li {
+    background: #f4f3ec none repeat scroll 0 0;
+    color: #000000;
+}
+.open-btn {
+    border: 2px solid #189d0e;
+    border-radius: 32px;
+    color: #189d0e !important;
+    display: inline-block;
+    margin: 10px 0 0;
+    padding: 9px 16px;
+    text-decoration: none !important;
+    text-transform: uppercase;
+}
+.chat_box .chat_message_wrapper ul.chat_message > li {
+    background: #ededed none repeat scroll 0 0;
+    border-radius: 4px;
+    clear: both;
+    color: #212121;
+    display: block;
+    float: left;
+    font-size: 13px;
+    padding: 8px 16px;
+    position: relative;
+    word-break: break-all;
+}
+.chat_box .chat_message_wrapper ul.chat_message, .chat_box .chat_message_wrapper ul.chat_message > li {
+    list-style: outside none none;
+    padding: 0;
+}
+.chat_box .chat_message_wrapper ul.chat_message > li {
+    margin: 0;
+}
+.chat_box .chat_message_wrapper ul.chat_message > li p {
+    margin: 0;
+}
+.chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li .chat_message_time {
+    color: rgba(185, 186, 180, 0.9);
+}
+.chat_box .chat_message_wrapper ul.chat_message > li .chat_message_time {
+    color: #727272;
+    display: block;
+    font-size: 11px;
+    padding-top: 2px;
+    text-transform: uppercase;
+}
+.chat_box .chat_message_wrapper.chat_message_right .chat_user_avatar {
+    float: right;
+}
+.chat_box .chat_message_wrapper.chat_message_right ul.chat_message {
+    float: right;
+    margin-left: 0 !important;
+    margin-right: 17px !important;
+}
+.chat_box.chat_box_colors_a .chat_message_wrapper.chat_message_right ul.chat_message > li:first-child::before {
+    border-left-color: #E8FFD4;
+}
+.chat_box.chat_box_colors_a .chat_message_wrapper ul.chat_message > li:first-child::before {
+    border-right-color: #f4f3ec;
+}
+.chat_box .chat_message_wrapper.chat_message_right ul.chat_message > li:first-child::before {
+    border-color: transparent transparent transparent #ededed;
+    border-width: 0 0 29px 29px;
+    left: auto;
+    right: -14px;
+}
+.chat_box .chat_message_wrapper ul.chat_message > li:first-child::before {
+    border-color: transparent #ededed transparent transparent;
+    border-style: solid;
+    border-width: 0 29px 29px 0;
+    content: "";
+    height: 0;
+    left: -14px;
+    position: absolute;
+    top: 0;
+    width: 0;
+}
+.chat_box.chat_box_colors_a .chat_message_wrapper.chat_message_right ul.chat_message > li {
+    background: #E8FFD4 none repeat scroll 0 0;
+}
+.chat_box .chat_message_wrapper ul.chat_message > li {
+    background: #ededed none repeat scroll 0 0;
+    border-radius: 12px;
+    clear: both;
+    color: #212121;
+    display: block;
+    float: left;
+    font-size: 13px;
+    padding: 8px 16px;
+    position: relative;
+}
+.gurdeep-chat-box {
+    background: #fff none repeat scroll 0 0;
+    border-radius: 5px;
+    float: left;
+    padding: 3px;
+}
+#submit_message {
+    background: transparent none repeat scroll 0 0;
+    border: 1px solid rgb(183, 183, 183);;
+    padding: 15px;
+}
+.gurdeep-chat-box i {
+    color: #333;
+    font-size: 21px;
+    line-height: 1px;
+}
+.chat_submit_box {
+    bottom: 0;
+    box-sizing: border-box;
+    left: 0;
+    overflow: hidden;
+    padding: 10px;
+    position: absolute;
+    width: 100%;
+}
+.uk-input-group {
+    border-collapse: separate;
+    display: table;
+    position: relative;
+}
+
+.md-input {
+	width: 270px;
+	margin-left: 10px;
+}
+
+
+
+/* Get It */
+
+#get-it {
+	font-weight: 900;
+	font-size: 1.2em;
+	letter-spacing: 0.08em;
+	padding: 50px 20;
+	text-transform: uppercase;
+}
+
+#get-it .btn{
+}
+
+#get-it img {
+	height: 25px;
+}
+
+/* Rattrapage des conflits sur l'ensemble des pages*/
+
+.introRubrique {
+	margin-bottom: 40px;
+}
+
+.rating-num {
+	color: #333;
+	text-shadow: none;
+	margin-bottom: 10px;
+	font-size: 3em;
+}
+
+.vertical {
+	display: flex;
+	align-items: center;
+}
+
+.product .image img {
+	height: 200px;
+}
+
+#echanges .miniIcone {
+	height: 15px;
+	margin-left: 10px;
+}
+
+.barreDessous {
+	background: #fff;
+    border: solid 1px #ccc;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    margin-bottom: 50px;
+}
+
+.objet{
+
+	padding: 20px 0px 30px 0px;
+	border: 1px solid #DDDDDD;
+	border-left: none;
+	border-bottom: none;
+		box-sizing: border-box;
+}
+
+.objetside {
+
+}
+
+.breadcrumb {
+	text-align: left !important;
+	margin: 0 !important;	
+}
+
+.marginBottom {
+	margin-bottom: 30px;
+}
+
+p.taillePolice150 {
+	margin: 0 !important;
+}
+
+.taillePoliceOu {
+	font-size: 1.5em;
+	text-transform: uppercase;
+	font-weight: 700;
+	margin: 20px 0 !important;
+	text-align: center;
+}
+
+.vertical {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.alignVertical {
+	display: flex;
+	align-items: center;
+}
+
+.echangeEtape h1 {
+	color: #333333;
+	text-shadow: none;
+}

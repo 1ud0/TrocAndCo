@@ -1,0 +1,228 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>COMPTE - MES ECHANGES</title>
+</h:head>
+<h:body bgcolor='white'>
+
+	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
+		<ui:define name="content">
+
+			<div id="echanges">
+				<div class="introRubrique">
+					<p class="lead">Retrouvez tous les échanges en cours ainsi que les échanges terminés.</p>
+					<p class="text-muted">Sont listés ici les échanges concernant des objets que vous proposez ainsi que les objets dont vous faîtes l'acquisition</p>
+				</div>
+				
+				<div class="heading">
+						<h3 class="text-uppercase">Mes acquisitions</h3>
+				</div>
+		
+
+
+
+					<div class="table-responsive">
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Photo</th>
+										<th>Objet</th>
+										<th>Catégorie</th>
+										<th>Valeur</th>
+										<th>Statut</th>
+										<th>RDV</th>
+										<th>Voir</th>
+									</tr>
+								</thead>
+								<tbody>
+									<tr>
+										<td><img src="img/custom/art1.png"></img></td>
+										<td>Vélo</td>
+										<td>Véhicule</td>
+										<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+										<td><span class="label label-info">Autre statut</span></td>
+										<td>22/06/2013</td>
+										<td><a href="customer-order.html"
+											class="btn btn-template-main btn-sm">Voir</a></td>
+									</tr>
+									<tr>
+										<td><img src="img/custom/art2.png"></img></td>
+										<td>Poupée Barbie</td>
+										<td>Jouet</td>
+										<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+										<td><span class="label label-success">Effectué</span></td>
+										<td>22/06/2013</td>
+										<td><a href="customer-order.html"
+											class="btn btn-template-main btn-sm">Voir</a></td>
+									</tr>
+									<tr>
+										<td><img src="img/custom/art3.png"></img></td>
+										<td>GI Joe</td>
+										<td>Jouet</td>
+										<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+										<td><span class="label label-danger">Annulé</span></td>
+										<td>22/06/2013</td>
+										<td><a href="customer-order.html"
+											class="btn btn-template-main btn-sm">Voir</a></td>
+									</tr>
+									<tr>
+										<td><img src="img/custom/art4.png"></img></td>
+										<td>Collier de pâtes</td>
+										<td>Art éthnique</td>
+										<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+										<td><span class="label label-warning">En attente</span></td>
+										<td>22/06/2013</td>
+										<td><a href="customer-order.html"
+											class="btn btn-template-main btn-sm">Voir</a></td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<!-- /.table-responsive -->
+					</div>
+					<!-- /.table-responsive -->
+
+		
+
+
+
+				<div class="box">
+
+					<div class="heading">
+						<h3 class="text-uppercase">Mes dons</h3>
+					</div>
+
+					<div class="table-responsive">
+						<table class="table table-hover">
+							<thead>
+								<tr>
+									<th>Photo</th>
+									<th>Objet</th>
+									<th>Catégorie</th>
+									<th>Valeur</th>
+									<th>Statut</th>
+									<th>RDV</th>
+									<th>Voir</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td><img src="img/custom/art1.png"></img></td>
+									<td>Vélo</td>
+									<td>Véhicule</td>
+									<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+									<td><span class="label label-info">Autre statut</span></td>
+									<td>22/06/2013</td>
+									<td><a href="customer-order.html"
+										class="btn btn-template-main btn-sm">Voir</a></td>
+								</tr>
+								<tr>
+									<td><img src="img/custom/art2.png"></img></td>
+									<td>Poupée Barbie</td>
+									<td>Jouet</td>
+									<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+									<td><span class="label label-success">Effectué</span></td>
+									<td>22/06/2013</td>
+									<td><a href="customer-order.html"
+										class="btn btn-template-main btn-sm">Voir</a></td>
+								</tr>
+								<tr>
+									<td><img src="img/custom/art3.png"></img></td>
+									<td>GI Joe</td>
+									<td>Jouet</td>
+									<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+									<td><span class="label label-danger">Annulé</span></td>
+									<td>22/06/2013</td>
+									<td><a href="customer-order.html"
+										class="btn btn-template-main btn-sm">Voir</a></td>
+								</tr>
+								<tr>
+									<td><img src="img/custom/art4.png"></img></td>
+									<td>Collier de pâtes</td>
+									<td>Art éthnique</td>
+									<td>5<img class="miniIcone" src="img/custom/feuille.png"></img></td>
+									<td><span class="label label-warning">En attente</span></td>
+									<td>22/06/2013</td>
+									<td><a href="customer-order.html"
+										class="btn btn-template-main btn-sm">Voir</a></td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+					<!-- /.table-responsive -->
+
+				</div>
+				<!-- /.box -->
+
+
+
+				<!-- *** LEFT COLUMN END *** -->
+
+
+				<div class="modal" id="myModal">
+					<div class="modal-dialog modal-md">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">x</button>
+								<h4 class="modal-title">Nouvelle adresse</h4>
+							</div>
+							<div class="modal-body">
+								<form>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="password_old">Adresse</label> <input
+													type="password" class="form-control" id="password_old"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="password_1">Code Postal</label> <input
+													type="password" class="form-control" id="password_1"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="password_2">Ville</label> <input type="password"
+													class="form-control" id="password_2"></input>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<div class="form-group">
+												<label for="password_2">Nom de l'adresse</label> <input
+													type="password" class="form-control" id="password_2"></input>
+											</div>
+										</div>
+									</div>
+									<!-- /.row -->
+
+									<div class="text-center">
+										<button class="btn btn-vert btn-lg" type="submit">
+											Enregistrer<span class="glyphicon glyphicon-floppy-disk"></span>
+										</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
