@@ -1,0 +1,454 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>COMPTE - MES ECHANGES</title>
+</h:head>
+<h:body >
+
+	<ui:composition template="/WEB-INF/templates/templateBack.xhtml">
+		<ui:define name="contentBO">
+
+			<section class="content-header">
+      <h1>
+        Tableau de bord
+        <small>gestion des paramétres</small>
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Index</a></li>
+        <li class="active">Paramétres</li>
+      </ol>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <!-- Small boxes (Stat box) -->
+     
+
+      <div class="row">
+  
+        <section class="col-lg-4 connectedSortable">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Paramétrage catégorie</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Intitulé</th>
+                  <th>Catégorie mère</th>
+                  <th style="width: 40px"><button type="button" class="btn btn-block btn-danger">Ajouter Catégories</button></th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Nom cat 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat mère si pas de mère "-"</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Nom cat 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat mère si pas de mère "-"</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom cat 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat mère si pas de mère "-"</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom cat 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat mère si pas de mère "-"</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+            
+        </section>
+           <!-- /.Param Cat -->
+        <section class="col-lg-4 connectedSortable">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Paramétrage des Etats</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Etat</th>
+                  <th>Decriptif</th>
+                  <th style="width: 40px"><button type="button" class="btn btn-block btn-danger">Ajouter Etats</button></th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Nom Etat</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif de l'etat</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Nom Etat</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif de l'etat</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Etat</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif de l'etat</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </section>
+           <!-- /.Param Valeur -->
+           <section class="col-lg-4 connectedSortable">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Paramétrage des Valeurs</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Valeur</th>
+                  <th>Descriptif</th>
+                  <th style="width: 40px"><button type="button" class="btn btn-block btn-danger">Ajouter Valeurs</button></th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </section>
+      </div>
+        <div class="row">
+  
+        <section class="col-lg-4 connectedSortable">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Paramétrage Tags</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Intitulé Tag</th>
+                  <th>Catégorie rattachée</th>
+                  <th style="width: 40px"><button type="button" class="btn btn-block btn-danger">Ajouter Tag</button></th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Nom Tag</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Nom de la cat à laquelle le tag est rattaché</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+            
+        </section>
+           <!-- /.Param Cat -->
+        <section class="col-lg-4 connectedSortable">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Paramétrage des Distances</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Distances</th>
+                  <th>Descriptif</th>
+                  <th style="width: 40px"><button type="button" class="btn btn-block btn-danger">Ajouter Distances</button></th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Distance</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Distance</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Distance</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Distance</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Descriptif</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </section>
+           <!-- /.Param Valeur -->
+           <section class="col-lg-4 connectedSortable">
+            <div class="box">
+            <div class="box-header">
+              <h3 class="box-title">Paramétrage des Valeurs</h3>
+            </div>
+            <!-- /.box-header -->
+            <div class="box-body no-padding">
+              <table class="table table-condensed">
+                <tr>
+                  <th style="width: 10px">#</th>
+                  <th>Valeur</th>
+                  <th>Descriptif</th>
+                  <th style="width: 40px"><button type="button" class="btn btn-block btn-danger">Ajouter Valeurs</button></th>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+                  <tr>
+                  <td>1.</td>
+                  <td>Valeur 1</td>
+                  <td>
+                    <div class="textFr">
+                      <span>Text associé à la valeur</span>
+                    </div>
+                  </td>
+                  <td><button type="button" class="btn btn-block btn-danger">Modifier</button></td>
+                </tr>
+              </table>
+            </div>
+            <!-- /.box-body -->
+          </div>
+        </section>
+      </div>
+    </section>
+			
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
