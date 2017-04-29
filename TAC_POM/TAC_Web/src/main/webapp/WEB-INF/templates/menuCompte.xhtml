@@ -1,0 +1,40 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<title><ui:insert name="title">MENU COMPTE</ui:insert></title>
+</head>
+
+<body>
+	<ui:composition>
+
+		<div class="panel panel-default sidebar-menu">
+
+			<div class="panel-heading">
+				<h3 class="panel-title">Customer section</h3>
+			</div>
+
+			<div class="panel-body">
+
+				<ul class="nav nav-pills nav-stacked">
+					<li class="#{view.viewId eq '/compte-tableau.xhtml' ? 'active' : ''}"><a href="#"><span class="icone"><i class="fa fa-user"></i></span>Tableau de bord</a></li>
+					<li class="#{view.viewId eq '/compte-infos.xhtml' ? 'active' : ''}"><a href="compte-infos.xhtml"><span class="icone"><i class="fa fa-info"></i></span>Infos / Adresses</a></li>
+					<li class="#{view.viewId eq '/compte-objets.xhtml' ? 'active' : ''}"><a href="compte-objets.xhtml"><span class="icone"><i class="fa fa-gift"></i></span>Mes objets</a></li>
+					<li class="#{view.viewId eq '/compte-echanges.xhtml' ? 'active' : ''}"><a href="compte-echanges.xhtml"><span class="icone"><i
+							class="fa fa-arrows-h"></i></span>Mes échanges</a></li>
+					<li class="#{view.viewId eq '/compte-messages.xhtml' ? 'active' : ''}"><a href="compte-messages.xhtml"><span class="icone"><i
+							class="fa fa-envelope"></i></span>Mes messages</a></li>
+					<li class="#{view.viewId eq '/compte-evaluations.xhtml' ? 'active' : ''}"><a href="compte-evaluations.xhtml"><span class="icone"><i class="fa fa-star"></i></span>Mes
+							évaluations</a></li>
+					<li class="#{view.viewId eq '/compte-calendrier.xhtml' ? 'active' : ''}"><a href="#"><span class="icone"><i class="fa fa-calendar"></i></span>Mon
+							calendrier</a></li>
+				</ul>
+			</div>
+
+		</div>
+
+
+	</ui:composition>
+</body>
+
+</html>

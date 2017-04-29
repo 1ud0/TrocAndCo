@@ -1,0 +1,164 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>INSCRIPTION</title>
+</h:head>
+<h:body bgcolor='white'>
+	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
+		<ui:define name="content">
+
+
+			<div id="inscription">
+
+
+
+				<!-- *** DEBUT DU CORPS DE LA PAGE *** _________________________________________________________ -->
+
+				<div class="container">
+				
+				<!-- *** GET IT ***
+_________________________________________________________ -->
+
+					<div id="get-it">
+						<div class="row vertical">
+							<div class="col-md-8 col-sm-12 col-md-offset-1">
+								Inscrivez vous dès maintent et profitez de 5  <IMG alt="feuille" src="img/custom/feuille_blanche.png" />  gratuites
+							</div>
+							<div class="col-md-3 col-sm-12">
+								<a href="#" class="btn btn-template-transparent-primary">Go
+									now</a>
+							</div>
+						</div>
+					</div>
+
+
+					<!-- *** GET IT END *** -->
+
+					<div id="content">
+
+							<div class="row">
+								<div class="col-md-6">
+									<div class="box">
+										<h2 class="text-uppercase">Nouveau Compte</h2>
+
+										<p class="lead">Pas encore inscrit?</p>
+										<p>Inscrivez vous et rejoinez dès maintenant notre grande communauté de troqueurs! Des centaines d'objets sont échangés chaque jour.</p>
+										<hr></hr>
+										<form>
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="firstname">Prénom</label> <input type="text"
+															class="form-control" id="firstname" name="nom"></input>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="lastname">Nom</label> <input type="text"
+															class="form-control" id="lastname" name="prenom"></input>
+													</div>
+												</div>
+											</div>
+											<!-- /.row -->
+
+
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="meeting">Date de naissance</label> <input
+															id="meeting" class="form-control" type="date"
+															value="2011-01-13" name="date" />
+													</div>
+												</div>
+											</div>
+											<!-- /.row -->
+
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="phone">Telephone</label> <input type="text"
+															class="form-control" id="phone"></input>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="email_account">Email</label> <input
+															type="text" class="form-control" id="email_account"></input>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="password">Password</label> <input
+															type="password" class="form-control" id="password"></input>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<label for="password">Retaper le mot de passer</label> <input
+															type="password" class="form-control" id="confirmPassword"></input>
+													</div>
+												</div>
+												<div class="col-sm-12 text-center">
+													<button class="btn btn-vert btn-lg" type="submit">
+														Enregistrer<span class="glyphicon glyphicon-floppy-disk"></span>
+													</button>
+												</div>
+											</div>
+										</form>
+
+
+									</div>
+								</div>
+
+								<div class="col-md-6">
+									<div class="box">
+										<h2 class="text-uppercase">Login</h2>
+
+										<p class="lead">Déjà inscrit?</p>
+										<p class="text-muted">Connectez vous à votre espace à l'aide du formulaire ci-dessous et accédez à votre tableau de bord.</p>
+
+										<hr></hr>
+										<form action="customer-orders.html" method="post">
+											<div class="form-group">
+												<label for="email">Email</label> <input type="text"
+													class="form-control" id="email"></input>
+											</div>
+											<div class="form-group">
+												<label for="password">Password</label> <input
+													type="password" class="form-control" id="password"></input>
+											</div>
+											<div class="row">
+												<div class="col-sm-12 text-center">
+													<button class="btn btn-vert btn-lg" type="submit">
+														Connexion<span class="glyphicon glyphicon glyphicon-ok"></span>
+													</button>
+												</div>
+											</div>
+										</form>
+									</div>
+								</div>
+
+							</div>
+							<!-- /.row -->
+
+
+					</div>
+					<!-- /#content -->
+
+
+					
+				</div>
+
+			</div>
+			
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

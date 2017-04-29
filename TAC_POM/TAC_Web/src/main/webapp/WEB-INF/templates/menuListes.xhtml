@@ -1,0 +1,66 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+<title><ui:insert name="title">MENU COMPTE</ui:insert></title>
+</head>
+
+<body>
+	<ui:composition>
+
+		<!-- *** MENUS AND FILTERS ***_________________________ -->
+		<div class="panel-group" id="accordion">
+			<div class="panel panel-default sidebar-menu">
+				<div class="panel-heading">
+					<h3 class="panel-title">Mes Listes d'envies</h3>
+				</div>
+				<!--Categorie du menu debut-->
+
+				<div class="panel-body">
+					<ul class="nav nav-pills nav-stacked category-menu">
+						<li><a data-toggle="collapse" data-parent="#accordion"
+							href="#collapse1">Ma Liste <span class="badge pull-right">3</span></a>
+							<div id="collapse1" class="panel-collapse collapse">
+								<ul>
+									<li><a href="shop-category.html">marmite </a></li>
+									<li><a href="shop-category.html">livre de Science
+											fiction </a></li>
+									<li><a href="shop-category.html">bonbon au lait</a></li>
+								</ul>
+							</div></li>
+						<li><a data-toggle="collapse" data-parent="#accordion"
+							href="#collapse2">Liste de maman <span
+								class="badge pull-right">2</span></a>
+							<div id="collapse2" class="panel-collapse collapse">
+								<ul>
+									<li><a href="shop-category.html">perceuse </a></li>
+									<li><a href="shop-category.html">Puzzle </a></li>
+								</ul>
+							</div></li>
+
+					</ul>
+				</div>
+
+				<!--Liste des favoris-->
+				<div class="panel-body">
+					<ul class="nav nav-pills nav-stacked category-menu">
+						<li><a data-toggle="collapse" data-parent="#accordion"
+							href="#collapse3">Liste de mes Favoris <span
+								class="badge pull-right">2</span></a>
+							<div id="collapse3" class="panel-collapse collapse">
+								<ul>
+									<li><a href="shop-category.html">marmite </a></li>
+									<li><a href="shop-category.html">Slip </a></li>
+								</ul>
+							</div></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+
+
+	</ui:composition>
+</body>
+
+</html>

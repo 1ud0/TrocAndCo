@@ -1,0 +1,298 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>RECHERCHE OBJET</title>
+</h:head>
+<h:body bgcolor='white'>
+
+	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
+		<ui:define name="content">
+
+			<!-- **style CSS pour la google map -->
+			<style>
+#gmap_canvas img {
+	max-width: none !important;
+	background: none !important
+}
+</style>
+
+			<!-- *** DEBUT DU CORPS DE LA PAGE *** _________________________________________________________ -->
+
+			<div class="container">
+
+				<!-- *** LEFT COLUMN ***
+         	                    _________________________________________________________ -->
+				<ul class="breadcrumb">
+					<li><a href="#">Home</a></li>
+					<li><a href="#">Products</a></li>
+					<li class="active">Accessories</li>
+				</ul>
+				<div class="col-md-9">
+
+					<div class="row objet" id="productMain">
+						<div class="col-sm-5">
+							<div id="mainImage">
+								<img src="img/detailbig1.jpg" alt=""
+									class="img-responsive" id="grossePhoto"></img>
+							</div>
+
+							<div class="ribbon sale">
+								<div class="theribbon">&lt;5km</div>
+								<div class="ribbon-background"></div>
+							</div>
+							<!-- /.ribbon -->
+							<br></br>
+							<div class="row" id="thumbs">
+								<div class="col-xs-4">
+									<a href="img/detailbig1.jpg" class="thumb"> <img
+										src="img/detailbig1.jpg" alt="" class="img-responsive"></img></a>
+								</div>
+								<div class="col-xs-4">
+									<a href="img/detailbig2.jpg" class="thumb"> <img
+										src="img/detailbig2.jpg" alt=""
+										class="img-responsive"></img></a>
+								</div>
+								<div class="col-xs-4">
+									<a href="img/detailbig3.jpg" class="thumb"> <img
+										src="img/detailbig3.jpg" alt="" class="img-responsive"></img></a>
+								</div>
+							</div>
+
+						</div>
+						<div class="col-sm-7">
+							<div>
+								<form>
+									<div class="sizes">
+										<h3>Casserole-Barbie-Vase</h3>
+									</div>
+									<p class="price">
+										<img src="img/custom/feuille orange.png" height="50"
+											width="50" border="1px"></img> 3
+									</p>
+									<p class="text-center">
+										<button type="submit" class="btn btn-template-main"
+											data-toggle="tooltip" data-placement="top"
+											title="Faire une proposition d'échange">Proposer un
+											échange</button>
+										<button type="submit"
+											class="btn btn-default tailleBoutonFavoris"
+											data-toggle="tooltip" data-placement="top"
+											title="Ajouter aux favoris">
+											<i class="fa fa-heart-o"></i>
+										</button>
+									</p>
+								</form>
+							</div>
+
+							<div class="box" id="details">
+
+								<h4>Details</h4>
+								<p>BMW X5 3.0sdA 286ch Luxe / II (E70)</p>
+								<p>Ph1 tout-terrain, noir, 19 cv, 5 portes, mise en
+									circulation le 15/10/2009. Autres équipements et informations :</p>
+								<p>puissance réelle : 286 ch, nombre de rapports : 6
+									vitesses, émission CO2 : 220 g/km, radar d'aide au
+									stationnement, rétroviseur interieur electrochrome, Vitres
+									arrières électriques, direction assistée, réglages du volant :
+									profondeur, Rétroviseurs extérieurs électrochromes, Sellerie
+									cuir, Sièges avant électriques à mémoire, Suspensions
+									pneumatiques - filtre à particules - jantes aluminium</p>
+
+								<blockquote>
+									<p>
+										<em>Etat : usure</em>
+									</p>
+									<p>
+										<em>Catégorie : blabla</em> <br></br> <em>Sous-catégorie
+											: blibli</em>
+									</p>
+
+								</blockquote>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.col-md-9 -->
+
+
+				<!-- *** LEFT COLUMN END *** -->
+
+				<div class="col-md-3 objetside">
+					<div>
+						
+
+						<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
+						<div style='overflow: hidden; height: 280px;'>
+							<div id='gmap_canvas' style='height: 440px;'></div>
+							<div>
+								<small><a href="http://embedgooglemaps.com">google
+										maps carte</a></small>
+							</div>
+							<div>
+								<small><a href="http://youtubeembedcode.com">embed
+										youtube code</a></small>
+							</div>
+
+						</div>
+						<script type='text/javascript'>function init_map(){var myOptions = {zoom:13,center:new google.maps.LatLng(48.81903901478888,2.3199924764770863),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(48.81903901478888,2.3199924764770863)});infowindow = new google.maps.InfoWindow({content:'<strong>Titre</strong><br></br>Paris, France<br></br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
+					</div>
+
+					<!-- partie sur le propriétaire -->
+
+					<!--***partie pour la photo et les info perso*** _________________________________________________________ -->
+					<br></br>
+					<div class="box-simple box-white same-height">
+						<div class="partieProprio ">
+							<h3 class="text-uppercase">Intéressé ?</h3>
+							<div class="row">
+								<div class="col-sm-4 col-md-6 ">
+									<div class="image">
+										<a href=""> <img src="img/person-2.jpg" alt=""
+											class="img-responsive img-circle tailleMaxImage"></img>
+										</a>
+									</div>
+								</div>
+								<div class="col-sm-4 col-md-6 ">
+									<h4>Pseudo</h4>
+									<p class="rating-num">4.0/5</p>
+								</div>
+							</div>
+
+						</div>
+
+						<!--***Fin partie pour la photo et les info perso***  -->
+
+						<div class="partieLiens">
+							<p>
+								<a href="profil.xhtml"><strong>Voir le profil du
+										propriétaire</strong></a>
+							</p>
+							<p>
+								<a href="compte-messages.xhtml"><strong>Contacter
+										le propriétaire</strong></a>
+							</p>
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- container pour les envies du propriétaire de l'objet -->
+			<div class="container">
+				<h4>Vous souhaitez l'échanger contre un de vos objets?</h4>
+				<button type="button" class="btn btn-template-main"
+					data-toggle="collapse" data-target="#demo">Consulter ses
+					envies</button>
+				<br></br>
+				<div id="demo" class="collapse">
+					<div class="row">
+													<!-- Premiere envie -->
+													<div class="col-md-6 col-sm-12 ">
+														<div class="box-simple boxEnvie">
+															<div class="text">
+																<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
+																	N°1</h4>
+																<h3>
+																	<div class="col-md-10 col-sm-10">Casserole</div>
+																	<div class="col-md-2 col-sm-2">
+																		<label> 3</label> <img src="img/custom/feuille orange.png"
+																			alt=""></img>
+																	</div>
+																</h3>
+																<div class="row">
+																	<div class="col-md-6 col-sm-12 orientationTextLeft">
+																		<h4>Détails:</h4>
+																		<p>
+																			<label> Catégorie: </label> <label class="italic">
+																				blabla</label> <br /> <label> Sous-catégorie: </label> <label
+																				class="italic"> blabla </label> <br /> <label> Etat
+																				d'usure: </label> <label class="italic"> blabla </label>
+																		</p>
+																	</div>
+																	<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
+																		<h4>Adresses:</h4>
+																		<div class="row">
+								
+																			<p>
+																				<span class="glyphicon glyphicon-map-marker"
+																					aria-hidden="true"></span> <label>8 boulevard du
+																					Général De Gaulle<br /> Montrouge
+																				</label>
+								
+																			</p>
+																		</div>
+																		<div class="row">
+																			<p>
+																				<span class="glyphicon glyphicon-map-marker"
+																					aria-hidden="true"></span> <label>8 boulevard du
+																					Général De Gaulle<br /> Montrouge
+																				</label>
+																			</p>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- /.text -->
+														</div>
+													</div>
+													<!-- deuxième envie -->
+													<!-- Premiere envie -->
+													<div class="col-md-6 col-sm-12 ">
+														<div class="box-simple boxEnvie">
+															<div class="text">
+																<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
+																	N°1</h4>
+																<h3>
+																	<div class="col-md-10 col-sm-10">Casserole</div>
+																	<div class="col-md-2 col-sm-2">
+																		<label> 3</label> <img src="img/custom/feuille orange.png"
+																			alt=""></img>
+																	</div>
+																</h3>
+																<div class="row">
+																	<div class="col-md-6 col-sm-12 orientationTextLeft">
+																		<h4>Détails:</h4>
+																		<p>
+																			<label> Catégorie: </label> <label class="italic">
+																				blabla</label> <br /> <label> Sous-catégorie: </label> <label
+																				class="italic"> blabla </label> <br /> <label> Etat
+																				d'usure: </label> <label class="italic"> blabla </label>
+																		</p>
+																	</div>
+																	<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
+																		<h4>Adresses:</h4>
+																		<div class="row">
+								
+																			<p>
+																				<span class="glyphicon glyphicon-map-marker"
+																					aria-hidden="true"></span> <label>8 boulevard du
+																					Général De Gaulle<br /> Montrouge
+																				</label>
+								
+																			</p>
+																		</div>
+																		<div class="row">
+																			<p>
+																				<span class="glyphicon glyphicon-map-marker"
+																					aria-hidden="true"></span> <label>8 boulevard du
+																					Général De Gaulle<br /> Montrouge
+																				</label>
+																			</p>
+																		</div>
+																	</div>
+																</div>
+															</div>
+															<!-- /.text -->
+														</div>
+													</div>
+					</div>
+				</div>
+			</div>
+			<div class="marginBottom"></div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

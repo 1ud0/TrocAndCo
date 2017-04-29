@@ -1,0 +1,48 @@
+.orientationImageEchange{
+display: flex;
+flex-direction: row;
+align-items: center;
+}
+
+.orientationTextCenterEchange{
+text-align: center;
+}
+#resumeCompte .product{
+    border-bottom: none;
+    border-top: solid 1px ;
+}
+
+.tailleBouton{
+    width: 150px;
+    height: 80px;
+    align-content: center;
+}
+.orientationCenter{
+display: flex;
+justify-content: center;
+}
+.large{
+height: 50px;
+}
+.long200{
+    width: 200px;
+}
+
+.MaxHeightImg400{
+    max-height: 400px;
+}
+.MaxHeightImg100{
+    max-height: 100px;
+}
+.MaxHeightImg200{
+    max-height: 200px;
+}
+.MaxHeightImg150{
+    max-height: 150px;
+}
+.MaxLigneBouton{
+    height: 200px;
+}
+.taillePolice150{
+    font-size: 120%;
+}
