@@ -4,6 +4,20 @@
 	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
 	<persistence-unit name="TAC_Data_EJB">
 		<jta-data-source>java:/TacDS</jta-data-source>
+		<class>com.tac.entity.Categorie</class>
+		<class>com.tac.entity.Compte</class>
+		<class>com.tac.entity.Echange</class>
+		<class>com.tac.entity.Envie</class>
+		<class>com.tac.entity.Etat</class>
+		<class>com.tac.entity.Liste</class>
+		<class>com.tac.entity.Localisation</class>
+		<class>com.tac.entity.Membre</class>
+		<class>com.tac.entity.Message</class>
+		<class>com.tac.entity.Proposition</class>
+		<class>com.tac.entity.Rdv</class>
+		<class>com.tac.entity.Suggestion</class>
+		<class>com.tac.entity.Tag</class>
+		<class>com.tac.entity.Valeur</class>
 		<properties>
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />

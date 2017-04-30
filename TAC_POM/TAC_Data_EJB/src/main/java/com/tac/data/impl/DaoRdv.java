@@ -38,8 +38,9 @@ public class DaoRdv implements IDaoRdv{
 	@Override
 	public List<Rdv> getByMembreId(Integer IdMembre) {
 		final String req = "SELECT r FROM RDV r WHERE r.id = :prdv";	
-		Query query = em.createQuery(req).setParameter("prdv", rdv.);
-		return query.getResultList();
+//		Query query = em.createQuery(req).setParameter("prdv", rdv.);
+//		return query.getResultList();
+		return null;
 	}
 
 }
