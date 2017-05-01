@@ -25,7 +25,7 @@ public class DaoProposition implements IDaoProposition{
 	}
 
 	@Override
-	public Proposition updateProsition(Proposition proposition) {
+	public Proposition updateProposition(Proposition proposition) {
 
 		em.merge(proposition);
 		return proposition;
