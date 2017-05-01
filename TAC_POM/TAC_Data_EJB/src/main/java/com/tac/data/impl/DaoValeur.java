@@ -30,12 +30,12 @@ public class DaoValeur implements IDaoValeur{
 
 	@Override
 	public void deleteValeur(Valeur valeur) {
-		em.remove(valeur);		
+		em.remove(em.merge(valeur));		
 	}
 
 	@Override
 	public Valeur getById(int idValeur) {
-		String req ="SELECT v FROM Valeur v WHERE v.idValeur like :pid";
+		String req ="SELECT v FROM Valeur v WHERE v.idValeur = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idValeur);
 		Valeur retour = (Valeur)query.getSingleResult();

@@ -33,12 +33,12 @@ public class DaoProposition implements IDaoProposition{
 
 	@Override
 	public void deleteProposition(Proposition proposition) {
-		em.remove(proposition);
+		em.remove(em.merge(proposition));
 	}
 
 	@Override
 	public Proposition getById(int idProposition) {
-		String req = "SELECT p FROM Proposition p WHERE p.idProposition like :pid";
+		String req = "SELECT p FROM Proposition p WHERE p.idProposition = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idProposition);
 		Proposition retour = (Proposition)query.getSingleResult();

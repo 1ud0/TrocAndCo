@@ -30,13 +30,13 @@ public class DaoEtat implements IDaoEtat {
 
 	@Override
 	public void deleteEtat(Etat etat) {
-		em.remove(etat);
+		em.remove(em.merge(etat));
 
 	}
 
 	@Override
 	public Etat getById(int idEtat) {
-		String req = "SELECT e FROM Etat e WHERE e.idEtat like :pid";
+		String req = "SELECT e FROM Etat e WHERE e.idEtat = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idEtat);
 		Etat retour = (Etat)query.getSingleResult();
