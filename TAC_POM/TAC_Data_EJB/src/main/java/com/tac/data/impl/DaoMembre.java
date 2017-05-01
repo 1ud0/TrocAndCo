@@ -7,15 +7,17 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.Entity;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoMembre;
 import com.tac.entity.Membre;
 
-@Remote
+@Remote (IDaoMembre.class)
 @Stateless
 public class DaoMembre implements IDaoMembre{
 
+	@PersistenceContext(unitName="TAC_Data_EJB")
 	EntityManager em;
 	
 	@Override
@@ -69,9 +71,7 @@ public class DaoMembre implements IDaoMembre{
 
 	@Override
 	public void deleteMembre(Membre membreToDelete) {
-		//TO DO!!
-		
-		//final String reqDelete = "DELETE m FROM Membre m WHERE ";
+		em.remove(em.merge(membreToDelete));
 	}
 
 }
