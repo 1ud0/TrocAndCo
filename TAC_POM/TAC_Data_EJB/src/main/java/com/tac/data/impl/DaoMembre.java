@@ -21,10 +21,10 @@ public class DaoMembre implements IDaoMembre{
 	EntityManager em;
 	
 	@Override
-	public Membre identifyMembre(String pseudo, String mdp) {
-		final String reqIdentification ="SELECT m FROM Membre m WHERE m.pseudo = :ppseudo AND m.mdp = :pmdp";
+	public Membre identifyMembre(String mail, String mdp) {
+		final String reqIdentification ="SELECT m FROM Membre m WHERE m.mail = :pmail AND m.mdp = :pmdp";
 		Query queryIdentification = em.createQuery(reqIdentification);
-		queryIdentification.setParameter("ppseudo", pseudo);
+		queryIdentification.setParameter("pmail", mail);
 		queryIdentification.setParameter("pmdp",mdp);
 		Membre memberIdentified = (Membre) queryIdentification.getSingleResult();
 		return memberIdentified;
