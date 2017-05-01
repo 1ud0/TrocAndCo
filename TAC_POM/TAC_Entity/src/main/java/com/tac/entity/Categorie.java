@@ -24,34 +24,34 @@ public class Categorie implements Serializable {
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
 	@JoinColumn(name="idCategorieMere")
-	private Categorie categorie;
+	private Categorie categorieMere;
 
 	//bi-directional many-to-one association to Categorie
-	@OneToMany(mappedBy="categorie")
-	private List<Categorie> categories;
+	@OneToMany(mappedBy="categorieMere")
+	private List<Categorie> sousCategories;
 
 	//bi-directional many-to-one association to Envie
-	@OneToMany(mappedBy="categorie_idCategorie")
+	@OneToMany(mappedBy="categorie")
 	private List<Envie> enviesCategorie;
 
 	//bi-directional many-to-one association to Envie
-	@OneToMany(mappedBy="categorie_idSousCategorie")
+	@OneToMany(mappedBy="sousCategorie")
 	private List<Envie> enviesSousCategorie;
 
 	//bi-directional many-to-one association to Proposition
-	@OneToMany(mappedBy="categorie_idCategorie")
+	@OneToMany(mappedBy="categorie")
 	private List<Proposition> propositionsCategorie;
 
 	//bi-directional many-to-one association to Proposition
-	@OneToMany(mappedBy="categorie_idSousCategorie")
+	@OneToMany(mappedBy="sousCategorie")
 	private List<Proposition> propositionsSousCategorie;
 
 	//bi-directional many-to-one association to Suggestion
-	@OneToMany(mappedBy="categorie_idCategorie")
+	@OneToMany(mappedBy="categorie")
 	private List<Suggestion> suggestionsCategorie;
 
 	//bi-directional many-to-one association to Suggestion
-	@OneToMany(mappedBy="categorie_idSousCategorie")
+	@OneToMany(mappedBy="sousCategorie")
 	private List<Suggestion> suggestionsSousCategorie;
 
 	//bi-directional many-to-one association to Tag
@@ -77,32 +77,32 @@ public class Categorie implements Serializable {
 		this.intitule = intitule;
 	}
 
-	public Categorie getCategorie() {
-		return this.categorie;
+	public Categorie getCategorieMere() {
+		return categorieMere;
 	}
 
-	public void setCategorie(Categorie categorie) {
-		this.categorie = categorie;
+	public void setCategorieMere(Categorie categorieMere) {
+		this.categorieMere = categorieMere;
 	}
 
-	public List<Categorie> getCategories() {
-		return this.categories;
+	public List<Categorie> getSousCategories() {
+		return sousCategories;
 	}
 
-	public void setCategories(List<Categorie> categories) {
-		this.categories = categories;
+	public void setSousCategories(List<Categorie> sousCategories) {
+		this.sousCategories = sousCategories;
 	}
 
 	public Categorie addCategory(Categorie category) {
-		getCategories().add(category);
-		category.setCategorie(this);
+		getSousCategories().add(category);
+		category.setCategorieMere(this);
 
 		return category;
 	}
 
 	public Categorie removeCategory(Categorie category) {
-		getCategories().remove(category);
-		category.setCategorie(null);
+		getSousCategories().remove(category);
+		category.setCategorieMere(null);
 
 		return category;
 	}

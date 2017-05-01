@@ -18,5 +18,6 @@
 		<module>TAC_Business_EJB</module>
 		<module>TAC_Web</module>
 		<module>TAC_EAR</module>
+		<module>TAC_TestQuery</module>
 	</modules>
 </project>
