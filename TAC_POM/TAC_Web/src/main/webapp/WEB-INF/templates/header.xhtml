@@ -12,6 +12,7 @@
 
 		<!-- *** TOP ***
 _________________________________________________________ -->
+		<h:form>
 		<div id="top">
 			<div class="container">
 				<div class="row">
@@ -23,18 +24,23 @@ _________________________________________________________ -->
 						</p>
 					</div>
 					<div class="col-xs-7">
-						<div class="login">
+						<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected==null}">
 							<a href="#" data-toggle="modal" data-target="#login-modal"><i
 								class="fa fa-sign-in"></i> <span
 								class="hidden-xs text-uppercase">Se connecter</span></a>
 							<a href="inscription.xhtml"><i class="fa fa-user"></i> <span
 								class="hidden-xs text-uppercase">S'enregistrer</span></a>
-						</div>
+						</h:panelGroup>
+						<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected!=null}">
+						
+						<h:commandLink action="#{mbIdentif.seDeconnecter()}" value="Déconnexion" />
+						</h:panelGroup>
 
 					</div>
 				</div>
 			</div>
 		</div>
+		</h:form>
 
 		<!-- *** TOP END *** -->
 

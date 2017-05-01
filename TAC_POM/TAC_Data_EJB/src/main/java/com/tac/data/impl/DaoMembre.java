@@ -22,11 +22,16 @@ public class DaoMembre implements IDaoMembre{
 	
 	@Override
 	public Membre identifyMembre(String mail, String mdp) {
-		final String reqIdentification ="SELECT m FROM Membre m WHERE m.mail = :pmail AND m.mdp = :pmdp";
+		final String reqIdentification ="SELECT m FROM Membre m WHERE m.mail = :pmail AND m.password = :pmdp";
 		Query queryIdentification = em.createQuery(reqIdentification);
 		queryIdentification.setParameter("pmail", mail);
 		queryIdentification.setParameter("pmdp",mdp);
-		Membre memberIdentified = (Membre) queryIdentification.getSingleResult();
+		Membre memberIdentified = null;		
+		try{
+			memberIdentified = (Membre) queryIdentification.getSingleResult();
+		}catch (Exception e){
+			
+		}
 		return memberIdentified;
 	}
 
