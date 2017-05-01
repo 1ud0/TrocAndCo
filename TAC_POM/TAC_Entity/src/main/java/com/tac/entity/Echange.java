@@ -18,40 +18,54 @@ public class Echange implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idEchange;
+	@Column(name="id_echange")
+	private Integer idEchange;
 
-	private int codeEchange;
+	@Column(name="code_echange")
+	private Integer codeEchange;
 
+	@Column(name="comm_chercheur")
 	private String comChercheur;
 
+	@Column(name="comm_donneur")
 	private String comDonneur;
 
+	@Column(name="date_acceptation")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAcceptation;
 
+	@Column(name="date_init")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateinit;
 
+	@Column(name="date_refus")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRefus;
 
+	@Column(name="date_validation")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateValidation;
 
-	private int noteChercheur;
+	@Column(name="note_chercheur")
+	private Integer noteChercheur;
 
-	private int noteDonneur;
+	@Column(name="note_donneur")
+	private Integer noteDonneur;
 
-	private int prix;
+	@Column(name="prix")
+	private Integer prix;
 
+	@Column(name="reference_echange")
 	private String referenceEchange;
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
+	@JoinColumn(name="membre_id")
 	private Membre membre;
 
 	//bi-directional many-to-one association to Proposition
 	@ManyToOne
+	@JoinColumn(name="proposition_id")
 	private Proposition proposition;
 
 	//bi-directional many-to-one association to Rdv
@@ -61,19 +75,19 @@ public class Echange implements Serializable {
 	public Echange() {
 	}
 
-	public int getIdEchange() {
+	public Integer getIdEchange() {
 		return this.idEchange;
 	}
 
-	public void setIdEchange(int idEchange) {
+	public void setIdEchange(Integer idEchange) {
 		this.idEchange = idEchange;
 	}
 
-	public int getCodeEchange() {
+	public Integer getCodeEchange() {
 		return this.codeEchange;
 	}
 
-	public void setCodeEchange(int codeEchange) {
+	public void setCodeEchange(Integer codeEchange) {
 		this.codeEchange = codeEchange;
 	}
 
@@ -126,27 +140,27 @@ public class Echange implements Serializable {
 		this.dateValidation = dateValidation;
 	}
 
-	public int getNoteChercheur() {
+	public Integer getNoteChercheur() {
 		return this.noteChercheur;
 	}
 
-	public void setNoteChercheur(int noteChercheur) {
+	public void setNoteChercheur(Integer noteChercheur) {
 		this.noteChercheur = noteChercheur;
 	}
 
-	public int getNoteDonneur() {
+	public Integer getNoteDonneur() {
 		return this.noteDonneur;
 	}
 
-	public void setNoteDonneur(int noteDonneur) {
+	public void setNoteDonneur(Integer noteDonneur) {
 		this.noteDonneur = noteDonneur;
 	}
 
-	public int getPrix() {
+	public Integer getPrix() {
 		return this.prix;
 	}
 
-	public void setPrix(int prix) {
+	public void setPrix(Integer prix) {
 		this.prix = prix;
 	}
 

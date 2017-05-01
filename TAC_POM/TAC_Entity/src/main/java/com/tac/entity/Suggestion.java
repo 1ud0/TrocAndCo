@@ -16,32 +16,35 @@ public class Suggestion implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idSuggestion;
+	@Column(name="id_suggestion")
+	private Integer idSuggestion;
 
+	@Column(name="intitule")
 	private String intitule;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="Categorie_idCategorie")
+	@JoinColumn(name="categorie_id")
 	private Categorie categorie;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="Categorie_idSousCategorie")
+	@JoinColumn(name="sous_categorie_id")
 	private Categorie sousCategorie;
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
+	@JoinColumn(name="membre_id")
 	private Membre membre;
 
 	public Suggestion() {
 	}
 
-	public int getIdSuggestion() {
+	public Integer getIdSuggestion() {
 		return this.idSuggestion;
 	}
 
-	public void setIdSuggestion(int idSuggestion) {
+	public void setIdSuggestion(Integer idSuggestion) {
 		this.idSuggestion = idSuggestion;
 	}
 

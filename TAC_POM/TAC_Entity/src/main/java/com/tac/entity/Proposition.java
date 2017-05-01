@@ -18,13 +18,17 @@ public class Proposition implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idProposition;
+	@Column(name="id_proposition")
+	private Integer idProposition;
 
+	@Column(name="date_ajout")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAjout;
 
+	@Column(name="description")
 	private String description;
 
+	@Column(name="intitule")
 	private String intitule;
 
 	//bi-directional many-to-one association to Echange
@@ -45,34 +49,37 @@ public class Proposition implements Serializable {
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
+	@JoinColumn(name="membre_id")
 	private Membre membre;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="Categorie_idCategorie")
+	@JoinColumn(name="categorie_id")
 	private Categorie categorie;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="Categorie_idSousCategorie")
+	@JoinColumn(name="sous_categorie_id")
 	private Categorie sousCategorie;
 
 	//bi-directional many-to-one association to Etat
 	@ManyToOne
+	@JoinColumn(name="etat_id")
 	private Etat etat;
 
 	//bi-directional many-to-one association to Valeur
 	@ManyToOne
+	@JoinColumn(name="valeur_id")
 	private Valeur valeur;
 
 	public Proposition() {
 	}
 
-	public int getIdProposition() {
+	public Integer getIdProposition() {
 		return this.idProposition;
 	}
 
-	public void setIdProposition(int idProposition) {
+	public void setIdProposition(Integer idProposition) {
 		this.idProposition = idProposition;
 	}
 

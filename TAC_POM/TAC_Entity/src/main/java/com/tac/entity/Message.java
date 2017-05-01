@@ -17,37 +17,42 @@ public class Message implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idMessage;
+	@Column(name="id_message")
+	private Integer idMessage;
 
+	@Column(name="date_envoi")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateEnvoi;
 
+	@Column(name="lu")
 	private boolean lu;
 
+	@Column(name="texte")
 	private String texte;
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
-	@JoinColumn(name="Membre_idEmetteur")
+	@JoinColumn(name="membre_id_emetteur")
 	private Membre emetteur;
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
-	@JoinColumn(name="Membre_idRecepteur")
+	@JoinColumn(name="membre_id_recepteur")
 	private Membre recepteur;
 
 	//bi-directional many-to-one association to Proposition
 	@ManyToOne
+	@JoinColumn(name="proposition_id")
 	private Proposition proposition;
 
 	public Message() {
 	}
 
-	public int getIdMessage() {
+	public Integer getIdMessage() {
 		return this.idMessage;
 	}
 
-	public void setIdMessage(int idMessage) {
+	public void setIdMessage(Integer idMessage) {
 		this.idMessage = idMessage;
 	}
 

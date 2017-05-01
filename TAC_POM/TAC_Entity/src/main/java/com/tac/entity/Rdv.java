@@ -17,30 +17,36 @@ public class Rdv implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idRDV;
+	@Column(name="id_rdv")
+	private Integer idRDV;
 
+	@Column(name="date_annulation")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date annulationRDV;
 
+	@Column(name="commentaire")
 	private String commentaire;
 
+	@Column(name="date_rdv")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRdv;
 
+	@Column(name="lieu")
 	private String lieu;
 
 	//bi-directional many-to-one association to Echange
 	@ManyToOne
+	@JoinColumn(name="echange_id")
 	private Echange echange;
 
 	public Rdv() {
 	}
 
-	public int getIdRDV() {
+	public Integer getIdRDV() {
 		return this.idRDV;
 	}
 
-	public void setIdRDV(int idRDV) {
+	public void setIdRDV(Integer idRDV) {
 		this.idRDV = idRDV;
 	}
 

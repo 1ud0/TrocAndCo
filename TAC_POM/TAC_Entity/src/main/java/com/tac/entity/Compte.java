@@ -17,8 +17,10 @@ public class Compte implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idCompte;
+	@Column(name="id_compte")
+	private Integer idCompte;
 
+	@Column(name="type_compte")
 	private String type;
 
 	//bi-directional many-to-one association to Membre
@@ -28,11 +30,11 @@ public class Compte implements Serializable {
 	public Compte() {
 	}
 
-	public int getIdCompte() {
+	public Integer getIdCompte() {
 		return this.idCompte;
 	}
 
-	public void setIdCompte(int idCompte) {
+	public void setIdCompte(Integer idCompte) {
 		this.idCompte = idCompte;
 	}
 

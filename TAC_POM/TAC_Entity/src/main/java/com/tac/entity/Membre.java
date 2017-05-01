@@ -18,34 +18,47 @@ public class Membre implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idMembre;
+	@Column(name="id_membre")
+	private Integer idMembre;
 
+	@Column(name="avatar")
 	private String avatar;
 
+	@Column(name="date_desinscription")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateDesinscription;
 
+	@Column(name="date_inscription")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateInscription;
 
+	@Column(name="date_naissance")
 	@Temporal(TemporalType.DATE)
 	private Date dateNaissance;
 
+	@Column(name="date_radiation")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateRadiation;
 
+	@Column(name="mail")
 	private String mail;
 
+	@Column(name="motif_radiation")
 	private String motifRadiation;
 
+	@Column(name="nom")
 	private String nom;
 
+	@Column(name="password")
 	private String password;
 
+	@Column(name="prenom")
 	private String prenom;
 
+	@Column(name="pseudo")
 	private String pseudo;
 
+	@Column(name="telephone")
 	private String telephone;
 
 	//bi-directional many-to-one association to Echange
@@ -57,10 +70,10 @@ public class Membre implements Serializable {
 	@JoinTable(
 		name="favori"
 		, joinColumns={
-			@JoinColumn(name="Membre_idMembre")
+			@JoinColumn(name="membre_id")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="Proposition_idProposition")
+			@JoinColumn(name="proposition_id")
 			}
 		)
 	private List<Proposition> favoris;
@@ -75,6 +88,7 @@ public class Membre implements Serializable {
 
 	//bi-directional many-to-one association to Compte
 	@ManyToOne
+	@JoinColumn(name="compte_id")
 	private Compte compte;
 
 	//bi-directional many-to-one association to Message
@@ -96,11 +110,11 @@ public class Membre implements Serializable {
 	public Membre() {
 	}
 
-	public int getIdMembre() {
+	public Integer getIdMembre() {
 		return this.idMembre;
 	}
 
-	public void setIdMembre(int idMembre) {
+	public void setIdMembre(Integer idMembre) {
 		this.idMembre = idMembre;
 	}
 

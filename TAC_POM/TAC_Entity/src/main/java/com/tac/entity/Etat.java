@@ -17,8 +17,10 @@ public class Etat implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idEtat;
+	@Column(name="id_etat")
+	private Integer idEtat;
 
+	@Column(name="intitule")
 	private String intitule;
 
 	//bi-directional many-to-one association to Proposition
@@ -28,11 +30,11 @@ public class Etat implements Serializable {
 	public Etat() {
 	}
 
-	public int getIdEtat() {
+	public Integer getIdEtat() {
 		return this.idEtat;
 	}
 
-	public void setIdEtat(int idEtat) {
+	public void setIdEtat(Integer idEtat) {
 		this.idEtat = idEtat;
 	}
 

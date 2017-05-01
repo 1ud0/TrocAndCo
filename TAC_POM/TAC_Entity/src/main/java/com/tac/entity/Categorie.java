@@ -17,13 +17,15 @@ public class Categorie implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idCategorie;
+	@Column(name="id_categorie")
+	private Integer idCategorie;
 
+	@Column(name="intitule")
 	private String intitule;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="idCategorieMere")
+	@JoinColumn(name="id_categorie_mere")
 	private Categorie categorieMere;
 
 	//bi-directional many-to-one association to Categorie
@@ -61,11 +63,11 @@ public class Categorie implements Serializable {
 	public Categorie() {
 	}
 
-	public int getIdCategorie() {
+	public Integer getIdCategorie() {
 		return this.idCategorie;
 	}
 
-	public void setIdCategorie(int idCategorie) {
+	public void setIdCategorie(Integer idCategorie) {
 		this.idCategorie = idCategorie;
 	}
 

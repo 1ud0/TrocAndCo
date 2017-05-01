@@ -16,22 +16,25 @@ public class Tag implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idTag;
+	@Column(name="id_tag")
+	private Integer idTag;
 
+	@Column(name="intitule")
 	private String intitule;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
+	@JoinColumn(name="categorie_id")
 	private Categorie categorie;
 
 	public Tag() {
 	}
 
-	public int getIdTag() {
+	public Integer getIdTag() {
 		return this.idTag;
 	}
 
-	public void setIdTag(int idTag) {
+	public void setIdTag(Integer idTag) {
 		this.idTag = idTag;
 	}
 

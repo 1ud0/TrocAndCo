@@ -16,46 +16,51 @@ public class Envie implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idEnvie;
+	@Column(name="id_envie")
+	private Integer idEnvie;
 
-	private int distance;
+	@Column(name="distance")
+	private Integer distance;
 
+	@Column(name="intitule")
 	private String intitule;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="Categorie_idCategorie")
+	@JoinColumn(name="categorie_id")
 	private Categorie categorie;
 
 	//bi-directional many-to-one association to Categorie
 	@ManyToOne
-	@JoinColumn(name="Categorie_idSousCategorie")
+	@JoinColumn(name="sous_categorie_id")
 	private Categorie sousCategorie;
 
 	//bi-directional many-to-one association to Liste
 	@ManyToOne
+	@JoinColumn(name="liste_id")
 	private Liste liste;
 
 	//bi-directional many-to-one association to Valeur
 	@ManyToOne
+	@JoinColumn(name="valeur_id")
 	private Valeur valeur;
 
 	public Envie() {
 	}
 
-	public int getIdEnvie() {
+	public Integer getIdEnvie() {
 		return this.idEnvie;
 	}
 
-	public void setIdEnvie(int idEnvie) {
+	public void setIdEnvie(Integer idEnvie) {
 		this.idEnvie = idEnvie;
 	}
 
-	public int getDistance() {
+	public Integer getDistance() {
 		return this.distance;
 	}
 
-	public void setDistance(int distance) {
+	public void setDistance(Integer distance) {
 		this.distance = distance;
 	}
 

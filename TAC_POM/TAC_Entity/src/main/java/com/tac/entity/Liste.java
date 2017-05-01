@@ -18,14 +18,18 @@ public class Liste implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idListe;
+	@Column(name="id_liste")
+	private Integer idListe;
 
+	@Column(name="date_creation")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateCreation;
 
+	@Column(name="date_valid")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateValid;
 
+	@Column(name="titre_liste")
 	private String titreListe;
 
 	//bi-directional many-to-one association to Envie
@@ -34,16 +38,17 @@ public class Liste implements Serializable {
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
+	@JoinColumn(name="membre_id")
 	private Membre membre;
 
 	public Liste() {
 	}
 
-	public int getIdListe() {
+	public Integer getIdListe() {
 		return this.idListe;
 	}
 
-	public void setIdListe(int idListe) {
+	public void setIdListe(Integer idListe) {
 		this.idListe = idListe;
 	}
 

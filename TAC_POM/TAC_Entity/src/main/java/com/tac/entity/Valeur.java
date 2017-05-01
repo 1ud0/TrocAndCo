@@ -17,11 +17,14 @@ public class Valeur implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idValeur;
+	@Column(name="id_valeur")
+	private Integer idValeur;
 
+	@Column(name="intitule")
 	private String intitule;
 
-	private int valeur;
+	@Column(name="valeur")
+	private Integer valeur;
 
 	//bi-directional many-to-one association to Envie
 	@OneToMany(mappedBy="valeur")
@@ -34,11 +37,11 @@ public class Valeur implements Serializable {
 	public Valeur() {
 	}
 
-	public int getIdValeur() {
+	public Integer getIdValeur() {
 		return this.idValeur;
 	}
 
-	public void setIdValeur(int idValeur) {
+	public void setIdValeur(Integer idValeur) {
 		this.idValeur = idValeur;
 	}
 
@@ -50,11 +53,11 @@ public class Valeur implements Serializable {
 		this.intitule = intitule;
 	}
 
-	public int getValeur() {
+	public Integer getValeur() {
 		return this.valeur;
 	}
 
-	public void setValeur(int valeur) {
+	public void setValeur(Integer valeur) {
 		this.valeur = valeur;
 	}
 

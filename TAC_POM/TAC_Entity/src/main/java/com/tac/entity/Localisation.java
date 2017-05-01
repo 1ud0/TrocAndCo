@@ -17,20 +17,27 @@ public class Localisation implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idLocalisation;
+	@Column(name="id_localisation")
+	private Integer idLocalisation;
 
+	@Column(name="adresse")
 	private String adresse;
 
-	private int codePostal;
+	@Column(name="code_postal")
+	private Integer codePostal;
 
-	private float latitude;
+	@Column(name="latitude")
+	private Float latitude;
 
-	private float longitude;
+	@Column(name="longitude")
+	private Float longitude;
 
+	@Column(name="ville")
 	private String ville;
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
+	@JoinColumn(name="membre_id")
 	private Membre membre;
 
 	//bi-directional many-to-many association to Proposition
@@ -38,10 +45,10 @@ public class Localisation implements Serializable {
 	@JoinTable(
 		name="localiser"
 		, joinColumns={
-			@JoinColumn(name="Localisation_idLocalisation")
+			@JoinColumn(name="localisation_id")
 			}
 		, inverseJoinColumns={
-			@JoinColumn(name="Proposition_idProposition")
+			@JoinColumn(name="proposition_id")
 			}
 		)
 	private List<Proposition> proposedHere;
@@ -50,12 +57,12 @@ public class Localisation implements Serializable {
 	}
 
 
-	public int getIdLocalisation() {
+	public Integer getIdLocalisation() {
 		return idLocalisation;
 	}
 
 
-	public void setIdLocalisation(int idLocalisation) {
+	public void setIdLocalisation(Integer idLocalisation) {
 		this.idLocalisation = idLocalisation;
 	}
 
@@ -68,27 +75,27 @@ public class Localisation implements Serializable {
 		this.adresse = adresse;
 	}
 
-	public int getCodePostal() {
+	public Integer getCodePostal() {
 		return this.codePostal;
 	}
 
-	public void setCodePostal(int codePostal) {
+	public void setCodePostal(Integer codePostal) {
 		this.codePostal = codePostal;
 	}
 
-	public float getLatitude() {
+	public Float getLatitude() {
 		return this.latitude;
 	}
 
-	public void setLatitude(float latitude) {
+	public void setLatitude(Float latitude) {
 		this.latitude = latitude;
 	}
 
-	public float getLongitude() {
+	public Float getLongitude() {
 		return this.longitude;
 	}
 
-	public void setLongitude(float longitude) {
+	public void setLongitude(Float longitude) {
 		this.longitude = longitude;
 	}
 
