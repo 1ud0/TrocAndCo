@@ -56,24 +56,12 @@ public class Localisation implements Serializable {
 	public Localisation() {
 	}
 
-<<<<<<< Upstream, based on master
-
 	public Integer getIdLocalisation() {
 		return idLocalisation;
-=======
-	public int getIdLocalisaiton() {
-		return this.idLocalisation;
->>>>>>> 7e8ea77 creation de l'interface et l'implémentation Localisation
 	}
-
-<<<<<<< Upstream, based on master
 
 	public void setIdLocalisation(Integer idLocalisation) {
 		this.idLocalisation = idLocalisation;
-=======
-	public void setIdLocalisaiton(int idLocalisaiton) {
-		this.idLocalisation = idLocalisaiton;
->>>>>>> 7e8ea77 creation de l'interface et l'implémentation Localisation
 	}
 
 
