@@ -17,7 +17,7 @@ public class Localisation implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private int idLocalisaiton;
+	private int idLocalisation;
 
 	private String adresse;
 
@@ -38,7 +38,7 @@ public class Localisation implements Serializable {
 	@JoinTable(
 		name="localiser"
 		, joinColumns={
-			@JoinColumn(name="Localisation_idLocalisaiton")
+			@JoinColumn(name="Localisation_idLocalisation")
 			}
 		, inverseJoinColumns={
 			@JoinColumn(name="Proposition_idProposition")
@@ -49,13 +49,16 @@ public class Localisation implements Serializable {
 	public Localisation() {
 	}
 
-	public int getIdLocalisaiton() {
-		return this.idLocalisaiton;
+
+	public int getIdLocalisation() {
+		return idLocalisation;
 	}
 
-	public void setIdLocalisaiton(int idLocalisaiton) {
-		this.idLocalisaiton = idLocalisaiton;
+
+	public void setIdLocalisation(int idLocalisation) {
+		this.idLocalisation = idLocalisation;
 	}
+
 
 	public String getAdresse() {
 		return this.adresse;
