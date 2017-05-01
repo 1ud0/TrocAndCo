@@ -74,4 +74,14 @@ public class DaoMembre implements IDaoMembre{
 		//final String reqDelete = "DELETE m FROM Membre m WHERE ";
 	}
 
+	@Override
+	public Membre checkMdp(String mdp, Integer idMembre) {
+		final String req = "SELECT m from Membre m WHERE m.password = :pmdp AND m.idMembre = :pidMembre";
+		Query query = em.createQuery(req);
+		query.setParameter("pmdp", mdp);
+		query.setParameter("pidMembre", idMembre);
+		Membre MembreChecked = (Membre) query.getSingleResult();
+		return MembreChecked;
+	}
+
 }

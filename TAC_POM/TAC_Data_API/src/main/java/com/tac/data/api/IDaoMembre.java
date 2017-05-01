@@ -7,6 +7,7 @@ import com.tac.entity.Membre;
 public interface IDaoMembre {
 
 	Membre identifyMembre(String pseudo, String mdp);
+	Membre checkMdp(String mdp, Integer idMembre);
 	Membre getByPseudo (String Pseudo);
 	Membre addMembre(Membre newMembre);
 	Membre updateMembre (Membre membre);

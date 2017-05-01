@@ -1,13 +1,10 @@
 package com.tac.data.impl;
 
 import java.util.List;
-
 import javax.ejb.Remote;
-import javax.ejb.Singleton;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
-
 import com.tac.data.api.IDaoRdv;
 import com.tac.entity.Rdv;
 
@@ -16,7 +13,6 @@ public class DaoRdv implements IDaoRdv{
 	
 	@PersistenceContext(unitName = "TAC_Data_EJB")
 	private EntityManager em;
-	@SuppressWarnings("unchecked")
 
 	@Override
 	public Rdv addRdv(Rdv rdv) {
@@ -35,12 +31,14 @@ public class DaoRdv implements IDaoRdv{
 		em.remove(em.merge(rdv));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Rdv> getByMembreId(Integer IdMembre) {
-		final String req = "SELECT r FROM RDV r WHERE r.id = :prdv";	
-//		Query query = em.createQuery(req).setParameter("prdv", rdv.);
-//		return query.getResultList();
-		return null;
+		final String req = "SELECT r FROM Rdv r LEFT JOIN IdEchange"
+				+ " LEFT JOIN IdMembre"
+				+ " WHERE r.idRDV like :pidRdv";	
+		Query query = em.createQuery(req).setParameter("pidRdv", IdMembre);
+		return query.getResultList();
 	}
 
 }
