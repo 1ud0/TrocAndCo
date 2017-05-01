@@ -8,7 +8,6 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
-import com.tac.data.api.IDaoEnvie;
 import com.tac.data.api.IDaoMessage;
 import com.tac.entity.Message;
 

@@ -10,5 +10,6 @@ public interface IDaoEnvie {
 	void deleteEnvie(Envie envie);
 	Envie getById(int idEnvie);
 	List<Envie> getByListeId(int idListe);
+	List<Envie> getByMembreId(int idMembre);
 
 }

@@ -9,9 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoEnvie;
-import com.tac.data.api.IDaoTag;
 import com.tac.entity.Envie;
-import com.tac.entity.Proposition;
 
 @Remote(IDaoEnvie.class)
 @Stateless
@@ -46,9 +44,18 @@ public class DaoEnvie implements IDaoEnvie {
 	@Override
 	public List<Envie> getByListeId(int idListe) {
 		
-		String req = "SELECT e from Envie e WHERE e.idListe = :lid";
+		String req = "SELECT e from Envie e WHERE e.liste.idListe = :lid";
 		Query query = em.createQuery(req);
 		query.setParameter("lid", idListe);
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Envie> getByMembreId(int idMembre) {
+		String req = "SELECT e from Envie e WHERE e.liste.membre.idMembre = :mid";
+		Query query = em.createQuery(req);
+		query.setParameter("mid", idMembre);
 		return query.getResultList();
 	}
 	
