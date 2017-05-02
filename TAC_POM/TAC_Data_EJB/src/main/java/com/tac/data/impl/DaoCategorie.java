@@ -48,7 +48,7 @@ public class DaoCategorie implements IDaoCategorie{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Categorie> getCategorieMere() {
-		final String req ="SELECT c FROM categorie WHERE c.idCaregorie is NULL";
+		final String req ="SELECT c FROM Categorie c WHERE c.categorieMere is NULL";
 		Query query = em.createQuery(req);
 		
 		return query.getResultList();
@@ -56,7 +56,7 @@ public class DaoCategorie implements IDaoCategorie{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Categorie> getCategorieFille(Integer IdMere) {
-		final String req = "SELECT c FROM Categorie c WHERE c.idCategorieMere = :pid";
+		final String req = "SELECT c FROM Categorie c WHERE c.categorieMere.idCategorie = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", IdMere);
 		return query.getResultList();

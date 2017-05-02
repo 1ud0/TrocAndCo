@@ -39,7 +39,7 @@ public class DaoTag implements IDaoTag {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Tag> getTagsByIdCat(int idCat) {
-		String req = "SELECT t FROM Tag t WHERE t.categorie like :tid";
+		String req = "SELECT t FROM Tag t WHERE t.categorie.idCategorie = :tid";
 		Query query = em.createQuery(req);
 		query.setParameter("tid", idCat);
 		return query.getResultList();

@@ -49,7 +49,7 @@ public class DaoMessage implements IDaoMessage {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Message> getMsgAboutEchange(int idChercheur, int idProp) {
-		String req="SELECT m FROM Message m WHERE (m.idProposition= :pid AND m.emetteur.idMembre = :cid) OR (m.idProposition= :pid AND m.recepteur.idMembre = :cid) ORDER BY m.dateEnvoi";
+		String req="SELECT m FROM Message m WHERE (m.proposition.idProposition= :pid AND m.emetteur.idMembre = :cid) OR (m.proposition.idProposition= :pid AND m.recepteur.idMembre = :cid) ORDER BY m.dateEnvoi";
 		Query query = em.createQuery(req);
 		query.setParameter("cid", idChercheur).setParameter("pid", idProp);
 		

@@ -32,7 +32,7 @@ public class DaoSuggestion implements IDaoSuggestion {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Suggestion> getSuggestionsByIdMembre(int idMembre) {
-		String req = "SELECT s FROM Suggestion s WHERE Membre_idMembre = :pid";
+		String req = "SELECT s FROM Suggestion s WHERE s.membre.idMembre = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
 		

@@ -9,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoLocalisation;
+import com.tac.data.api.IDaoMembre;
 import com.tac.entity.Localisation;
+import com.tac.entity.Membre;
 
 @Remote
 @Stateless
@@ -46,6 +48,7 @@ public class DaoLocalisation implements IDaoLocalisation {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Localisation> getMembreLocalisations(Integer id) {
+		
 		final String req = "SELECT m.localisations FROM Membre m WHERE m.idMembre = :pid";
 		Query query = em.createNamedQuery(req).setParameter("pid", id);
 		return query.getResultList();

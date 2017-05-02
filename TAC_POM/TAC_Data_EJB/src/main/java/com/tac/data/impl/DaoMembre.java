@@ -58,8 +58,8 @@ public class DaoMembre implements IDaoMembre{
 
 	@Override
 	public Membre getById(Integer id) {
-		final String reqGetById = "SELECT m FROM Membre m WHERE m.id = :pid";
-		Query queryGetById = em.createQuery(reqGetById);
+		final String reqGetById = "SELECT m FROM Membre m WHERE m.idMembre = :pid";
+			Query queryGetById = em.createQuery(reqGetById);
 		queryGetById.setParameter("pid", id);
 		Membre membreById = (Membre) queryGetById.getSingleResult();
 		return membreById;
@@ -85,8 +85,8 @@ public class DaoMembre implements IDaoMembre{
 		Query query = em.createQuery(req);
 		query.setParameter("pmdp", mdp);
 		query.setParameter("pidMembre", idMembre);
-		Membre MembreChecked = (Membre) query.getSingleResult();
-		return MembreChecked;
+		Membre membreChecked = (Membre) query.getSingleResult();
+		return membreChecked;
 	}
 
 }
