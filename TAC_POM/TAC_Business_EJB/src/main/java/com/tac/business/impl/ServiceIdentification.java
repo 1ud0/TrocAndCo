@@ -16,8 +16,8 @@ public class ServiceIdentification implements IServiceIdentification{
 	IDaoMembre proxyMembre;
 	
 	@Override
-	public Membre identification(String pseudo, String mdp) {
-		Membre memberIdentified = proxyMembre.identifyMembre(pseudo, mdp);
+	public Membre identification(String mail, String mdp) {
+		Membre memberIdentified = proxyMembre.identifyMembre(mail, mdp);
 		return memberIdentified;
 	}
 

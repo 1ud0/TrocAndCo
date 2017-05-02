@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-	xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <head>
 <title><ui:insert name="title">Default title</ui:insert></title>
@@ -12,34 +13,83 @@
 
 		<!-- *** TOP ***
 _________________________________________________________ -->
-		<h:form>
-		<div id="top">
-			<div class="container">
-				<div class="row">
-					<div class="col-xs-5 contact">
-						<p class="hidden-md hidden-lg">
-							<a href="#" data-animate-hover="pulse"><i class="fa fa-phone"></i></a>
-							<a href="#" data-animate-hover="pulse"><i
-								class="fa fa-envelope"></i></a>
-						</p>
-					</div>
-					<div class="col-xs-7">
-						<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected==null}">
-							<a href="#" data-toggle="modal" data-target="#login-modal"><i
-								class="fa fa-sign-in"></i> <span
-								class="hidden-xs text-uppercase">Se connecter</span></a>
-							<a href="inscription.xhtml"><i class="fa fa-user"></i> <span
-								class="hidden-xs text-uppercase">S'enregistrer</span></a>
-						</h:panelGroup>
-						<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected!=null}">
-						
-						<h:commandLink action="#{mbIdentif.seDeconnecter()}" value="Déconnexion" />
-						</h:panelGroup>
+		<h:form id="barreConnexion">
+			<div id="top">
+				<div class="container">
+					<div class="row">
+						<div class="col-xs-5 contact">
+							<p class="hidden-md hidden-lg">
+								<a href="#" data-animate-hover="pulse"><i
+									class="fa fa-phone"></i></a> <a href="#" data-animate-hover="pulse"><i
+									class="fa fa-envelope"></i></a>
+							</p>
+						</div>
+						<div class="col-xs-7">
+							<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected==null}">
+								<a href="#" data-toggle="modal" data-target="#login-modal"><i
+									class="fa fa-sign-in"></i> <span
+									class="hidden-xs text-uppercase">Se connecter</span></a>
+								<a href="inscription.xhtml"><i class="fa fa-user"></i> <span
+									class="hidden-xs text-uppercase">S'enregistrer</span></a>
+							</h:panelGroup>
+							<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected!=null}">
+								<h:panelGroup styleClass="text-uppercase pseudo">#{mbIdentif.membreConnected.pseudo}</h:panelGroup>
+								<span class="credit">Crédit : 10<img alt="feuille"
+									src="img/custom/feuille.png" /></span>
+								<div class="dropdown">
+									<button class="btn btn-default btn-lg btn-link"
+										data-toggle="dropdown" data-target="#">
+										<span class="glyphicon glyphicon-bell"></span>
+									</button>
+									<span class="badge badge-notify">3</span>
+									<ul class="dropdown-menu notifications" role="menu"
+										aria-labelledby="dLabel">
+										<div class="notification-heading">
+											<h4 class="menu-title">Notifications</h4>
+											<h4 class="menu-title pull-right">
+												View all<i class="glyphicon glyphicon-circle-arrow-right"></i>
+											</h4>
+										</div>
+										<li class="divider"></li>
+										<div class="notifications-wrapper">
+											<a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">
+														<span class="glyphicon glyphicon-envelope"
+															aria-hidden="true"></span> <span class="notifNum">5</span>nouveaux
+														messages
+													</h4>
+												</div>
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">
+														<span class="glyphicon glyphicon glyphicon-star-empty"
+															aria-hidden="true"></span> <span class="notifNum">3</span>nouvelles
+														évaluations
+													</h4>
+												</div>
+											</a> <a class="content" href="#">
+												<div class="notification-item">
+													<h4 class="item-title">
+														<span class="fa fa-exchange" aria-hidden="true"></span> <span
+															class="notifNum">2</span>nouveaux échanges
+													</h4>
+												</div>
+											</a>
+										</div>
+										<li class="divider"></li>
+									</ul>
 
+								</div>
+								<h:commandLink action="#{mbIdentif.seDeconnecter()}"
+									value="Déconnexion" ><i class="fa fa-sign-out"></i><span
+								class="hidden-xs text-uppercase"></span></h:commandLink>
+								</h:panelGroup>
+
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
 		</h:form>
 
 		<!-- *** TOP END *** -->
@@ -57,8 +107,8 @@ _________________________________________________________ -->
 						<div class="navbar-brand home">
 							<!--<img src="img/logo.png" alt="Universal logo" class="hidden-xs hidden-sm">
                                <img src="img/logo-small.png" alt="Universal logo" class="visible-xs visible-sm"><span class="sr-only">Universal - go to homepage</span> -->
-							<a  href="index.xhtml" class="logo"><img src="img/custom/logo.png"
-								alt="logo"></img></a>
+							<a href="index.xhtml" class="logo"><img
+								src="img/custom/logo.png" alt="logo"></img></a>
 						</div>
 						<div class="navbar-buttons">
 							<button type="button" class="navbar-toggle btn-template-main"
@@ -195,8 +245,7 @@ _________________________________________________________ -->
 												<div class="col-sm-3">
 													<h5>Mon compte</h5>
 													<ul>
-														<li><a href="#">Tableau de
-																bord</a></li>
+														<li><a href="#">Tableau de bord</a></li>
 														<li><a href="compte-infos.xhtml">Mes infos / Mes
 																adresses</a></li>
 														<li><a href="compte-objets.xhtml">Mes objets</a></li>
@@ -206,8 +255,7 @@ _________________________________________________________ -->
 														</li>
 														<li><a href="compte-evaluations.xhtml">Mes
 																évaluations</a></li>
-														<li><a href="#">Mon
-																calendrier</a></li>
+														<li><a href="#">Mon calendrier</a></li>
 													</ul>
 												</div>
 											</div>
@@ -268,17 +316,17 @@ _________________________________________________________ -->
 					<div class="modal-body">
 						<h:form action="customer-orders.html" method="post">
 							<div class="form-group">
-								<h:inputText value="#{mbIdentif.mail}" styleClass="form-control"></h:inputText>
-								
+								<h:inputText value="#{mbIdentif.mail}" styleClass="form-control" p:placeholder="adresse mail"></h:inputText>
+
 							</div>
 							<div class="form-group">
-							<h:inputText value="#{mbIdentif.mdp}" styleClass="form-control"></h:inputText>
+								<h:inputText value="#{mbIdentif.mdp}" styleClass="form-control" p:placeholder="mot de passe"></h:inputText>
 
 							</div>
 
 							<p class="text-center">
-								<h:commandButton action="#{mbIdentif.seConnecter()}" value="Connexion" styleClass="btn btn-template-main">
-									<i class="fa fa-sign-in"></i>
+								<h:commandButton action="#{mbIdentif.seConnecter()}"
+									value="Connexion" styleClass="btn btn-template-main">
 								</h:commandButton>
 							</p>
 
@@ -286,7 +334,8 @@ _________________________________________________________ -->
 
 						<p class="text-center text-muted">Pas encore inscrit?</p>
 						<p class="text-center text-muted">
-							<a href="customer-register.html"><strong>Inscrivez vous!</strong></a><br></br>C'est rapide et facile. 2 minutes suffisent!
+							<a href="inscription.xhtml"><strong>Inscrivez
+									vous!</strong></a><br></br>C'est rapide et facile. 2 minutes suffisent!
 						</p>
 
 					</div>
@@ -299,7 +348,8 @@ _________________________________________________________ -->
 
 		<div class="container" id="search">
 			<div class="row">
-				<form name="top_search" method="get" autocomplete="on" action="recherche.xhtml">
+				<form name="top_search" method="get" autocomplete="on"
+					action="recherche.xhtml">
 					<div class="col-sm-12 col-md-4">
 						<input type="text" name="string_search" id="string_search"
 							placeholder="Rechercher..." value="" class="form-control"></input>
