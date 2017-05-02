@@ -15,6 +15,7 @@
 		<class>com.tac.entity.Suggestion</class>
 		<class>com.tac.entity.Tag</class>
 		<class>com.tac.entity.Valeur</class>
+		<class>com.tac.entity.Photo</class>
 		<properties>
             <!-- <property name="hibernate.show_sql" value="true" /> -->
             <property name="hibernate.format_sql" value="true" />

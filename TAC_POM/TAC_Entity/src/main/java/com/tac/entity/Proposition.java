@@ -72,6 +72,9 @@ public class Proposition implements Serializable {
 	@JoinColumn(name="valeur_id")
 	private Valeur valeur;
 
+	@OneToMany(mappedBy="proposition")
+	private List<Photo> photos;
+	
 	public Proposition() {
 	}
 
@@ -207,6 +210,14 @@ public class Proposition implements Serializable {
 
 	public void setValeur(Valeur valeur) {
 		this.valeur = valeur;
+	}
+
+	public List<Photo> getPhotos() {
+		return photos;
+	}
+
+	public void setPhotos(List<Photo> photos) {
+		this.photos = photos;
 	}
 
 }

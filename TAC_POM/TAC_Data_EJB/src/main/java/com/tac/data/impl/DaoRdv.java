@@ -2,6 +2,7 @@ package com.tac.data.impl;
 
 import java.util.List;
 import javax.ejb.Remote;
+import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -9,6 +10,7 @@ import com.tac.data.api.IDaoRdv;
 import com.tac.entity.Rdv;
 
 @Remote(IDaoRdv.class)
+@Stateless
 public class DaoRdv implements IDaoRdv{
 	
 	@PersistenceContext(unitName = "TAC_Data_EJB")
