@@ -11,7 +11,7 @@ import com.tac.entity.Membre;
 @Remote(IServiceInscription.class)
 @Stateless
 public class ServiceInscription implements IServiceInscription {
-	
+
 	@EJB
 	IDaoMembre proxyInscription;
 
@@ -22,15 +22,12 @@ public class ServiceInscription implements IServiceInscription {
 
 	@Override
 	public boolean checkPseudo(String pseudo) {
-		if(proxyInscription.getByPseudo(pseudo) != null)
-			return(false);
-		else{
-			return(true);
+		if (proxyInscription.getByPseudo(pseudo) != null)
+			return false;
+		else {
+			return true;
 		}
-		
-		
+
 	}
-	
-	
 
 }

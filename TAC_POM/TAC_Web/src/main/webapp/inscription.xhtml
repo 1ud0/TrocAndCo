@@ -47,19 +47,19 @@ _________________________________________________________ -->
 										<p class="lead">Pas encore inscrit?</p>
 										<p>Inscrivez vous et rejoinez dès maintenant notre grande communauté de troqueurs! Des centaines d'objets sont échangés chaque jour.</p>
 										<hr></hr>
-										<form>
+										<h:form name="formInscription">
 
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="firstname">Prénom</label> <input type="text"
-															class="form-control" id="firstname" name="nom"></input>
+														<label>Prénom</label>
+														<h:inputText value="#{mbInscription.newMembre.prenom}" class="form-control"/>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="lastname">Nom</label> <input type="text"
-															class="form-control" id="lastname" name="prenom"></input>
+														<label>Nom</label>
+														<h:inputText value="#{mbInscription.newMembre.nom}" class="form-control"/>
 													</div>
 												</div>
 											</div>
@@ -70,9 +70,8 @@ _________________________________________________________ -->
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="meeting">Date de naissance</label> <input
-															id="meeting" class="form-control" type="date"
-															value="2011-01-13" name="date" />
+														<label>Date de naissance</label>
+														<h:inputText value="#{mbInscription.newMembre.dateNaissance}" class="form-control"/>
 													</div>
 												</div>
 											</div>
@@ -81,37 +80,66 @@ _________________________________________________________ -->
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="phone">Telephone</label> <input type="text"
-															class="form-control" id="phone"></input>
+														<label>Telephone</label>
+														<h:inputText value="#{mbInscription.newMembre.telephone}" class="form-control"/>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="email_account">Email</label> <input
-															type="text" class="form-control" id="email_account"></input>
+														<label>Email</label>
+														<h:inputText value="#{mbInscription.newMembre.mail}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-sm-12">
+													<div class="form-group">
+														<label for="adresse">Adresse</label> <input type="text"
+															class="form-control" id="adresse"></input>
+													</div>
+												</div>
+												<div class="col-sm-3">
+													<div class="form-group">
+														<label for="code_postal">Code postal</label> <input type="text"
+															class="form-control" id="code_postal"></input>
+													</div>
+												</div>
+												<div class="col-sm-9">
+													<div class="form-group">
+														<label for="ville">Ville</label>
+														<input
+															type="text" class="form-control" id="ville"></input>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<h:inputHidden id="latitude"/>
+													</div>
+												</div>
+												<div class="col-sm-6">
+													<div class="form-group">
+														<h:inputHidden id="longitude"/>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="password">Password</label> <input
-															type="password" class="form-control" id="password"></input>
+														<label>Password</label>
+														<h:inputSecret value="#{mbInscription.newMembre.password}" class="form-control"/>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label for="password">Retaper le mot de passer</label> <input
-															type="password" class="form-control" id="confirmPassword"></input>
+														<label>Retaper le mot de passer</label>
+														<h:inputSecret value="#{mbInscription.verifPwd}" class="form-control"/>
 													</div>
 												</div>
 												<div class="col-sm-12 text-center">
-													<button class="btn btn-vert btn-lg" type="submit">
-														Enregistrer<span class="glyphicon glyphicon-floppy-disk"></span>
-													</button>
+													<h:commandButton class="btn btn-vert btn-lg" action="#{mbInscription.createMembre()}" value="Enregistrer" ><span class="glyphicon glyphicon-floppy-disk"></span></h:commandButton>
 												</div>
 											</div>
-										</form>
+										</h:form>
 
 
 									</div>
@@ -157,8 +185,10 @@ _________________________________________________________ -->
 				</div>
 
 			</div>
-			
+			<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZnM_O8BFFutbT4s_XlCFPA5XH9DSwsQ"></script>
+			<script src="js/geocoding.js"></script>
 		</ui:define>
 	</ui:composition>
+	
 </h:body>
 </html>

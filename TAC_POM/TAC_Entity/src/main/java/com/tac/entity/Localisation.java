@@ -34,6 +34,9 @@ public class Localisation implements Serializable {
 
 	@Column(name="ville")
 	private String ville;
+	
+	@Column(name="titre_adresse")
+	private String titreAdresse;
 
 	//bi-directional many-to-one association to Membre
 	@ManyToOne
@@ -119,6 +122,14 @@ public class Localisation implements Serializable {
 
 	public void setProposedHere(List<Proposition> proposedHere) {
 		this.proposedHere = proposedHere;
+	}
+
+	public String getTitreAdresse() {
+		return titreAdresse;
+	}
+
+	public void setTitreAdresse(String titreAdresse) {
+		this.titreAdresse = titreAdresse;
 	}
 
 
