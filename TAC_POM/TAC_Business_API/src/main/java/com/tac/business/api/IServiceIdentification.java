@@ -4,5 +4,5 @@ import com.tac.entity.Membre;
 
 public interface IServiceIdentification {
 
-	Membre identification (String pseudo, String mdp);
+	Membre identification (String mail, String mdp);
 }
