@@ -50,7 +50,7 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getByMembre(int idMembre) {
-		final String req = "SELECT p FROM Proposition p WHERE p.idMembre = :pid";
+		final String req = "SELECT p FROM Proposition p WHERE p.membre.idMembre = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
 		return query.getResultList();
