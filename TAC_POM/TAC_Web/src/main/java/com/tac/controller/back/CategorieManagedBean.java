@@ -12,13 +12,13 @@ public class CategorieManagedBean {
 	@ManagedProperty(value="#{mbCnx}")
 	private ConnectionManagedBean mbConnect;
 	public String connection(){
-	return mbConnect.getUserConnected().getNom();
+	return mbConnect.getAdminConnected().getNom();
 	}
 	public String httpSession(){
 		HttpSession session =(HttpSession) 
 				FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		ConnectionManagedBean mbCnx = (ConnectionManagedBean) session.getAttribute("mbCnx");
-		return mbCnx.getUserConnected().getNom();
+		return mbCnx.getAdminConnected().getNom();
 	}
 	public ConnectionManagedBean getMbConnect(){
 		return mbConnect;

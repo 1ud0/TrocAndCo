@@ -10,9 +10,10 @@ import com.tac.entity.Membre;
 
 @Remote(IServiceAuthentificationBackOffice.class)
 @Stateless
-public class ServiceAuthentificationBackOffice implements IServiceAuthentificationBackOffice{
-@EJB
-private IDaoMembre proxyIDaoMembre;
+public class ServiceAuthentificationBackOffice implements IServiceAuthentificationBackOffice {
+	@EJB
+	IDaoMembre proxyIDaoMembre;
+
 	@Override
 	public Membre authentification(String mail, String mdp) {		
 		return proxyIDaoMembre.identifyMembre(mail, mdp);
