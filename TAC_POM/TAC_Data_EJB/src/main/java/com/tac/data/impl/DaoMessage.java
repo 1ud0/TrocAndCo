@@ -25,7 +25,8 @@ public class DaoMessage implements IDaoMessage {
 	}
 
 	@Override
-	public Message updateMessage(Message message) {
+	public Message updateMessageLu(Message message) {
+		message.setLu(true);
 		em.merge(message);
 		return message;
 	}
@@ -64,5 +65,7 @@ public class DaoMessage implements IDaoMessage {
 		query.setParameter("mid", idMembre);
 		return query.getResultList();
 	}
+
+	
 
 }
