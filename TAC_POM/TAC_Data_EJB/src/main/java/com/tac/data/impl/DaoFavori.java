@@ -38,7 +38,6 @@ public class DaoFavori implements IDaoFavori {
 				proposition.getIdProposition());
 		query.executeUpdate();
 
-
 	}
 
 	@Override

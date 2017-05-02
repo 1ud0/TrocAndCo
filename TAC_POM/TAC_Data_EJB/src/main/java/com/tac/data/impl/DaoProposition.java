@@ -1,5 +1,6 @@
 package com.tac.data.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -38,7 +39,7 @@ public class DaoProposition implements IDaoProposition{
 
 	@Override
 	public Proposition getById(int idProposition) {
-		String req = "SELECT p FROM Proposition p WHERE p.idProposition = :pid";
+		final String req = "SELECT p FROM Proposition p WHERE p.idProposition = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idProposition);
 		Proposition retour = (Proposition)query.getSingleResult();
@@ -49,7 +50,7 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getByMembre(int idMembre) {
-		String req = "SELECT p FROM Proposition p WHERE p.idMembre = :pid";
+		final String req = "SELECT p FROM Proposition p WHERE p.idMembre = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
 		return query.getResultList();
@@ -57,14 +58,21 @@ public class DaoProposition implements IDaoProposition{
 
 	@Override
 	public List<Proposition> getPropDispo() {
-		
-		return null;
+		final String req = "SELECT p FROM Proposition p WHERE SIZE(p.echanges)=0";
+		Query query = em.createQuery(req);
+		return query.getResultList();
 	}
 
 	@Override
 	public List<Proposition> getNouveautes(int nombre) {
-		// TODO Auto-generated method stub
-		return null;
+		final String req = "SELECT p FROM Proposition p ORDER BY dateAjout DESC";
+		Query query = em.createQuery(req);
+		List<Proposition> propoNew = query.getResultList();
+		List<Proposition> firstPropNew = new ArrayList<>();
+		for(int i=0; i<nombre; i++){
+			firstPropNew.add(propoNew.get(i));
+		}
+		return firstPropNew;
 	}
 
 }
