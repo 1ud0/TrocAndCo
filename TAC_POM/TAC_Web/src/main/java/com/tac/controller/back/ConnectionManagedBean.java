@@ -1,8 +1,7 @@
 package com.tac.controller.back;
 
-
 import javax.ejb.EJB;
-import javax.faces.application.ConfigurableNavigationHandler;
+
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -10,71 +9,60 @@ import javax.servlet.http.HttpSession;
 
 import com.tac.business.api.IServiceAuthentificationBackOffice;
 import com.tac.entity.Membre;
+import java.io.Serializable;
 
-@ManagedBean(name="mbCnx")
+@SuppressWarnings("serial")
+@ManagedBean(name = "mbAuthentification")
 @SessionScoped
-public class ConnectionManagedBean {
+public class ConnectionManagedBean implements Serializable{
 	@EJB
-private IServiceAuthentificationBackOffice proxyAuthentificationBackOffice;
+	private IServiceAuthentificationBackOffice proxyAuthentificationBackOffice;
 	private String mail;
 	private String mdp;
-	private Membre userConnected;
+	private Membre adminConnected;
+
 	public String seConnecter() {
-		userConnected = proxyAuthentificationBackOffice.authentification(mail, mdp);
 		String nav = "";
-		if(userConnected != null) {
-			if(isAdmin()) {
-				nav = "/index.xhtml?faces-redirect=true";
-			} else {
-				nav = "/loginTandC.xhtml?faces-redirect=true";
-			}
+		adminConnected = proxyAuthentificationBackOffice.authentification(mail, mdp);
+		
+		if (adminConnected != null) {
+				nav = "index.xhtml?faces-redirect=true";
+		}else {
+			nav = "loginTandCo.xhtml?faces-redirect=true";
 		}
 		return nav;
 	}
+
 	public String seDeconnecter() {
-		HttpSession session = (HttpSession) FacesContext.getCurrentInstance()
-				.getExternalContext().getSession(true);
+		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.invalidate();
-		return "/loginTandC.xhtml?faces-redirect=true";
+		String redirection = "loginTandC.xhtml?faces-redirect=true";
+		return redirection;
 	}
-	public boolean isAdmin() {
-		boolean retour = false;
-		if(userConnected.getMail() == "admin@trocandco.com") {
-			retour = true;
-		}
-		return retour;
+
+	
+
+	public Membre getAdminConnected() {
+		return adminConnected;
 	}
-	public void securePage() {
-		if(userConnected == null) {
-			ConfigurableNavigationHandler  nav =
-					(ConfigurableNavigationHandler)
-					FacesContext.getCurrentInstance()
-					.getApplication()
-					.getNavigationHandler();
-			nav.performNavigation("/indecTandC.xhtml?faces-redirect=true");
-		}
+
+	public void setAdminConnected(Membre adminConnected) {
+		this.adminConnected = adminConnected;
 	}
-	public Membre getUserConnected() {
-		return userConnected;
-	}
-	public void setUserConnected(Membre userConnected) {
-		this.userConnected = userConnected;
-	}
-	public IServiceAuthentificationBackOffice getProxyIdent() {
-		return proxyAuthentificationBackOffice;
-	}
-	public void setProxyproxyIdentification(IServiceAuthentificationBackOffice proxyIdent) {
-		this.proxyAuthentificationBackOffice = proxyIdent;
-	}
+
+
 	public String getMail() {
 		return mail;
 	}
+
 	public void setMail(String mail) {
 		this.mail = mail;
 	}
+
 	public String getMdp() {
 		return mdp;
 	}
+
 	public void setMdp(String mdp) {
 		this.mdp = mdp;
 	}

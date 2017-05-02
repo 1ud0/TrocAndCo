@@ -18,7 +18,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="dist/css/AdminLTE.min.css"></link>
   <!-- iCheck -->
-  <link rel="stylesheet" href="plugins/iCheck/square/blue.css"></link>
+  <link rel="stylesheet" href="plugins/iCheck/flat/blue.css"></link>
 
   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -36,24 +36,24 @@
   <div class="login-box-body">
     <p class="login-box-msg">Connectez vous ici pour démarrer votre session</p>
 
-    <form action="index.xhtml" method="post">
+    <h:form value="#"  method="post">
       <div class="form-group has-feedback">
-        <input  class="form-control" placeholder="Email" value="#{mbCnx.mail}"></input>
+        <h:inputText  class="form-control"  value="#{mbAuthentification.mail}"></h:inputText>
         <span class="glyphicon glyphicon-envelope form-control-feedback"></span>
       </div>
       <div class="form-group has-feedback">
-        <input type="password" class="form-control" placeholder="Password" value="#{mbCnx.mdp}"></input>
+        <h:inputSecret value="#{mbAuthentification.mdp}" class="form-control"></h:inputSecret>
         <span class="glyphicon glyphicon-lock form-control-feedback"></span>
       </div>
       <div class="row">
         
         <!-- /.col -->
         <div class="col-xs-4">
-          <h:commandButton action="#{mbCnx.seConnecter()}" value="Connexion" styleClass="btn btn-primary btn-block btn-flat"></h:commandButton> 
+          <h:commandButton action="#{mbAuthentification.seConnecter()}" value="Connexion" styleClass="btn btn-primary btn-block btn-flat"></h:commandButton> 
         </div>
         <!-- /.col -->
       </div>
-    </form>
+    </h:form>
 
     <!-- /.social-auth-links -->
 

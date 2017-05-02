@@ -48,7 +48,7 @@ public class DaoCategorie implements IDaoCategorie{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Categorie> getCategorieMere() {
-		final String req ="SELECT c FROM categorie WHERE c.idCaregorie is NULL";
+		final String req ="SELECT c FROM Categorie c WHERE c.idCaregorie is NULL";
 		Query query = em.createQuery(req);
 		
 		return query.getResultList();
