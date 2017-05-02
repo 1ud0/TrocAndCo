@@ -25,6 +25,7 @@ public class DaoFavori implements IDaoFavori {
 		Query query = em.createQuery(req);
 		query.setParameter("pidMembre", membre.getIdMembre()).setParameter("pidProposition",
 				proposition.getIdProposition());
+		int nbLigne = query.executeUpdate();
 		return proposition;
 	}
 
@@ -35,6 +36,7 @@ public class DaoFavori implements IDaoFavori {
 		Query query = em.createQuery(req);
 		query.setParameter("pidMembre", membre.getIdMembre()).setParameter("pidProposition",
 				proposition.getIdProposition());
+		int nbLigne = query.executeUpdate();
 
 	}
 
@@ -43,7 +45,8 @@ public class DaoFavori implements IDaoFavori {
 		String req = "DELETE FROM Favori  WHERE Proposition_idProposition = :pidProposition ";
 		Query query = em.createQuery(req);
 		query.setParameter("pidProposition", proposition.getIdProposition());
-	}
+		int nbLigne = query.executeUpdate();
+		}
 
 	
 	@Override

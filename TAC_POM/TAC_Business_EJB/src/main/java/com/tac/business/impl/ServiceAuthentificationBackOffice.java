@@ -14,8 +14,7 @@ public class ServiceAuthentificationBackOffice implements IServiceAuthentificati
 @EJB
 private IDaoMembre proxyIDaoMembre;
 	@Override
-	public Membre authentification(String mail, String mdp) {
-		
+	public Membre authentification(String mail, String mdp) {		
 		return proxyIDaoMembre.identifyMembre(mail, mdp);
 	}
 

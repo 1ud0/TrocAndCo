@@ -37,6 +37,11 @@ public class Echange implements Serializable {
 	@Column(name="date_init")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateinit;
+	
+	@Column(name="date_annul")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateAnnul;
+
 
 	@Column(name="date_refus")
 	@Temporal(TemporalType.TIMESTAMP)
@@ -83,6 +88,14 @@ public class Echange implements Serializable {
 		this.idEchange = idEchange;
 	}
 
+
+	public Date getDateAnnul() {
+		return dateAnnul;
+	}
+
+	public void setDateAnnul(Date dateAnnul) {
+		this.dateAnnul = dateAnnul;
+	}
 	public Integer getCodeEchange() {
 		return this.codeEchange;
 	}

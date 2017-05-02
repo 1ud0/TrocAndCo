@@ -37,11 +37,11 @@ public class DaoEchange implements IDaoEchange{
 
 	@Override
 	public Echange getByNumero(Integer numero) {
-		final String reqGetByNum ="SELECT e FROM Echange WHERE e.idEchange = :pnumero";
+		final String reqGetByNum ="SELECT e FROM Echange e WHERE e.idEchange = :pnumero";
 		Query queryGetByNum = em.createQuery(reqGetByNum);
 		queryGetByNum.setParameter("pnumero", numero);
-		Echange Selectedchange = (Echange) queryGetByNum.getSingleResult();
-		return Selectedchange;
+		Echange selectedchange = (Echange) queryGetByNum.getSingleResult();
+		return selectedchange;
 	}
 
 	@Override
@@ -56,7 +56,7 @@ public class DaoEchange implements IDaoEchange{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Echange> getByMembreDonneur(Integer idMembreDonneur) {
-		final String reqGetByMemberId="SELECT e FROM Echange WHERE e.proposition.membre.idMembre= :pidMembreDonneur";
+		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur";
 		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
 		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembreDonneur);
 		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
@@ -66,17 +66,27 @@ public class DaoEchange implements IDaoEchange{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Echange> getByMembreChercheur(Integer idMembreChercheur) {
-		final String reqGetByMemberId="SELECT e FROM Echange WHERE e.membre.idMembre= :pidMembre";
+		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.membre.idMembre= :pidMembre";
 		Query queryGetByIdMembreChercheur = em.createQuery(reqGetByMemberId);
 		queryGetByIdMembreChercheur.setParameter("pidMembre", idMembreChercheur);
 		List<Echange> echangesDuChercheur = queryGetByIdMembreChercheur.getResultList();
 		return echangesDuChercheur;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public Double getNoteMoyenneMembre(Integer idMembre) {
-		// TO DO!!
-	return null;
+		final String reqGetMoyNote="SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
+		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
+		queryGetMoyNote.setParameter("pidMembre", 10);
+		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
+		System.out.println(echangesDuMembre.size());
+		Double totalNote=0.0;
+		for(Echange echange : echangesDuMembre){			
+			totalNote=totalNote+echange.getNoteDonneur();			
+		}
+		Double noteMoyenne = totalNote/(double)echangesDuMembre.size();
+		return noteMoyenne;
 	}
 
 	
