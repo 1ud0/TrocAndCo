@@ -15,32 +15,27 @@ public class ServiceEvaluation implements IServiceEvaluation {
 
 	@Override
 	public Echange evalDonneur(Echange echange) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDaoEchange.updateEchange(echange);
 	}
 
 	@Override
 	public Echange evalChercheur(Echange echange) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDaoEchange.updateEchange(echange);
 	}
 
 	@Override
 	public List<Echange> getEvalRecues(Membre membre) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDaoEchange.getByMembre(membre.getIdMembre()); 
 	}
 
 	@Override
 	public List<Echange> getEvalDonnees(Membre membre) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDaoEchange.getByMembre(membre.getIdMembre());
 	}
-
+	
 	@Override
 	public Double getNoteMoyenneMembre(Membre membre) {
-		// TODO Auto-generated method stub
-		return null;
+		return proxyDaoEchange.getNoteMoyenneMembre(membre.getIdMembre());
 	}
 
 }
