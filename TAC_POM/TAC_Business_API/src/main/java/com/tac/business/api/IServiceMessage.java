@@ -11,7 +11,7 @@ public interface IServiceMessage {
 	
 	Message envoyerMessage(Message message);
 	List<Message> getByMembre(Membre membre);
-	List<Message> getMsgEchange(Echange echange);
+	List<Message> getConversation(Membre membre1, Membre membre2);
 	List<Message> getMsgAboutProp(Membre chercheur, Proposition prop);
 	Message messageLu(Message msg);
 

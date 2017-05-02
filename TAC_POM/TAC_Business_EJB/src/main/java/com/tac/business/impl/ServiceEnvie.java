@@ -2,6 +2,7 @@ package com.tac.business.impl;
 
 import java.util.List;
 
+import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
@@ -15,6 +16,7 @@ import com.tac.entity.Membre;
 @Stateless
 public class ServiceEnvie implements IServiceEnvie{
 	
+	@EJB
 	private IDaoEnvie proxyDaoEnvie;
 
 	@Override
