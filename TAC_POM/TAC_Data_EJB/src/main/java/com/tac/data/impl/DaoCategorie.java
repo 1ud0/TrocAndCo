@@ -12,7 +12,7 @@ import javax.persistence.Query;
 import com.tac.data.api.IDaoCategorie;
 import com.tac.entity.Categorie;
 
-@Remote
+@Remote(IDaoCategorie.class)
 @Stateless
 public class DaoCategorie implements IDaoCategorie{
 	@PersistenceContext(unitName = "TAC_Data_EJB")

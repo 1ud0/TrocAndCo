@@ -47,98 +47,129 @@ _________________________________________________________ -->
 										<p class="lead">Pas encore inscrit?</p>
 										<p>Inscrivez vous et rejoinez dès maintenant notre grande communauté de troqueurs! Des centaines d'objets sont échangés chaque jour.</p>
 										<hr></hr>
-										<h:form name="formInscription">
+										<h:form id="formInscription">
 
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Prénom</label>
-														<h:inputText value="#{mbInscription.newMembre.prenom}" class="form-control"/>
+														<label>Prénom*</label>
+														<h:inputText id="prenom" value="#{mbInscription.newMembre.prenom}" class="form-control" />
+														<h:message for="prenom" style="color: red;"/>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Nom</label>
-														<h:inputText value="#{mbInscription.newMembre.nom}" class="form-control"/>
+														<label>Nom*</label>
+														<h:inputText id="nom" value="#{mbInscription.newMembre.nom}" class="form-control" />
+														<h:message for="nom" style="color: red;"/>
 													</div>
 												</div>
 											</div>
 											<!-- /.row -->
-
-
-
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Date de naissance</label>
-														<h:inputText value="#{mbInscription.newMembre.dateNaissance}" class="form-control"/>
+														<label>Date de naissance*</label>
+														<h:inputText id="date_naissance" value="#{mbInscription.newMembre.dateNaissance}" class="form-control">
+															<f:convertDateTime pattern="yyyy-MM-dd"/>
+														</h:inputText>
+														<h:message for="date_naissance" style="color: red;"/>
 													</div>
 												</div>
 											</div>
 											<!-- /.row -->
-
 											<div class="row">
 												<div class="col-sm-6">
 													<div class="form-group">
 														<label>Telephone</label>
-														<h:inputText value="#{mbInscription.newMembre.telephone}" class="form-control"/>
+														<h:inputText id="telephone" value="#{mbInscription.newMembre.telephone}" class="form-control" validatorMessage="numéro invalide">
+														
+														</h:inputText>
+														<h:message for="telephone" style="color: red;"/>
 													</div>
 												</div>
 												<div class="col-sm-6">
 													<div class="form-group">
-														<label>Email</label>
-														<h:inputText value="#{mbInscription.newMembre.mail}" class="form-control"/>
+														<label>Email*</label>
+														<h:inputText id="mail" value="#{mbInscription.newMembre.mail}" class="form-control" validatorMessage="adresse mail invalide">
+															
+														</h:inputText>
+														<h:message for="mail" style="color: red;"/>
 													</div>
 												</div>
 											</div>
-											<div class="row">
-												<div class="col-sm-12">
-													<div class="form-group">
-														<label for="adresse">Adresse</label> <input type="text"
-															class="form-control" id="adresse"></input>
+											
+											<fieldset>
+												<legend>Adresse principale</legend>
+												<div class="row">
+													<div class="col-sm-12">
+														<div class="form-group">
+															<label for="adresse">Adresse*</label>
+															<h:inputText value="#{mbInscription.lieu.adresse}" class="form-control" id="adresse"/>
+															<h:message for="adresse" style="color: red;"/>
+														</div>
+													</div>
+													<div class="col-sm-3">
+														<div class="form-group">
+															<label for="code_postal">Code postal*</label>
+															<h:inputText value="#{mbInscription.lieu.codePostal}" class="form-control" id="code_postal"/>
+															<h:message for="code_postal" style="color: red;"/>
+														</div>
+													</div>
+													<div class="col-sm-9">
+														<div class="form-group">
+															<label for="ville">Ville*</label>
+															<h:inputText value="#{mbInscription.lieu.ville}" class="form-control" id="ville"/>
+															<h:message for="ville" style="color: red;"/>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group">
+															<h:inputHidden id="latitude" value="#{mbInscription.lieu.latitude}"/>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group">
+															<h:inputHidden id="longitude" value="#{mbInscription.lieu.longitude}"/>
+														</div>
 													</div>
 												</div>
-												<div class="col-sm-3">
-													<div class="form-group">
-														<label for="code_postal">Code postal</label> <input type="text"
-															class="form-control" id="code_postal"></input>
+											</fieldset>
+											
+											<fieldset>
+												<legend>Vos identifiants</legend>
+												<div class="row">
+													<div class="col-sm-6">
+														<div class="form-group">
+															<label>Pseudo*</label>
+															<h:inputText id="pseudo" value="#{mbInscription.newMembre.pseudo}" class="form-control" />
+															<h:message for="pwd" style="color: red;"/>
+														</div>
 													</div>
 												</div>
-												<div class="col-sm-9">
-													<div class="form-group">
-														<label for="ville">Ville</label>
-														<input
-															type="text" class="form-control" id="ville"></input>
+												<div class="row">
+													<div class="col-sm-6">
+														<div class="form-group">
+															<label>Mot de passe*</label>
+															<h:inputSecret id="pwd" value="#{mbInscription.newMembre.password}" class="form-control" />
+															<h:message for="pwd" style="color: red;"/>
+														</div>
+													</div>
+													<div class="col-sm-6">
+														<div class="form-group">
+															<label>Confirmer mot de passe*</label>
+															<h:inputSecret value="#{mbInscription.verifPwd}" class="form-control"/>
+														</div>
+													</div>
+													<div class="col-sm-12 text-center">
+														<h:commandButton id="btn" action="#{mbInscription.createMembre()}" style="display: none" />
+														<button type="button" id="btnVisible" name="btnVisible" class="btn btn-vert btn-lg">
+															Enregistrer
+															<span class="glyphicon glyphicon-floppy-disk"></span>
+														</button>
 													</div>
 												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<h:inputHidden id="latitude"/>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<h:inputHidden id="longitude"/>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Password</label>
-														<h:inputSecret value="#{mbInscription.newMembre.password}" class="form-control"/>
-													</div>
-												</div>
-												<div class="col-sm-6">
-													<div class="form-group">
-														<label>Retaper le mot de passer</label>
-														<h:inputSecret value="#{mbInscription.verifPwd}" class="form-control"/>
-													</div>
-												</div>
-												<div class="col-sm-12 text-center">
-													<h:commandButton class="btn btn-vert btn-lg" action="#{mbInscription.createMembre()}" value="Enregistrer" ><span class="glyphicon glyphicon-floppy-disk"></span></h:commandButton>
-												</div>
-											</div>
+											</fieldset>
 										</h:form>
 
 
@@ -153,23 +184,24 @@ _________________________________________________________ -->
 										<p class="text-muted">Connectez vous à votre espace à l'aide du formulaire ci-dessous et accédez à votre tableau de bord.</p>
 
 										<hr></hr>
-										<form action="customer-orders.html" method="post">
+										<h:form id="formLogin">
 											<div class="form-group">
-												<label for="email">Email</label> <input type="text"
-													class="form-control" id="email"></input>
+												<label>Email</label>
+												<h:inputText id="mail_login" value="#{mbIdentif.mail}" class="form-control" />
 											</div>
 											<div class="form-group">
-												<label for="password">Password</label> <input
-													type="password" class="form-control" id="password"></input>
+												<label>Mot de passe</label>
+												<h:inputSecret value="#{mbIdentif.mdp}" class="form-control"/>
 											</div>
 											<div class="row">
 												<div class="col-sm-12 text-center">
-													<button class="btn btn-vert btn-lg" type="submit">
+													<h:commandButton action="#{mbIdentif.seConnecter()}" id="btn_login" style="display: none;" />
+													<button class="btn btn-vert btn-lg" type="submit" id="formLogin:btn_login" name="formLogin:btn_login" >
 														Connexion<span class="glyphicon glyphicon glyphicon-ok"></span>
 													</button>
 												</div>
 											</div>
-										</form>
+										</h:form>
 									</div>
 								</div>
 
