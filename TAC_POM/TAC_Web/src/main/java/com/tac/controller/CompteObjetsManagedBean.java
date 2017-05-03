@@ -8,7 +8,6 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.ViewScoped;
 
-
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
 import com.tac.business.api.IServiceLocalisation;
@@ -64,6 +63,7 @@ public class CompteObjetsManagedBean implements Serializable{
 		membreCourant = identifBean.getMembreConnected();
 		proposDuMembre = proxyObjet.getByMembre(membreCourant);
 		return proposDuMembre;
+		
 	}
 	
 	public void listnerSelectionObjet( Proposition proposition){

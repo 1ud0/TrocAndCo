@@ -1,11 +1,9 @@
 package com.tac.data.impl;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
-import javax.persistence.Entity;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
@@ -13,7 +11,7 @@ import javax.persistence.Query;
 import com.tac.data.api.IDaoMembre;
 import com.tac.entity.Membre;
 
-@Remote (IDaoMembre.class)
+@Remote(IDaoMembre.class)
 @Stateless
 public class DaoMembre implements IDaoMembre{
 

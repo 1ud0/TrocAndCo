@@ -1,7 +1,6 @@
 
 package com.tac.data.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Remote;
@@ -65,19 +64,13 @@ public class DaoProposition implements IDaoProposition{
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getNouveautes(int nombre) {
-		
 		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos ORDER BY p.dateAjout DESC";
 		Query query = em.createQuery(req);
-		
-		@SuppressWarnings("unchecked")
-		List<Proposition> propoNew = query.getResultList();
-		List<Proposition> firstPropNew = new ArrayList<>();
-		for(int i=0; i<nombre; i++){
-			firstPropNew.add(propoNew.get(i));
-		}
-		return firstPropNew;
+		query.setMaxResults(nombre);
+		return query.getResultList();
 	}
 
 }

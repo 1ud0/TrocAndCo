@@ -35,7 +35,7 @@
 					<div class="row objet" id="productMain">
 						<div class="col-sm-5">
 							<div id="mainImage">
-								<img src="img/detailbig1.jpg" alt=""
+								<img src="" alt=""
 									class="img-responsive" id="grossePhoto"></img>
 							</div>
 
@@ -46,19 +46,13 @@
 							<!-- /.ribbon -->
 							<br></br>
 							<div class="row" id="thumbs">
-								<div class="col-xs-4">
-									<a href="img/detailbig1.jpg" class="thumb"> <img
-										src="img/detailbig1.jpg" alt="" class="img-responsive"></img></a>
+							<ui:repeat var="photo" value="#{mbObjet.selectedProp.photos}">
+								<div class="col-xs-4">				
+									<a href="#{photo.url}" class="thumb"> <img
+										src="#{photo.url}" alt="" class="img-responsive"></img></a>
 								</div>
-								<div class="col-xs-4">
-									<a href="img/detailbig2.jpg" class="thumb"> <img
-										src="img/detailbig2.jpg" alt=""
-										class="img-responsive"></img></a>
-								</div>
-								<div class="col-xs-4">
-									<a href="img/detailbig3.jpg" class="thumb"> <img
-										src="img/detailbig3.jpg" alt="" class="img-responsive"></img></a>
-								</div>
+								</ui:repeat>
+								
 							</div>
 
 						</div>
@@ -66,11 +60,11 @@
 							<div>
 								<form>
 									<div class="sizes">
-										<h3>Casserole-Barbie-Vase</h3>
+										<h3><h:outputText value="#{mbObjet.selectedProp.intitule}" /> </h3>
 									</div>
 									<p class="price">
 										<img src="img/custom/feuille orange.png" height="50"
-											width="50" border="1px"></img> 3
+											width="50" border="1px"></img> <h:outputText value="#{mbObjet.selectedProp.valeur.valeur}" />
 									</p>
 									<p class="text-center">
 										<button type="submit" class="btn btn-template-main"
@@ -90,24 +84,16 @@
 							<div class="box" id="details">
 
 								<h4>Details</h4>
-								<p>BMW X5 3.0sdA 286ch Luxe / II (E70)</p>
-								<p>Ph1 tout-terrain, noir, 19 cv, 5 portes, mise en
-									circulation le 15/10/2009. Autres équipements et informations :</p>
-								<p>puissance réelle : 286 ch, nombre de rapports : 6
-									vitesses, émission CO2 : 220 g/km, radar d'aide au
-									stationnement, rétroviseur interieur electrochrome, Vitres
-									arrières électriques, direction assistée, réglages du volant :
-									profondeur, Rétroviseurs extérieurs électrochromes, Sellerie
-									cuir, Sièges avant électriques à mémoire, Suspensions
-									pneumatiques - filtre à particules - jantes aluminium</p>
+								<p> <h:outputText value="#{mbObjet.selectedProp.description}" /> </p>
+
 
 								<blockquote>
 									<p>
-										<em>Etat : usure</em>
+										<em>Etat : <h:outputText value="#{mbObjet.selectedProp.etat.intitule}" /> </em>
 									</p>
 									<p>
-										<em>Catégorie : blabla</em> <br></br> <em>Sous-catégorie
-											: blibli</em>
+										<em>Catégorie : <h:outputText value=" #{mbObjet.selectedProp.categorie.intitule}" /></em> <br></br> <em>Sous-catégorie
+											: <h:outputText value="#{mbObjet.selectedProp.sousCategorie.intitule}" /> </em>
 									</p>
 
 								</blockquote>

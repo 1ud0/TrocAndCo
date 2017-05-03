@@ -1,21 +1,30 @@
 window.onload = function() {
-	var form = document.formInscription;
-	form.addEventListener("submit", function(e) {
-		//e.preventDefault();
+	var form = document.getElementById("formInscription");
+	var btnVisible = document.getElementById("btnVisible");
+	var btnCache = document.getElementById("formInscription:btn");
+	btnVisible.onclick = function() {
+		console.log("coucou");
 		var geocoder = new google.maps.Geocoder();
+		var chpLatitude = document.getElementById("formInscription:latitude");
+		var chpLongitude = document.getElementById("formInscription:longitude");
+		var chpAdresse = document.getElementById("formInscription:adresse");
+		var chpCodePostal = document.getElementById("formInscription:code_postal");
+		var chpVille = document.getElementById("formInscription:ville");
 		//recupération de l'adresse depuis les 3 imput text
-	    var address = form.elements.adresse.value + ", " + form.elements.code_postal.value + ", " + form.elements.ville.value;
+	    var address = chpAdresse.value + ", " + chpCodePostal.value + ", " + chpVille.value;
 	    console.log(address);
 	    //geocoding
 	    geocoder.geocode({'address': address}, function(results, status) {
 	        if (status === google.maps.GeocoderStatus.OK) {
 	            var maLocalisation = results[0].geometry.location;
-	            form.elements.latitude.value = results[0].geometry.location.lat();
-	            form.elements.longitude.value = results[0].geometry.location.lng();
+	            console.log(results[0].geometry.location.lat());
+	            console.log(results[0].geometry.location.lng());
+	            chpLatitude.value = results[0].geometry.location.lat();
+	            chpLongitude.value = results[0].geometry.location.lng();
+	            btnCache.click();
 	        } else {
 	            alert('Geocode was not successful for the following reason: ' + status);
 	        }
 	    });
-		console.log("coucou");
-	});
+	}
 }
