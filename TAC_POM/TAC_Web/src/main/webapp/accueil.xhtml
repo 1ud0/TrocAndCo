@@ -129,8 +129,11 @@ _________________________________________________________ -->
 												<div class="col-sm-3">
 													<div class="article">
 														<div class="photo">
-															<img src="#{prop.photos.get(0).url}" alt="E1"
-																class="img-responsive"></img>
+															<h:graphicImage  value="#{prop.photos.get(0).url}" alt="E1"
+																styleClass="img-responsive" rendered="#{not empty prop.photos}"></h:graphicImage >
+
+															<h:graphicImage styleClass="img-responsive" value="img/texture-turquoise.png" rendered="#{empty prop.photos}">
+																</h:graphicImage>
 														</div>
 														<div class="texteArticle">
 															<span class="categorie"> <h:outputText
