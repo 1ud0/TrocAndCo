@@ -8,7 +8,6 @@ import javax.ejb.Stateless;
 
 import com.tac.business.api.IServiceMessage;
 import com.tac.data.api.IDaoMessage;
-import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Message;
 import com.tac.entity.Proposition;

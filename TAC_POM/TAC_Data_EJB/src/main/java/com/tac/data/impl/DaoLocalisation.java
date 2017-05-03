@@ -9,9 +9,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoLocalisation;
-import com.tac.data.api.IDaoMembre;
 import com.tac.entity.Localisation;
-import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
 @Remote(IDaoLocalisation.class)
