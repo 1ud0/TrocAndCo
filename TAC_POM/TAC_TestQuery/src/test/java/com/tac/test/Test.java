@@ -21,19 +21,9 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
 
-        //
-        // 
-		final String reqGetMoyNote="SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
-		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
-		queryGetMoyNote.setParameter("pidMembre", 10);
-		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
-		System.out.println(echangesDuMembre.size());
-		Double totalNote=0.0;
-		for(Echange echange : echangesDuMembre){			
-			totalNote=totalNote+echange.getNoteDonneur();			
-		}
-		Double noteMoyenne = totalNote/(double)echangesDuMembre.size();
-		System.out.println(noteMoyenne);
+        //code here
+        
+        
         tx.commit();
         em.close();
         emf.close();

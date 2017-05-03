@@ -128,8 +128,18 @@ INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_insc
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (7,'Dodo','Lulu','1975-07-15','2016-12-12 00:00:00',NULL,'lulu.dodo@free.fr','0312121212',NULL,NULL,NULL,'Ludo','pass',2);
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (8,'Outant','Laurent','1984-08-15','2016-11-03 00:00:00',NULL,'lolo@lolo.fr','0456565656',NULL,NULL,NULL,'Lolo','pass',2);
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (9,'De Bourbon','Louis','1953-04-06','2016-02-03 00:00:00',NULL,'Loulou14@france.fr','0101010101',NULL,NULL,NULL,'Kingsun','pass',2);
-INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (10,'D\'autriche','Marie-Thérèse','1954-09-10','2016-05-09 00:00:00',NULL,'marieT@france.fr','0202020202',NULL,NULL,NULL,'QueenMT','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (10,'D autriche','Marie-Thérèse','1954-09-10','2016-05-09 00:00:00',NULL,'marieT@france.fr','0202020202',NULL,NULL,NULL,'QueenMT','pass',2);
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (11,'France','Galle','1966-11-30','2017-03-25 00:00:00',NULL,'fg@france.fr','0303030303',NULL,NULL,NULL,'FranceG','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (12,'Michel','Brian','1956-05-06','2017-01-02',NULL,'Michel.Brian@gmail.com','0254695762',NULL,NULL,NULL,'Michel','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (13,'Miguel','Jozette','1957-04-17','2017-01-03',NULL,'Miguel.Jozette@gmail.com','0124965345',NULL,NULL,NULL,'Miguel','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (14,'Travis','Ed','1956-12-25','2017-01-04',NULL,'Travis.Ed@gmail.com','0234589566',NULL,NULL,NULL,'Travis','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (15,'Doe','John','1976-04-26','2017-01-05',NULL,'Doe.John@gmail.com','0324565464',NULL,NULL,NULL,'Doe','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (16,'Sparrow','Jack','1992-03-25','2017-01-06',NULL,'Sparrow.Jack@gmail.com','0165465462',NULL,NULL,NULL,'Sparrow','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (17,'Lama','Serge','1966-06-06','2017-01-07',NULL,'Lama.Serge@gmail.com','0324598466',NULL,NULL,NULL,'Lama','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (18,'Mondor','Henri','1945-07-14','2017-01-08',NULL,'Mondor.Henri@gmail.com','0694643233',NULL,NULL,NULL,'Mondor','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (19,'Freeman','Morgan','1953-04-18','2017-01-09',NULL,'Freeman.Morgan@gmail.com','0654795332',NULL,'2017-04-29','Abuse','Freeman','pass',2);
+INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (20,'Smith','Black','1967-08-18','2017-01-10',NULL,'Smith.Black@gmail.com','0694645541','2017-04-15',NULL,NULL,'Smith','pass',2);
+
 
 /*============================*/
 /*		TABLE PROPOSITION		  */
@@ -147,9 +157,36 @@ INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`,
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (11,'Bol vert',3,1,5,8,50,'Fait par mon fils!','2017-04-12 11:00:00');
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (12,'Manteau en hermine Lisse',2,5,10,11,67,'Pas piqué des verres','2016-05-09 10:00:00');
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (13,'Cadenas',3,2,9,14,85,'Du pont des arts','2016-02-03 10:00:00');
-INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (14,'Peluche',1,2,2,12,71,'Bob l\'éponge','2017-10-01 12:00:00');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (14,'Peluche',1,2,2,12,71,'Bob léponge','2017-10-01 12:00:00');
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (15,'Ballon',1,2,6,10,61,NULL,'2017-03-01 10:02:00');
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (16,'Timbres',4,3,8,14,82,'Grosse collection','2016-11-03 20:00:00');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (17,'Casserole',1,1,12,8,50,'En cuivre','2017-01-04');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (18,'vélo',2,2,12,10,61,'Rockrider blanc','2017-01-05');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (19,'roue de vélo',3,3,12,10,61,'Roue rousse','2017-01-06');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (20,'trotinette',4,4,12,10,61,'pliable','2017-01-07');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (21,'Casque de moto',1,1,12,13,80,'Avec des cornes de diable','2017-01-08');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (22,'Poupée',2,2,13,12,72,'en chiffon','2017-01-09');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (23,'Bougie',3,3,13,8,53,'Senteur des îles','2017-01-10');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (24,'Pièces de lego',4,4,13,12,72,'Moité de TIE fighter','2017-01-11');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (25,'Peluche',1,1,14,12,71,'Ours gris','2017-01-12');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (26,'Verre à bière',2,2,14,8,52,'Grim','2017-01-13');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (27,'Sac en osier',3,3,14,11,69,'fait main','2017-01-14');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (28,'Gant pilote',4,4,15,13,80,'Petite taille','2017-01-15');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (29,'Porte bébé',1,1,15,12,71,'en kit','2017-01-16');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (30,'Cable alimentation pc',2,2,15,6,42,'Asus','2017-01-17');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (31,'Ecran pc Asus',3,3,16,6,40,'17 pouces','2017-01-18');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (32,'Manche de pioche',4,4,16,9,58,'En plastique vert','2017-01-19');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (33,'Tête de rateau',1,1,16,9,58,'32 dents','2017-01-20');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (34,'Mug',2,2,17,8,50,'Keep Calm','2017-01-21');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (35,'Parapluie',3,3,17,11,69,'Européen','2017-01-22');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (36,'Collection de timbre',4,4,17,14,82,'300 timbres 1950-200','2017-01-23');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (37,'Livre dont vous êtes le héros',1,1,18,1,16,'Qui est tu?','2017-01-24');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (38,'CD RadioHead',2,2,18,2,21,'1985','2017-01-25');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (39,'Vynil Freddy',3,3,18,2,22,'Queen','2017-01-26');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (40,'VHS des nulls',4,4,19,3,28,'c est null','2017-01-27');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (41,'Affiche manger des pommes',1,1,20,14,85,'JC','2017-01-28');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (42,'Marteau',2,2,20,9,58,'Provenance URSS','2017-01-29');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (43,'Faucille',3,3,20,9,58,'Provenance URSS','2017-01-30');
 
 /*============================*/
 /*		TABLE TAG				  */
@@ -328,7 +365,7 @@ INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (173,'maroc',84)
 INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (174,'état',84);
 INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (175,'figurine',85);
 INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (176,'carte',85);
-INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (177,'pin\'s',85);
+INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (177,'pins',85);
 
 /*============================*/
 /*		TABLE MESSAGE			  */
@@ -343,19 +380,33 @@ INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_rec
 
 INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (1,'34 rue de picpus',75012,'paris',2.39535,48.8452,1);
 INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (2,'92 avenue du général michel bizot',75012,'paris',2.40387,48.8375,2);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (27,'9 Boulevard du Général de Gaulle',92120,'Montrouge',2.32717,48.8164,3);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (28,'1 rue d\'Alésia',75014,'Paris',2.34114,48.8264,4);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (29,'3 rue de la pomme',31000,'Toulouse',1.44703,43.6019,5);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (30,'4 rue des messageries',75010,'Paris',2.35083,48.8762,5);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (31,'5 rue Monge',75005,'Paris',2.34968,48.8494,6);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (32,'50 boulevard du minervois',11700,'Pepieux',2.68208,43.2969,6);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (33,'3 avenue verdier',92120,'Montrouge',2.32027,48.8144,7);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (34,'15 rue pasteur',73200,'albertville',6.38809,45.6697,7);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (35,'5 rue de la paix',75002,'Paris',2.33122,48.8696,8);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (36,'3 boulevard du roi',78000,'Versailles',2.12515,48.8103,9);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (37,'Palais du louvre',75001,'Paris',2.33856,48.8604,9);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (38,'67 boulevard de la reine',78000,'Versailles',2.1308,48.8097,10);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (39,'25 Avenue Danielle casanova',94200,'Ivry-sur-seine',2.38165,48.8175,11);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (3,'9 Boulevard du Général de Gaulle',92120,'Montrouge',2.32717,48.8164,3);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (4,'1 rue d Alésia',75014,'Paris',2.34114,48.8264,4);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (5,'3 rue de la pomme',31000,'Toulouse',1.44703,43.6019,5);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (6,'4 rue des messageries',75010,'Paris',2.35083,48.8762,5);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (7,'5 rue Monge',75005,'Paris',2.34968,48.8494,6);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (8,'50 boulevard du minervois',11700,'Pepieux',2.68208,43.2969,6);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (9,'3 avenue verdier',92120,'Montrouge',2.32027,48.8144,7);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (10,'15 rue pasteur',73200,'albertville',6.38809,45.6697,7);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (11,'5 rue de la paix',75002,'Paris',2.33122,48.8696,8);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (12,'3 boulevard du roi',78000,'Versailles',2.12515,48.8103,9);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (13,'Palais du louvre',75001,'Paris',2.33856,48.8604,9);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (14,'67 boulevard de la reine',78000,'Versailles',2.1308,48.8097,10);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (15,'25 Avenue Danielle casanova',94200,'Ivry-sur-seine',2.38165,48.8175,11);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (16,'12 Allée Sonia Delaunay',94800,'VilleJuif',2.347641,48.788771,12);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (17,'65 Quai du Rancy',94380,'Bonneuil-sur-Marne',2.48085,48.779723,12);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (18,'16 Rue Montbauron',78000,'Versailles',2.136154,48.80415,13);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (19,'49 Boulevard Pasteur',93120,'La Courneuve',2.383347,48.922499,14);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (20,'62 Rue Ernest Savart',93100,'Montreuil',2.439651,48.868328 ,14);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (21,'120 Avenue Pablo Picasso',92000,'Nanterre',2.225418,48.888198,15);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (22,'13 Rue Petitpas',28100,'Dreux',1.365738,48.731738,16);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (23,'20 Rue de la Baume',75008,'Paris',2.313137,48.874425,16);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (24,'91 Rue Championnet',75018,'Paris',2.342362,48.895534,17);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (25,'68 Boulevard de Clichy',75018,'Paris',2.33403,48.883683,17);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (26,'35 bis Rue du Borrégo',75020,'Paris',2.40107,48.873296,18);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (27,'63 Boulevard Richard Lenoir',75011,'Paris',2.372231,48.860085,19);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (28,'44 Rue Frémicourt',75015,'Paris',2.301335,48.84783 ,20);
+
 
 
 /*============================*/
@@ -390,4 +441,17 @@ INSERT INTO `favori` (`membre_id`, `proposition_id`) VALUES (11,6);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (1,'1','2017-04-15 00:00:00','2017-04-15 00:00:00','2017-04-16 00:00:00','2017-04-17 00:00:00','Attente comblée',5,'Bon contact',4,4562,3,4,10);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (2,'2','2017-04-02 00:00:00','2017-04-03 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,5,11);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (3,'3','2017-01-01 00:00:00','2017-01-02 00:00:00','2017-01-03 00:00:00',NULL,NULL,NULL,NULL,NULL,NULL,2,5,11);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (4,4,'2017-04-01','2017-04-02',NULL,'2017-04-03','Tres bon contact',4,'Parfait',3,1235,3,12,37);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (5,5,'2017-04-02','2017-04-03',NULL,'2017-04-04','A l écoute',4,'Un plaisir',5,4895,2,13,17);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (6,6,'2017-04-03','2017-04-04',NULL,'2017-04-05','Très réactif',4,'Vive vous!',4,1656,1,14,30);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (7,7,'2017-04-04','2017-04-05',NULL,'2017-04-06','Super!!',4,'A refaire',3,3213,5,15,43);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (8,8,'2017-04-05','2017-04-06',NULL,'2017-04-07','Trop bien',4,'Chouette',5,7945,1,16,20);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`) VALUES (9,9,'2017-04-06','2017-04-07',NULL,'2017-04-08','Très mignon',4,'Grogon',4,3546,1,17,32);
 
+/*============================*/
+/*		TABLE RDV			  */
+/*============================*/
+
+INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (1, NULL, 'Cela vous va?', '2017-03-15', 'Paris', 2);
+INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (2, NULL, 'Cela vous va?', '2017-03-16', 'Paris', 5);
+INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (3, NULL, 'Cela vous va?', '2017-03-11', 'Paris', 6);
