@@ -13,5 +13,5 @@ public interface IDaoMembre {
 	Membre updateMembre (Membre membre);
 	Membre getById(Integer id);
 	List<Membre> getAll();
-	void deleteMembre(Membre membreToDelete);	
+	void deleteMembre(Membre membreToDelete);
 }

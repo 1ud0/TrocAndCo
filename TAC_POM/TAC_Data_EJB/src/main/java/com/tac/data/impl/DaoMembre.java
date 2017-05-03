@@ -55,6 +55,8 @@ public class DaoMembre implements IDaoMembre{
 		em.merge(membre);
 		return membre;
 	}
+	
+
 
 	@Override
 	public Membre getById(Integer id) {

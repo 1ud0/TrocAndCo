@@ -13,7 +13,8 @@
 
 
 			<div class="introRubrique">
-				<p class="lead">Retrouvez ici l'ensemble de vos informations personnelles et adresses.</p>
+				<p class="lead">Retrouvez ici l'ensemble de vos informations
+					personnelles et adresses.</p>
 				<p class="text-muted"></p>
 			</div>
 
@@ -22,55 +23,58 @@
 					<h3 class="text-uppercase">Détails</h3>
 				</div>
 
-				<form>
-					<div class="row text-center">
-						<div class="col-sm-3 avatar">
-							<img src="img/custom/avatar.png" class="img-responsive"
-								alt="avatar"></img>
-							<button class="btn btn-vert btn-lg" type="submit">Modifier</button>
-						</div>
+
+				<div class="row text-center">
+					<div class="col-sm-3 avatar">
+						<img src="#{mbIdentif.membreConnected.avatar}" class="img-responsive"
+							alt="avatar"></img>
+						<h:form enctype="multipart/form-data">
+							<h:inputFile id="file" value="#{mbModifCompte.file1}" validator="#{mbModifCompte.validateFile}"></h:inputFile>
+							<h:commandButton action="#{mbModifCompte.upload()}"
+								value="Upload">
+								<f:ajax execute="file" render="@all"/>	
+							</h:commandButton>
+						</h:form>
+						<button class="btn btn-vert btn-lg" type="submit">Modifier</button>
 					</div>
+				</div>
+
+				<h:form>
 
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="firstname">Prénom</label> <input type="text"
-									class="form-control" id="firstname" name="nom"></input>
+								<label for="firstname">Prénom</label> <h:inputText value="#{mbIdentif.membreConnected.prenom}" styleClass="form-control"/>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="lastname">Nom</label> <input type="text"
-									class="form-control" id="lastname" name="prenom"></input>
-							</div>
-						</div>
-					</div>
-					<!-- /.row -->
-
-
-
-					<div class="row">
-						<div class="col-sm-6">
-							<div class="form-group">
-								<label for="meeting">Date de naissance</label> <input
-									id="meeting" class="form-control" type="date"
-									value="2011-01-13" name="date" />
+								<label for="lastname">Nom</label> <h:inputText value="#{mbIdentif.membreConnected.nom}" styleClass="form-control"/>
 							</div>
 						</div>
 					</div>
 					<!-- /.row -->
 
+
+
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="phone">Telephone</label> <input type="text"
-									class="form-control" id="phone"></input>
+								<label for="meeting">Date de naissance</label> <h:inputText value="#{mbIdentif.membreConnected.dateNaissance}" styleClass="form-control"/>
+							</div>
+						</div>
+					</div>
+					<!-- /.row -->
+
+					<div class="row">
+						<div class="col-sm-6">
+							<div class="form-group">
+								<label for="phone">Telephone</label> <h:inputText value="#{mbIdentif.membreConnected.telephone}" styleClass="form-control"/>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="email_account">Email</label> <input type="text"
-									class="form-control" id="email_account"></input>
+								<label for="email_account">Email</label> <h:inputText value="#{mbIdentif.membreConnected.mail}" styleClass="form-control"/>
 							</div>
 						</div>
 						<div class="col-sm-12 text-center">
@@ -86,7 +90,7 @@
 
 
 
-				</form>
+				</h:form>
 
 
 
@@ -270,7 +274,7 @@
 				</div>
 			</div>
 
-				<!-- Fin de la modale -->
+			<!-- Fin de la modale -->
 		</ui:define>
 	</ui:composition>
 </h:body>

@@ -13,7 +13,7 @@ import com.tac.data.api.IDaoMembre;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 
-@Remote
+@Remote(IDaoLocalisation.class)
 @Stateless
 public class DaoLocalisation implements IDaoLocalisation {
 
