@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
+import com.tac.entity.Proposition;
 
 public interface IServiceLocalisation {
 	
@@ -11,5 +12,6 @@ public interface IServiceLocalisation {
 	Localisation updateLocalisation(Localisation localisation);
 	void deleteLocalisation(Localisation localisation);
 	List<Localisation> getMembreLocalisations(Membre membre);
+	List<Localisation> getPropositionLocalisations(Proposition proposition);
 	
 }

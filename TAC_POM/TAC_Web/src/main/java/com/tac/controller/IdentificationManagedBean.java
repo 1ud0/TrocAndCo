@@ -18,8 +18,8 @@ public class IdentificationManagedBean implements Serializable {
 
 	@EJB
 	private IServiceIdentification proxyIdentification;
-	private String mail;
-	private String mdp;
+	private String mail = "bob.toto@toto.com";
+	private String mdp = "pass";
 	private Membre membreConnected;
 	
 	public String seConnecter(){
