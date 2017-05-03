@@ -89,5 +89,13 @@ public class DaoEchange implements IDaoEchange{
 		return noteMoyenne;
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getAllEchangeFini() {
+		final String req = "SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL";
+		Query query = em.createQuery(req);
+		return query.getResultList();
+	}
+
 	
 }
