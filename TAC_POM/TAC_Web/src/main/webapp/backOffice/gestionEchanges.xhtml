@@ -18,8 +18,8 @@
 					Tableau de bord <small>Control panel</small>
 				</h1>
 				<ol class="breadcrumb">
-					<li><a href="index.xhtml"><i class="fa fa-dashboard"></i> Tableau de
-							bord</a></li>
+					<li><a href="index.xhtml"><i class="fa fa-dashboard"></i>
+							Tableau de bord</a></li>
 					<li><a href="gestionEchanges.xhtml">Tables des Echanges</a></li>
 					<li class="active">Graphiques</li>
 				</ol>
@@ -32,17 +32,7 @@
 						<div class="box-header">
 							<h3 class="box-title">Gestion des Echanges</h3>
 
-							<div class="box-tools">
-								<div class="input-group input-group-sm" style="width: 150px;">
-									<input type="text" name="table_search"
-										class="form-control pull-right" placeholder="Search"></input>
-									<div class="input-group-btn">
-										<button type="submit" class="btn btn-default">
-											<i class="fa fa-search"></i>
-										</button>
-									</div>
-								</div>
-							</div>
+
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding">
@@ -54,8 +44,11 @@
 										<th>Recepteur</th>
 										<th>Date d'init</th>
 										<th>Date de cloture</th>
+										<th>Date de refus</th>
+										<th>Date de d'annulation</th>
 										<th>Status</th>
-										<th>Intitulé objet</th>
+										<th>Status</th>
+										<th>Intitulé de l'objet</th>
 										<th>Edition</th>
 									</tr>
 									<tr>
@@ -64,12 +57,14 @@
 										<td>John Doe</td>
 										<td>11-7-2014</td>
 										<td>11-8-2014</td>
+										<td></td>
+										<td></td>
 										<td><span class="label label-success">Finalisé</span></td>
-										<td>Bacon ipsum dolor sit amet salami venison chicken
-											flank fatback doner.</td>
-										<td>
-											<button type="button" class="btn btn-block btn-success">Editer</button>
-										</td>
+										<th>2</th>
+										<td>Bacon ipsum</td>
+										<td><a href="#" class="btn btn-primary btn-block"
+											type="button" data-toggle="modal"
+											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
 									</tr>
 									<tr>
 										<td>183</td>
@@ -77,25 +72,31 @@
 										<td>John Rob</td>
 										<td>11-7-2014</td>
 										<td></td>
+										<td></td>
+										<td></td>
 										<td><span class="label label-warning">Initié</span></td>
+										<th>2</th>
 										<td>Bacon ipsum dolor sit amet salami venison chicken
 											flank fatback doner.</td>
-										<td>
-											<button type="button" class="btn btn-block btn-success">Editer</button>
-										</td>
+										<td><a href="#" class="btn btn-primary btn-block"
+											type="button" data-toggle="modal"
+											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
 									</tr>
 									<tr>
 										<td>183</td>
 										<td>John Doe</td>
 										<td>John Doe</td>
 										<td>11-7-2014</td>
+										<td></td>
+										<td></td>
 										<td></td>
 										<td><span class="label label-primary">En cours</span></td>
+										<th>2</th>
 										<td>Bacon ipsum dolor sit amet salami venison chicken
 											flank fatback doner.</td>
-										<td>
-											<button type="button" class="btn btn-block btn-success">Editer</button>
-										</td>
+										<td><a href="#" class="btn btn-primary btn-block"
+											type="button" data-toggle="modal"
+											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
 									</tr>
 									<tr>
 										<td>183</td>
@@ -103,12 +104,15 @@
 										<td>John Doe</td>
 										<td>11-7-2014</td>
 										<td></td>
+										<td></td>
+										<td>11-7-2014</td>
 										<td><span class="label label-danger">Annulé</span></td>
+										<th>2</th>
 										<td>Bacon ipsum dolor sit amet salami venison chicken
 											flank fatback doner.</td>
-										<td>
-											<button type="button" class="btn btn-block btn-success">Editer</button>
-										</td>
+										<td><a href="#" class="btn btn-primary btn-block"
+											type="button" data-toggle="modal"
+											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
 									</tr>
 
 								</tbody>
@@ -119,7 +123,87 @@
 				</div>
 
 			</section>
+			<section class="col-lg-8 connectedSortable">
+				<div class=" modal fade bs-example-modal-lg">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true"></span>
+								</button>
+								<h4 class="modal-title">Edition</h4>
+							</div>
+							<div class="modal-body">
+								<div class="box box-info">
 
+									<div class="box-header with-border">
+										<h3 class="box-title">Information de l'échange</h3>
+									</div>
+
+									<div class="box-body">
+										<h4>Donateur</h4>
+
+										<div class="form-group">
+											<select
+												class="form-control select2 select2-hidden-accessible"
+												style="width: 100%;" tabindex="-1" aria-hidden="true">
+												<option selected="selected"></option>
+												<option>Alaska</option>
+												<option>California</option>
+												<option>Delaware</option>
+												<option>Tennessee</option>
+												<option>Texas</option>
+												<option>Washington</option>
+											</select>
+										</div>
+										<br />
+										<h4>Receveur</h4>
+										<div class="form-group">
+											<select
+												class="form-control select2 select2-hidden-accessible"
+												style="width: 100%;" tabindex="-1" aria-hidden="true">
+												<option selected="selected"></option>
+												<option>Alaska</option>
+												<option>California</option>
+												<option>Delaware</option>
+												<option>Tennessee</option>
+												<option>Texas</option>
+												<option>Washington</option>
+											</select>
+										</div>
+										<br />
+										<h4>Valeur</h4>
+										<div class="form-group">
+											<select
+												class="form-control select2 select2-hidden-accessible"
+												style="width: 100%;" tabindex="-1" aria-hidden="true">
+												<option selected="selected"></option>
+												<option>Alaska</option>
+												<option>California</option>
+												<option>Delaware</option>
+												<option>Tennessee</option>
+												<option>Texas</option>
+												<option>Washington</option>
+											</select>
+										</div>
+
+
+										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
+											modifications</button>
+
+
+									</div>
+									<!-- /.box-body -->
+								</div>
+							</div>
+
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+			</section>
 
 
 		</ui:define>
