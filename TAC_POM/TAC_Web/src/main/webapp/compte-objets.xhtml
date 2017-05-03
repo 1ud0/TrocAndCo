@@ -2,7 +2,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+	xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
 	<title>COMPTE - MES OBJETS</title>
@@ -13,45 +13,40 @@
 		<ui:define name="content">
 			<div id="objets">
 				<div class="row products">
-				<ui:repeat var="proposition" value="#{mbCompteObjet.proposDuMembre}">
-					<!-- produits DEBUT -->
-					<div class="col-sm-6 col-md-6">					
-						<div class="product ">
-						<h:form>
-							<div class="image ">
-								<img src="img/iPhone.jpg"
-									alt="Iphone"></img>
+					<ui:repeat var="proposition"
+						value="#{mbCompteObjet.proposDuMembre}">
+						<!-- produits DEBUT -->
+						<div class="col-sm-6 col-md-6">
+							<div class="product ">
+								<h:form id="formObjet">
+									<div class="image ">
+										<img src="img/iPhone.jpg" alt="Iphone"></img>
 
-							</div>
-							<!-- /.image -->
-							<div class="text">
-								<h3>
-								${proposition.intitule}								
-								</h3>
-								<h:commandButton value="modif" onclick="$('#modalObjet').modal('show');"  
-								styleClass="btn btn-default">
-								<f:setPropertyActionListener value="#{proposition}" 
-								target="#{mbCompteObjet.propositionSelected}" /> </h:commandButton>
-								<span class="glyphicon glyphicon-remove"></span>
-								
-								<!--<button type="submit" class="btn btn-default"
-									data-placement="top" data-toggle="modal"
-									data-target="#suppressionObjet">									
-								</button>   -->
+									</div>
+									<!-- /.image -->
+									<div class="text">
+										<h3>${proposition.intitule}</h3>
+										<h:commandButton value="modif"
+											onclick="$('#modalObjet').modal('show');"
+											styleClass="btn btn-default">
+											<f:ajax render=":formModifObjet:modifObjet" execute="@form"
+												event="click"
+												listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}"></f:ajax>
+										</h:commandButton>
+										<h:commandButton value="suppression"
+											onclick="$('#suppressionObjet').modal('show');"
+											styleClass="btn btn-default">
+											<f:ajax event="click"></f:ajax>
+										</h:commandButton>
 
-								<!--<button type="submit" class="btn btn-default"
-									data-placement="top" data-toggle="modal"
-									data-target="#modalObjet">
-									<span class="glyphicon glyphicon-pencil"></span>
-								</button>-->
+									</div>
+									<!-- /.text -->
+								</h:form>
 							</div>
-							<!-- /.text -->
-							</h:form>
 						</div>
-					</div>
 					</ui:repeat>
 					<!-- produits FIN  -->
-		</div>
+				</div>
 
 				<!-- DEBUT BOUTON AJOUTER -->
 
@@ -63,130 +58,94 @@
 
 						<!-- Modal content-->
 						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">x</button>
-								<h4 class="modal-title">Création d'un nouvel objet</h4>
-								<h4 class="modal-title">${mbCompteObjet.propositionSelected.intitule}</h4>
-							</div>
-							<div class="modal-body">
+							<h:form id="formModifObjet">
+								<h:panelGroup id="modifObjet">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h4 class="modal-title">Modification de la proposition :
+											${mbCompteObjet.propositionSelected.intitule}</h4>
 
-
-								<form name="top_search" method="get"
-									autocomplete="on" action="#">
-
-
-									<br></br>
-
-									<div class="row ">
-										
-												<div class="col-sm-4">
-													<div class="image ">
-														<a href="#"> <img src="img/camera-flat.png"
-															alt="Appareil-photo" class="img-responsive"></img>
-														</a>
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="image ">
-														<a href="#"> <img src="img/camera-flat.png"
-															alt="Appareil-photo" class="img-responsive"></img>
-														</a>
-													</div>
-												</div>
-												<div class="col-sm-4">
-													<div class="image ">
-														<a href="#"> <img src="img/camera-flat.png"
-															alt="Appareil-photo" class="img-responsive"></img>
-														</a>
-													</div>
+									</div>
+									<div class="modal-body">
+										<br></br>
+										<div class="row ">
+											<div class="col-sm-4">
+												<div class="image ">
+													<a href="#"> <img src="img/camera-flat.png"
+														alt="Appareil-photo" class="img-responsive"></img>
+													</a>
 												</div>
 											</div>
-											<br></br>
-											<div class="row">
-												<div class="col-md-6">
+											<div class="col-sm-4">
+												<div class="image ">
+													<a href="#"> <img src="img/camera-flat.png"
+														alt="Appareil-photo" class="img-responsive"></img>
+													</a>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="image ">
+													<a href="#"> <img src="img/camera-flat.png"
+														alt="Appareil-photo" class="img-responsive"></img>
+													</a>
+												</div>
+											</div>
+										</div>
+										<br></br>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<input class="form-control" name="string_search"
+														placeholder="Intitulé"
+														value="#{mbCompteObjet.propositionSelected.intitule}"
+														type="text"></input>
 
-													<div class="form-group">
-														<input class="form-control" name="string_search"
-															placeholder="Intitulé" value="" type="text"></input>
-													</div>
-													<div class="form-group selecteur">
-														<select id="categorie" class="selectpicker form-control"
-															data-live-search="true" title="Please select a lunch ...">
-															<option value="0">Catégorie</option>
-															<option value="1" id="list_rub" class="noir">Multimédia</option>
-															<option value="2" id="list_rub" class="noir">Sport</option>
-															<option value="3" id="list_rub" class="noir">Electroménager</option>
-															<option value="3" id="list_rub" class="noir">Jouet</option>
-														</select>
-													</div>
 
-													<div class="form-group selecteur">
-														<select id="souscategorie"
-															class="selectpicker form-control" data-live-search="true"
-															title="Please select a lunch ...">
-															<option value="0">Sous catégorie</option>
-															<option value="1" id="list_rub" class="noir">Multimédia</option>
-															<option value="2" id="list_rub" class="noir">Sport</option>
-															<option value="3" id="list_rub" class="noir">Electroménager</option>
-															<option value="3" id="list_rub" class="noir">Jouet</option>
-														</select>
-													</div>
-
-													<div class="form-group selecteur">
-														<select id="etat" class="selectpicker form-control"
-															data-live-search="true" title="Please select a lunch ...">
-															<option value="0">Etat d'usure</option>
-															<option value="1" id="list_rub" class="noir">Bon
-																état</option>
-															<option value="2" id="list_rub" class="noir">Usé</option>
-															<option value="3" id="list_rub" class="noir">Très
-																usé</option>
-														</select>
-													</div>
-
-													<div class="form-group selecteur">
-														<select id="valeur" class="selectpicker form-control"
-															data-live-search="true" title="Please select a lunch ...">
-															<option value="0">Valeur</option>
-															<option value="1" id="list_rub" class="noir">1
-																feuille</option>
-															<option value="2" id="list_rub" class="noir">2
-																feuilles</option>
-															<option value="3" id="list_rub" class="noir">3
-																feuilles</option>
-															<option value="3" id="list_rub" class="noir">4
-																feuilles</option>
-															<option value="3" id="list_rub" class="noir">5
-																feuilles</option>
-														</select>
-													</div>
-
-													<!-- Checkbox-->
-
-													<div class="checkbox">
-														<label class="checkbox-inline"><input
-															type="checkbox" value=""></input>Addresse 1</label> <label
-															class="checkbox-inline"><input type="checkbox"
-															value=""></input> Addresse 2</label>
-													</div>
+												</div>
+												<div class="form-group selecteur" id="catDeLObjet">
+												
+													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.categorie.idCategorie}">
+														<f:selectItems value="#{mbCompteObjet.allCategorie}" var="categorie" itemLabel="${categorie.intitule}" itemValue="${categorie.idCategorie}" />
+													</h:selectOneMenu>
 												</div>
 
-							
+												<div class="form-group selecteur" id="sousCatDeLObjet">
+													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.sousCategorie.idCategorie}">
+														<f:selectItems value="#{mbCompteObjet.getAllSousCategorie(mbCompteObjet.propositionSelected.categorie.idCategorie)}" var="categorie" itemLabel="${categorie.intitule}" itemValue="${categorie.idCategorie}" />
+													</h:selectOneMenu>
+												</div>
 
+												<div class="form-group selecteur" id="etatDeLObjet">
+														<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.etat.idEtat}">
+														<f:selectItems value="#{mbCompteObjet.allEtat}" var="etat" itemLabel="${etat.intitule}" itemValue="${etat.idEtat}"/>
+													</h:selectOneMenu>
+												</div>
+												
+												<div class="form-group selecteur" id="valeurDeLObjet">
+														<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.valeur.idValeur}">
+														<f:selectItems value="#{mbCompteObjet.allValeur}" var="valeur" itemLabel="${valeur.intitule}" itemValue="${valeur.idValeur}" />
+													</h:selectOneMenu>
+												</div>											
+
+												<!-- Checkbox-->
+
+												<h:selectManyCheckbox value="">
+												<f:selectItems value="#{mbCompteObjet.adresseByMembre}"></f:selectItems>												
+												</h:selectManyCheckbox>
+									 
+												  
+											</div>
+										</div>
+										<div class="modal-footer">
+											<h:commandButton action="#{mbCompteObjet.updateObjet()}" value="Valider" styleClass="btn btn-vert btn-lg" onclick="$('#modalObjet').modal('hide');"></h:commandButton>
+
+											<button type="button" class="btn btn-vert btn-lg"
+												data-dismiss="modal">Annuler</button>
+										</div>
 
 									</div>
-									<div class="modal-footer">
-										<button type="submit" class="btn btn-vert btn-lg"
-											data-dismiss="modal">Valider</button>
-
-										<button type="button" class="btn btn-vert btn-lg"
-											data-dismiss="modal">Annuler</button>
-
-									</div>
-								</form>
-
-							</div>
-
+								</h:panelGroup>
+							</h:form>
 						</div>
 
 					</div>
@@ -195,35 +154,38 @@
 				<!-- ******************************MODALE FIN AJOUTER****************************** -->
 
 				<!-- ******************************MODALE SUPPRIMER DEBUT****************************** -->
-				
+
 				<!-- Modale Suppression objet-->
-                      <div class="modal fade" id="suppressionObjet" role="dialog">
-                            <div class="modal-dialog">
+				<div class="modal fade" id="suppressionObjet" role="dialog">
+					<div class="modal-dialog">
 
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <button type="button" class="close" data-dismiss="modal">x</button>
-                                        <h4 class="modal-title">Confirmation de la suppression</h4>
-                                    </div>
-                                    <div class="modal-body">    
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal">x</button>
+								<h4 class="modal-title">Confirmation de la suppression</h4>
+							</div>
+							<div class="modal-body">
 
-                                        <form id="creation_objet" name="top_search" method="get" autocomplete="on" action="#">      
-                                            <div  class="row ">
-                                                <div class="col-sm-12 orientationCenter">
-                                                <p>Êtes-vous certain(e) de vouloir supprimer cet objet ?</p>
-                                                </div>
-                                            </div>
-                                            <div class="modal-footer">
-                                                <button type="submit" class="btn btn-vert btn-lg" data-dismiss="modal">Oui</button>
-                                                <button type="button" class="btn btn-vert btn-lg" data-dismiss="modal">Non</button>
-                                            </div>
-                                        </form>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-				
-				
+								<form id="creation_objet" name="top_search" method="get"
+									autocomplete="on" action="#">
+									<div class="row ">
+										<div class="col-sm-12 orientationCenter">
+											<p>Êtes-vous certain(e) de vouloir supprimer cet objet ?</p>
+										</div>
+									</div>
+									<div class="modal-footer">
+										<button type="submit" class="btn btn-vert btn-lg"
+											data-dismiss="modal">Oui</button>
+										<button type="button" class="btn btn-vert btn-lg"
+											data-dismiss="modal">Non</button>
+									</div>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 				<!-- ******************************MODALE SUPPRIMER FIN****************************** -->
 
 				<div class="col-md-12 col-sm-12 CentrerBoutons">

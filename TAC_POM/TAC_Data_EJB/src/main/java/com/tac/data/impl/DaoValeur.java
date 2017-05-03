@@ -1,5 +1,7 @@
 package com.tac.data.impl;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -40,6 +42,15 @@ public class DaoValeur implements IDaoValeur{
 		query.setParameter("pid", idValeur);
 		Valeur retour = (Valeur)query.getSingleResult();
 		return retour;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Valeur> getAllValeur() {
+		String req ="SELECT v FROM Valeur v";
+		Query query = em.createQuery(req);	
+		List<Valeur> valeurs = query.getResultList();
+		return valeurs;
 	}
 
 }

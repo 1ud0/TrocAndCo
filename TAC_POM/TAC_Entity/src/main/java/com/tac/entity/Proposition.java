@@ -220,4 +220,12 @@ public class Proposition implements Serializable {
 		this.photos = photos;
 	}
 
+	@Override
+	public String toString() {
+		return "Proposition [idProposition=" + idProposition + ", description=" + description + ", intitule=" + intitule
+				+ "]";
+	}
+	
+	
+
 }

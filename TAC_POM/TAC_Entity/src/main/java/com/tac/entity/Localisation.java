@@ -132,5 +132,11 @@ public class Localisation implements Serializable {
 		this.titreAdresse = titreAdresse;
 	}
 
+	@Override
+	public String toString() {
+		return adresse +ville;
+	}
+	
+
 
 }

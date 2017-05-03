@@ -2,6 +2,7 @@ package com.tac.data.impl;
 
 import java.util.List;
 
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -10,6 +11,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoSuggestion;
 import com.tac.entity.Suggestion;
+
 @Remote(IDaoSuggestion.class)
 @Stateless
 public class DaoSuggestion implements IDaoSuggestion {

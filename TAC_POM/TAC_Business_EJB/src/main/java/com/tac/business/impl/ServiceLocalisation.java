@@ -10,6 +10,7 @@ import com.tac.business.api.IServiceLocalisation;
 import com.tac.data.api.IDaoLocalisation;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
+import com.tac.entity.Proposition;
 
 @Remote(IServiceLocalisation.class)
 @Stateless
@@ -37,6 +38,12 @@ public class ServiceLocalisation implements IServiceLocalisation {
 	@Override
 	public List<Localisation> getMembreLocalisations(Membre membre) {
 		return proxyDaoLocalisation.getMembreLocalisations(membre.getIdMembre());
+	}
+
+	@Override
+	public List<Localisation> getPropositionLocalisations(Proposition proposition) {
+		
+		return proxyDaoLocalisation.getPropositionLocalisations(proposition);
 	}
 	
 	

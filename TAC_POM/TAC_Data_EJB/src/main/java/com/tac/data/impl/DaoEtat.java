@@ -1,5 +1,7 @@
 package com.tac.data.impl;
 
+import java.util.List;
+
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
@@ -41,6 +43,15 @@ public class DaoEtat implements IDaoEtat {
 		query.setParameter("pid", idEtat);
 		Etat retour = (Etat)query.getSingleResult();
 		return retour;
+	}
+	
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Etat> getAllEtat() {
+		String req="SELECT e FROM Etat e";
+		Query query = em.createQuery(req);
+		return query.getResultList();
 	}
 
 }

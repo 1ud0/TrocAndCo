@@ -1,5 +1,7 @@
 package com.tac.business.impl;
 
+import java.util.List;
+
 import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -33,6 +35,11 @@ private IDaoValeur proxyDaoValeur;
 	@Override
 	public Valeur getById(int idValeur) {
 		return proxyDaoValeur.getById(idValeur);
+	}
+
+	@Override
+	public List<Valeur> getAllValeur() {
+		return proxyDaoValeur.getAllValeur();
 	}
 
 }
