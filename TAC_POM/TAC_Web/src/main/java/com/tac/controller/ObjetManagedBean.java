@@ -1,6 +1,5 @@
 package com.tac.controller;
 
-
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -23,12 +22,13 @@ public class ObjetManagedBean {
 	private Proposition selectedProp;
 	private Membre selectedMembre;
 
-
+	private Integer entryId;
+	
 	public String loadProposition(Proposition proposition) {
 		String nav = "";
 		selectedProp = proposition;
 		if (selectedProp != null) {
-			nav = "/fiche.xhtml?faces-redirect=true";
+			nav = "/fiche.xhtml?faces-redirect=true&id=" + selectedProp.getIdProposition();
 		}
 		return nav;
 	}
@@ -42,6 +42,12 @@ public class ObjetManagedBean {
 		return nav;
 
 	}
+	
+	public void loadEntry() {
+		System.out.println(entryId);
+		//selectedProp = proxyProp
+	}
+	
 
 	public IServiceProposition getProxyProp() {
 		return proxyProp;
@@ -76,5 +82,11 @@ public class ObjetManagedBean {
 		this.proxyLocalisation = proxyLocalisation;
 	}
 
+	public Integer getEntryId() {
+		return entryId;
+	}
 
+	public void setEntryId(Integer entryId) {
+		this.entryId = entryId;
+	}
 }

@@ -25,14 +25,15 @@ public class InscriptionManagedBean {
 	
 	private Membre newMembre = new Membre();
 	private Localisation lieu = new Localisation();
-	private String verifPwd;
 
 	public String createMembre() {
 		List<Localisation> lieux = new ArrayList<>();
 		lieux.add(lieu);
 		newMembre.setLocalisations(lieux);
+		//TODO mettre avatar par defaut
 		String nav = "";
-		if (proxy.addMembre(newMembre) != null) {
+		newMembre = proxy.addMembre(newMembre);
+		if (newMembre != null) {
 			connexionBean.setMembreConnected(newMembre);
 			nav = "/compte-TB.xhtml?faces-redirect=true";
 		}
@@ -53,14 +54,6 @@ public class InscriptionManagedBean {
 
 	public void setNewMembre(Membre newMembre) {
 		this.newMembre = newMembre;
-	}
-
-	public String getVerifPwd() {
-		return verifPwd;
-	}
-
-	public void setVerifPwd(String verifPwd) {
-		this.verifPwd = verifPwd;
 	}
 
 	public Localisation getLieu() {

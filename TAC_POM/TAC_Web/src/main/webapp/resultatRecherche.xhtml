@@ -237,18 +237,15 @@ _________________________________________________________ -->
 							<!--Resultat recherche DEBUT-->
 							<h5 class="text">Résultat de la recherche : 8 objets trouvés</h5>
 							<br /> <br /> <br />
-
-
-
-
-
-
+							
+							
+							<!-- products -->
 							<div class=" col-md-9 col-sm-12 ">
 								<div class="row">
 									<ui:repeat var="prop" value="#{mbRecherche.propositions}">
 										<h:form>
 											<div class=" col-md-3 col-sm-9 ">
-												<!-- produit 1 DEBUT -->
+												
 												<div class="product ">
 
 													<h:commandLink action="#{mbObjet.loadProposition(prop)}"
