@@ -26,30 +26,36 @@
 
 				<div class="row text-center">
 					<div class="col-sm-3 avatar">
-						<img src="#{mbIdentif.membreConnected.avatar}" class="img-responsive"
-							alt="avatar"></img>
+						<img src="#{mbIdentif.membreConnected.avatar}"
+							class="img-responsive" alt="avatar"></img>
 						<h:form enctype="multipart/form-data">
-							<h:inputFile id="file" value="#{mbModifCompte.file1}" validator="#{mbModifCompte.validateFile}"></h:inputFile>
+							<h:inputFile styleClass="marginBottom15" id="file"
+								value="#{mbModifCompte.file1}"
+								validator="#{mbModifCompte.validateFile}"></h:inputFile>
+							<h:message for="file" />
 							<h:commandButton action="#{mbModifCompte.upload()}"
-								value="Upload">
-								<f:ajax execute="file" render="@all"/>	
+								value="Valider" styleClass="btn btn-vert btn-lg">
+								<f:ajax execute="file" render="@all" />
 							</h:commandButton>
 						</h:form>
-						<button class="btn btn-vert btn-lg" type="submit">Modifier</button>
 					</div>
 				</div>
 
-				<h:form>
+				<h:form id="toto">
 
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="firstname">Prénom</label> <h:inputText value="#{mbIdentif.membreConnected.prenom}" styleClass="form-control"/>
+								<label for="firstname">Prénom</label>
+								<h:inputText value="#{mbIdentif.membreConnected.prenom}"
+									styleClass="form-control" />
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="lastname">Nom</label> <h:inputText value="#{mbIdentif.membreConnected.nom}" styleClass="form-control"/>
+								<label for="lastname">Nom</label>
+								<h:inputText value="#{mbIdentif.membreConnected.nom}"
+									styleClass="form-control" />
 							</div>
 						</div>
 					</div>
@@ -60,7 +66,11 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="meeting">Date de naissance</label> <h:inputText value="#{mbIdentif.membreConnected.dateNaissance}" styleClass="form-control"/>
+								<label for="meeting">Date de naissance</label>
+								<h:inputText value="#{mbIdentif.membreConnected.dateNaissance}"
+									styleClass="form-control" >
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+								</h:inputText>
 							</div>
 						</div>
 					</div>
@@ -69,24 +79,35 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="phone">Telephone</label> <h:inputText value="#{mbIdentif.membreConnected.telephone}" styleClass="form-control"/>
+								<label for="phone">Telephone</label>
+								<h:inputText value="#{mbIdentif.membreConnected.telephone}"
+									styleClass="form-control" />
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="email_account">Email</label> <h:inputText value="#{mbIdentif.membreConnected.mail}" styleClass="form-control"/>
+								<label for="email_account">Email</label>
+								<h:inputText value="#{mbIdentif.membreConnected.mail}"
+									styleClass="form-control" />
 							</div>
 						</div>
 						<div class="col-sm-12 text-center">
-							<button class="btn btn-vert btn-lg" type="submit">
-								Enregistrer<span class="glyphicon glyphicon-floppy-disk"></span>
-							</button>
+							<h:commandButton action="#{mbModifCompte.majDonnees()}"
+								value="Enregistrer" styleClass="btn btn-vert btn-lg">
+								<f:ajax listener="#{mbModifCompte.majDonnees()}"
+	    		 	event="click" render=":toto"
+	    			execute="@form"/>
+							</h:commandButton>
+					
+
 
 						</div>
 
 					</div>
 
-
+					<h:outputScript rendered="#{mbModifCompte.showAlertModif}">
+						$.notify("Informations changées avec succès.");
+					</h:outputScript>
 
 
 
@@ -180,37 +201,51 @@
 					<h3 class="text-uppercase">Changer de mot de passe</h3>
 				</div>
 
-				<form>
+				<h:form id="formPwd">
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="password_old">Ancien mot de passe</label> <input
-									type="password" class="form-control" id="password_old"></input>
+								<label for="password_old">Ancien mot de passe</label>
+									<h:inputSecret value="#{mbModifCompte.ancienMdp}" styleClass="marginBottom15 form-control" id="password_old"></h:inputSecret>
 							</div>
 						</div>
 					</div>
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="form-group">
-								<label for="password_1">Nouveau mot de passe</label> <input
-									type="password" class="form-control" id="password_1"></input>
+								<label for="password_1">Nouveau mot de passe</label>
+								<h:inputSecret id="password" value="#{mbModifCompte.nouveauMdp}" styleClass="marginBottom15 form-control">
+									<f:validator validatorId="passwordValidator"/>
+									<f:validateLength minimum = "3" />
+									<f:attribute name="confirmPassword" value="#{confirmPassword}"></f:attribute>
+								</h:inputSecret>
+								<h:message for="password" style="color: red;"/>
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="password_2">Retapez le nouveau mot de passe</label>
-								<input type="password" class="form-control" id="password_2"></input>
+								<h:inputSecret styleClass="marginBottom15 form-control" id="confirmPassword" binding="#{confirmPassword}">
+									<h:message for="confirmPassword" style="color: red;"/>
+								</h:inputSecret>
 							</div>
 						</div>
 					</div>
 					<!-- /.row -->
 
 					<div class="text-center">
-						<button class="btn btn-vert btn-lg" type="submit">
-							Enregistrer<span class="glyphicon glyphicon-floppy-disk"></span>
-						</button>
+						<h:commandButton action="#{mbModifCompte.modifPwd()}"
+								value="Enregistrer" styleClass="btn btn-vert btn-lg success">
+								<f:ajax listener="#{mbModifCompte.modifPwd()}"
+	    		 	event="click" render=":formPwd"
+	    			execute="@form"/>
+						</h:commandButton>
 					</div>
-				</form>
+					<h:outputScript rendered="#{mbModifCompte.showAlertPwd}">
+						$.notify("Nouveau mot de passe enregistré.");
+					</h:outputScript>
+					
+				</h:form>
 
 			</div>
 			<!-- /.box -->
@@ -273,7 +308,10 @@
 					</div>
 				</div>
 			</div>
-
+			
+			
+			
+			
 			<!-- Fin de la modale -->
 		</ui:define>
 	</ui:composition>

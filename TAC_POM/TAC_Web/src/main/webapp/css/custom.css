@@ -825,6 +825,10 @@ aside {
 	margin-bottom: 30px;
 }
 
+.marginBottom15 {
+	margin-bottom: 15px;
+}
+
 p.taillePolice150 {
 	margin: 0 !important;
 }
@@ -952,3 +956,12 @@ p.taillePolice150 {
   form {
   	margin: 0! important;
   }
+  
+  #file {
+  	margin-bottom: 20px;
+  }
+  
+  
+  .infoBulle {
+ 	 
+ }
