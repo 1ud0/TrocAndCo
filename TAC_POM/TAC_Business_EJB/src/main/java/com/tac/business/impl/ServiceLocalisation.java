@@ -42,7 +42,6 @@ public class ServiceLocalisation implements IServiceLocalisation {
 
 	@Override
 	public List<Localisation> getPropositionLocalisations(Proposition proposition) {
-		
 		return proxyDaoLocalisation.getPropositionLocalisations(proposition);
 	}
 
