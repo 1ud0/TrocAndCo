@@ -26,7 +26,7 @@
 									<!-- /.image -->
 									<div class="text">
 										<h3>${proposition.intitule}</h3>
-										<h:commandButton value="modif"
+										<h:commandButton value="modification"
 											onclick="$('#modalObjet').modal('show');"
 											styleClass="btn btn-default">
 											<f:ajax render=":formModifObjet:modifObjet" execute="@form"
@@ -51,7 +51,7 @@
 				<!-- DEBUT BOUTON AJOUTER -->
 
 
-				<!-- ******************************MODALE AJOUTER DEBUT****************************** -->
+				<!-- ******************************MODALE MODIFIER DEBUT****************************** -->
 
 				<div class="modal fade" id="modalObjet" role="dialog">
 					<div class="modal-dialog">
@@ -63,7 +63,7 @@
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
 										<h4 class="modal-title">Modification de la proposition :
-											${mbCompteObjet.propositionSelected.intitule}</h4>
+											${mbCompteObjet.intituleSelected}</h4>
 
 									</div>
 									<div class="modal-body">
@@ -95,54 +95,107 @@
 										<div class="row">
 											<div class="col-md-6">
 												<div class="form-group">
-													<input class="form-control" name="string_search"
-														placeholder="Intitulé"
-														value="#{mbCompteObjet.propositionSelected.intitule}"
-														type="text"></input>
-
-
+													<div>
+														<label>Intitulé:</label>
+													</div>
+													<div>
+														<h:inputText value="#{mbCompteObjet.intituleSelected}"
+															styleClass="form-control" />
+													</div>
 												</div>
-												<div class="form-group selecteur" id="catDeLObjet">
-												
-													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.categorie.idCategorie}">
-														<f:selectItems value="#{mbCompteObjet.allCategorie}" var="categorie" itemLabel="${categorie.intitule}" itemValue="${categorie.idCategorie}" />
-													</h:selectOneMenu>
+												<div>
+													<div>
+														<label>Catégorie:</label>
+													</div>
+													<div class="form-group selecteur" id="catDeLObjet">
+
+
+														<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.categorieSelected.idCategorie}">
+															<f:selectItems value="#{mbCompteObjet.allCategorie}"
+																var="categorie" itemLabel="${categorie.intitule}"
+																itemValue="${categorie.idCategorie}" />
+															<f:ajax event="change" execute="@form"
+																render=":formModifObjet:ComboSousCat"
+																listener="#{mbCompteObjet.listenerChargementSousCat()}"></f:ajax>
+														</h:selectOneMenu>
+													</div>
 												</div>
-
-												<div class="form-group selecteur" id="sousCatDeLObjet">
-													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.sousCategorie.idCategorie}">
-														<f:selectItems value="#{mbCompteObjet.getAllSousCategorie(mbCompteObjet.propositionSelected.categorie.idCategorie)}" var="categorie" itemLabel="${categorie.intitule}" itemValue="${categorie.idCategorie}" />
-													</h:selectOneMenu>
+												<div>
+													<div>
+														<label>Sous-catégorie:</label>
+													</div>
+													<div class="form-group selecteur" id="sousCatDeLObjet">
+														<h:selectOneMenu id="ComboSousCat"
+															styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.sousCategorieSelected.idCategorie}">
+															<f:selectItems
+																value="#{mbCompteObjet.sousCategoriesSelected}"
+																var="categorie" itemLabel="${categorie.intitule}"
+																itemValue="${categorie.idCategorie}" />
+														</h:selectOneMenu>
+													</div>
 												</div>
-
-												<div class="form-group selecteur" id="etatDeLObjet">
-														<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.etat.idEtat}">
-														<f:selectItems value="#{mbCompteObjet.allEtat}" var="etat" itemLabel="${etat.intitule}" itemValue="${etat.idEtat}"/>
-													</h:selectOneMenu>
+												<div>
+													<div>
+														<label>Etat d'usure:</label>
+													</div>
+													<div class="form-group selecteur" id="etatDeLObjet">
+														<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.etatSelected.idEtat}">
+															<f:selectItems value="#{mbCompteObjet.allEtat}"
+																var="etat" itemLabel="${etat.intitule}"
+																itemValue="${etat.idEtat}" />
+														</h:selectOneMenu>
+													</div>
 												</div>
-												
-												<div class="form-group selecteur" id="valeurDeLObjet">
-														<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbCompteObjet.propositionSelected.valeur.idValeur}">
-														<f:selectItems value="#{mbCompteObjet.allValeur}" var="valeur" itemLabel="${valeur.intitule}" itemValue="${valeur.idValeur}" />
-													</h:selectOneMenu>
-												</div>											
+												<div>
+													<div>
+														<label>Valeur:</label>
+													</div>
 
-												<!-- Checkbox-->
-
-												<h:selectManyCheckbox value="">
-												<f:selectItems value="#{mbCompteObjet.adresseByMembre}"></f:selectItems>												
-												</h:selectManyCheckbox>
-									 
-												  
+													<div class="form-group selecteur" id="valeurDeLObjet">
+														<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.valeurSelected.idValeur}">
+															<f:selectItems value="#{mbCompteObjet.allValeur}"
+																var="valeur" itemLabel="${valeur.intitule}"
+																itemValue="${valeur.idValeur}" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div>
+													<div>
+														<label>Adresses:</label>
+													</div>
+													<h:selectManyCheckbox
+														value="#{mbCompteObjet.idAdressesSelected}">
+														<f:selectItems value="#{mbCompteObjet.adresseByMembre}"
+															var="adresse" itemLabel="${adresse.adresse}"
+															itemValue="${adresse.idLocalisation}"></f:selectItems>
+													</h:selectManyCheckbox>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div>
+													<div>
+														<label>Description de la proposition:</label>
+													</div>
+													<div class="styleDescription">
+														<h:inputTextarea rows="10"
+															value="#{mbCompteObjet.descriptionSelected}"
+															styleClass="form-control" />
+													</div>
+												</div>
 											</div>
 										</div>
 										<div class="modal-footer">
-											<h:commandButton action="#{mbCompteObjet.updateObjet()}" value="Valider" styleClass="btn btn-vert btn-lg" onclick="$('#modalObjet').modal('hide');"></h:commandButton>
+											<h:commandButton action="#{mbCompteObjet.updateObjet()}"
+												value="Valider" styleClass="btn btn-vert btn-lg"
+												onclick="$('#modalObjet').modal('hide');"></h:commandButton>
 
 											<button type="button" class="btn btn-vert btn-lg"
 												data-dismiss="modal">Annuler</button>
 										</div>
-
 									</div>
 								</h:panelGroup>
 							</h:form>
@@ -151,7 +204,7 @@
 					</div>
 				</div>
 
-				<!-- ******************************MODALE FIN AJOUTER****************************** -->
+				<!-- ******************************MODALE FIN MODIFIER****************************** -->
 
 				<!-- ******************************MODALE SUPPRIMER DEBUT****************************** -->
 

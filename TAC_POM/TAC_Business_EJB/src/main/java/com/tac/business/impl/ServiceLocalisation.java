@@ -45,6 +45,11 @@ public class ServiceLocalisation implements IServiceLocalisation {
 		
 		return proxyDaoLocalisation.getPropositionLocalisations(proposition);
 	}
+
+	@Override
+	public Localisation getById(Integer idLocalisation) {
+		return proxyDaoLocalisation.getById(idLocalisation);
+	}
 	
 	
 

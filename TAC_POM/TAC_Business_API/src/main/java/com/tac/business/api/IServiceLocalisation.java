@@ -13,5 +13,6 @@ public interface IServiceLocalisation {
 	void deleteLocalisation(Localisation localisation);
 	List<Localisation> getMembreLocalisations(Membre membre);
 	List<Localisation> getPropositionLocalisations(Proposition proposition);
+	Localisation getById(Integer idLocalisation);
 	
 }
