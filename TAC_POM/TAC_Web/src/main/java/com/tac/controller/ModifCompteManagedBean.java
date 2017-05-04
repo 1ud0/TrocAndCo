@@ -10,7 +10,6 @@ import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.validator.ValidatorException;
@@ -18,7 +17,7 @@ import javax.servlet.http.Part;
 
 import com.tac.business.api.IServiceCompte;
 import com.tac.business.api.IServiceLocalisation;
-import com.tac.entity.Membre;
+import com.tac.entity.Localisation;
 
 @ManagedBean(name = "mbModifCompte")
 @RequestScoped
@@ -35,6 +34,9 @@ public class ModifCompteManagedBean implements Serializable {
 	@EJB
 	private IServiceCompte proxyCompte;
 	
+	
+	@EJB
+	private IServiceLocalisation proxyLocalisation;
 
 
 	private Part file1;
@@ -46,6 +48,8 @@ public class ModifCompteManagedBean implements Serializable {
 	
 	private boolean showAlertPwd;
 	private boolean showAlertModif;
+	
+	private List<Localisation> adresses;
 	
 	
 
@@ -178,6 +182,29 @@ public class ModifCompteManagedBean implements Serializable {
 	public void setShowAlertModif(boolean showAlertModif) {
 		this.showAlertModif = showAlertModif;
 	}
+
+
+
+	public IServiceLocalisation getProxyLocalisation() {
+		return proxyLocalisation;
+	}
+
+
+	public void setProxyLocalisation(IServiceLocalisation proxyLocalisation) {
+		this.proxyLocalisation = proxyLocalisation;
+	}
+
+
+	public List<Localisation> getAdresses() {
+		adresses = proxyLocalisation.getMembreLocalisations(identifSession.getMembreConnected());
+		return adresses;
+	}
+
+
+	public void setAdresses(List<Localisation> adresses) {
+		this.adresses = adresses;
+	}
+
 
 
 	

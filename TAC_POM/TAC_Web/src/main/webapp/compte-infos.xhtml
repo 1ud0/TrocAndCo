@@ -135,13 +135,16 @@
 							</h5>
 						</div>
 					</div>
-					<div class="col-md-6">
+					<ui:repeat var="ad" value="#{mbModifCompte.adresses}">
+						<h:form>
+						<div class="col-md-6">
+					
 						<div class="adresse">
-							<h5>Adresse pincipale</h5>
+							<h5>#{ad.titreAdresse}</h5>
 							<ul>
-								<li>10B, rue Jacques Kellner</li>
-								<li>75017</li>
-								<li>Paris</li>
+								<li>#{ad.adresse}</li>
+								<li>#{ad.codePostal}</li>
+								<li>#{ad.ville}</li>
 							</ul>
 							<div class="row text-center">
 								<div class="col-sm-6">
@@ -153,42 +156,9 @@
 							</div>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="adresse">
-							<h5>Adresse pincipale</h5>
-							<ul>
-								<li>10B, rue Jacques Kellner</li>
-								<li>75017</li>
-								<li>Paris</li>
-							</ul>
-							<div class="row text-center">
-								<div class="col-sm-6">
-									<a href="">Modifier</a>
-								</div>
-								<div class="col-sm-6">
-									<a href="">Supprimer</a>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-6">
-						<div class="adresse">
-							<h5>Adresse pincipale</h5>
-							<ul>
-								<li>10B, rue Jacques Kellner</li>
-								<li>75017</li>
-								<li>Paris</li>
-							</ul>
-							<div class="row text-center">
-								<div class="col-sm-6">
-									<a href="">Modifier</a>
-								</div>
-								<div class="col-sm-6">
-									<a href="">Supprimer</a>
-								</div>
-							</div>
-						</div>
-					</div>
+						
+						</h:form>
+					</ui:repeat>
 				</div>
 
 			</div>
