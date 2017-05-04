@@ -9,7 +9,9 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoFavori;
+import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
+import com.tac.entity.Photo;
 import com.tac.entity.Proposition;
 
 @Remote(IDaoFavori.class)
@@ -50,8 +52,16 @@ public class DaoFavori implements IDaoFavori {
 
 	@Override
 	public List<Proposition> getFavorisByMembre(Membre membre) {
+		membre = em.merge(membre);
+		List<Proposition> propositions = membre.getFavoris();
+		for (Proposition p : propositions) {
+			List<Localisation> localisations = p.getLocalisations();
+			List<Photo> photos = p.getPhotos();
+			localisations.size();
+			photos.size();
+		}
 
-		return em.merge(membre).getFavoris();
+		return propositions;
 
 	}
 

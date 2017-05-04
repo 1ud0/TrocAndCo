@@ -46,9 +46,10 @@ public class DaoListe implements IDaoListe{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Liste> getByMembreId(Integer idMembre) {
-		final String reqGetAll = "SELECT l FROM Liste l";
-		Query queryGetAll = em.createQuery(reqGetAll);
-		List<Liste> listes= queryGetAll.getResultList();
+		final String req = "SELECT l FROM Liste l WHERE l.membre.idMembre = :pid";
+		Query query = em.createQuery(req);
+		query.setParameter("pid", idMembre);
+		List<Liste> listes= query.getResultList();
 		return listes;
 	}
 

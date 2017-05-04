@@ -9,5 +9,6 @@ public interface IServiceFavori {
 	Proposition addToFavoris (Proposition proposition, Membre membre);
 	void deleteFavori(Proposition proposition , Membre membre );
 	List<Proposition> getFavorisMembre (Membre membre);
+	Proposition getFavoriById(int idProposition);
 
 }
