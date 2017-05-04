@@ -3,6 +3,7 @@ package com.tac.data.api;
 import java.util.List;
 
 import com.tac.entity.Localisation;
+import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
 public interface IDaoLocalisation {
@@ -13,4 +14,5 @@ public interface IDaoLocalisation {
 	Localisation getById(Integer id);
 	List<Localisation> getMembreLocalisations(Integer id);
 	List<Localisation> getPropositionLocalisations(Proposition proposition);
+	List<Localisation> getMembreMembreLocalisations(Membre membre);
 }

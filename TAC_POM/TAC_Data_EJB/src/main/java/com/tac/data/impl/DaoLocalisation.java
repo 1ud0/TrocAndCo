@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoLocalisation;
 import com.tac.entity.Localisation;
+import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
 @Remote(IDaoLocalisation.class)
@@ -60,5 +61,15 @@ public class DaoLocalisation implements IDaoLocalisation {
 		Query query = em.createQuery(req).setParameter("pid", proposition.getIdProposition());
 		return query.getResultList();
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Localisation> getMembreMembreLocalisations(Membre membre) {
+		
+		final String req = "SELECT l FROM Localisation l WHERE l.membre = :pmembre";
+		Query query = em.createQuery(req).setParameter("pmembre", membre);
+		return query.getResultList();
+	}
+
 
 }

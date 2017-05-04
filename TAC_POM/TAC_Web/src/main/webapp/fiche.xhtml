@@ -27,16 +27,17 @@
          	                    _________________________________________________________ -->
 				<ul class="breadcrumb">
 					<li><a href="#">Home</a></li>
-					<li><a href="#">Products</a></li>
-					<li class="active">Accessories</li>
+					<li><a href="#"> <h:outputText
+								value="#{mbObjet.selectedProp.categorie.intitule}" /></a></li>
+					<li class="active"><h:outputText
+							value="#{mbObjet.selectedProp.sousCategorie.intitule}" /></li>
 				</ul>
 				<div class="col-md-9">
 
 					<div class="row objet" id="productMain">
 						<div class="col-sm-5">
 							<div id="mainImage">
-								<img src="" alt=""
-									class="img-responsive" id="grossePhoto"></img>
+								<img src="" alt="" class="img-responsive" id="grossePhoto"></img>
 							</div>
 
 							<div class="ribbon sale">
@@ -46,13 +47,13 @@
 							<!-- /.ribbon -->
 							<br></br>
 							<div class="row" id="thumbs">
-							<ui:repeat var="photo" value="#{mbObjet.selectedProp.photos}">
-								<div class="col-xs-4">				
-									<a href="#{photo.url}" class="thumb"> <img
-										src="#{photo.url}" alt="" class="img-responsive"></img></a>
-								</div>
+								<ui:repeat var="photo" value="#{mbObjet.selectedProp.photos}">
+									<div class="col-xs-4">
+										<a href="#{photo.url}" class="thumb"> <img
+											src="#{photo.url}" alt="" class="img-responsive"></img></a>
+									</div>
 								</ui:repeat>
-								
+
 							</div>
 
 						</div>
@@ -60,11 +61,14 @@
 							<div>
 								<form>
 									<div class="sizes">
-										<h3><h:outputText value="#{mbObjet.selectedProp.intitule}" /> </h3>
+										<h3>
+											<h:outputText value="#{mbObjet.selectedProp.intitule}" />
+										</h3>
 									</div>
 									<p class="price">
 										<img src="img/custom/feuille orange.png" height="50"
-											width="50" border="1px"></img> <h:outputText value="#{mbObjet.selectedProp.valeur.valeur}" />
+											width="50" border="1px"></img>
+										<h:outputText value="#{mbObjet.selectedProp.valeur.valeur}" />
 									</p>
 									<p class="text-center">
 										<button type="submit" class="btn btn-template-main"
@@ -84,16 +88,23 @@
 							<div class="box" id="details">
 
 								<h4>Details</h4>
-								<p> <h:outputText value="#{mbObjet.selectedProp.description}" /> </p>
+								<p>
+									<h:outputText value="#{mbObjet.selectedProp.description}" />
+								</p>
 
 
 								<blockquote>
 									<p>
-										<em>Etat : <h:outputText value="#{mbObjet.selectedProp.etat.intitule}" /> </em>
+										<em>Etat : <h:outputText
+												value="#{mbObjet.selectedProp.etat.intitule}" />
+										</em>
 									</p>
 									<p>
-										<em>Catégorie : <h:outputText value=" #{mbObjet.selectedProp.categorie.intitule}" /></em> <br></br> <em>Sous-catégorie
-											: <h:outputText value="#{mbObjet.selectedProp.sousCategorie.intitule}" /> </em>
+										<em>Catégorie : <h:outputText
+												value=" #{mbObjet.selectedProp.categorie.intitule}" /></em> <br></br>
+										<em>Sous-catégorie : <h:outputText
+												value="#{mbObjet.selectedProp.sousCategorie.intitule}" />
+										</em>
 									</p>
 
 								</blockquote>
@@ -109,7 +120,7 @@
 
 				<div class="col-md-3 objetside">
 					<div>
-						
+
 
 						<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
 						<div style='overflow: hidden; height: 280px;'>
@@ -137,14 +148,20 @@
 							<div class="row">
 								<div class="col-sm-4 col-md-6 ">
 									<div class="image">
-										<a href=""> <img src="img/person-2.jpg" alt=""
+										<a href=""> <img
+											src="#{mbObjet.selectedProp.membre.avatar}" alt=""
 											class="img-responsive img-circle tailleMaxImage"></img>
 										</a>
 									</div>
 								</div>
 								<div class="col-sm-4 col-md-6 ">
-									<h4>Pseudo</h4>
-									<p class="rating-num">4.0/5</p>
+									<h4>
+										<h:outputText value="#{mbObjet.selectedProp.membre.pseudo}" />
+									</h4>
+									<p class="rating-num">
+										<h:outputText value="#" />
+										/5
+									</p>
 								</div>
 							</div>
 
@@ -154,8 +171,13 @@
 
 						<div class="partieLiens">
 							<p>
-								<a href="profil.xhtml"><strong>Voir le profil du
-										propriétaire</strong></a>
+								<h:form >
+									<h:commandLink
+										action="#{mbObjet.LoadMembre(mbObjet.selectedProp.membre)}"
+										value="" >
+									<strong>Voir le profil du
+											propriétaire</strong></h:commandLink>
+								</h:form>
 							</p>
 							<p>
 								<a href="compte-messages.xhtml"><strong>Contacter
@@ -175,105 +197,105 @@
 				<br></br>
 				<div id="demo" class="collapse">
 					<div class="row">
-													<!-- Premiere envie -->
-													<div class="col-md-6 col-sm-12 ">
-														<div class="box-simple boxEnvie">
-															<div class="text">
-																<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-																	N°1</h4>
-																<h3>
-																	<div class="col-md-10 col-sm-10">Casserole</div>
-																	<div class="col-md-2 col-sm-2">
-																		<label> 3</label> <img src="img/custom/feuille orange.png"
-																			alt=""></img>
-																	</div>
-																</h3>
-																<div class="row">
-																	<div class="col-md-6 col-sm-12 orientationTextLeft">
-																		<h4>Détails:</h4>
-																		<p>
-																			<label> Catégorie: </label> <label class="italic">
-																				blabla</label> <br /> <label> Sous-catégorie: </label> <label
-																				class="italic"> blabla </label> <br /> <label> Etat
-																				d'usure: </label> <label class="italic"> blabla </label>
-																		</p>
-																	</div>
-																	<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
-																		<h4>Adresses:</h4>
-																		<div class="row">
-								
-																			<p>
-																				<span class="glyphicon glyphicon-map-marker"
-																					aria-hidden="true"></span> <label>8 boulevard du
-																					Général De Gaulle<br /> Montrouge
-																				</label>
-								
-																			</p>
-																		</div>
-																		<div class="row">
-																			<p>
-																				<span class="glyphicon glyphicon-map-marker"
-																					aria-hidden="true"></span> <label>8 boulevard du
-																					Général De Gaulle<br /> Montrouge
-																				</label>
-																			</p>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<!-- /.text -->
-														</div>
-													</div>
-													<!-- deuxième envie -->
-													<!-- Premiere envie -->
-													<div class="col-md-6 col-sm-12 ">
-														<div class="box-simple boxEnvie">
-															<div class="text">
-																<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-																	N°1</h4>
-																<h3>
-																	<div class="col-md-10 col-sm-10">Casserole</div>
-																	<div class="col-md-2 col-sm-2">
-																		<label> 3</label> <img src="img/custom/feuille orange.png"
-																			alt=""></img>
-																	</div>
-																</h3>
-																<div class="row">
-																	<div class="col-md-6 col-sm-12 orientationTextLeft">
-																		<h4>Détails:</h4>
-																		<p>
-																			<label> Catégorie: </label> <label class="italic">
-																				blabla</label> <br /> <label> Sous-catégorie: </label> <label
-																				class="italic"> blabla </label> <br /> <label> Etat
-																				d'usure: </label> <label class="italic"> blabla </label>
-																		</p>
-																	</div>
-																	<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
-																		<h4>Adresses:</h4>
-																		<div class="row">
-								
-																			<p>
-																				<span class="glyphicon glyphicon-map-marker"
-																					aria-hidden="true"></span> <label>8 boulevard du
-																					Général De Gaulle<br /> Montrouge
-																				</label>
-								
-																			</p>
-																		</div>
-																		<div class="row">
-																			<p>
-																				<span class="glyphicon glyphicon-map-marker"
-																					aria-hidden="true"></span> <label>8 boulevard du
-																					Général De Gaulle<br /> Montrouge
-																				</label>
-																			</p>
-																		</div>
-																	</div>
-																</div>
-															</div>
-															<!-- /.text -->
-														</div>
-													</div>
+						<!-- Premiere envie -->
+						<div class="col-md-6 col-sm-12 ">
+							<div class="box-simple boxEnvie">
+								<div class="text">
+									<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
+										N°1</h4>
+									<h3>
+										<div class="col-md-10 col-sm-10">Casserole</div>
+										<div class="col-md-2 col-sm-2">
+											<label> 3</label> <img src="img/custom/feuille orange.png"
+												alt=""></img>
+										</div>
+									</h3>
+									<div class="row">
+										<div class="col-md-6 col-sm-12 orientationTextLeft">
+											<h4>Détails:</h4>
+											<p>
+												<label> Catégorie: </label> <label class="italic">
+													blabla</label> <br /> <label> Sous-catégorie: </label> <label
+													class="italic"> blabla </label> <br /> <label>
+													Etat d'usure: </label> <label class="italic"> blabla </label>
+											</p>
+										</div>
+										<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
+											<h4>Adresses:</h4>
+											<div class="row">
+
+												<p>
+													<span class="glyphicon glyphicon-map-marker"
+														aria-hidden="true"></span> <label>8 boulevard du
+														Général De Gaulle<br /> Montrouge
+													</label>
+
+												</p>
+											</div>
+											<div class="row">
+												<p>
+													<span class="glyphicon glyphicon-map-marker"
+														aria-hidden="true"></span> <label>8 boulevard du
+														Général De Gaulle<br /> Montrouge
+													</label>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.text -->
+							</div>
+						</div>
+						<!-- deuxième envie -->
+						<!-- Premiere envie -->
+						<div class="col-md-6 col-sm-12 ">
+							<div class="box-simple boxEnvie">
+								<div class="text">
+									<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
+										N°1</h4>
+									<h3>
+										<div class="col-md-10 col-sm-10">Casserole</div>
+										<div class="col-md-2 col-sm-2">
+											<label> 3</label> <img src="img/custom/feuille orange.png"
+												alt=""></img>
+										</div>
+									</h3>
+									<div class="row">
+										<div class="col-md-6 col-sm-12 orientationTextLeft">
+											<h4>Détails:</h4>
+											<p>
+												<label> Catégorie: </label> <label class="italic">
+													blabla</label> <br /> <label> Sous-catégorie: </label> <label
+													class="italic"> blabla </label> <br /> <label>
+													Etat d'usure: </label> <label class="italic"> blabla </label>
+											</p>
+										</div>
+										<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
+											<h4>Adresses:</h4>
+											<div class="row">
+
+												<p>
+													<span class="glyphicon glyphicon-map-marker"
+														aria-hidden="true"></span> <label>8 boulevard du
+														Général De Gaulle<br /> Montrouge
+													</label>
+
+												</p>
+											</div>
+											<div class="row">
+												<p>
+													<span class="glyphicon glyphicon-map-marker"
+														aria-hidden="true"></span> <label>8 boulevard du
+														Général De Gaulle<br /> Montrouge
+													</label>
+												</p>
+											</div>
+										</div>
+									</div>
+								</div>
+								<!-- /.text -->
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
