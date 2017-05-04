@@ -36,4 +36,6 @@ private IDaoListe proxyDaoListe;
 		return proxyDaoListe.getByMembreId(membre.getIdMembre());
 	}
 
+
+
 }

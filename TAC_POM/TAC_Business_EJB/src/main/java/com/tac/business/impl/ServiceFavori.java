@@ -8,6 +8,7 @@ import javax.ejb.Stateless;
 
 import com.tac.business.api.IServiceFavori;
 import com.tac.data.api.IDaoFavori;
+import com.tac.data.api.IDaoProposition;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
@@ -16,7 +17,10 @@ import com.tac.entity.Proposition;
 public class ServiceFavori implements IServiceFavori {
 	@EJB
 	private IDaoFavori proxyDaoFavori;
-
+	
+	@EJB
+	private IDaoProposition proxyDaoProposition;
+	
 	@Override
 	public Proposition addToFavoris(Proposition proposition, Membre membre) {
 		return proxyDaoFavori.addFavori(proposition, membre);
@@ -32,6 +36,12 @@ public class ServiceFavori implements IServiceFavori {
 	@Override
 	public List<Proposition> getFavorisMembre(Membre membre) {
 		return proxyDaoFavori.getFavorisByMembre(membre);
+	}
+
+	@Override
+	public Proposition getFavoriById(int idProposition) {
+		
+		return proxyDaoProposition.getById(idProposition);
 	}
 
 }

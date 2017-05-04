@@ -7,222 +7,53 @@
 	<title>COMPTE - MES ECHANGES</title>
 </h:head>
 <h:body bgcolor='white'>
+	<f:metadata>
+		<f:event listener="#{mbFavori.securePage()}" type="preRenderView"></f:event>
+	</f:metadata>
 
 	<ui:composition template="/WEB-INF/templates/templateEnvies.xhtml">
 		<ui:define name="content">
 
+
 			<!--Resultat recherche DEBUT-->
 			<div class=" col-md-12 col-sm-12 ">
-				<div class=" col-md-3 col-sm-9 ">
-					<!-- produit 1 DEBUT -->
-					<div class="product ">
+				<!-- produit 1 DEBUT -->
+				<h:form>
+					<ui:repeat var="favori" value="#{mbFavori.favorisDuMembre}">
+						<div class=" col-md-3 col-sm-9 ">
+							<div class="product ">
+								<div class="image ">
+									<h:commandLink action="#{mbObjet.loadProposition(favori)}"
+										value="">
+										<h:graphicImage value="#{favori.photos.get(0).url}"
+											styleClass="img-responsive image1" />
+									</h:commandLink>
 
+								</div>
+								<!-- /.image -->
+								<div class="text">
+									<h3>
+										<h:commandLink action="#{mbObjet.loadProposition(favori)}"
+											value="">
+											<h:outputText value="#{favori.intitule}" />
+										</h:commandLink>
+									</h3>
+									<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
+									<p class="text-muted">
+										<h:outputText value="#{favori.localisations.get(0).ville}" />
+									</p>
+									<p class="price">
+										<h:outputText value="#{favori.valeur.valeur}" />
+										<img src="img/custom/feuille orange.png" alt=""></img>
+									</p>
 
-						<div class="image ">
-							<a href="shop-detail.html"> <img
-								src="img/custom/casserole.png" alt=""
-								class="img-responsive image1"></img>
-							</a>
-
+								</div>
+								<!-- /.text -->
+							</div>
 						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3>
-								<a href="shop-detail.html">Casserole</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Montrouge</p>
-							<p class="price">
-								3 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
+					</ui:repeat>
+				</h:form>
 
-						</div>
-						<!-- /.text -->
-					</div>
-				</div>
-
-				<!-- produit 1 FIN  -->
-				<!-- produit 2 DEBUT -->
-				<div class=" col-md-3 col-sm-9 ">
-
-					<div class="product ">
-
-						<div class="image">
-							<a href="shop-detail.html"> <img src="img/custom/barbie.png"
-								alt="" class="img-responsive image1"></img>
-							</a>
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3 class="nomArticleTrouve">
-								<a href="shop-detail.html">Barbie</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Paris</p>
-							<p class="price">
-								2 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-						</div>
-
-					</div>
-				</div>
-				<!-- produit 2 FIN  -->
-				<!-- produit 3 DEBUT -->
-				<div class=" col-md-3 col-sm-9 ">
-
-					<div class="product ">
-						<div class="image">
-							<a href="shop-detail.html"> <img
-								src="img/custom/vaseMetal.png" alt=""
-								class="img-responsive image1"></img>
-							</a>
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3 class="nomArticleTrouve">
-								<a href="shop-detail.html">Vase en métal</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Paris</p>
-							<p class="price">
-								5 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-
-						</div>
-						<!-- /.text -->
-					</div>
-				</div>
-				<!-- produit 3 FIN  -->
-				<!-- produit 4 DEBUT -->
-				<div class=" col-md-3 col-sm- ">
-					<div class="product ">
-						<div class="image">
-							<a href="shop-detail.html"> <img
-								src="img/custom/vaseVerre.png" alt=""
-								class="img-responsive image1"></img>
-							</a>
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3 class="nomArticleTrouve">
-								<a href="shop-detail.html">Vase en verre</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Paris</p>
-							<p class="price">
-								4 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-
-						</div>
-						<!-- /.text -->
-					</div>
-				</div>
-				<!-- produit 4 FIN  -->
-				<div class=" col-md-3 col-sm-9 ">
-					<!-- produit 5 DEBUT -->
-					<div class="product ">
-
-
-						<div class="image ">
-							<a href="shop-detail.html"> <img
-								src="img/custom/casserole.png" alt=""
-								class="img-responsive image1"></img>
-							</a>
-
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3>
-								<a href="shop-detail.html">Casserole</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Montrouge</p>
-							<p class="price">
-								3 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-
-						</div>
-						<!-- /.text -->
-					</div>
-				</div>
-
-				<!-- produit 5 FIN  -->
-				<!-- produit 6 DEBUT -->
-				<div class=" col-md-3 col-sm-9 ">
-
-					<div class="product ">
-
-						<div class="image">
-							<a href="shop-detail.html"> <img src="img/custom/barbie.png"
-								alt="" class="img-responsive image1"></img>
-							</a>
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3 class="nomArticleTrouve">
-								<a href="shop-detail.html">Barbie</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Paris</p>
-							<p class="price">
-								2 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-						</div>
-
-					</div>
-				</div>
-				<!-- produit 6 FIN  -->
-				<!-- produit 7 DEBUT -->
-				<div class=" col-md-3 col-sm-9 ">
-
-					<div class="product ">
-						<div class="image">
-							<a href="shop-detail.html"> <img
-								src="img/custom/vaseMetal.png" alt=""
-								class="img-responsive image1"></img>
-							</a>
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3 class="nomArticleTrouve">
-								<a href="shop-detail.html">Vase en métal</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Paris</p>
-							<p class="price">
-								5 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-
-						</div>
-						<!-- /.text -->
-					</div>
-				</div>
-				<!-- produit 7 FIN  -->
-				<!-- produit 8 DEBUT -->
-				<div class=" col-md-3 col-sm- ">
-					<div class="product ">
-						<div class="image">
-							<a href="shop-detail.html"> <img
-								src="img/custom/vaseVerre.png" alt=""
-								class="img-responsive image1"></img>
-							</a>
-						</div>
-						<!-- /.image -->
-						<div class="text">
-							<h3 class="nomArticleTrouve">
-								<a href="shop-detail.html">Vase en verre</a>
-							</h3>
-							<span class="glyphicon glyphicon-map-marker" aria-hidden="true"></span>
-							<p class="text-muted">Paris</p>
-							<p class="price">
-								4 <img src="img/custom/feuille orange.png" alt=""></img>
-							</p>
-
-						</div>
-						<!-- /.text -->
-					</div>
-				</div>
-				<!-- produit 8 FIN  -->
 			</div>
 
 		</ui:define>
