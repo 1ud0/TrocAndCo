@@ -15,9 +15,7 @@ private IDaoMembre proxyDaoMembre;
 
 	@Override
 	public Membre majDonnees(Membre membre) { //Besoin de checkPassword pr autoriser l'update
-		if(checkPassword(membre.getPassword(), membre.getIdMembre())== true){
 		proxyDaoMembre.updateMembre(membre);
-		}
 		return membre;
 	}
 
