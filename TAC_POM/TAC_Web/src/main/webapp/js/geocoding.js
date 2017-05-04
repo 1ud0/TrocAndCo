@@ -18,7 +18,7 @@ window.onload = function() {
 	            chpLongitude.value = results[0].geometry.location.lng();
 	            btnCache.click();
 	        } else {
-	            alert('Geocode was not successful for the following reason: ' + status);
+	            console.log('Geocode was not successful for the following reason: ' + status);
 	        }
 	    });
 	}
