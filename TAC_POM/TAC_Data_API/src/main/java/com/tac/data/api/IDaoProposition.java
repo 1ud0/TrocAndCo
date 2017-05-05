@@ -14,6 +14,7 @@ public interface IDaoProposition {
 	List<Proposition> getByMembre(int idMembre);
 	List<Proposition> getPropDispo();
 	List<Proposition> getNouveautes(int nombre);
+	List<Proposition> getPropoDispoByMembre( int idMembre);
 	
 	
 }

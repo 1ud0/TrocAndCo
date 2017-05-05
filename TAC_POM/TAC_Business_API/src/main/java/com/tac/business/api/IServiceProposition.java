@@ -13,5 +13,6 @@ public interface IServiceProposition {
 	void deleteProposition(Proposition proposition);
 	List<Proposition> getByMembre(Membre membre);
 	List<Photo> getByProposition(Proposition proposition);
+	List<Proposition> getPropDispoByMembre(Membre membre);
 	
 }

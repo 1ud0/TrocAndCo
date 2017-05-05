@@ -58,8 +58,8 @@ public class CompteObjetsManagedBean implements Serializable{
 	private List<Categorie> sousCategoriesSelected;	
 	private Categorie sousCategorieSelected = new Categorie();
 	private List<Categorie> allCategories;
-	private Membre membreCourant ;
-	private Proposition propositionSelected;
+	private Membre membreCourant;
+	private Proposition propositionSelected = new Proposition();
 	private Categorie categorieSelected = new Categorie();
 	private String descriptionSelected ="";
 
@@ -78,8 +78,12 @@ public class CompteObjetsManagedBean implements Serializable{
 	
 	public List<Proposition> getProposDuMembre() {	
 		membreCourant = identifBean.getMembreConnected();
-		proposDuMembre = proxyObjet.getByMembre(membreCourant);
+		proposDuMembre = proxyObjet.getPropDispoByMembre(membreCourant);
 		return proposDuMembre;		
+	}
+	
+	public void listnerSelectionObjetPourSuppression(Proposition proposition){
+		propositionSelected = proposition;
 	}
 	
 	public void listnerSelectionObjet(Proposition proposition){
@@ -90,21 +94,49 @@ public class CompteObjetsManagedBean implements Serializable{
 		sousCategorieSelected = propositionSelected.getSousCategorie();
 		valeurSelected = propositionSelected.getValeur();
 		etatSelected = propositionSelected.getEtat();
+		idAdressesSelected=getidAdresseProp();
 		listenerChargementSousCat();
 	}
 	
-	private void updateLocalisationProposition(){
-		System.out.println("l'id de la proposition est : " +propositionSelected.getIdProposition());
+	public String ajoutProposition(){
+		propositionSelected.setMembre(membreCourant);
+		propositionSelected.setIntitule(intituleSelected);
+		propositionSelected.setValeur(valeurSelected);
+		propositionSelected.setEtat(etatSelected);
+		propositionSelected.setCategorie(categorieSelected);
+		propositionSelected.setSousCategorie(sousCategorieSelected);		
+		propositionSelected.setLocalisations(adressesSelected);
+		propositionSelected.setDescription(descriptionSelected);
+		propositionSelected=proxyObjet.addProposition(propositionSelected);
+		updateLocalisationProposition();
 
+		String nav = "";		
+		return nav;
+	}
+	
+	private List<String> getidAdresseProp(){
+		List<Localisation> adressesProp = getAdresseByProposition(propositionSelected);
+		List<String> idAdressesPropString = new ArrayList<>();
+		for (Localisation adresse : adressesProp) {
+			idAdressesPropString.add(adresse.getIdLocalisation().toString());
+		}
+		return idAdressesPropString;
+	}
+	
+	private void updateLocalisationProposition(){
 		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
 			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
-			System.out.println("old"+propositionSelected.getIdProposition() +","+oldLocalisation.getIdLocalisation());
 		}
 		adressesSelected=GetListAdressesSelected(idAdressesSelected);
 		for (Localisation newLocalisation : adressesSelected) {
 			proxyLocaliserProposition.addLocalisationAUneProposition(propositionSelected, newLocalisation);
-			System.out.println(propositionSelected.getIdProposition() +","+newLocalisation.getIdLocalisation());
 		}		
+	}	
+	private void supprimerLocalisationProposition(){
+		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
+			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
+		}
+			
 	}	
 	public String updateObjet(){
 		updateLocalisationProposition();
@@ -142,7 +174,10 @@ public class CompteObjetsManagedBean implements Serializable{
 		return  localisationsPropo;
 	}
 	
-	
+	public void suppressionProposition(){
+		supprimerLocalisationProposition();
+		proxyObjet.deleteProposition(propositionSelected);
+	}
 	
 	//GETTER SETTER
 	

@@ -1,0 +1,111 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+<h:head>
+<ui:insert name="header">
+	<ui:include src="/WEB-INF/templates/head.xhtml" />
+</ui:insert>
+</h:head>
+
+<body>
+	<div id="all">
+		<!--  Debut du all -->
+
+		<header>
+			<ui:insert name="header">
+				<ui:include src="/WEB-INF/templates/header.xhtml" />
+			</ui:insert>
+
+			<ui:insert name="scripts">
+				<ui:include src="/WEB-INF/templates/scripts.xhtml" />
+			</ui:insert>
+		</header>
+
+			<div class="container">
+				<ul class="nav nav-pills nav-justified">
+					<li class="#{view.viewId eq '/echangeInitAcquereur.xhtml' or view.viewId eq '/echangeInitDonneur.xhtml' or view.viewId eq '/echangeAttenteValidation.xhtml' ? 'active' : 'disabled'}"><a href="#"><i
+							class="fa fa-play-circle"></i><br />Initialisation</a></li>
+					<li class="#{view.viewId eq '/echangeCodeAcquereur.xhtml' or view.viewId eq '/echangeCodeDonneur.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-exchange"></i><br />Echange
+							en cours</a></li>
+					<li class="#{view.viewId eq '/echangeEvaluation.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-star"></i>
+							<i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i
+							class="fa fa-star-o"></i><i class="fa fa-star-o"></i> <br />Evaluation</a>
+					</li>
+					<li class="#{view.viewId eq '/echangeRecap.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-eye"></i><br />Récapitulatif</a>
+					</li>
+				</ul>
+				<div class="echangeEtape">
+					<div class="row products orientationImageEchange">
+						<div class=" col-md-4 col-sm-12" id="resumeCompte">
+							<div class="row">
+								<div class="col-sm-4">
+									<div class="image">
+										<a href=""> <img src="#{mbIdentif.membreConnected.avatar}" alt=""
+											class="img-responsive img-circle MaxHeightImg100" /></a>
+									</div>
+								</div>
+								<div class="col-sm-8">
+									<h4>#{mbEchange.membreCourant.pseudo}</h4>
+									<p>#{mbEchange.membreCourant.nom} #{mbEchange.membreCourant.prenom}</p>
+									
+								</div>
+							</div>
+							<!-- fin avatar proprietaire  -->
+							<div class="row">
+								<div class=" col-sm-12">
+									<div class="product">
+										<div class="orientationCenter marginTop15">
+											<div>
+												<img src="#{mbEchange.selectedProp.photos.get(0).url}" alt=""
+													class="img-responsive MaxHeightImg200 " />
+											</div>
+										</div>
+										<!-- /.image -->
+										<div class="text">
+											<h:form>
+											<h3>
+											<h:commandLink action="#{mbEchange.redirigerEchange()}" value="#{mbEchange.selectedProp.intitule}" />
+											</h3>
+											<p class="price">
+												#{mbEchange.selectedProp.valeur.valeur}<img alt="feuille" src="img/custom/feuille.png" class="iconeFeuille"/>
+											</p>
+											</h:form>
+										</div>
+										<!-- /.text -->
+									</div>
+									<!-- /.product -->
+								</div>
+							</div>
+						</div>
+						<!-- fin avatar+produit proposé  -->
+						<div class="col-md-8 col-sm-12">
+							<ui:insert name="content">
+							
+							</ui:insert>
+						</div>
+						<!--  -->
+					</div>
+					
+				</div>
+			</div>
+
+
+		<footer>
+			<ui:insert name="footer">
+				<ui:include src="/WEB-INF/templates/footer.xhtml" />
+			</ui:insert>
+		</footer>
+
+
+
+	</div>
+	<!--  Fin du all -->
+
+
+
+
+
+</body>
+
+</html>

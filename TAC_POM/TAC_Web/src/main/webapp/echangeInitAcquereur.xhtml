@@ -8,8 +8,10 @@
 </h:head>
 <h:body bgcolor='white'>
 
-	<ui:composition template="/WEB-INF/templates/templateEchange.xhtml">
+
+	<ui:composition template="/WEB-INF/templates/templateEchangeAcquereur.xhtml">
 		<ui:define name="content">
+		<h:form>
 			<div class="row">
 
 				<div class="col-sm-6 col-sm-12 text-center">
@@ -29,14 +31,13 @@
 							<p class="taillePoliceOu">ou</p>
 						</div>
 						<div class="col-md-5 col-sm-12">
-							<button type="submit" class="btn btn-default tailleBouton"
-								data-placement="top" title=""
-								data-original-title="Echanger contre des feuilles"
-								data-toggle="modal" data-target="#ModalEchangeFeuille">
-								<p class="taillePolice150">
-									des <img src="img/custom/feuille%20orange.png" alt="" />
-								</p>
-							</button>
+						<h:commandButton value="une valeur"
+											onclick="$('#ModalEchangeFeuille').modal('show');"
+											styleClass="btn btn-default tailleBouton">
+											<f:ajax render=":echangeFeuille:echangeFeuillePanel" execute="@form"
+												event="click"></f:ajax>
+										</h:commandButton>		
+						
 						</div>
 					</div>
 
@@ -46,9 +47,9 @@
 					<div class="box-simple box-white same-height"
 						style="height: 500px;">
 						<h3>Résumé de la proposition</h3>
-						<p>Casserole</p>
+						<p>#{mbEchange.echangePropose.proposition.intitule}</p>
 						<p>CONTRE</p>
-						<p>ce qu'on a choisi</p>
+						<p>#{mbEchange.echangePropose.prix}<img src="img/custom/feuille.png" class="iconeFeuille" /></p>
 					</div>
 				</div>
 
@@ -59,12 +60,13 @@
 
 				<div class="text-center">
 
-					<button type="submit" class="btn btn-vert btn-lg">Valider</button>
+					<h:commandButton styleClass="btn btn-vert btn-lg" action="#{mbEchange.ajouterEchange()}" value="Valider" />
 					<button type="submit" class="btn btn-vert btn-lg">Annuler</button>
 				</div>
 
 			</div>
-
+			
+</h:form>
 
 			<!-- Modal echanger contre feuilles-->
 			<div class="modal fade" id="ModalEchangeFeuille" role="dialog">
@@ -72,17 +74,19 @@
 
 					<!-- Modal content-->
 					<div class="modal-content">
+					<h:form id="echangeFeuille">
+					<h:panelGroup id="echangeFeuillePanel">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">x</button>
 							<h4 class="modal-title">Sélectionner une valeur:</h4>
 						</div>
 						<div class="modal-body">
-							<form name="top_search" method="get" autocomplete="on" action="#">
 								<div class="row">
 									<div class="col-sm-6 col-md-5 orientationCenter">
 										<div class="checkbox">
-											<label><input type="checkbox" value="" />Prix
-												proposé</label>
+											<label><h:selectBooleanCheckbox value="#{mbEchange.prixFixe}" /> Prix
+												proposé: #{mbEchange.selectedProp.valeur.valeur}<img alt="feuille"
+									src="img/custom/feuille.png" class="iconeFeuille"/></label>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-2">
@@ -90,28 +94,28 @@
 									</div>
 									<div class="col-sm-6 col-md-5 orientationCenter">
 										<div class="input-group form-group selecteur" id="selecteur">
-											<select id="lunch" class="selectpicker form-control"
-												data-live-search="true" title="Choisir un objet">
-												<option value="0"></option>
-												<option value="1" id="list_rub" class="noir">Valeur
-													1</option>
-												<option value="2" id="list_rub" class="noir">Valeur
-													2</option>
-												<option value="3" id="list_rub" class="noir">Valeur
-													3</option>
-											</select>
+										<span class="input-group-addon"><img
+								src="img/custom/feuille.png" alt="cat" class="iconeFeuille"></img></span>
+											<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbEchange.valeurPourEchange.valeur}">
+															<f:selectItems value="#{mbEchange.valeurs}"
+																var="valeur" itemLabel="${valeur.valeur}"
+																itemValue="${valeur.idValeur}" />
+														</h:selectOneMenu>
+										
 										</div>
 									</div>
 								</div>
 								<div class="modal-footer">
-									<button type="submit" class="btn btn-vert btn-lg"
-										data-dismiss="modal">Valider</button>
+								<h:commandButton  styleClass="btn btn-vert btn-lg" action="#{mbEchange.parametragePrixEchange()}" value="Valider"  />
+
 
 									<button type="button" class="btn btn-vert btn-lg"
 										data-dismiss="modal">Annuler</button>
 								</div>
-							</form>
 						</div>
+						</h:panelGroup>
+					</h:form>
 					</div>
 				</div>
 			</div>
@@ -122,6 +126,7 @@
 				<div class="modal-dialog">
 					<!-- Modal content-->
 					<div class="modal-content">
+					<h:form>
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">x</button>
 							<h4 class="modal-title">Sélectionner un objet:</h4>
@@ -131,16 +136,12 @@
 								<div class="row">
 									<div class="col-sm-6 col-md-5 orientationCenter">
 										<div class="form-group selecteur" id="selecteur">
-											<select id="lunch" class="selectpicker form-control"
-												data-live-search="true" title="Choisir un objet">
-												<option value="0"></option>
-												<option value="1" id="list_rub" class="noir">Objet
-													1</option>
-												<option value="2" id="list_rub" class="noir">Objet
-													2</option>
-												<option value="3" id="list_rub" class="noir">Objet
-													3</option>
-											</select>
+											<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbEchange.propositionPourEchange.idProposition}">
+															<f:selectItems value="#{mbEchange.propositionsMembre}"
+																var="proposition" itemLabel="${proposition.intitule}"
+																itemValue="${proposition.idProposition}" />
+														</h:selectOneMenu>
 										</div>
 									</div>
 									<div class="col-sm-6 col-md-2">
@@ -162,124 +163,14 @@
 								</div>
 							</form>
 						</div>
+						</h:form>
 					</div>
 				</div>
 			</div>
 			<!-- Fin Echange Modale echanger contre un objet-->
 
 
-			<!-- ******************************MODALE AJOUTER DEBUT****************************** -->
-
-			<div class="modal fade" id="modalObjet" role="dialog">
-				<div class="modal-dialog">
-					<!-- Modal content-->
-					<div class="modal-content">
-						<div class="modal-header">
-							<button type="button" class="close" data-dismiss="modal">x</button>
-							<h4 class="modal-title">Création d'un nouvel objet</h4>
-						</div>
-						<div class="modal-body">
-							<form name="top_search" method="get" autocomplete="on" action="#">
-								<br></br>
-								<div class="row ">
-									<div class="col-sm-4">
-										<div class="image ">
-											<a href="#"> <img src="img/camera-flat.png"
-												alt="Appareil-photo" class="img-responsive"></img>
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="image ">
-											<a href="#"> <img src="img/camera-flat.png"
-												alt="Appareil-photo" class="img-responsive"></img>
-											</a>
-										</div>
-									</div>
-									<div class="col-sm-4">
-										<div class="image ">
-											<a href="#"> <img src="img/camera-flat.png"
-												alt="Appareil-photo" class="img-responsive"></img>
-											</a>
-										</div>
-									</div>
-								</div>
-								<br></br>
-								<div class="row">
-									<div class="col-md-6">
-										<div class="form-group">
-											<input class="form-control" name="string_search"
-												placeholder="Intitulé" value="" type="text"></input>
-										</div>
-										<div class="form-group selecteur">
-											<select id="categorie" class="selectpicker form-control"
-												data-live-search="true" title="Please select a lunch ...">
-												<option value="0">Catégorie</option>
-												<option value="1" id="list_rub" class="noir">Multimédia</option>
-												<option value="2" id="list_rub" class="noir">Sport</option>
-												<option value="3" id="list_rub" class="noir">Electroménager</option>
-												<option value="3" id="list_rub" class="noir">Jouet</option>
-											</select>
-										</div>
-										<div class="form-group selecteur">
-											<select id="souscategorie" class="selectpicker form-control"
-												data-live-search="true" title="Please select a lunch ...">
-												<option value="0">Sous catégorie</option>
-												<option value="1" id="list_rub" class="noir">Multimédia</option>
-												<option value="2" id="list_rub" class="noir">Sport</option>
-												<option value="3" id="list_rub" class="noir">Electroménager</option>
-												<option value="3" id="list_rub" class="noir">Jouet</option>
-											</select>
-										</div>
-										<div class="form-group selecteur">
-											<select id="etat" class="selectpicker form-control"
-												data-live-search="true" title="Please select a lunch ...">
-												<option value="0">Etat d'usure</option>
-												<option value="1" id="list_rub" class="noir">Bon
-													état</option>
-												<option value="2" id="list_rub" class="noir">Usé</option>
-												<option value="3" id="list_rub" class="noir">Très
-													usé</option>
-											</select>
-										</div>
-										<div class="form-group selecteur">
-											<select id="valeur" class="selectpicker form-control"
-												data-live-search="true" title="Please select a lunch ...">
-												<option value="0">Valeur</option>
-												<option value="1" id="list_rub" class="noir">1
-													feuille</option>
-												<option value="2" id="list_rub" class="noir">2
-													feuilles</option>
-												<option value="3" id="list_rub" class="noir">3
-													feuilles</option>
-												<option value="3" id="list_rub" class="noir">4
-													feuilles</option>
-												<option value="3" id="list_rub" class="noir">5
-													feuilles</option>
-											</select>
-										</div>
-										<!-- Checkbox-->
-										<div class="checkbox">
-											<label class="checkbox-inline"><input type="checkbox"
-												value=""></input>Addresse 1</label> <label class="checkbox-inline"><input
-												type="checkbox" value=""></input> Addresse 2</label>
-										</div>
-									</div>
-								</div>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-vert btn-lg"
-										data-dismiss="modal">Valider</button>
-
-									<button type="button" class="btn btn-vert btn-lg"
-										data-dismiss="modal">Annuler</button>
-
-								</div>
-							</form>
-						</div>
-					</div>
-				</div>
-			</div>
-			<!-- ******************************MODALE FIN AJOUTER****************************** -->
+			
 
 		</ui:define>
 	</ui:composition>
