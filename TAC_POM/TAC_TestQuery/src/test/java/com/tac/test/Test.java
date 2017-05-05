@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.tac.entity.Echange;
 import com.tac.entity.Proposition;
 
 
@@ -21,12 +22,14 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-		final String req = "SELECT proposition FROM Echange e WHERE e.idEchange = :pidEchange";
+		final String req = "SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL";
 		Query query = em.createQuery(req);
-		query.setParameter("pidEchange", 1);
-        Proposition p = (Proposition) query.getSingleResult();
+        List<Echange> echanges = query.getResultList();
 		
-        System.out.println(p.getIntitule() + p.getIdProposition());
+        for (Echange p : echanges) {
+        	System.out.println(p.getIdEchange() + p.getProposition().getIntitule());
+		}
+        
         tx.commit();
         em.close();
         emf.close();

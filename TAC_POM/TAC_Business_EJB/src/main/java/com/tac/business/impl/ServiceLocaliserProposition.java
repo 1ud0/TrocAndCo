@@ -5,7 +5,6 @@ import javax.ejb.EJB;
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
-import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceLocaliserProposition;
 import com.tac.data.api.IDaoLocaliser;
 import com.tac.entity.Localisation;

@@ -1,6 +1,5 @@
 package com.tac.controller;
 
-import java.lang.reflect.Proxy;
 import java.util.List;
 
 import javax.ejb.EJB;
