@@ -11,6 +11,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoProposition;
 import com.tac.entity.Proposition;
+import com.tac.exception.DataAccessException;
 
 @Remote(IDaoProposition.class)
 @Stateless
@@ -37,13 +38,19 @@ public class DaoProposition implements IDaoProposition{
 		em.remove(em.merge(proposition));
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public Proposition getById(int idProposition) {
-		final String req = "SELECT p FROM Proposition p WHERE p.idProposition = :pid";
+	public Proposition getById(int idProposition) throws DataAccessException {
+		final String req = "SELECT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.idProposition = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idProposition);
-		Proposition retour = (Proposition)query.getSingleResult();
-		
+		List<Proposition> propositions = query.getResultList();
+		Proposition retour = null;
+		if (!propositions.isEmpty()) {
+			retour = propositions.get(0);
+		} else {
+			throw new DataAccessException("Aucun objet trouvé");
+		}
 		return retour;
 	}
 

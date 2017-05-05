@@ -348,8 +348,7 @@ _________________________________________________________ -->
 
 		<div class="container" id="search">
 			<div class="row">
-				<form name="top_search" method="get" autocomplete="on"
-					action="resultatRecherche.xhtml">
+				<h:form id="formSeek">
 					<div class="col-sm-12 col-md-4">
 						<input type="text" name="string_search" id="string_search"
 							placeholder="Rechercher..." value="" class="form-control"></input>
@@ -398,11 +397,12 @@ _________________________________________________________ -->
 						</div>
 					</div>
 					<div class="col-sm-2">
-						<button class="btn btn-custom btn-lg" type="submit">
+						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}" id="btnSeek" style="display: none;"  />
+						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek">
 							Rechercher<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>
-				</form>
+				</h:form>
 
 			</div>
 		</div>

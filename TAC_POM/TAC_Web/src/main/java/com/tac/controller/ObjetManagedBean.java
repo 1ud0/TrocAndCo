@@ -3,9 +3,11 @@ package com.tac.controller;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceEnvie;
@@ -16,6 +18,7 @@ import com.tac.entity.Envie;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
+import com.tac.exception.DataAccessException;
 
 @ManagedBean(name = "mbObjet")
 @SessionScoped
@@ -113,8 +116,16 @@ public class ObjetManagedBean {
 	
 
 	public void loadEntry() {
-		System.out.println(entryId);
-		// selectedProp = proxyProp
+		if (entryId != null && entryId != 0) {
+			try {
+				selectedProp = proxyProp.getById(entryId);
+			} catch (DataAccessException e) {
+				String message = "Erreur lors du chargement de la page : " + e.getMessage();
+				FacesContext.getCurrentInstance().addMessage(null,
+						new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+				selectedProp = null;
+			}
+		}
 	}
 
 	public IServiceProposition getProxyProp() {
