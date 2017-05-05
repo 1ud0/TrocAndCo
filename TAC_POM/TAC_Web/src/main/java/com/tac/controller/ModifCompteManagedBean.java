@@ -118,6 +118,10 @@ public class ModifCompteManagedBean implements Serializable {
 		}
 	}
 	
+	public void deleteLocalisation(Localisation loc) {
+		proxyLocalisation.deleteLocalisation(loc);
+	}
+	
 
 	public Part getFile1() {
 		return file1;
