@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoEchange;
 import com.tac.entity.Echange;
+import com.tac.entity.Proposition;
 
 @Remote(IDaoEchange.class)
 @Stateless
@@ -120,6 +121,7 @@ public class DaoEchange implements IDaoEchange{
 		return echangesDuMembre.size();
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int[] getToutesLesNotes(int idMembre) {
 		final String reqGetMoyNote="SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
@@ -163,6 +165,7 @@ public class DaoEchange implements IDaoEchange{
 		return echangesDuChercheur;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getCreditEnMoins(Integer idMembre) {
 		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.membre.idMembre= :pidMembre AND e.dateValidation IS NOT NULL";
@@ -178,6 +181,7 @@ public class DaoEchange implements IDaoEchange{
 		return credit;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public int getCreditEnPlus(Integer idMembre) {
 		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateValidation IS NOT NULL";
@@ -192,6 +196,15 @@ public class DaoEchange implements IDaoEchange{
 		
 		return credit;
 	}
+	
+	@Override
+	public Proposition getbyEchange(Echange echange) {
+		final String req = "SELECT proposition FROM Echange e WHERE e.idEchange = :pidEchange";
+		Query query = em.createQuery(req);
+		query.setParameter("pidEchange", echange.getIdEchange());
+		return (Proposition) query.getSingleResult();
+	}
+
 
 	
 }

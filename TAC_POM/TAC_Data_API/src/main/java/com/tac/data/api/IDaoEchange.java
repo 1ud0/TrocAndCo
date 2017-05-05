@@ -1,9 +1,9 @@
 package com.tac.data.api;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import com.tac.entity.Echange;
+import com.tac.entity.Proposition;
 
 public interface IDaoEchange {
 
@@ -36,5 +36,8 @@ public interface IDaoEchange {
 	int getCreditEnMoins(Integer idMembre);
 	
 	int getCreditEnPlus(Integer idMembre);
+
+	Proposition getbyEchange(Echange echange);
+
 
 }

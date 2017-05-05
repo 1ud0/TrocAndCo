@@ -4,11 +4,12 @@ import java.util.List;
 
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceEnvie;
+import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceProposition;
 import com.tac.entity.Envie;
@@ -30,12 +31,49 @@ public class ObjetManagedBean {
 	
 	@EJB
 	private IServiceEchange proxyEchange;
+	@EJB
+	private IServiceFavori proxyFavori;
+
+	@ManagedProperty(value = "#{mbIdentif}")
+	private IdentificationManagedBean identifBean;
 
 	private Proposition selectedProp;
 	private Membre selectedMembre;
+	private Membre membreCourant;
 
 	private Integer entryId;
-	
+
+	public boolean dejaFavori() {
+		membreCourant = identifBean.getMembreConnected();
+		if (membreCourant != null) {
+			for (Proposition proposition : proxyFavori.getFavorisMembre(membreCourant)) {
+				if (proposition.getIdProposition() == selectedProp.getIdProposition()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public String ajouterFavori() {
+		membreCourant = identifBean.getMembreConnected();
+		if (membreCourant != null) {
+			proxyFavori.addToFavoris(selectedProp, membreCourant);
+		}
+		String nav = "";
+		return nav;
+	}
+
+	public String deleteFavori() {
+		membreCourant = identifBean.getMembreConnected();
+		if (membreCourant != null) {
+			proxyFavori.deleteFavori(selectedProp, membreCourant);
+		}
+		String nav = "";
+		return nav;
+
+	}
+
 	public String loadProposition(Proposition proposition) {
 		String nav = "";
 		selectedProp = proposition;
@@ -74,11 +112,11 @@ public class ObjetManagedBean {
 		return proxyLocalisation.getMembreLocalisations(membre);
 	}
 	
+
 	public void loadEntry() {
 		System.out.println(entryId);
-		//selectedProp = proxyProp
+		// selectedProp = proxyProp
 	}
-	
 
 	public IServiceProposition getProxyProp() {
 		return proxyProp;
@@ -89,7 +127,7 @@ public class ObjetManagedBean {
 	}
 
 	public Proposition getSelectedProp() {
-		
+
 		return selectedProp;
 	}
 
@@ -120,4 +158,29 @@ public class ObjetManagedBean {
 	public void setEntryId(Integer entryId) {
 		this.entryId = entryId;
 	}
+
+	public IServiceFavori getProxyFavori() {
+		return proxyFavori;
+	}
+
+	public void setProxyFavori(IServiceFavori proxyFavori) {
+		this.proxyFavori = proxyFavori;
+	}
+
+	public IdentificationManagedBean getIdentifBean() {
+		return identifBean;
+	}
+
+	public void setIdentifBean(IdentificationManagedBean identifBean) {
+		this.identifBean = identifBean;
+	}
+
+	public Membre getMembreCourant() {
+		return membreCourant;
+	}
+
+	public void setMembreCourant(Membre membreCourant) {
+		this.membreCourant = membreCourant;
+	}
+
 }
