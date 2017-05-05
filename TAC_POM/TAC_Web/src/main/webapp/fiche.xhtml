@@ -26,12 +26,19 @@
 				<f:event listener="#{mbObjet.loadEntry()}" type="preRenderView"></f:event>
 			</f:metadata>
 
+			<!-- Message erreur si chargement echoue -->
+			<div class="container">
+			<h:messages globalOnly="true" rendered="#{mbObjet.selectedProp == null}" style="height: 600px;"/>
+			</div>
+			
+			
 			<!-- *** DEBUT DU CORPS DE LA PAGE *** _________________________________________________________ -->
-
+			<h:panelGroup id="corps" rendered="#{mbObjet.selectedProp != null}">
 			<div class="container">
 
-				<!-- *** LEFT COLUMN ***
-         	                    _________________________________________________________ -->
+				<h:messages globalOnly="true" style="color: red;"/>
+				<!-- *** LEFT COLUMN *** _________________________________________________________ -->
+				
 				<ul class="breadcrumb">
 					<li><a href="#">Home</a></li>
 					<li><a href="#"> <h:outputText
@@ -306,6 +313,7 @@
 					</div>
 				</div>
 			</div>
+			</h:panelGroup>
 			<div class="marginBottom"></div>
 		</ui:define>
 	</ui:composition>

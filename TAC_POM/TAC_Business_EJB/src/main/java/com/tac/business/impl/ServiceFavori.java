@@ -11,6 +11,7 @@ import com.tac.data.api.IDaoFavori;
 import com.tac.data.api.IDaoProposition;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
+import com.tac.exception.DataAccessException;
 
 @Remote(IServiceFavori.class)
 @Stateless
@@ -40,8 +41,11 @@ public class ServiceFavori implements IServiceFavori {
 
 	@Override
 	public Proposition getFavoriById(int idProposition) {
-		
-		return proxyDaoProposition.getById(idProposition);
+		try {
+			return proxyDaoProposition.getById(idProposition);
+		} catch (DataAccessException e) {
+			return null;
+		}
 	}
 
 }

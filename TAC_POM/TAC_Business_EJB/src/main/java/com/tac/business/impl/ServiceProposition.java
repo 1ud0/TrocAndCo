@@ -12,6 +12,7 @@ import com.tac.data.api.IDaoProposition;
 import com.tac.entity.Membre;
 import com.tac.entity.Photo;
 import com.tac.entity.Proposition;
+import com.tac.exception.DataAccessException;
 
 @Remote(IServiceProposition.class)
 @Stateless
@@ -50,6 +51,11 @@ public class ServiceProposition implements IServiceProposition {
 	public List<Photo> getByProposition(Proposition proposition) {
 		
 		return proxyDaoPhoto.getByProposition(proposition);
+	}
+
+	@Override
+	public Proposition getById(Integer idObjet) throws DataAccessException {
+		return proxyDaoProposition.getById(idObjet);
 	}
 
 }

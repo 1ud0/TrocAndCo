@@ -348,8 +348,7 @@ _________________________________________________________ -->
 
 		<div class="container" id="search">
 			<div class="row">
-				<form name="top_search" method="get" autocomplete="on"
-					action="resultatRecherche.xhtml">
+				<h:form id="formSeek">
 					<div class="col-sm-12 col-md-4">
 						<input type="text" name="string_search" id="string_search"
 							placeholder="Rechercher..." value="" class="form-control"></input>
@@ -377,7 +376,7 @@ _________________________________________________________ -->
 								src="img/custom/location.png" alt="cat"></img></span> <select
 								id="lunch" class="selectpicker form-control"
 								data-live-search="true" title="Please select a lunch ...">
-								<option value="0" selected="selected">Toutes catégories</option>
+								<option value="0" selected="selected">Region...</option>
 								<option value="1" id="list_rub" class="noir">Auvergne-Rhône-Alpes</option>
 								<option value="2" id="list_rub" class="noir">Bourgogne-Franche-Comté</option>
 								<option value="3" id="list_rub" class="noir">Bretagne</option>
@@ -398,11 +397,12 @@ _________________________________________________________ -->
 						</div>
 					</div>
 					<div class="col-sm-2">
-						<button class="btn btn-custom btn-lg" type="submit">
+						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}" id="btnSeek" style="display: none;"  />
+						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek">
 							Rechercher<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>
-				</form>
+				</h:form>
 
 			</div>
 		</div>

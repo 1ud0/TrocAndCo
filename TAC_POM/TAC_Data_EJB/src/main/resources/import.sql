@@ -414,34 +414,34 @@ INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_rec
 /*		TABLE LOCALISATION	  */
 /*============================*/
 
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (1,'34 rue de picpus',75012,'paris',2.39535,48.8452,1);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (2,'92 avenue du général michel bizot',75012,'paris',2.40387,48.8375,2);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (3,'9 Boulevard du Général de Gaulle',92120,'Montrouge',2.32717,48.8164,3);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (4,'1 rue d Alésia',75014,'Paris',2.34114,48.8264,4);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (5,'3 rue de la pomme',31000,'Toulouse',1.44703,43.6019,5);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (6,'4 rue des messageries',75010,'Paris',2.35083,48.8762,5);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (7,'5 rue Monge',75005,'Paris',2.34968,48.8494,6);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (8,'50 boulevard du minervois',11700,'Pepieux',2.68208,43.2969,6);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (9,'3 avenue verdier',92120,'Montrouge',2.32027,48.8144,7);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (10,'15 rue pasteur',73200,'albertville',6.38809,45.6697,7);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (11,'5 rue de la paix',75002,'Paris',2.33122,48.8696,8);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (12,'3 boulevard du roi',78000,'Versailles',2.12515,48.8103,9);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (13,'Palais du louvre',75001,'Paris',2.33856,48.8604,9);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (14,'67 boulevard de la reine',78000,'Versailles',2.1308,48.8097,10);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (15,'25 Avenue Danielle casanova',94200,'Ivry-sur-seine',2.38165,48.8175,11);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (16,'12 Allée Sonia Delaunay',94800,'VilleJuif',2.347641,48.788771,12);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (17,'65 Quai du Rancy',94380,'Bonneuil-sur-Marne',2.48085,48.779723,12);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (18,'16 Rue Montbauron',78000,'Versailles',2.136154,48.80415,13);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (19,'49 Boulevard Pasteur',93120,'La Courneuve',2.383347,48.922499,14);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (20,'62 Rue Ernest Savart',93100,'Montreuil',2.439651,48.868328 ,14);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (21,'120 Avenue Pablo Picasso',92000,'Nanterre',2.225418,48.888198,15);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (22,'13 Rue Petitpas',28100,'Dreux',1.365738,48.731738,16);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (23,'20 Rue de la Baume',75008,'Paris',2.313137,48.874425,16);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (24,'91 Rue Championnet',75018,'Paris',2.342362,48.895534,17);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (25,'68 Boulevard de Clichy',75018,'Paris',2.33403,48.883683,17);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (26,'35 bis Rue du Borrégo',75020,'Paris',2.40107,48.873296,18);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (27,'63 Boulevard Richard Lenoir',75011,'Paris',2.372231,48.860085,19);
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`) VALUES (28,'44 Rue Frémicourt',75015,'Paris',2.301335,48.84783 ,20);
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (1,'34 rue de picpus',75012,'paris',2.39535,48.8452,1,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (2,'92 avenue du général michel bizot',75012,'paris',2.40387,48.8375,2,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (3,'9 Boulevard du Général de Gaulle',92120,'Montrouge',2.32717,48.8164,3,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (4,'1 rue d Alésia',75014,'Paris',2.34114,48.8264,4,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (5,'3 rue de la pomme',31000,'Toulouse',1.44703,43.6019,5,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (6,'4 rue des messageries',75010,'Paris',2.35083,48.8762,5,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (7,'5 rue Monge',75005,'Paris',2.34968,48.8494,6,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (8,'50 boulevard du minervois',11700,'Pepieux',2.68208,43.2969,6,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (9,'3 avenue verdier',92120,'Montrouge',2.32027,48.8144,7,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (10,'15 rue pasteur',73200,'albertville',6.38809,45.6697,7,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (11,'5 rue de la paix',75002,'Paris',2.33122,48.8696,8,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (12,'3 boulevard du roi',78000,'Versailles',2.12515,48.8103,9,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (13,'Palais du louvre',75001,'Paris',2.33856,48.8604,9,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (14,'67 boulevard de la reine',78000,'Versailles',2.1308,48.8097,10,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (15,'25 Avenue Danielle casanova',94200,'Ivry-sur-seine',2.38165,48.8175,11,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (16,'12 Allée Sonia Delaunay',94800,'VilleJuif',2.347641,48.788771,12,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (17,'65 Quai du Rancy',94380,'Bonneuil-sur-Marne',2.48085,48.779723,12,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (18,'16 Rue Montbauron',78000,'Versailles',2.136154,48.80415,13,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (19,'49 Boulevard Pasteur',93120,'La Courneuve',2.383347,48.922499,14,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (20,'62 Rue Ernest Savart',93100,'Montreuil',2.439651,48.868328 ,14,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (21,'120 Avenue Pablo Picasso',92000,'Nanterre',2.225418,48.888198,15,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (22,'13 Rue Petitpas',28100,'Dreux',1.365738,48.731738,16,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (23,'20 Rue de la Baume',75008,'Paris',2.313137,48.874425,16,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (24,'91 Rue Championnet',75018,'Paris',2.342362,48.895534,17,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (25,'68 Boulevard de Clichy',75018,'Paris',2.33403,48.883683,17,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (26,'35 bis Rue du Borrégo',75020,'Paris',2.40107,48.873296,18,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (27,'63 Boulevard Richard Lenoir',75011,'Paris',2.372231,48.860085,19,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (28,'44 Rue Frémicourt',75015,'Paris',2.301335,48.84783 ,20,'Adresse Principale');
 
 
 

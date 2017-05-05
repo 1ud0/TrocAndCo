@@ -8,6 +8,10 @@
 </h:head>
 <h:body bgcolor='white'>
 
+	<f:metadata>
+		<f:event listener="#{mbRecherche.loadingPage()}" type="preRenderView"></f:event>
+	</f:metadata>
+
 	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
 		<ui:define name="content">
 
@@ -25,44 +29,32 @@ _________________________________________________________ -->
 
 								<!-- *** MENUS AND FILTERS ***
 _________________________________________________________ -->
+
+								<!--Categorie du menu debut-->
 								<div class="panel panel-default sidebar-menu">
 									<div class="panel-heading">
 										<h3 class="panel-title">Categories</h3>
 									</div>
-									<!--Categorie du menu debut-->
 									<div class="panel-body">
 										<ul class="nav nav-pills nav-stacked category-menu">
-											<li><a href="shop-category.html">Tout <span
-													class="badge pull-right">1</span></a></li>
-											<li><a href="shop-category.html">Maison <span
-													class="badge pull-right">3</span></a>
-												<ul>
-													<li><a href="shop-category.html">Cuisine </a></li>
-													<li><a href="shop-category.html">Déco </a></li>
-
-												</ul></li>
-											<li><a href="shop-category.html">Jouet <span
-													class="badge pull-right">1</span></a>
-												<ul>
-													<li><a href="shop-category.html">Poupées </a></li>
-													<li><a href="shop-category.html">Puzzle </a></li>
-
-												</ul></li>
-
-
+											<ui:repeat var="entry" value="#{mbRecherche.categories}">
+												<li>
+													<h:outputLink>
+														<h:outputText value="#{entry.key.intitule}" /><span class="badge pull-right"><h:outputText value="#{entry.value.size()}" /></span>
+													</h:outputLink>
+												</li>
+											</ui:repeat>
 										</ul>
-
 									</div>
 								</div>
-								<div class="panel panel-default sidebar-menu">
-
+								
+								<!-- panel adresse -->
+								<h:panelGroup styleClass="panel panel-default sidebar-menu" rendered="#{mbIdentif.membreConnected != null}">
 									<div class="panel-heading">
 										<h3 class="panel-title">Adresse</h3>
 									</div>
-
 									<div class="panel-body">
-
-										<form>
+										<h:form>
 											<div class="form-group">
 												<div class="checkBox">
 													<label> <input type="checkBox"
@@ -75,153 +67,69 @@ _________________________________________________________ -->
 													</label>
 												</div>
 											</div>
-
 											<button class="btn btn-default btn-sm btn-template-main">
 												<i class="fa fa-pencil"></i> Appliquer
 											</button>
-
-										</form>
-
+										</h:form>
 									</div>
-								</div>
-								<div class="panel panel-default sidebar-menu">
-
+								</h:panelGroup>
+								
+								<!-- panel distance -->
+								<h:panelGroup styleClass="panel panel-default sidebar-menu" rendered="#{mbIdentif.membreConnected != null}">
 									<div class="panel-heading">
 										<h3 class="panel-title">Distance</h3>
 									</div>
-
 									<div class="panel-body">
-
 										<form>
 											<div class="form-group">
-												<div class="radio">
-													<label> <input type="radio" name="distance"
-														value="5km"></input>5Km
-													</label>
-												</div>
-												<div class="radio">
-													<label> <input type="radio" name="distance"
-														value="10km"></input>10Km
-													</label>
-												</div>
-												<div class="radio">
-													<label> <input type="radio" name="distance"
-														value="25km"></input>25Km
-													</label>
-												</div>
-												<div class="radio">
-													<label> <input type="radio" name="distance"
-														value="50km"></input>50Km
-													</label>
-												</div>
-												<div class="radio">
-													<label> <input type="radio" name="distance"
-														value="Paskm"></input>Pas de filtre
-													</label>
-												</div>
+												<h:selectOneRadio value="#{mbRecherche.distanceSelected}" styleClass="radio-inline" layout="pageDirection">
+													<f:selectItem itemLabel="5km" itemValue="5"/>
+													<f:selectItem itemLabel="10km" itemValue="10"/>
+													<f:selectItem itemLabel="25km" itemValue="25"/>
+													<f:selectItem itemLabel="50km" itemValue="50"/>
+													<f:selectItem itemLabel="Pas de filtre" itemValue="0"/>
+												</h:selectOneRadio>
 											</div>
-
-											<button class="btn btn-default btn-sm btn-template-main">
-												<i class="fa fa-pencil"></i> Appliquer
-											</button>
-
 										</form>
-
 									</div>
-								</div>
+								</h:panelGroup>
 
+								<!-- panel Valeur -->
 								<div class="panel panel-default sidebar-menu">
-
 									<div class="panel-heading">
 										<h3 class="panel-title">
 											Valeur <img src="img/custom/feuille orange.png" alt=""></img>
 										</h3>
 									</div>
 									<div class="panel-body">
-
 										<form>
 											<div class="form-group">
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur1"></input>
-														1
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur2"></input>
-														2
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur3"></input>
-														3
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur4"></input>
-														4
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur5"></input>
-														5
-													</label>
-												</div>
-
+												<h:selectManyCheckbox value="#{mbRecherche.valeursSelected}" styleClass="checkbox-inline" layout="pageDirection">
+													<f:selectItems var="valeur" value="#{mbRecherche.valeurs}" itemLabel="#{valeur.valeur}" itemValue="#{valeur.idValeur}"/>
+												</h:selectManyCheckbox>
 											</div>
-
-											<button class="btn btn-default btn-sm btn-template-main">
-												<i class="fa fa-pencil"></i> Appliquer
-											</button>
-
 										</form>
-
 									</div>
-
-
 								</div>
+								
+								<!-- panel Etat -->
 								<div class="panel panel-default sidebar-menu">
-
 									<div class="panel-heading">
 										<h3 class="panel-title">Etat d'usure</h3>
 									</div>
 									<div class="panel-body">
-
-										<form>
+										<h:form>
 											<div class="form-group">
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur1"></input>
-														Neuf
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur2"></input>
-														Bon
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur3"></input>
-														Moyen
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox" name="valeur4"></input>
-														Usagé
-													</label>
-												</div>
-
+												<h:selectOneRadio value="#{mbRecherche.etatSelected}" styleClass="radio-inline" layout="pageDirection">
+													<f:selectItems var="etat" value="#{mbRecherche.etats}" itemLabel="#{etat.intitule}" itemValue="#{etat.idEtat}" />
+													<f:selectItem itemLabel="Tous" itemValue="0"/>
+												</h:selectOneRadio>
 											</div>
-
-											<button class="btn btn-default btn-sm btn-template-main">
-												<i class="fa fa-pencil"></i> Appliquer
-											</button>
-
-										</form>
-
+										</h:form>
 									</div>
-
-
 								</div>
-
+								
+								<!-- bouton save envie-->
 								<button type="submit" class="btn btn-vert btn-lg"
 									data-toggle="modal" data-target="#ModalEnregistrementEnvie">
 									Enregistrer une envie</button>
@@ -235,7 +143,7 @@ _________________________________________________________ -->
 
 
 							<!--Resultat recherche DEBUT-->
-							<h5 class="text">Résultat de la recherche : 8 objets trouvés</h5>
+							<h5 class="text">Résultat de la recherche : <h:outputText value="#{mbRecherche.propositions.size()}" /> objets trouvés</h5>
 							<br /> <br /> <br />
 							
 							
