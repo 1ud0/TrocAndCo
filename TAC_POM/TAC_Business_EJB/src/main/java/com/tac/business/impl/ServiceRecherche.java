@@ -19,7 +19,7 @@ public class ServiceRecherche implements IServiceRecherche {
 	
 	@Override
 	public List<Proposition> getPropositionsBidon() {
-		return proxyProposition.getNouveautes(10);
+		return proxyProposition.getNouveautes(50);
 	}
 
 }

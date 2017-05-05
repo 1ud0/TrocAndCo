@@ -1,5 +1,6 @@
 package com.tac.data.api;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import com.tac.entity.Echange;
@@ -23,4 +24,17 @@ public interface IDaoEchange {
 	Double getNoteMoyenneMembre(Integer idMembre);
 
 	List<Echange> getAllEchangeFini();
+	
+	int getTotalEchangeAvecNote(Integer idMembre);
+	
+	int[] getToutesLesNotes(int idMembre);
+	
+	List<Echange> getByMembreDonneurFini(Integer idMembreDonneur);
+
+	List<Echange> getByMembreChercheurFini(Integer idMembreChercheur);
+	
+	int getCreditEnMoins(Integer idMembre);
+	
+	int getCreditEnPlus(Integer idMembre);
+
 }

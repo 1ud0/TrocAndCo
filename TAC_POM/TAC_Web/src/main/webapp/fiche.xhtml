@@ -165,10 +165,17 @@
 									<h4>
 										<h:outputText value="#{mbObjet.selectedProp.membre.pseudo}" />
 									</h4>
+									<h:panelGroup rendered="#{mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
 									<p class="rating-num">
-										<h:outputText value="#" />
+										-/5
+									</p>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{!mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+									<p class="rating-num">
+										<h:outputText value="#{mbObjet.getNoteMoyenne(mbObjet.selectedProp.membre)}" />
 										/5
 									</p>
+									</h:panelGroup>
 								</div>
 							</div>
 
@@ -205,16 +212,32 @@
 				<div id="demo" class="collapse">
 					<div class="row">
 						<!-- Premiere envie -->
+						<h:panelGroup rendered="#{empty mbEnvie.enviesDuMembre}">
+						<br></br>
+						<div class="col-md-6 col-sm-12 ">
+						Ce membre ne possède pas encore d'envie.
+						</div>
+						</h:panelGroup>
+						<ui:repeat var="envie" value="#{mbObjet.getEnviesAutreMembre(mbObjet.selectedProp.membre)}"
+				varStatus="envieStatut">
 						<div class="col-md-6 col-sm-12 ">
 							<div class="box-simple boxEnvie">
 								<div class="text">
 									<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-										N°1</h4>
+										N° #{envieStatut.index +1}</h4>
 									<h3>
-										<div class="col-md-10 col-sm-10">Casserole</div>
+										<div class="col-md-10 col-sm-10">#{envie.intitule}</div>
 										<div class="col-md-2 col-sm-2">
-											<label> 3</label> <img src="img/custom/feuille orange.png"
-												alt=""></img>
+											
+												<h:panelGroup rendered="#{!mbEnvie.valeurVide(envie)}">
+									<label> #{envie.valeur.valeur}</label> <img
+										src="img/custom/feuille orange.png" alt=""></img>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{mbEnvie.valeurVide(envie)}">
+									<label> ?</label> <img
+										src="img/custom/feuille orange.png" alt=""></img>
+										</h:panelGroup>
+										
 										</div>
 									</h3>
 									<div class="row">
@@ -222,87 +245,35 @@
 											<h4>Détails:</h4>
 											<p>
 												<label> Catégorie: </label> <label class="italic">
-													blabla</label> <br /> <label> Sous-catégorie: </label> <label
-													class="italic"> blabla </label> <br /> <label>
-													Etat d'usure: </label> <label class="italic"> blabla </label>
+													#{envie.categorie.intitule}</label> <br /> <label> Sous-catégorie: </label> <label
+													class="italic"> #{envie.sousCategorie.intitule} </label> <br /> <label>
+													Distance: </label> <label class="italic"> moins de #{envie.distance} km </label>
 											</p>
 										</div>
 										<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
 											<h4>Adresses:</h4>
+											<ui:repeat var="adresse"
+											value="#{mbObjet.getLocalisationByMembre(mbObjet.selectedProp.membre)}">
 											<div class="row">
 
 												<p>
 													<span class="glyphicon glyphicon-map-marker"
-														aria-hidden="true"></span> <label>8 boulevard du
-														Général De Gaulle<br /> Montrouge
+														aria-hidden="true"></span> <label>#{adresse.adresse}<br /> #{adresse.ville}
 													</label>
 
 												</p>
 											</div>
-											<div class="row">
-												<p>
-													<span class="glyphicon glyphicon-map-marker"
-														aria-hidden="true"></span> <label>8 boulevard du
-														Général De Gaulle<br /> Montrouge
-													</label>
-												</p>
-											</div>
+											</ui:repeat>
 										</div>
 									</div>
 								</div>
 								<!-- /.text -->
 							</div>
 						</div>
-						<!-- deuxième envie -->
+						</ui:repeat>
+						
 						<!-- Premiere envie -->
-						<div class="col-md-6 col-sm-12 ">
-							<div class="box-simple boxEnvie">
-								<div class="text">
-									<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-										N°1</h4>
-									<h3>
-										<div class="col-md-10 col-sm-10">Casserole</div>
-										<div class="col-md-2 col-sm-2">
-											<label> 3</label> <img src="img/custom/feuille orange.png"
-												alt=""></img>
-										</div>
-									</h3>
-									<div class="row">
-										<div class="col-md-6 col-sm-12 orientationTextLeft">
-											<h4>Détails:</h4>
-											<p>
-												<label> Catégorie: </label> <label class="italic">
-													blabla</label> <br /> <label> Sous-catégorie: </label> <label
-													class="italic"> blabla </label> <br /> <label>
-													Etat d'usure: </label> <label class="italic"> blabla </label>
-											</p>
-										</div>
-										<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
-											<h4>Adresses:</h4>
-											<div class="row">
-
-												<p>
-													<span class="glyphicon glyphicon-map-marker"
-														aria-hidden="true"></span> <label>8 boulevard du
-														Général De Gaulle<br /> Montrouge
-													</label>
-
-												</p>
-											</div>
-											<div class="row">
-												<p>
-													<span class="glyphicon glyphicon-map-marker"
-														aria-hidden="true"></span> <label>8 boulevard du
-														Général De Gaulle<br /> Montrouge
-													</label>
-												</p>
-											</div>
-										</div>
-									</div>
-								</div>
-								<!-- /.text -->
-							</div>
-						</div>
+						
 					</div>
 				</div>
 			</div>

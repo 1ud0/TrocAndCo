@@ -34,7 +34,7 @@ _________________________________________________________ -->
 							</h:panelGroup>
 							<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected!=null}">
 								<h:panelGroup styleClass="text-uppercase pseudo">#{mbIdentif.membreConnected.pseudo}</h:panelGroup>
-								<span class="credit">Crédit : 10<img alt="feuille"
+								<span class="credit">Crédit : #{mbProfil.getCredit(mbIdentif.membreConnected)} <img alt="feuille"
 									src="img/custom/feuille.png" /></span>
 								<div class="dropdown">
 									<button class="btn btn-default btn-lg btn-link"

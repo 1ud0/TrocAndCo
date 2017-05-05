@@ -8,8 +8,10 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
 
 import com.tac.business.api.IServiceCompte;
+import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceProposition;
+import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
@@ -23,6 +25,8 @@ public class ProfilManagedBean {
 	private IServiceLocalisation proxyLocalisation;
 	@EJB
 	private IServiceProposition proxyProposition;
+	@EJB
+	private IServiceEchange proxyEchange;
 
 	@ManagedProperty(value = "#{mbObjet}")
 	private ObjetManagedBean objetManagedBean;
@@ -68,6 +72,39 @@ public class ProfilManagedBean {
 		membreCourant.setPropositions(propositions);
 
 		return membreCourant;
+	}
+	
+	public int getNombreNoteValeur(int noteATester, Membre membre){
+		int[] tableauNote = proxyEchange.getToutesLesNotes(membre);
+		int taille = tableauNote.length;
+		int nombreDeCetteNote =0;
+		for(int i=0; i<taille; i++){
+			if(tableauNote[i]==noteATester){
+				nombreDeCetteNote=nombreDeCetteNote+1;
+			}
+		}
+		int pourcentage = (nombreDeCetteNote*100)/taille;
+		return pourcentage;
+	}
+	
+	public List<Echange> getEchangesQuandDonneur(Membre membre){
+		return proxyEchange.getByMembreDonneurFini(membre);
+	}
+	
+	public List<Echange> getEchangesQuandAcheteur(Membre membre){
+		return proxyEchange.getByMembreChercheurFini(membre);
+	}
+	
+	public int getCredit(Membre membre){
+		return proxyEchange.totalCredit(membre);
+	}
+	
+	public int getNombreNote(Membre membre){
+		return proxyEchange.getTotalEchangeAvecNote(membre);
+	}
+	
+	public int getNoteMoyenne(Membre membre){
+		 return (int)proxyEchange.getNoteMoyenne(membre);
 	}
 
 	public void setMembreCourant(Membre membreCourant) {

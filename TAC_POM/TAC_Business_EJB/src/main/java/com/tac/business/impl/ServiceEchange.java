@@ -10,6 +10,8 @@ import javax.ejb.Stateless;
 import com.tac.business.api.IServiceEchange;
 import com.tac.data.api.IDaoEchange;
 import com.tac.data.api.IDaoFavori;
+import com.tac.data.api.IDaoMembre;
+import com.tac.data.api.IDaoProposition;
 import com.tac.data.api.IDaoRdv;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
@@ -25,6 +27,8 @@ public class ServiceEchange implements IServiceEchange {
 	IDaoFavori proxyFavori ;
 	@EJB
 	IDaoRdv proxyRdv;
+	@EJB
+	IDaoProposition proxyProposition;
 	
 	
 	@Override
@@ -84,6 +88,41 @@ public class ServiceEchange implements IServiceEchange {
 	public List<Rdv> getRdvForMembre(Membre membre) {
 		List<Rdv> rdvDuMembre = proxyRdv.getByMembreId(membre.getIdMembre());
 		return rdvDuMembre;
+	}
+
+	@Override
+	public double getNoteMoyenne(Membre membre) {
+		return proxyEchange.getNoteMoyenneMembre(membre.getIdMembre());
+		
+	}
+
+	@Override
+	public int getTotalEchangeAvecNote(Membre membre) {
+		return proxyEchange.getTotalEchangeAvecNote(membre.getIdMembre());
+	}
+
+	@Override
+	public int[] getToutesLesNotes(Membre membre) {
+		return proxyEchange.getToutesLesNotes(membre.getIdMembre());
+	}
+
+	@Override
+	public List<Echange> getByMembreDonneurFini(Membre membre) {
+		return proxyEchange.getByMembreDonneurFini(membre.getIdMembre());
+	}
+
+	@Override
+	public List<Echange> getByMembreChercheurFini(Membre membre) {
+		return proxyEchange.getByMembreChercheurFini(membre.getIdMembre());
+	}
+
+	@Override
+	public int totalCredit(Membre membre) {
+		int totalCredit = proxyEchange.getCreditEnPlus(membre.getIdMembre())+proxyEchange.getCreditEnMoins(membre.getIdMembre());
+		if(proxyProposition.getByMembre(membre.getIdMembre()) != null){
+			totalCredit=totalCredit+5;
+		}
+		return totalCredit;
 	}
 
 }

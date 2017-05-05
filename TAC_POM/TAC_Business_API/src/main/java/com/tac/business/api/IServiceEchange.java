@@ -17,4 +17,10 @@ public interface IServiceEchange {
 	Echange getByNumero(Echange echange);
 	List<Echange> getByMembre(Membre membre);
 	List<Rdv> getRdvForMembre(Membre membre);
+	double getNoteMoyenne(Membre membre);
+	int getTotalEchangeAvecNote(Membre membre);
+	int[] getToutesLesNotes(Membre membre);
+	List<Echange> getByMembreDonneurFini(Membre membre);
+	List<Echange> getByMembreChercheurFini(Membre membre);
+	int totalCredit(Membre membre);
 }

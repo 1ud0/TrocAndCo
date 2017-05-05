@@ -56,6 +56,7 @@ public class EnvieManagedBean implements Serializable{
 		
 	}
 	
+	
 	public List<Localisation> getLocalisationByMembre(){
 		membreCourant = identifBean.getMembreConnected();
 		return proxyLocalisation.getMembreLocalisations(membreCourant);

@@ -78,14 +78,27 @@ public class DaoEchange implements IDaoEchange{
 	public Double getNoteMoyenneMembre(Integer idMembre) {
 		final String reqGetMoyNote="SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
 		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
-		queryGetMoyNote.setParameter("pidMembre", 10);
+		queryGetMoyNote.setParameter("pidMembre", idMembre);
 		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
-		System.out.println(echangesDuMembre.size());
 		Double totalNote=0.0;
-		for(Echange echange : echangesDuMembre){			
-			totalNote=totalNote+echange.getNoteDonneur();			
+		for(Echange echange : echangesDuMembre){
+			if(echange.getMembre().getIdMembre()==idMembre){
+				totalNote=totalNote+echange.getNoteChercheur();
+			}
+			else{
+				totalNote=totalNote+echange.getNoteDonneur();
+			}
 		}
-		Double noteMoyenne = totalNote/(double)echangesDuMembre.size();
+		Double noteMoyenne;
+		if(echangesDuMembre.size()==0){
+			noteMoyenne = -1.0;
+		}
+		else{
+			noteMoyenne = totalNote/(double)echangesDuMembre.size();
+		}
+		noteMoyenne=noteMoyenne*10;
+		noteMoyenne=(double)Math.round(noteMoyenne);
+		noteMoyenne=noteMoyenne/10;
 		return noteMoyenne;
 	}
 
@@ -95,6 +108,89 @@ public class DaoEchange implements IDaoEchange{
 		final String req = "SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL";
 		Query query = em.createQuery(req);
 		return query.getResultList();
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public int getTotalEchangeAvecNote(Integer idMembre) {
+		final String reqGetMoyNote="SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
+		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
+		queryGetMoyNote.setParameter("pidMembre", idMembre);
+		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
+		return echangesDuMembre.size();
+	}
+
+	@Override
+	public int[] getToutesLesNotes(int idMembre) {
+		final String reqGetMoyNote="SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
+		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
+		queryGetMoyNote.setParameter("pidMembre", idMembre);
+		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
+		int[] tableauNote = new int[echangesDuMembre.size()];
+		int i=0;
+		for(Echange echange : echangesDuMembre){
+			if(echange.getMembre().getIdMembre()==idMembre){
+				tableauNote[i]=echange.getNoteChercheur();
+				
+			}
+			else{
+				tableauNote[i]=echange.getNoteDonneur();
+				
+			}
+			i=i+1;
+		}
+	
+		return tableauNote;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getByMembreDonneurFini(Integer idMembreDonneur) {
+		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.noteDonneur IS NOT NULL";
+		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
+		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembreDonneur);
+		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
+		return echangesDuDonneur;
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getByMembreChercheurFini(Integer idMembreChercheur) {
+		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.membre.idMembre= :pidMembre AND e.noteChercheur IS NOT NULL";
+		Query queryGetByIdMembreChercheur = em.createQuery(reqGetByMemberId);
+		queryGetByIdMembreChercheur.setParameter("pidMembre", idMembreChercheur);
+		List<Echange> echangesDuChercheur = queryGetByIdMembreChercheur.getResultList();
+		return echangesDuChercheur;
+	}
+
+	@Override
+	public int getCreditEnMoins(Integer idMembre) {
+		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.membre.idMembre= :pidMembre AND e.dateValidation IS NOT NULL";
+		Query queryGetByIdMembreChercheur = em.createQuery(reqGetByMemberId);
+		queryGetByIdMembreChercheur.setParameter("pidMembre", idMembre);
+		List<Echange> echangesDuChercheur = queryGetByIdMembreChercheur.getResultList();
+		int credit=0;
+		for(Echange echange : echangesDuChercheur){
+			credit= credit- echange.getPrix();
+		}
+		
+		
+		return credit;
+	}
+
+	@Override
+	public int getCreditEnPlus(Integer idMembre) {
+		final String reqGetByMemberId="SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateValidation IS NOT NULL";
+		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
+		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembre);
+		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
+		int credit = 0;
+		for(Echange echange : echangesDuDonneur){
+			credit= credit + echange.getPrix();
+		}
+		
+		
+		return credit;
 	}
 
 	

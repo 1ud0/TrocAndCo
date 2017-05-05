@@ -57,6 +57,8 @@ public class DaoMessage implements IDaoMessage {
 		return query.getResultList();
 	}
 	
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Message> getByMembreId(int idMembre) {
@@ -65,6 +67,8 @@ public class DaoMessage implements IDaoMessage {
 		query.setParameter("mid", idMembre);
 		return query.getResultList();
 	}
+
+	
 
 	
 
