@@ -194,7 +194,7 @@ public class DaoEchange implements IDaoEchange {
 
 	@Override
 	public Proposition getbyEchange(Echange echange) {
-		final String req = "SELECT proposition FROM Echange e WHERE e.idEchange = :pidEchange";
+		final String req = "SELECT e.proposition FROM Echange e WHERE e.idEchange = :pidEchange";
 		Query query = em.createQuery(req);
 		query.setParameter("pidEchange", echange.getIdEchange());
 		return (Proposition) query.getSingleResult();

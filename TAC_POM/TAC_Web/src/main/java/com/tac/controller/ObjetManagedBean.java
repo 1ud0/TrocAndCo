@@ -43,9 +43,9 @@ public class ObjetManagedBean {
 	private Proposition selectedProp;
 	private Membre selectedMembre;
 	private Membre membreCourant;
-
 	private Integer entryId;
 
+	
 	public boolean dejaFavori() {
 		membreCourant = identifBean.getMembreConnected();
 		if (membreCourant != null) {
@@ -63,8 +63,7 @@ public class ObjetManagedBean {
 		if (membreCourant != null) {
 			proxyFavori.addToFavoris(selectedProp, membreCourant);
 		}
-		String nav = "";
-		return nav;
+		return "";
 	}
 
 	public String deleteFavori() {
@@ -72,8 +71,7 @@ public class ObjetManagedBean {
 		if (membreCourant != null) {
 			proxyFavori.deleteFavori(selectedProp, membreCourant);
 		}
-		String nav = "";
-		return nav;
+		return "";
 
 	}
 
@@ -102,19 +100,6 @@ public class ObjetManagedBean {
 		return false;
 	}
 	
-	public double getNoteMoyenne(Membre membre){
-		return proxyEchange.getNoteMoyenne(membre);
-	}
-	
-	public List<Envie> getEnviesAutreMembre(Membre membre){
-		return proxyEnvie.getByMembre(membre);
-	}
-	
-	public List<Localisation> getLocalisationByMembre(Membre membre){
-		return proxyLocalisation.getMembreLocalisations(membre);
-	}
-	
-
 	public void loadEntry() {
 		if (entryId != null && entryId != 0) {
 			try {
@@ -126,6 +111,18 @@ public class ObjetManagedBean {
 				selectedProp = null;
 			}
 		}
+	}
+	
+	public double getNoteMoyenne(Membre membre){
+		return proxyEchange.getNoteMoyenne(membre);
+	}
+	
+	public List<Envie> getEnviesAutreMembre(Membre membre){
+		return proxyEnvie.getByMembre(membre);
+	}
+	
+	public List<Localisation> getLocalisationByMembre(Membre membre){
+		return proxyLocalisation.getMembreLocalisations(membre);
 	}
 
 	public IServiceProposition getProxyProp() {
@@ -191,6 +188,22 @@ public class ObjetManagedBean {
 
 	public void setMembreCourant(Membre membreCourant) {
 		this.membreCourant = membreCourant;
+	}
+
+	public IServiceEnvie getProxyEnvie() {
+		return proxyEnvie;
+	}
+
+	public void setProxyEnvie(IServiceEnvie proxyEnvie) {
+		this.proxyEnvie = proxyEnvie;
+	}
+
+	public IServiceEchange getProxyEchange() {
+		return proxyEchange;
+	}
+
+	public void setProxyEchange(IServiceEchange proxyEchange) {
+		this.proxyEchange = proxyEchange;
 	}
 
 }
