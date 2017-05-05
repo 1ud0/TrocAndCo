@@ -67,7 +67,7 @@
 						</div>
 						<div class="col-sm-7">
 							<div>
-								<form>
+								<h:form>
 									<div class="sizes">
 										<h3>
 											<h:outputText value="#{mbObjet.selectedProp.intitule}" />
@@ -79,11 +79,10 @@
 										<h:outputText value="#{mbObjet.selectedProp.valeur.valeur}" />
 									</p>
 									<p class="text-center">
-										<button type="submit" class="btn btn-template-main"
-											data-toggle="tooltip" data-placement="top"
-											title="Faire une proposition d'échange">Proposer un
-											échange</button>
-
+										
+										<h:commandButton action="#{mbEchange.loadPropositionEtMembre()}" value="Proposer un
+											échange" styleClass="btn btn-template-main" />
+										
 										<h:form id="myFormFav">
 											<h:panelGroup rendered="#{!mbObjet.dejaFavori()}">
 												<h:commandButton action="#{mbObjet.ajouterFavori()}"
@@ -110,9 +109,8 @@
 												</button>
 											</h:panelGroup>
 										</h:form>
-
 									</p>
-								</form>
+								</h:form>
 							</div>
 
 							<div class="box" id="details">

@@ -22,110 +22,141 @@ import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
 
-@ManagedBean(name="mbCompteObjet")
+@ManagedBean(name = "mbCompteObjet")
 @ViewScoped
-public class CompteObjetsManagedBean implements Serializable{
-	
+public class CompteObjetsManagedBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
-	
+
 	@EJB
 	private IServiceProposition proxyObjet;
-	
+
 	@EJB
 	private IServiceCategorie proxyCategorie;
-	
+
 	@EJB
 	private IServiceEtat proxyEtat;
-	
+
 	@EJB
 	private IServiceValeur proxyValeur;
-	
+
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
-	
+
 	@EJB
 	private IServiceLocaliserProposition proxyLocaliserProposition;
-	
-	@ManagedProperty(value="#{mbIdentif}")
-	private IdentificationManagedBean identifBean;	
-	private String intituleSelected="";
+
+	@ManagedProperty(value = "#{mbIdentif}")
+	private IdentificationManagedBean identifBean;
+	private String intituleSelected = "";
 	private Etat etatSelected = new Etat();
 	private Valeur valeurSelected = new Valeur();
 	private List<Proposition> proposDuMembre = new ArrayList<>();
 	private List<Localisation> adressesDuMembre = new ArrayList<>();
 	private List<Localisation> adressesSelected = new ArrayList<>();
 	private List<String> idAdressesSelected = new ArrayList<>();
-	private List<Categorie> sousCategoriesSelected;	
+	private List<Categorie> sousCategoriesSelected;
 	private Categorie sousCategorieSelected = new Categorie();
 	private List<Categorie> allCategories;
-	private Membre membreCourant ;
-	private Proposition propositionSelected;
+	private Membre membreCourant;
+	private Proposition propositionSelected = new Proposition();
 	private Categorie categorieSelected = new Categorie();
-	private String descriptionSelected ="";
+	private String descriptionSelected = "";
 
-	
-	//METHODES
-	
-	public void listenerChargementSousCat(){
+	// METHODES
+
+	public void listenerChargementSousCat() {
 		sousCategoriesSelected = proxyCategorie.getCategorieFille(categorieSelected.getIdCategorie());
 	}
-	
-	public List<Categorie> getAllCategorie(){
+
+	public List<Categorie> getAllCategorie() {
 		allCategories = proxyCategorie.getCategorieMere();
 		return allCategories;
 	}
-		
-	
-	public List<Proposition> getProposDuMembre() {	
+
+	public List<Proposition> getProposDuMembre() {
 		membreCourant = identifBean.getMembreConnected();
-		proposDuMembre = proxyObjet.getByMembre(membreCourant);
-		for (Proposition proposition:proposDuMembre) {
+		proposDuMembre = proxyObjet.getPropDispoByMembre(membreCourant);
+		for (Proposition proposition : proposDuMembre) {
 			proposition.setPhotos(proxyObjet.getByProposition(proposition));
-			
+
 		}
-		
-		return proposDuMembre;		
+		return proposDuMembre;
 	}
-	
-	public void listnerSelectionObjet(Proposition proposition){
+
+	public void listnerSelectionObjetPourSuppression(Proposition proposition) {
 		propositionSelected = proposition;
-		descriptionSelected =propositionSelected.getDescription();
-		intituleSelected = propositionSelected.getIntitule();		
+	}
+
+	public void listnerSelectionObjet(Proposition proposition) {
+		propositionSelected = proposition;
+		descriptionSelected = propositionSelected.getDescription();
+		intituleSelected = propositionSelected.getIntitule();
 		categorieSelected = propositionSelected.getCategorie();
 		sousCategorieSelected = propositionSelected.getSousCategorie();
 		valeurSelected = propositionSelected.getValeur();
 		etatSelected = propositionSelected.getEtat();
+		idAdressesSelected = getidAdresseProp();
 		listenerChargementSousCat();
 	}
-	
-	private void updateLocalisationProposition(){
-		System.out.println("l'id de la proposition est : " +propositionSelected.getIdProposition());
 
+	public String ajoutProposition() {
+		propositionSelected.setMembre(membreCourant);
+		propositionSelected.setIntitule(intituleSelected);
+		propositionSelected.setValeur(valeurSelected);
+		propositionSelected.setEtat(etatSelected);
+		propositionSelected.setCategorie(categorieSelected);
+		propositionSelected.setSousCategorie(sousCategorieSelected);
+		propositionSelected.setLocalisations(adressesSelected);
+		propositionSelected.setDescription(descriptionSelected);
+		propositionSelected = proxyObjet.addProposition(propositionSelected);
+		updateLocalisationProposition();
+
+		String nav = "";
+		return nav;
+	}
+
+	private List<String> getidAdresseProp() {
+		List<Localisation> adressesProp = getAdresseByProposition(propositionSelected);
+		List<String> idAdressesPropString = new ArrayList<>();
+		for (Localisation adresse : adressesProp) {
+			idAdressesPropString.add(adresse.getIdLocalisation().toString());
+		}
+		return idAdressesPropString;
+	}
+
+	private void updateLocalisationProposition() {
 		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
 			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
-			System.out.println("old"+propositionSelected.getIdProposition() +","+oldLocalisation.getIdLocalisation());
 		}
-		adressesSelected=GetListAdressesSelected(idAdressesSelected);
+		adressesSelected = GetListAdressesSelected(idAdressesSelected);
 		for (Localisation newLocalisation : adressesSelected) {
 			proxyLocaliserProposition.addLocalisationAUneProposition(propositionSelected, newLocalisation);
-			System.out.println(propositionSelected.getIdProposition() +","+newLocalisation.getIdLocalisation());
-		}		
-	}	
-	public String updateObjet(){
+		}
+	}
+
+	private void supprimerLocalisationProposition() {
+		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
+			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
+		}
+
+	}
+
+	public String updateObjet() {
 		updateLocalisationProposition();
 		propositionSelected.setIntitule(intituleSelected);
 		propositionSelected.setValeur(valeurSelected);
 		propositionSelected.setEtat(etatSelected);
 		propositionSelected.setCategorie(categorieSelected);
-		propositionSelected.setSousCategorie(sousCategorieSelected);		
+		propositionSelected.setSousCategorie(sousCategorieSelected);
 		propositionSelected.setLocalisations(adressesSelected);
 		propositionSelected.setDescription(descriptionSelected);
-		propositionSelected = proxyObjet.updateProposition(propositionSelected);		
+		propositionSelected = proxyObjet.updateProposition(propositionSelected);
 		String nav = "";
 		return nav;
 	}
-	
-	public List<Localisation> GetListAdressesSelected(List<String> idAdressesSelected){		
+
+	public List<Localisation> GetListAdressesSelected(List<String> idAdressesSelected) {
 		Localisation adresseSelected = new Localisation();
 		int idAdresseInt;
 		for (String idLocalisation : idAdressesSelected) {
@@ -134,24 +165,26 @@ public class CompteObjetsManagedBean implements Serializable{
 			adressesSelected.add(adresseSelected);
 		}
 		return adressesSelected;
-	}	
-	
-	public List<Localisation> getAdresseByMembre(){
+	}
+
+	public List<Localisation> getAdresseByMembre() {
 		membreCourant = identifBean.getMembreConnected();
 		adressesDuMembre = proxyLocalisation.getMembreLocalisations(membreCourant);
 		return adressesDuMembre;
-	}	
-	
-	public List<Localisation> getAdresseByProposition(Proposition propositionSelected){
-		List<Localisation> localisationsPropo = proxyLocalisation.getPropositionLocalisations(propositionSelected);
-		return  localisationsPropo;
 	}
-	
-	
-	
-	//GETTER SETTER
-	
-	
+
+	public List<Localisation> getAdresseByProposition(Proposition propositionSelected) {
+		List<Localisation> localisationsPropo = proxyLocalisation.getPropositionLocalisations(propositionSelected);
+		return localisationsPropo;
+	}
+
+	public void suppressionProposition() {
+		supprimerLocalisationProposition();
+		proxyObjet.deleteProposition(propositionSelected);
+	}
+
+	// GETTER SETTER
+
 	public List<Localisation> getAdressesSelected() {
 		return adressesSelected;
 	}
@@ -160,12 +193,12 @@ public class CompteObjetsManagedBean implements Serializable{
 		this.adressesSelected = adressesSelected;
 	}
 
-	public List<Etat> getAllEtat(){
+	public List<Etat> getAllEtat() {
 		List<Etat> listeEtat = proxyEtat.getAllEtat();
 		return listeEtat;
 	}
-	
-	public List<Valeur> getAllValeur(){
+
+	public List<Valeur> getAllValeur() {
 		List<Valeur> listeValeur = proxyValeur.getAllValeur();
 		return listeValeur;
 	}
@@ -178,23 +211,17 @@ public class CompteObjetsManagedBean implements Serializable{
 		return propositionSelected;
 	}
 
-
-
 	public void setPropositionSelected(Proposition propositionSelected) {
 		this.propositionSelected = propositionSelected;
 	}
-
 
 	public void setIdentifBean(IdentificationManagedBean identifBean) {
 		this.identifBean = identifBean;
 	}
 
-
-
 	public void setProposDuMembre(List<Proposition> proposDuMembre) {
 		this.proposDuMembre = proposDuMembre;
 	}
-
 
 	public List<String> getIdAdressesSelected() {
 		return idAdressesSelected;
@@ -211,7 +238,6 @@ public class CompteObjetsManagedBean implements Serializable{
 	public void setAdressesDuMembre(List<Localisation> adressesDuMembre) {
 		this.adressesDuMembre = adressesDuMembre;
 	}
-
 
 	public Membre getMembreCourant() {
 		return membreCourant;
@@ -336,9 +362,5 @@ public class CompteObjetsManagedBean implements Serializable{
 	public void setProxyLocaliserProposition(IServiceLocaliserProposition proxyLocaliserProposition) {
 		this.proxyLocaliserProposition = proxyLocaliserProposition;
 	}
-	
-	
-			
-	
-	
+
 }

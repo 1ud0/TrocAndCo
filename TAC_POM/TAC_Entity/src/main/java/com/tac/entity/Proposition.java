@@ -132,8 +132,6 @@ public class Proposition implements Serializable {
 		return echange;
 	}
 
-	
-
 	public List<Membre> getMembresDuFavori() {
 		return membresDuFavori;
 	}

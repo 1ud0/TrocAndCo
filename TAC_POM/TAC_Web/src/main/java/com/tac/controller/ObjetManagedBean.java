@@ -90,7 +90,6 @@ public class ObjetManagedBean {
 			nav = "/profil.xhtml?faces-redirect=true";
 		}
 		return nav;
-
 	}
 	
 	public boolean NoteVide(Membre membre){

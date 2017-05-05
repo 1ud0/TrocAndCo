@@ -1,5 +1,6 @@
 package com.tac.business.impl;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -10,7 +11,6 @@ import com.tac.business.api.IServiceProposition;
 import com.tac.data.api.IDaoEchange;
 import com.tac.data.api.IDaoPhoto;
 import com.tac.data.api.IDaoProposition;
-import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Photo;
 import com.tac.entity.Proposition;
@@ -28,7 +28,7 @@ public class ServiceProposition implements IServiceProposition {
 
 	@Override
 	public Proposition addProposition(Proposition proposition) {
-		
+		proposition.setDateAjout(new Date());
 		return proxyDaoProposition.addProposition(proposition);
 	}
 
@@ -56,6 +56,9 @@ public class ServiceProposition implements IServiceProposition {
 		return proxyDaoPhoto.getByProposition(proposition);
 	}
 
-
+	@Override
+	public List<Proposition> getPropDispoByMembre(Membre membre) {
+		return proxyDaoProposition.getPropoDispoByMembre(membre.getIdMembre());		 
+	}
 
 }

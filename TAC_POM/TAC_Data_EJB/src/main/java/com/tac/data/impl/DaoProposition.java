@@ -73,4 +73,14 @@ public class DaoProposition implements IDaoProposition{
 		return query.getResultList();
 	}
 
+	@Override
+	public List<Proposition> getPropoDispoByMembre(int idMembre) {
+		final String req = "SELECT p FROM Proposition p WHERE p.membre.idMembre = :pid AND SIZE(p.echanges)=0";
+		Query query = em.createQuery(req);
+		query.setParameter("pid", idMembre);
+		return query.getResultList();
+	}
+
+
+
 }

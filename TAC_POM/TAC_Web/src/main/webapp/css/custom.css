@@ -829,6 +829,10 @@ aside {
 	margin-bottom: 15px;
 }
 
+.marginTop15 {
+	margin-top: 15px;	
+}
+
 p.taillePolice150 {
 	margin: 0 !important;
 }
@@ -864,7 +868,7 @@ p.taillePolice150 {
 	margin-right: 10px;
 }
 
-.credit img {
+.credit img, .iconefeuille {
 	height: 15px;
 	margin-left: 3px;
 	margin-bottom: 3px;
