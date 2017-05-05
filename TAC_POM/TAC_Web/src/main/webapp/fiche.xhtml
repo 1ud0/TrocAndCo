@@ -13,15 +13,16 @@
 
 			<!-- **style CSS pour la google map -->
 			<style>
-			#gmap_canvas img {
-				max-width: none !important;
-				background: none !important
-			}
-			</style>
+#gmap_canvas img {
+	max-width: none !important;
+	background: none !important
+}
+</style>
 
 			<f:metadata>
-				<f:viewParam name="id" value="#{mbObjet.entryId}" required="true" requiredMessage="Aucun objet selectionné">
-					<f:validateLongRange minimum="1"/>
+				<f:viewParam name="id" value="#{mbObjet.entryId}" required="true"
+					requiredMessage="Aucun objet selectionné">
+					<f:validateLongRange minimum="1" />
 				</f:viewParam>
 				<f:event listener="#{mbObjet.loadEntry()}" type="preRenderView"></f:event>
 			</f:metadata>
@@ -82,12 +83,34 @@
 											data-toggle="tooltip" data-placement="top"
 											title="Faire une proposition d'échange">Proposer un
 											échange</button>
-										<button type="submit"
-											class="btn btn-default tailleBoutonFavoris"
-											data-toggle="tooltip" data-placement="top"
-											title="Ajouter aux favoris">
-											<i class="fa fa-heart-o"></i>
-										</button>
+
+										<h:form id="myFormFav">
+											<h:panelGroup rendered="#{!mbObjet.dejaFavori()}">
+												<h:commandButton action="#{mbObjet.ajouterFavori()}"
+													id="btnAjtFav" style="display:none">
+												</h:commandButton>
+												<button type="submit" id="myFormFav:btnAjtFav"
+													name="myFormFav:btnAjtFav"
+													class="btn btn-default tailleBoutonFavoris"
+													data-toggle="tooltip" data-placement="top"
+													title="Ajouter aux favoris" value="">
+													<i class="fa fa-heart-o"></i>
+												</button>
+											</h:panelGroup>
+											<h:panelGroup rendered="#{mbObjet.dejaFavori()}">
+												 <h:commandButton action="#{mbObjet.deleteFavori()}"
+													id="btndelFav" style="display:none">
+												</h:commandButton>
+												<button type="submit" id="myFormFav:btndelFav"
+													name="myFormFav:btndelFav"
+													class="btn btn-default tailleBoutonFavoris"
+													data-toggle="tooltip" data-placement="top"
+													title="Retirer des favoris" value="">
+													<i class="fa fa-heart" style="color: red"></i>
+												</button>
+											</h:panelGroup>
+										</h:form>
+
 									</p>
 								</form>
 							</div>
@@ -178,12 +201,12 @@
 
 						<div class="partieLiens">
 							<p>
-								<h:form >
+								<h:form>
 									<h:commandLink
 										action="#{mbObjet.LoadMembre(mbObjet.selectedProp.membre)}"
-										value="" >
-									<strong>Voir le profil du
-											propriétaire</strong></h:commandLink>
+										value="">
+										<strong>Voir le profil du propriétaire</strong>
+									</h:commandLink>
 								</h:form>
 							</p>
 							<p>

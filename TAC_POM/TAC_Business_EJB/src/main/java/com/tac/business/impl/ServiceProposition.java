@@ -7,8 +7,10 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.tac.business.api.IServiceProposition;
+import com.tac.data.api.IDaoEchange;
 import com.tac.data.api.IDaoPhoto;
 import com.tac.data.api.IDaoProposition;
+import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Photo;
 import com.tac.entity.Proposition;
@@ -21,6 +23,8 @@ public class ServiceProposition implements IServiceProposition {
 	private IDaoProposition proxyDaoProposition;
 	@EJB
 	private IDaoPhoto proxyDaoPhoto;
+	@EJB
+	private IDaoEchange proxyEchange;
 
 	@Override
 	public Proposition addProposition(Proposition proposition) {
@@ -51,5 +55,7 @@ public class ServiceProposition implements IServiceProposition {
 		
 		return proxyDaoPhoto.getByProposition(proposition);
 	}
+
+
 
 }

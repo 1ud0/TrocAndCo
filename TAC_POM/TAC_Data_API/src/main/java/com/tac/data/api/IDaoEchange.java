@@ -3,6 +3,7 @@ package com.tac.data.api;
 import java.util.List;
 
 import com.tac.entity.Echange;
+import com.tac.entity.Proposition;
 
 public interface IDaoEchange {
 
@@ -23,4 +24,8 @@ public interface IDaoEchange {
 	Double getNoteMoyenneMembre(Integer idMembre);
 
 	List<Echange> getAllEchangeFini();
+
+	Proposition getbyEchange(Echange echange);
+
+
 }

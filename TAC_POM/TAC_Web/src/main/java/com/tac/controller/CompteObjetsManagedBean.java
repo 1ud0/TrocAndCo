@@ -79,6 +79,11 @@ public class CompteObjetsManagedBean implements Serializable{
 	public List<Proposition> getProposDuMembre() {	
 		membreCourant = identifBean.getMembreConnected();
 		proposDuMembre = proxyObjet.getByMembre(membreCourant);
+		for (Proposition proposition:proposDuMembre) {
+			proposition.setPhotos(proxyObjet.getByProposition(proposition));
+			
+		}
+		
 		return proposDuMembre;		
 	}
 	

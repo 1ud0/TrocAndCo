@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoEchange;
 import com.tac.entity.Echange;
+import com.tac.entity.Proposition;
 
 @Remote(IDaoEchange.class)
 @Stateless
@@ -96,6 +97,15 @@ public class DaoEchange implements IDaoEchange{
 		Query query = em.createQuery(req);
 		return query.getResultList();
 	}
+
+	@Override
+	public Proposition getbyEchange(Echange echange) {
+		final String req = "SELECT proposition FROM Echange e WHERE e.idEchange = :pidEchange";
+		Query query = em.createQuery(req);
+		query.setParameter("pidEchange", echange.getIdEchange());
+		return (Proposition) query.getSingleResult();
+	}
+
 
 	
 }

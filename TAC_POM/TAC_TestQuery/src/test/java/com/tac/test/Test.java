@@ -20,15 +20,13 @@ public class Test {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-
-        final String req = "SELECT DISTINCT p.favoris FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.localisations LEFT JOIN FETCH p.photos WHERE p.favoris.membre.idMembre = :pid";
+        
+		final String req = "SELECT proposition FROM Echange e WHERE e.idEchange = :pidEchange";
 		Query query = em.createQuery(req);
-		query.setParameter("pid", 11);
-
-		@SuppressWarnings("unchecked")
-		List<Proposition>propositions= query.getResultList();
-        
-        
+		query.setParameter("pidEchange", 1);
+        Proposition p = (Proposition) query.getSingleResult();
+		
+        System.out.println(p.getIntitule() + p.getIdProposition());
         tx.commit();
         em.close();
         emf.close();

@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
+import com.tac.entity.Proposition;
 import com.tac.entity.Rdv;
 
 public interface IServiceEchange {
@@ -17,4 +18,5 @@ public interface IServiceEchange {
 	Echange getByNumero(Echange echange);
 	List<Echange> getByMembre(Membre membre);
 	List<Rdv> getRdvForMembre(Membre membre);
+	Proposition getPropByEchange(Echange echange);
 }

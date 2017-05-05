@@ -10,9 +10,11 @@ import javax.ejb.Stateless;
 import com.tac.business.api.IServiceEchange;
 import com.tac.data.api.IDaoEchange;
 import com.tac.data.api.IDaoFavori;
+import com.tac.data.api.IDaoProposition;
 import com.tac.data.api.IDaoRdv;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
+import com.tac.entity.Proposition;
 import com.tac.entity.Rdv;
 
 @Remote(IServiceEchange.class)
@@ -25,6 +27,8 @@ public class ServiceEchange implements IServiceEchange {
 	IDaoFavori proxyFavori ;
 	@EJB
 	IDaoRdv proxyRdv;
+	@EJB
+	IDaoProposition proxyProp;
 	
 	
 	@Override
@@ -85,5 +89,13 @@ public class ServiceEchange implements IServiceEchange {
 		List<Rdv> rdvDuMembre = proxyRdv.getByMembreId(membre.getIdMembre());
 		return rdvDuMembre;
 	}
+
+	@Override
+	public Proposition getPropByEchange(Echange echange) {
+		
+		return proxyEchange.getbyEchange(echange);
+	}
+
+
 
 }
