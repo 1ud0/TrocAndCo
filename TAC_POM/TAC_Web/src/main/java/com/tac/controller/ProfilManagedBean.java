@@ -59,6 +59,11 @@ public class ProfilManagedBean {
 		this.objetManagedBean = objetManagedBean;
 	}
 
+	/**
+	 * donne le membre courant
+	 * et charge ses propositions
+	 * @return
+	 */
 	public Membre getMembreCourant() {
 		membreCourant = objetManagedBean.getSelectedMembre();
 		membreCourant.setLocalisations(proxyLocalisation.getMembreLocalisations(membreCourant));
@@ -73,38 +78,38 @@ public class ProfilManagedBean {
 
 		return membreCourant;
 	}
-	
-	public int getNombreNoteValeur(int noteATester, Membre membre){
+
+	public int getNombreNoteValeur(int noteATester, Membre membre) {
 		int[] tableauNote = proxyEchange.getToutesLesNotes(membre);
 		int taille = tableauNote.length;
-		int nombreDeCetteNote =0;
-		for(int i=0; i<taille; i++){
-			if(tableauNote[i]==noteATester){
-				nombreDeCetteNote=nombreDeCetteNote+1;
+		int nombreDeCetteNote = 0;
+		for (int i = 0; i < taille; i++) {
+			if (tableauNote[i] == noteATester) {
+				nombreDeCetteNote = nombreDeCetteNote + 1;
 			}
 		}
-		int pourcentage = (nombreDeCetteNote*100)/taille;
+		int pourcentage = (nombreDeCetteNote * 100) / taille;
 		return pourcentage;
 	}
-	
-	public List<Echange> getEchangesQuandDonneur(Membre membre){
+
+	public List<Echange> getEchangesQuandDonneur(Membre membre) {
 		return proxyEchange.getByMembreDonneurFini(membre);
 	}
-	
-	public List<Echange> getEchangesQuandAcheteur(Membre membre){
+
+	public List<Echange> getEchangesQuandAcheteur(Membre membre) {
 		return proxyEchange.getByMembreChercheurFini(membre);
 	}
-	
-	public int getCredit(Membre membre){
+
+	public int getCredit(Membre membre) {
 		return proxyEchange.totalCredit(membre);
 	}
-	
-	public int getNombreNote(Membre membre){
+
+	public int getNombreNote(Membre membre) {
 		return proxyEchange.getTotalEchangeAvecNote(membre);
 	}
-	
-	public int getNoteMoyenne(Membre membre){
-		 return (int)proxyEchange.getNoteMoyenne(membre);
+
+	public int getNoteMoyenne(Membre membre) {
+		return (int) proxyEchange.getNoteMoyenne(membre);
 	}
 
 	public void setMembreCourant(Membre membreCourant) {

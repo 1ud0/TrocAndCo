@@ -51,20 +51,19 @@
 											<td>#{echange.proposition.categorie.intitule}</td>
 											<td>#{echange.prix}<img class="miniIcone" src="img/custom/feuille.png"></img></td>
 											<td>
-											
-											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'refus'}">
-											<span class="label label-warning">Refusé</span>
-											</h:panelGroup>
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'annule'}">
 											<span class="label label-danger">Annulé</span>
+											</h:panelGroup>
+											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'refus'}">
+											<span class="label label-warning">Refusé</span>
 											</h:panelGroup>
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'encours'}">
 											<span class="label label-info">En cours</span>
 											</h:panelGroup>
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'effectue'}">
 											<span class="label label-success">Effectué</span>
-											</h:panelGroup></td>
-											
+											</h:panelGroup>
+											</td>
 											<td>22/06/2013</td>
 											<td><h:form>
 											<h:commandLink action="#{mbCompteEchange.loadEchange(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 

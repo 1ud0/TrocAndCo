@@ -130,6 +130,12 @@ public class ServiceEchange implements IServiceEchange {
 		return proxyEchange.getbyEchange(echange);
 	}
 
+	@Override
+	public Echange getEchangeByProp(Proposition proposition) {
+		
+		return proxyEchange.getEchangeByProp(proposition);
+	}
+
 
 
 }
