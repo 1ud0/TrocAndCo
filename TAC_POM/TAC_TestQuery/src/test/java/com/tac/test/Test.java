@@ -22,7 +22,14 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
      
+        final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.dateSuppression IS NULL ORDER BY p.dateAjout DESC ";
+		Query query = em.createQuery(req);
+		query.setMaxResults(20);
+		List<Proposition> props = query.getResultList();
 		
+		for (Proposition proposition : props) {
+			System.out.println(proposition.getIntitule());
+		}
 		
         tx.commit();
         em.close();
