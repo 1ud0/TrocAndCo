@@ -17,6 +17,7 @@
 					<h3 class="panel-title">Mes Listes d'envies</h3>
 				</div>
 				<!--Categorie du menu debut-->
+<<<<<<< HEAD
 
 				<div class="panel-body">
 					<ul class="nav nav-pills nav-stacked category-menu">
@@ -41,7 +42,10 @@
 				</div>
 
 				<!--Liste des favoris-->
+=======
+>>>>>>> refs/heads/cyril
 				<h:form>
+<<<<<<< HEAD
 					<div class="panel-body">
 						<ul class="nav nav-pills nav-stacked category-menu">
 							<li><h:commandLink action="#{mbFavori.loadFavori()}"
@@ -62,9 +66,59 @@
 										</ui:repeat>
 									</ul>
 								</div></li>
+=======
+					<!--Liste des favoris-->
+
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked category-menu">
+							<li><h:commandLink
+									action="#{mbEnvieFavori.chargerFavoris()}"
+									value="Liste de mes Favoris">
+									<h:outputText value="#{mbEnvieFavori.nombreFavoris()}"
+										class="badge pull-right" />
+								</h:commandLink>
+								<div>
+									<ul>
+										<ui:repeat var="favori" value="#{mbEnvieFavori.favoris}">
+											<li><h:commandLink
+													action="#{mbObjet.loadProposition(favori)}"
+													value="#{favori.intitule}" /></li>
+										</ui:repeat>
+									</ul>
+								</div></li>
+						</ul>
+					</div>
+
+					<!-- Liste des Envies -->
+
+					<div class="panel-body">
+						<ul class="nav nav-pills nav-stacked category-menu">
+							<ui:repeat var="liste" value="#{mbEnvieFavori.listesByMembre}"
+								varStatus="listeStatut">
+								<li><h:commandLink
+										action="#{mbEnvieFavori.chargerEnvie(liste)}"
+										value="#{liste.titreListe}">
+										<h:outputText
+											value="#{mbEnvieFavori.nombreEnviesByListe(liste)}"
+											class="badge pull-right" />
+									</h:commandLink> <h:panelGroup>
+										<ul>
+											<ui:repeat var="envie" value="#{mbEnvieFavori.envies}">
+												<h:panelGroup
+													rendered="#{mbEnvieFavori.isEnvieDeLaListe(envie, liste)}">
+													<li><a href="#">#{envie.intitule} </a></li>
+												</h:panelGroup>
+											</ui:repeat>
+										</ul>
+									</h:panelGroup></li>
+							</ui:repeat>
+
+>>>>>>> refs/heads/cyril
 						</ul>
 					</div>
 				</h:form>
+
+
 			</div>
 		</div>
 
