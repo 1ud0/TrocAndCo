@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoMessage;
 import com.tac.entity.Message;
+import com.tac.entity.Proposition;
 
 @Remote(IDaoMessage.class)
 @Stateless
@@ -33,8 +34,7 @@ public class DaoMessage implements IDaoMessage {
 
 	@Override
 	public void deleteMessage(Message message) {
-		em.remove(message);
-		
+		em.remove(message);	
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -52,8 +52,7 @@ public class DaoMessage implements IDaoMessage {
 	public List<Message> getMsgAboutEchange(int idChercheur, int idProp) {
 		String req="SELECT m FROM Message m WHERE (m.proposition.idProposition= :pid AND m.emetteur.idMembre = :cid) OR (m.proposition.idProposition= :pid AND m.recepteur.idMembre = :cid) ORDER BY m.dateEnvoi";
 		Query query = em.createQuery(req);
-		query.setParameter("cid", idChercheur).setParameter("pid", idProp);
-		
+		query.setParameter("cid", idChercheur).setParameter("pid", idProp);		
 		return query.getResultList();
 	}
 	

@@ -10,7 +10,6 @@ public interface IDaoProposition {
 
 	Proposition addProposition(Proposition proposition);
 	Proposition updateProposition(Proposition proposition);
-	void deleteProposition(Proposition proposition);
 	Proposition getById(int idProposition) throws DataAccessException;
 	List<Proposition> getByMembre(int idMembre);
 	List<Proposition> getPropDispo();

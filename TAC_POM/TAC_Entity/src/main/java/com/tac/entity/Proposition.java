@@ -24,6 +24,10 @@ public class Proposition implements Serializable {
 	@Column(name="date_ajout")
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dateAjout;
+	
+	@Column(name="date_suppression")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dateSuppression;
 
 	@Column(name="description")
 	private String description;
@@ -222,6 +226,14 @@ public class Proposition implements Serializable {
 	public String toString() {
 		return "Proposition [idProposition=" + idProposition + ", description=" + description + ", intitule=" + intitule
 				+ "]";
+	}
+
+	public Date getDateSuppression() {
+		return dateSuppression;
+	}
+
+	public void setDateSuppression(Date dateSuppression) {
+		this.dateSuppression = dateSuppression;
 	}
 	
 	

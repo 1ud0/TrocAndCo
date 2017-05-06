@@ -41,19 +41,17 @@ public class ServiceProposition implements IServiceProposition {
 
 	@Override
 	public void deleteProposition(Proposition proposition) {
-		proxyDaoProposition.deleteProposition(proposition);
-
+		proposition.setDateSuppression(new Date());
+		proxyDaoProposition.updateProposition(proposition);
 	}
 
 	@Override
-	public List<Proposition> getByMembre(Membre membre) {
-		
+	public List<Proposition> getByMembre(Membre membre) {		
 		return proxyDaoProposition.getByMembre(membre.getIdMembre());
 	}
 
 	@Override
-	public List<Photo> getByProposition(Proposition proposition) {
-		
+	public List<Photo> getByProposition(Proposition proposition) {		
 		return proxyDaoPhoto.getByProposition(proposition);
 	}
 

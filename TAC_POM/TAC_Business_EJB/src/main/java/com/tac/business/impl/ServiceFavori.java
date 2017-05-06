@@ -48,4 +48,12 @@ public class ServiceFavori implements IServiceFavori {
 		}
 	}
 
+	@Override
+	public void deleteAllFavori(Proposition proposition) {
+
+		proxyDaoFavori.deleteAllFavori(proposition);
+	}
+	
+	
+
 }
