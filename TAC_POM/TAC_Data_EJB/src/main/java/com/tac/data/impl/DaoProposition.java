@@ -15,11 +15,11 @@ import com.tac.exception.DataAccessException;
 
 @Remote(IDaoProposition.class)
 @Stateless
-public class DaoProposition implements IDaoProposition{
+public class DaoProposition implements IDaoProposition {
 
 	@PersistenceContext(unitName = "TAC_Data_EJB")
 	private EntityManager em;
-	
+
 	@Override
 	public Proposition addProposition(Proposition proposition) {
 		em.persist(proposition);
@@ -31,7 +31,6 @@ public class DaoProposition implements IDaoProposition{
 		em.merge(proposition);
 		return proposition;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -83,7 +82,6 @@ public class DaoProposition implements IDaoProposition{
 		query.setParameter("pid", idMembre);
 		return query.getResultList();
 	}
-
 
 
 }

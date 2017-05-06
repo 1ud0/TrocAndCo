@@ -186,7 +186,11 @@ INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`,
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (40,'VHS des nulls',4,4,19,3,28,'c est null','2017-04-27');
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (41,'Affiche manger des pommes',1,1,19,14,85,'JC','2017-04-28');
 INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (42,'Marteau',2,2,19,9,58,'Provenance URSS','2017-04-29');
-INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (43,'Faucille',3,3,20,9,58,'Provenance URSS','2017-04-30');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (43,'Faucille',3,3,19,9,58,'Provenance URSS','2017-04-30');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (44,'Faucille1',3,3,5,9,58,'Provenance URSS','2017-03-01');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (45,'Faucille2',3,3,5,9,58,'Provenance URSS','2017-03-01');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (46,'Faucille3',3,3,5,9,58,'Provenance URSS','2017-03-01');
+INSERT INTO `proposition` (`id_proposition`, `intitule`, `etat_id`, `valeur_id`, `membre_id`, `categorie_id`, `sous_categorie_id`, `description`, `date_ajout`) VALUES (47,'Faucille4',3,3,5,9,58,'Provenance URSS','2017-03-01');
 
 /*============================*/
 /*		TABLE TAG			  */
@@ -371,44 +375,47 @@ INSERT INTO `tag` (`id_tag`, `intitule`, `categorie_id`) VALUES (177,'pins',85);
 /*		TABLE MESSAGE		  */
 /*============================*/
 
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (1,1,'PdDSf dsqlkfhkldhf d;qksfjhfksdf','2017-04-15 00:00:00',5,5,6);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (2,0,'sdqfq dslkfhjldj dsflkhdksf qsldkhfdsq ','2017-04-15 02:00:00',5,5,6);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (3,1,'Salut','2017-04-24 13:00:00',12,NULL,11);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (4,1,'Salut','2017-04-24 13:10:00',11,NULL,12);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (5,1,'Cava','2017-04-24 13:15:00',12,NULL,11);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (6,1,'oui et toi','2017-04-24 13:20:00',11,NULL,12);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (7,1,'bien et toi?','2017-04-24 13:25:00',12,NULL,11);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (8,0,'L''objet…','2017-04-24 13:30:00',11,NULL,12);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (9,1,'L''objet est il dispo ?','2017-04-24 13:00:00',13,31,16);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (10,0,'Oui bien sur il est disponible à l''echange','2017-04-24 13:10:00',16,31,13);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (11,1,'Bonjour comment ca va ?','2017-04-24 13:00:00',18,NULL,16);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (12,1,'yep toujours ok pour la piscine?','2017-04-24 13:10:00',16,NULL,18);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (13,0,'oui!! Demain à 13h!','2017-04-24 13:15:00',18,NULL,16);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (14,1,'Salut morue','2017-04-24 13:00:00',14,NULL,16);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (15,1,'Tu réponds?','2017-04-24 13:10:00',14,NULL,16);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (16,1,'non','2017-04-24 13:15:00',16,NULL,14);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (17,0,'Ok','2017-04-24 13:20:00',14,NULL,16);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (18,1,'Bonjour pourriez me donner plus de précision sur l''objet ?','2017-04-24 13:00:00',10,NULL,15);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (19,1,'Bonsoir avez-vous bien recu mon message?','2017-04-24 13:10:00',10,NULL,15);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (20,1,'Oui dsl j''etais en vacance. L''objet est cassé!','2017-04-24 13:15:00',15,NULL,10);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (21,1,'je vais vous faire une proposition','2017-04-24 13:20:00',10,NULL,15);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (22,1,'Ok','2017-04-24 13:25:00',15,NULL,10);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (23,1,'J''attend toujours','2017-04-24 13:30:00',15,NULL,10);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (24,1,'Salut cava ma belle?','2017-04-24 13:00:00',15,NULL,17);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (25,1,'Désolé je suis un homme ! Mon mignon','2017-04-24 13:10:00',17,NULL,15);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (26,1,'Bonjour, j''aurais voullu avoir plus de précision sur l''objet ….','2017-04-24 13:00:00',3,NULL,13);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (27,1,'Biensur, alors il a ces caractèristiques et cettehistoire!','2017-04-24 13:10:00',13,NULL,3);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (28,1,'euh! Ok je vais réflechir','2017-04-24 13:15:00',3,NULL,13);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (29,1,'Alors?','2017-04-24 13:20:00',13,NULL,3);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (30,1,'Alors? Vous le voulez?','2017-04-24 13:25:00',13,NULL,3);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (31,1,'OUI!!! Je vous soumets une proposition!','2017-04-24 13:30:00',3,NULL,13);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (32,0,'Ok j''attends!','2017-04-24 13:35:00',13,NULL,3);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (33,1,'Je suis au max!','2017-04-24 13:00:00',6,NULL,10);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (34,1,'Ok j''attends!','2017-04-24 13:10:00',10,NULL,6);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (35,1,'Kamoulox','2017-04-24 13:15:00',6,NULL,10);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (36,1,'Scrabble','2017-04-24 13:20:00',10,NULL,6);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (37,1,'Poulet','2017-04-24 13:25:00',6,NULL,10);
-INSERT INTO `message` (`id_message`, `lu`, `texte`, `date_envoi`, `membre_id_recepteur`, `proposition_id`, `membre_id_emetteur`) VALUES (38,1,'Cailloux','2017-04-24 13:30:00',10,NULL,6);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (1,'2017-04-15 00:00:00',1,'PdDSf dsqlkfhkldhf d;qksfjhfksdf',6,11,5);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (2,'2017-04-15 02:00:00',0,'sdqfq dslkfhjldj dsflkhdksf qsldkhfdsq ',6,11,5);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (3,'2017-04-24 13:00:00',1,'Salut',11,17,12);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (4,'2017-04-24 13:10:00',1,'Salut',12,17,11);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (5,'2017-04-24 13:15:00',1,'Cava',11,17,12);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (6,'2017-04-24 13:20:00',1,'oui et toi',12,17,11);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (7,'2017-04-24 13:25:00',1,'bien et toi?',11,17,12);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (8,'2017-04-24 13:30:00',0,'Lobjet…',12,17,11);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (9,'2017-04-24 13:00:00',1,'Lobjet est il dispo ?',16,22,13);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (10,'2017-04-24 13:10:00',0,'Oui bien sur il est disponible à lechange',13,22,16);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (11,'2017-04-24 13:00:00',1,'Bonjour comment ca va ?',16,37,18);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (12,'2017-04-24 13:10:00',1,'yep toujours ok pour la piscine?',18,37,16);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (13,'2017-04-24 13:15:00',0,'oui!! Demain à 13h!',16,37,18);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (14,'2017-04-24 13:00:00',1,'Salut morue',16,25,14);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (15,'2017-04-24 13:10:00',1,'Tu réponds?',16,25,14);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (16,'2017-04-24 13:15:00',1,'non',14,25,16);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (17,'2017-04-24 13:20:00',0,'Ok',16,25,14);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (18,'2017-04-24 13:00:00',1,'Bonjour pourriez me donner plus de précision sur lobjet ?',15,12,10);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (19,'2017-04-24 13:10:00',1,'Bonsoir avez-vous bien recu mon message?',15,12,10);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (20,'2017-04-24 13:15:00',1,'Oui dsl jetais en vacance. Lobjet est cassé!',10,12,15);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (21,'2017-04-24 13:20:00',1,'je vais vous faire une proposition',15,12,10);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (22,'2017-04-24 13:25:00',1,'Ok',10,12,15);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (23,'2017-04-24 13:30:00',1,'Jattend toujours',10,12,15);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (24,'2017-04-24 13:00:00',1,'Salut cava ma belle?',17,28,15);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (25,'2017-04-24 13:10:00',1,'Désolé je suis un homme ! Mon mignon',15,28,17);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (26,'2017-04-24 13:00:00',1,'Bonjour, jaurais voullu avoir plus de précision sur lobjet ….',13,10,2);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (27,'2017-04-24 13:10:00',1,'Biensur, alors il a ces caractèristiques et cettehistoire!',2,10,13);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (28,'2017-04-24 13:15:00',1,'euh! Ok je vais réflechir',13,10,2);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (29,'2017-04-24 13:20:00',1,'Alors?',2,10,13);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (30,'2017-04-24 13:25:00',1,'Alors? Vous le voulez?',2,10,13);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (31,'2017-04-24 13:30:00',1,'OUI!!! Je vous soumets une proposition!',13,10,2);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (32,'2017-04-24 13:35:00',0,'Ok jattends!',2,10,13);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (33,'2017-04-24 13:00:00',1,'Je suis au max!',10,5,6);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (34,'2017-04-24 13:10:00',1,'Ok jattends!',6,5,10);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (35,'2017-04-24 13:15:00',1,'Kamoulox',10,5,6);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (36,'2017-04-24 13:20:00',1,'Scrabble',6,5,10);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (37,'2017-04-24 13:25:00',1,'Poulet',10,5,6);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (38,'2017-04-24 13:30:00',1,'Cailloux',6,5,10);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (39,'2017-04-08',0,'Test pour aubin',1,45,5);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (40,'2017-04-09',0,'Test5 pour aubin',10,46,5);
+INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_emetteur`, `proposition_id`, `membre_id_recepteur`) VALUES (41,'2017-04-10',0,'Test6 pour aubin',5,46,10);
 
 /*============================*/
 /*		TABLE LOCALISATION	  */
@@ -499,8 +506,12 @@ INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acc
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (8,8,'2017-04-05','2017-04-06',NULL,'2017-04-07','Trop bien',4,'Chouette',5,7945,1,16,20,NULL);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (9,9,'2017-04-06','2017-04-07',NULL,'2017-04-08','Très mignon',4,'Grogon',4,3546,1,17,32,NULL);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (10,10,'2017-04-06','2017-04-07',NULL,'2017-04-08','Très mignon',4,'Grogon',4,3541,1,5,28,NULL);
-INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (11,11,'2017-04-06',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,29,'2017-04-7');
-
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (11,11,'2017-04-06',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,5,43,'2017-04-7');
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (12,12,'2017-04-06','2017-04-10',NULL,'2017-04-11','yeah',4,'youhhou',4,1454,4,1,44,NULL);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (13,13,'2017-04-06','2017-04-07','2017-04-08',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,45,NULL);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (14,14,'2017-04-06','2017-04-07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,46,NULL);
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (15,15,'2017-04-06','2017-04-07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,47,'2017-04-7');
+ 
 /*============================*/
 /*		TABLE RDV			  */
 /*============================*/
@@ -562,6 +573,10 @@ INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (46,'img/imgPro
 INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (47,'img/imgProposition/faucille.jpg',43);
 INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (48,'img/imgProposition/bidule2.jpg',3);
 INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (49,'img/imgProposition/bidule3.jpg',3);
+INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (50,'img/imgProposition/faucille.jpg',44);
+INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (51,'img/imgProposition/faucille.jpg',45);
+INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (52,'img/imgProposition/faucille.jpg',46);
+INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (53,'img/imgProposition/faucille.jpg',47);
 /*============================*/
 /*		TABLE LOCALISER       */
 /*============================*/
@@ -626,4 +641,7 @@ INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (27,40);
 INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (27,41);
 INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (27,42);
 INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (28,43);
-
+INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,44);
+INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,45);
+INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,46);
+INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,47);

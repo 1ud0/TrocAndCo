@@ -35,11 +35,12 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	private Proposition selectedProposition;
 	private Membre membreCourant;
 	private List<Echange> echangeDuMembre = new ArrayList<>();
+	private List<Echange> donDuMembre = new ArrayList<>();
 	private String status = "";
-	private List<Proposition> propositionDuMembre = new ArrayList<>();
+
 
 	/**
-	 * Pour lecture ludo ^ v ^ \ / \ / v Permet de connaitre quel est le status
+	 *  Permet de connaitre quel est le status
 	 * des échanges
 	 * 
 	 * @param echange
@@ -66,7 +67,7 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	 */
 	public List<Echange> getEchangeDuMembre() {
 		membreCourant = identifBean.getMembreConnected();
-		echangeDuMembre = proxyEchange.getByMembre(membreCourant);
+		echangeDuMembre = proxyEchange.getByMembreChercheur(membreCourant.getIdMembre());
 		for (Echange echange : echangeDuMembre) {
 			Proposition prop = proxyEchange.getPropByEchange(echange);
 			echange.setProposition(prop);
@@ -76,19 +77,19 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	}
 
 	/**
-	 * ici on récupère les echanges du membre dont il est l'acquéreur!
+	 * ici on récupère les echanges du membre dont il est le donnateur!
 	 * 
 	 * @return
 	 */
-	public List<Echange> getEchangeByPropositionDuMembre() {
+	public List<Echange> getDonDuMembre() {
 		membreCourant = identifBean.getMembreConnected();
-		propositionDuMembre = proxyObjet.getByMembre(membreCourant);
-		for (Proposition proposition : propositionDuMembre) {
-			 Echange echange = proxyEchange.getEchangeByProp(proposition);
-				 
-		
+		donDuMembre = proxyEchange.getByMembreDonneur(membreCourant.getIdMembre());
+		for (Echange echange : donDuMembre) {
+			Proposition prop = proxyEchange.getPropByEchange(echange);
+			echange.setProposition(prop);
+			prop.setPhotos(proxyObjet.getByProposition(prop));
 		}
-		return echangeDuMembre;
+		return donDuMembre;
 	}
 
 	/**
@@ -162,6 +163,24 @@ public class CompteMesEchangesManagedBean implements Serializable {
 
 	public void setMembreCourant(Membre membreCourant) {
 		this.membreCourant = membreCourant;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+
+	public void setDonDuMembre(List<Echange> donDuMembre) {
+		this.donDuMembre = donDuMembre;
+	}
+
+	public void setEchangeDuMembre(List<Echange> echangeDuMembre) {
+		this.echangeDuMembre = echangeDuMembre;
 	}
 
 }

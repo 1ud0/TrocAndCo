@@ -136,6 +136,18 @@ public class ServiceEchange implements IServiceEchange {
 		return proxyEchange.getEchangeByProp(proposition);
 	}
 
+	@Override
+	public List<Echange> getByMembreDonneur(Integer idMembreDonneur) {
+
+		return proxyEchange.getByMembreDonneur(idMembreDonneur);
+	}
+
+	@Override
+	public List<Echange> getByMembreChercheur(Integer idMembreChercheur) {
+
+		return proxyEchange.getByMembreChercheur(idMembreChercheur);
+	}
+
 
 
 }
