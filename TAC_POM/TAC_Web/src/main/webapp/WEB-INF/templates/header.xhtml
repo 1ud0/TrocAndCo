@@ -350,30 +350,23 @@ _________________________________________________________ -->
 			<div class="row">
 				<h:form id="formSeek">
 					<div class="col-sm-12 col-md-4">
-						<input type="text" name="string_search" id="string_search"
-							placeholder="Rechercher..." value="" class="form-control"></input>
+						<h:inputText value="#{mbRecherche.critere.intitule}" id="string_search" name="string_search" p:placeholder="Rechercher..." styleClass="form-control"/>
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="input-group selecteur">
-							<span class="input-group-addon"><img
-								src="img/custom/cat.png" alt="cat"></img></span> <select id="lunch"
-								class="selectpicker form-control" data-live-search="true"
-								title="Please select a lunch ...">
-								<option value="0" selected="selected">Toutes catégories</option>
-								<option value="1" id="list_rub" class="noir">Multimédia</option>
-								<option value="2" id="list_rub" class="noir">Sport</option>
-								<option value="3" id="list_rub" class="noir">Jouets</option>
-								<option value="4" id="list_rub" class="noir">Photo/vidéo</option>
-								<option value="5" id="list_rub" class="noir">Informatique</option>
-								<option value="6" id="list_rub" class="noir">Sport</option>
-								<option value="7" id="list_rub" class="noir">Autre</option>
-							</select>
+							<span class="input-group-addon">
+								<img src="img/custom/cat.png" alt="cat" />
+							</span>
+							<h:selectOneMenu value="#{mbRecherche.critere.cat}" >
+								<f:selectItems value="#{mbRecherche.categories}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
+							</h:selectOneMenu>
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="input-group selecteur">
 							<span class="input-group-addon"><img
-								src="img/custom/location.png" alt="cat"></img></span> <select
+								src="img/custom/location.png" alt="cat"></img></span> 
+							<select
 								id="lunch" class="selectpicker form-control"
 								data-live-search="true" title="Please select a lunch ...">
 								<option value="0" selected="selected">Toutes les régions</option>
@@ -397,8 +390,8 @@ _________________________________________________________ -->
 						</div>
 					</div>
 					<div class="col-sm-2">
-						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}" id="btnSeek" style="display: none;"  />
-						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek">
+						<h:commandButton action="#{mbRecherche.seekAndNotDestroy(mbRecherche.critere)}" id="btnSeek" style="display: none;"  />
+						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek" >
 							Rechercher<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>

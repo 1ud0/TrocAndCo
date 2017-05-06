@@ -42,11 +42,20 @@ _________________________________________________________ -->
 									</div>
 									<div class="panel-body">
 										<ul class="nav nav-pills nav-stacked category-menu">
-											<ui:repeat var="entry" value="#{mbRecherche.categories}">
+											<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
 												<li>
 													<h:outputLink>
 														<h:outputText value="#{entry.key.intitule}" /><span class="badge pull-right"><h:outputText value="#{entry.value.size()}" /></span>
 													</h:outputLink>
+													<ul>
+														<ui:repeat var="sousCat" value="#{entry.value}">
+															<li>
+																<h:outputLink>
+																	<h:outputText value="#{sousCat.intitule}" /><span class="badge pull-right"><h:outputText value="1" /></span>
+																</h:outputLink>
+															</li>
+														</ui:repeat>
+													</ul>
 												</li>
 											</ui:repeat>
 										</ul>
@@ -61,20 +70,10 @@ _________________________________________________________ -->
 									<div class="panel-body">
 										<h:form>
 											<div class="form-group">
-												<div class="checkBox">
-													<label> <input type="checkBox"
-														name="adresseDomicile"></input> Domicile
-													</label>
-												</div>
-												<div class="checkBox">
-													<label> <input type="checkBox"
-														name="adresseTravail"></input> Travail
-													</label>
-												</div>
+												<h:selectManyCheckbox value="#{mbRecherche.critere.lieux}" styleClass="checkbox-inline" layout="pageDirection">
+													<f:selectItems value="#{mbRecherche.adresses}" var="currentAdr" itemLabel="#{currentAdr.titreAdresse}" itemValue="#{currentAdr.idLocalisation}"/>
+												</h:selectManyCheckbox>
 											</div>
-											<button class="btn btn-default btn-sm btn-template-main">
-												<i class="fa fa-pencil"></i> Appliquer
-											</button>
 										</h:form>
 									</div>
 								</h:panelGroup>
@@ -87,7 +86,7 @@ _________________________________________________________ -->
 									<div class="panel-body">
 										<form>
 											<div class="form-group">
-												<h:selectOneRadio value="#{mbRecherche.distanceSelected}" styleClass="radio-inline" layout="pageDirection">
+												<h:selectOneRadio value="#{mbRecherche.critere.distanceMax}" styleClass="radio-inline" layout="pageDirection">
 													<f:selectItem itemLabel="5km" itemValue="5"/>
 													<f:selectItem itemLabel="10km" itemValue="10"/>
 													<f:selectItem itemLabel="25km" itemValue="25"/>
@@ -109,7 +108,7 @@ _________________________________________________________ -->
 									<div class="panel-body">
 										<form>
 											<div class="form-group">
-												<h:selectManyCheckbox value="#{mbRecherche.valeursSelected}" styleClass="checkbox-inline" layout="pageDirection">
+												<h:selectManyCheckbox value="#{mbRecherche.critere.valeurs}" styleClass="checkbox-inline" layout="pageDirection">
 													<f:selectItems var="valeur" value="#{mbRecherche.valeurs}" itemLabel="#{valeur.valeur}" itemValue="#{valeur.idValeur}"/>
 												</h:selectManyCheckbox>
 											</div>
@@ -125,7 +124,7 @@ _________________________________________________________ -->
 									<div class="panel-body">
 										<h:form>
 											<div class="form-group">
-												<h:selectOneRadio value="#{mbRecherche.etatSelected}" styleClass="radio-inline" layout="pageDirection">
+												<h:selectOneRadio value="#{mbRecherche.critere.etat}" styleClass="radio-inline" layout="pageDirection">
 													<f:selectItems var="etat" value="#{mbRecherche.etats}" itemLabel="#{etat.intitule}" itemValue="#{etat.idEtat}" />
 													<f:selectItem itemLabel="Tous" itemValue="0"/>
 												</h:selectOneRadio>
