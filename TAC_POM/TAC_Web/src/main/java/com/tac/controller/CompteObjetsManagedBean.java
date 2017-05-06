@@ -11,6 +11,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
+import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceLocaliserProposition;
 import com.tac.business.api.IServiceProposition;
@@ -45,6 +46,9 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	@EJB
 	private IServiceLocaliserProposition proxyLocaliserProposition;
+	
+	@EJB
+	private IServiceFavori proxyFavori;
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
@@ -141,6 +145,9 @@ public class CompteObjetsManagedBean implements Serializable {
 		}
 
 	}
+	private void supprimerFavoriProposition() {		
+			proxyFavori.deleteAllFavori(propositionSelected);
+	}
 
 	public String updateObjet() {
 		updateLocalisationProposition();
@@ -180,6 +187,7 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	public void suppressionProposition() {
 		supprimerLocalisationProposition();
+		supprimerFavoriProposition();
 		proxyObjet.deleteProposition(propositionSelected);
 	}
 
@@ -361,6 +369,14 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	public void setProxyLocaliserProposition(IServiceLocaliserProposition proxyLocaliserProposition) {
 		this.proxyLocaliserProposition = proxyLocaliserProposition;
+	}
+
+	public IServiceFavori getProxyFavori() {
+		return proxyFavori;
+	}
+
+	public void setProxyFavori(IServiceFavori proxyFavori) {
+		this.proxyFavori = proxyFavori;
 	}
 
 }

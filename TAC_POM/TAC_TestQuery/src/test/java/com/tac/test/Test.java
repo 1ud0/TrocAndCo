@@ -21,12 +21,14 @@ public class Test {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        
-        final String req = "SELECT e FROM Echange e WHERE e.proposition.idProposition = :pidProposition";
-		Query query = em.createQuery(req);
-		query.setParameter("pidProposition", 29);
-		Echange echange = (Echange) query.getSingleResult();
-		 System.out.println(echange.getIdEchange());
+     
+		
+		final String req = "SELECT * FROM proposition p inner JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null;";
+		Query query = em.createNativeQuery(req);
+		List<Proposition> propositionDispo = query.getResultList();
+		for (Proposition proposition : propositionDispo) {
+			System.out.println(proposition.getIntitule());
+		}
 		
         tx.commit();
         em.close();

@@ -28,15 +28,10 @@ public class DaoProposition implements IDaoProposition{
 
 	@Override
 	public Proposition updateProposition(Proposition proposition) {
-
 		em.merge(proposition);
 		return proposition;
 	}
 
-	@Override
-	public void deleteProposition(Proposition proposition) {
-		em.remove(em.merge(proposition));
-	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -66,7 +61,7 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getPropDispo() {
-		final String req = "SELECT p FROM Proposition p WHERE SIZE(p.echanges)=0";
+		final String req = "SELECT * FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null";
 		Query query = em.createQuery(req);
 		return query.getResultList();
 	}
@@ -74,7 +69,7 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getNouveautes(int nombre) {
-		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos ORDER BY p.dateAjout DESC";
+		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos ORDER BY p.dateAjout DESC WHERE p.dateSuppression IS NULL";
 		Query query = em.createQuery(req);
 		query.setMaxResults(nombre);
 		return query.getResultList();
@@ -83,7 +78,7 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getPropoDispoByMembre(int idMembre) {
-		final String req = "SELECT p FROM Proposition p WHERE p.membre.idMembre = :pid AND SIZE(p.echanges)=0";
+		final String req = "SELECT * FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null and p.membre_id=:pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
 		return query.getResultList();

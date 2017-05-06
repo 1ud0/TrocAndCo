@@ -3,6 +3,7 @@ package com.tac.data.api;
 import java.util.List;
 
 import com.tac.entity.Message;
+import com.tac.entity.Proposition;
 
 public interface IDaoMessage {
 	
