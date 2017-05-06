@@ -5,6 +5,9 @@
 <h:head>
 	<ui:insert name="head">
 		<ui:include src="/WEB-INF/templates/head.xhtml" />
+	</ui:insert>	
+	<ui:insert name="scripts">
+		<ui:include src="/WEB-INF/templates/scripts.xhtml" />
 	</ui:insert>
 	<ui:insert name="headPerso"></ui:insert>
 </h:head>
@@ -16,10 +19,7 @@
 			<ui:insert name="header">
 				<ui:include src="/WEB-INF/templates/header.xhtml" />
 			</ui:insert>
-			
-			<ui:insert name="scripts">
-				<ui:include src="/WEB-INF/templates/scripts.xhtml" />
-			</ui:insert>
+
 		</header>
 		
 		<div id="content">
