@@ -9,15 +9,20 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
-		<ui:define name="content">
-
+	
+		<ui:define name="headPerso">
 			<!-- **style CSS pour la google map -->
 			<style>
-#gmap_canvas img {
-	max-width: none !important;
-	background: none !important
-}
-</style>
+				#gmap_canvas img {
+					max-width: none !important;
+					background: none !important
+				}
+			</style>
+		</ui:define>
+		
+		<ui:define name="content">
+
+			
 
 			<f:metadata>
 				<f:viewParam name="id" value="#{mbObjet.entryId}" required="true"

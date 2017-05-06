@@ -62,7 +62,7 @@ public class CompteObjetsManagedBean implements Serializable {
 	private Proposition propositionSelected = new Proposition();
 	private Categorie categorieSelected = new Categorie();
 	private String descriptionSelected = "";
-
+	
 	// METHODES
 
 	public void listenerChargementSousCat() {
