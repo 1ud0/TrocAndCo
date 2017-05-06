@@ -45,7 +45,10 @@ public class ObjetManagedBean {
 	private Membre membreCourant;
 	private Integer entryId;
 
-	
+	/**
+	 * Permet de savoir si l'objet qui est affiché est déja dans les favoris du membre en session
+	 * @return false pas dans les favoris // true est dans les favoris
+	 */
 	public boolean dejaFavori() {
 		membreCourant = identifBean.getMembreConnected();
 		if (membreCourant != null) {
@@ -57,15 +60,22 @@ public class ObjetManagedBean {
 		}
 		return false;
 	}
-
+	/**
+	 *  permet d'ajouter l'objet visualisé aux favoris du membre en session
+	 * @return
+	 */
 	public String ajouterFavori() {
 		membreCourant = identifBean.getMembreConnected();
+		System.out.println("ajout"+membreCourant.getNom()+selectedProp.getIntitule());
 		if (membreCourant != null) {
 			proxyFavori.addToFavoris(selectedProp, membreCourant);
 		}
 		return "";
 	}
-
+	/**
+	 *  permet de retirer l'objet visualisé aux favoris du membre en session
+	 * @return
+	 */
 	public String deleteFavori() {
 		membreCourant = identifBean.getMembreConnected();
 		if (membreCourant != null) {
@@ -74,7 +84,11 @@ public class ObjetManagedBean {
 		return "";
 
 	}
-
+	/**
+	 * charge la proposition en cours et ses informations
+	 * @param proposition
+	 * @return
+	 */
 	public String loadProposition(Proposition proposition) {
 		String nav = "";
 		selectedProp = proposition;
@@ -83,7 +97,11 @@ public class ObjetManagedBean {
 		}
 		return nav;
 	}
-
+	/**
+	 * charge les informations du membre qui possède l'objet visualisé
+	 * @param membre
+	 * @return
+	 */
 	public String LoadMembre(Membre membre) {
 		String nav = "";
 		selectedMembre = membre;

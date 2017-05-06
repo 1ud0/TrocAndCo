@@ -25,4 +25,5 @@ public interface IServiceEchange {
 	List<Echange> getByMembreChercheurFini(Membre membre);
 	int totalCredit(Membre membre);
 	Proposition getPropByEchange(Echange echange);
+	Echange getEchangeByProp(Proposition proposition);
 }

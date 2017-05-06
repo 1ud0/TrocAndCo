@@ -22,22 +22,11 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-        final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateValidation IS NOT NULL";
-		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
-		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", 2);
-		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
-		int credit = 0;
-		for (Echange echange : echangesDuDonneur) {
-			credit = credit + echange.getPrix();
-		}
-		
-		System.out.println(credit);
-		
-		final String req = "SELECT SUM(e.prix) FROM Echange e WHERE e.proposition.membre.idMembre= 2 AND e.dateValidation IS NOT NULL";
+        final String req = "SELECT e FROM Echange e WHERE e.proposition.idProposition = :pidProposition";
 		Query query = em.createQuery(req);
-		Number result = (Number) query.getSingleResult();
-		System.out.println(result.getClass());
-		System.out.println(result);
+		query.setParameter("pidProposition", 29);
+		Echange echange = (Echange) query.getSingleResult();
+		 System.out.println(echange.getIdEchange());
 		
         tx.commit();
         em.close();

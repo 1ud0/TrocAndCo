@@ -23,5 +23,6 @@ public interface IDaoEchange {
 	int getCreditEnMoins(Integer idMembre);
 	int getCreditEnPlus(Integer idMembre);
 	Proposition getbyEchange(Echange echange);
+	Echange getEchangeByProp(Proposition proposition);
 
 }

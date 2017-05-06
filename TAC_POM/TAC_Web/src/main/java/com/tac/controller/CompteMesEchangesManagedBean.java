@@ -28,7 +28,6 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	@EJB
 	private IServiceCategorie proxyCategorie;
 
-
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
@@ -36,35 +35,68 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	private Proposition selectedProposition;
 	private Membre membreCourant;
 	private List<Echange> echangeDuMembre = new ArrayList<>();
-	private String status="";
+	private String status = "";
+	private List<Proposition> propositionDuMembre = new ArrayList<>();
 
+	/**
+	 * Pour lecture ludo ^ v ^ \ / \ / v Permet de connaitre quel est le status
+	 * des échanges
+	 * 
+	 * @param echange
+	 * @return
+	 */
 	public String statusEchange(Echange echange) {
-
-		if(echange.getDateAnnul()!=null){
+		if (echange.getDateAnnul() != null && echange.getDateinit() != null) {
 			status = "annule";
-		}else if(echange.getDateRefus()!=null){
+		} else if (echange.getDateRefus() != null) {
 			status = "refus";
-		}else if(echange.getDateValidation()!=null){
+		} else if (echange.getDateValidation() != null) {
 			status = "effectue";
-		}else{
-			status ="encours";
+		} else if (echange.getDateAcceptation() != null && echange.getDateAnnul() == null
+				&& echange.getDateRefus() == null && echange.getDateValidation() == null) {
+			status = "encours";
 		}
 		return status;
 	}
 
+	/**
+	 * return une liste des échanges du membre
+	 * 
+	 * @return
+	 */
 	public List<Echange> getEchangeDuMembre() {
 		membreCourant = identifBean.getMembreConnected();
 		echangeDuMembre = proxyEchange.getByMembre(membreCourant);
 		for (Echange echange : echangeDuMembre) {
-			Proposition prop =proxyEchange.getPropByEchange(echange);
+			Proposition prop = proxyEchange.getPropByEchange(echange);
 			echange.setProposition(prop);
 			prop.setPhotos(proxyObjet.getByProposition(prop));
 		}
 		return echangeDuMembre;
-
 	}
 
-	public String loadEchange(Echange echange) {
+	/**
+	 * ici on récupère les echanges du membre dont il est l'acquéreur!
+	 * 
+	 * @return
+	 */
+	public List<Echange> getEchangeByPropositionDuMembre() {
+		membreCourant = identifBean.getMembreConnected();
+		propositionDuMembre = proxyObjet.getByMembre(membreCourant);
+		for (Proposition proposition : propositionDuMembre) {
+			 Echange echange = proxyEchange.getEchangeByProp(proposition);
+				 
+		
+		}
+		return echangeDuMembre;
+	}
+
+	/**
+	 *  a modifier
+	 * @param echange
+	 * @return
+	 */
+	public String loadEchangeAcquereur(Echange echange) {
 		String nav = "";
 		selectedEchange = echange;
 
@@ -73,6 +105,8 @@ public class CompteMesEchangesManagedBean implements Serializable {
 		}
 		return nav;
 	}
+
+
 
 	public Echange getSelectedEchange() {
 		return selectedEchange;
