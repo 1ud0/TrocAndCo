@@ -53,8 +53,17 @@ public class RechercheManagedBean {
 	private String distanceSelected;
 	private List<Entry<Categorie, List<Categorie>>> categories;
 	private Map<Categorie, List<Categorie>> mycats;
+	private List<Categorie> cartouches;
 
 	
+	public List<Categorie> getCartouches() {
+		return cartouches;
+	}
+
+	public void setCartouches(List<Categorie> cartouches) {
+		this.cartouches = cartouches;
+	}
+
 	public String seekAndNotDestroy() {
 		return "/resultatRecherche.xhtml?faces-redirect=true";
 	}
@@ -82,6 +91,29 @@ public class RechercheManagedBean {
 		categories = new ArrayList<>(mycats.entrySet());
 	}
 	
+	public void loaddP() {
+		propositions = proxyRecherche.getPropositionsBidon();
+		cartouches = new ArrayList<>();
+		for (Proposition proposition : propositions) {
+			List<Localisation> localisations = proxyLocalisation.getPropositionLocalisations(proposition);
+			proposition.setLocalisations(localisations);
+			Categorie cat = proposition.getCategorie();
+			Categorie sousCat = proposition.getSousCategorie();
+			int inexCat = cartouches.indexOf(cat);
+			List<Categorie> sousCategories = new ArrayList<>();
+			if (inexCat == -1) {
+				sousCategories.add(sousCat);
+				cat.setSousCategories(sousCategories);
+				cartouches.add(cat);
+			} else {
+				Categorie catFound = cartouches.get(inexCat);
+				List<Categorie> souscatFound = catFound.getSousCategories();
+				if (!souscatFound.contains(sousCat)) {
+					souscatFound.add(sousCat);
+				}
+			}
+		}
+	}
 	
 	// getters & setters
 	public IServiceRecherche getProxyRecherche() {
