@@ -23,12 +23,6 @@ public class Test {
         tx.begin();
      
 		
-		final String req = "SELECT * FROM proposition p inner JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null;";
-		Query query = em.createNativeQuery(req);
-		List<Proposition> propositionDispo = query.getResultList();
-		for (Proposition proposition : propositionDispo) {
-			System.out.println(proposition.getIntitule());
-		}
 		
         tx.commit();
         em.close();
