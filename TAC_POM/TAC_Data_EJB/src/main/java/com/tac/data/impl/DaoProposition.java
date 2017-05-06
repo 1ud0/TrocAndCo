@@ -61,7 +61,7 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getPropDispo() {
-		final String req = "SELECT p.id_proposition FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null";
+		final String req = "SELECT p.id_proposition, p.intitule, p.categorie_id, p.description, p.date_ajout, p.date_suppression, p.etat_id, p.membre_id, p.sous_categorie_id, p.valeur_id FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null";
 		Query query = em.createNativeQuery(req);
 		return query.getResultList();
 	}
@@ -78,8 +78,8 @@ public class DaoProposition implements IDaoProposition{
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getPropoDispoByMembre(int idMembre) {
-		final String req = "SELECT p.id_proposition FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null and p.membre_id=:pid";
-		Query query = em.createNativeQuery(req);
+        final String req = "SELECT p.id_proposition, p.intitule, p.categorie_id, p.description, p.date_ajout, p.date_suppression, p.etat_id, p.membre_id, p.sous_categorie_id, p.valeur_id FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null and p.membre_id=:pid";
+		Query query = em.createNativeQuery(req, Proposition.class);
 		query.setParameter("pid", idMembre);
 		return query.getResultList();
 	}

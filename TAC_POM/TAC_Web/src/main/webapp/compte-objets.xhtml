@@ -402,14 +402,12 @@
 
 				<!-- ******************************MODALE SUPPRIMER FIN****************************** -->
 
-				<div class="col-md-12 col-sm-12 CentrerBoutons">
-					<button type="submit" class="btn btn-default" data-placement="top"
-						title="" data-original-title="Echanger contre des feuilles"
-						data-toggle="modal" data-target="#modalAjoutObjet">
-						<h5>
-							<span class="glyphicon glyphicon-plus"></span> Ajouter un objet
-						</h5>
-					</button>
+				<div class="col-md-12 col-sm-12 CentrerBoutons">					
+					<h:commandButton value="Ajouter un objet"
+											onclick="$('#modalAjoutObjet').modal('show');"
+											styleClass="btn btn-default">
+											<f:ajax event="click" listener="#{mbCompteObjet.listenerAjoutObjet()}" render="formAjoutObjet"></f:ajax>
+				</h:commandButton>
 				</div>
 
 

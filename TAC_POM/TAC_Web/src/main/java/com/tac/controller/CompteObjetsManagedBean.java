@@ -31,22 +31,16 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	@EJB
 	private IServiceProposition proxyObjet;
-
 	@EJB
 	private IServiceCategorie proxyCategorie;
-
 	@EJB
 	private IServiceEtat proxyEtat;
-
 	@EJB
 	private IServiceValeur proxyValeur;
-
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
-
 	@EJB
-	private IServiceLocaliserProposition proxyLocaliserProposition;
-	
+	private IServiceLocaliserProposition proxyLocaliserProposition;	
 	@EJB
 	private IServiceFavori proxyFavori;
 
@@ -83,13 +77,23 @@ public class CompteObjetsManagedBean implements Serializable {
 		proposDuMembre = proxyObjet.getPropDispoByMembre(membreCourant);
 		for (Proposition proposition : proposDuMembre) {
 			proposition.setPhotos(proxyObjet.getByProposition(proposition));
-
 		}
 		return proposDuMembre;
 	}
 
 	public void listnerSelectionObjetPourSuppression(Proposition proposition) {
 		propositionSelected = proposition;
+	}
+	
+	public void listenerAjoutObjet(){
+		descriptionSelected = "test";
+		intituleSelected = "test";
+		categorieSelected = new Categorie();
+		sousCategorieSelected = new Categorie();
+		valeurSelected = new Valeur();
+		etatSelected = new Etat();
+		idAdressesSelected = getidAdresseProp();
+		listenerChargementSousCat();
 	}
 
 	public void listnerSelectionObjet(Proposition proposition) {
@@ -139,16 +143,7 @@ public class CompteObjetsManagedBean implements Serializable {
 		}
 	}
 
-	private void supprimerLocalisationProposition() {
-		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
-			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
-		}
-
-	}
-	private void supprimerFavoriProposition() {		
-			proxyFavori.deleteAllFavori(propositionSelected);
-	}
-
+	
 	public String updateObjet() {
 		updateLocalisationProposition();
 		propositionSelected.setIntitule(intituleSelected);
@@ -186,8 +181,11 @@ public class CompteObjetsManagedBean implements Serializable {
 	}
 
 	public void suppressionProposition() {
-		supprimerLocalisationProposition();
-		supprimerFavoriProposition();
+		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
+			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
+		}
+		proxyFavori.deleteAllFavori(propositionSelected);
+
 		proxyObjet.deleteProposition(propositionSelected);
 	}
 
