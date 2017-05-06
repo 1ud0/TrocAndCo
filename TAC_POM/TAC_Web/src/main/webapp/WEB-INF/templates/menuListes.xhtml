@@ -30,10 +30,10 @@
 								</h:commandLink>
 								<div>
 									<ul>
-										<ui:repeat var="favori"
-											value="#{mbEnvieFavori.favoris}">
-											<li><a href="shop-category.html">#{favori.intitule}
-											</a></li>
+										<ui:repeat var="favori" value="#{mbEnvieFavori.favoris}">
+											<li><h:commandLink
+													action="#{mbObjet.loadProposition(favori)}"
+													value="#{favori.intitule}" /></li>
 										</ui:repeat>
 									</ul>
 								</div></li>
@@ -47,21 +47,21 @@
 							<ui:repeat var="liste" value="#{mbEnvieFavori.listesByMembre}"
 								varStatus="listeStatut">
 								<li><h:commandLink
-									action="#{mbEnvieFavori.chargerEnvie(liste)}"
-									value="#{liste.titreListe}">
-									<h:outputText value="#{mbEnvieFavori.nombreEnviesByListe(liste)}"
-										class="badge pull-right" />
-								</h:commandLink>
-								<h:panelGroup >
-									<ul>
-										<ui:repeat var="envie"
-											value="#{mbEnvieFavori.envies}" >
-											<h:panelGroup rendered="#{mbEnvieFavori.isEnvieDeLaListe(envie, liste)}">
-											<li><a href="shop-category.html">#{envie.intitule}
-											</a></li></h:panelGroup>
-										</ui:repeat>
-									</ul>
-								</h:panelGroup> </li>
+										action="#{mbEnvieFavori.chargerEnvie(liste)}"
+										value="#{liste.titreListe}">
+										<h:outputText
+											value="#{mbEnvieFavori.nombreEnviesByListe(liste)}"
+											class="badge pull-right" />
+									</h:commandLink> <h:panelGroup>
+										<ul>
+											<ui:repeat var="envie" value="#{mbEnvieFavori.envies}">
+												<h:panelGroup
+													rendered="#{mbEnvieFavori.isEnvieDeLaListe(envie, liste)}">
+													<li><a href="#">#{envie.intitule} </a></li>
+												</h:panelGroup>
+											</ui:repeat>
+										</ul>
+									</h:panelGroup></li>
 							</ui:repeat>
 
 						</ul>
