@@ -10,6 +10,11 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
+	
+		<ui:define name="headPerso">
+		
+		</ui:define>
+		
 		<ui:define name="content">
 			<div id="objets">
 				<div class="row products">
@@ -71,21 +76,21 @@
 										<div class="row ">
 											<div class="col-sm-4">
 												<div class="image ">
-													<a href="#"> <img src="img/camera-flat.png"
+													<a href="#"> <img src="#{mbCompteObjet.propositionSelected.photos.size()>0 ? mbCompteObjet.propositionSelected.photos.get(0).url : 'img/camera-flat.png'}"
 														alt="Appareil-photo" class="img-responsive"></img>
 													</a>
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="image ">
-													<a href="#"> <img src="img/camera-flat.png"
+													<a href="#"> <img src="#{mbCompteObjet.propositionSelected.photos.size()>1 ? mbCompteObjet.propositionSelected.photos.get(1).url : 'img/camera-flat.png'}"
 														alt="Appareil-photo" class="img-responsive"></img>
 													</a>
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="image ">
-													<a href="#"> <img src="img/camera-flat.png"
+													<a href="#"> <img src="#{mbCompteObjet.propositionSelected.photos.size()>2 ? mbCompteObjet.propositionSelected.photos.get(2).url : 'img/camera-flat.png'}"
 														alt="Appareil-photo" class="img-responsive"></img>
 													</a>
 												</div>
