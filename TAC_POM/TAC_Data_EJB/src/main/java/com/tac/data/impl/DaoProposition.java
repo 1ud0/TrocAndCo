@@ -15,11 +15,11 @@ import com.tac.exception.DataAccessException;
 
 @Remote(IDaoProposition.class)
 @Stateless
-public class DaoProposition implements IDaoProposition{
+public class DaoProposition implements IDaoProposition {
 
 	@PersistenceContext(unitName = "TAC_Data_EJB")
 	private EntityManager em;
-	
+
 	@Override
 	public Proposition addProposition(Proposition proposition) {
 		em.persist(proposition);
@@ -31,7 +31,6 @@ public class DaoProposition implements IDaoProposition{
 		em.merge(proposition);
 		return proposition;
 	}
-
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -60,14 +59,6 @@ public class DaoProposition implements IDaoProposition{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Proposition> getPropDispo() {
-		final String req = "SELECT p.id_proposition FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null";
-		Query query = em.createNativeQuery(req);
-		return query.getResultList();
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
 	public List<Proposition> getNouveautes(int nombre) {
 		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.dateSuppression IS NULL ORDER BY p.dateAjout DESC";
 		Query query = em.createQuery(req);
@@ -77,13 +68,19 @@ public class DaoProposition implements IDaoProposition{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Proposition> getPropoDispoByMembre(int idMembre) {
-		final String req = "SELECT p.id_proposition FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null and p.membre_id=:pid";
+	public List<Proposition> getPropDispo() {
+		final String req = "SELECT p.id_proposition, p.intitule, p.categorie_id, p.description, p.date_ajout, p.date_suppression, p.etat_id, p.membre_id, p.sous_categorie_id, p.valeur_id FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null";
 		Query query = em.createNativeQuery(req);
-		query.setParameter("pid", idMembre);
 		return query.getResultList();
 	}
 
-
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Proposition> getPropoDispoByMembre(int idMembre) {
+		final String req = "SELECT p.id_proposition, p.intitule, p.categorie_id, p.description, p.date_ajout, p.date_suppression, p.etat_id, p.membre_id, p.sous_categorie_id, p.valeur_id FROM proposition p left JOIN echange e on e.proposition_id=p.id_proposition where e.date_validation is null and p.date_suppression is null and p.membre_id=:pid";
+		Query query = em.createNativeQuery(req, Proposition.class);
+		query.setParameter("pid", idMembre);
+		return query.getResultList();
+	}
 
 }
