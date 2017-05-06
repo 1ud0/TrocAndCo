@@ -13,4 +13,5 @@ public interface IDaoMessage {
 	List<Message> getConversations(int idMembre1, int idMembre2);
 	List<Message> getMsgAboutEchange(int idChercheur, int idProp);
 	List<Message> getByMembreId(int idMembre);
+	List<Message> getByConversation(int idMembre);
 }

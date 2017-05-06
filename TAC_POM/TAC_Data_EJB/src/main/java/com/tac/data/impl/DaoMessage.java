@@ -61,11 +61,19 @@ public class DaoMessage implements IDaoMessage {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Message> getByMembreId(int idMembre) {
-		String req="SELECT m FROM Message m WHERE m.emetteur.idMembre= :mid OR m.recepteur.idMembre= :mid";
+		String req="SELECT m FROM Message m WHERE m.emetteur.idMembre= :mid OR m.recepteur.idMembre= :mid ORDER BY m.dateEnvoi";
 		Query query = em.createQuery(req);
 		query.setParameter("mid", idMembre);
 		return query.getResultList();
 	}
+
+	@Override
+	public List<Message> getByConversation(int idMembre) {
+		
+		return null;
+	}
+	
+	
 
 	
 

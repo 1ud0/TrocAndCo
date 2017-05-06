@@ -83,12 +83,16 @@ public class ProfilManagedBean {
 		int[] tableauNote = proxyEchange.getToutesLesNotes(membre);
 		int taille = tableauNote.length;
 		int nombreDeCetteNote = 0;
+		int pourcentage =0;
 		for (int i = 0; i < taille; i++) {
 			if (tableauNote[i] == noteATester) {
 				nombreDeCetteNote = nombreDeCetteNote + 1;
 			}
 		}
-		int pourcentage = (nombreDeCetteNote * 100) / taille;
+		if(taille!=0){
+			pourcentage = (nombreDeCetteNote * 100) / taille;
+			
+		}
 		return pourcentage;
 	}
 

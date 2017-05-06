@@ -41,12 +41,40 @@ public class MessageManagedBean implements Serializable {
 		List<Message> tout = proxyMessage.getByMembre(membreCourant);
 		List<Proposition> resultat = new ArrayList<Proposition>();
 		for(Message message : tout){
-			if(resultat.contains(message.getProposition())){
+			if(!resultat.contains(message.getProposition())){
+				resultat.add(message.getProposition());
+				
+			}
+		}
+		return resultat;
+	}
+	
+	public List<Proposition> getAllDiscussionsLues(){
+		membreCourant = identifBean.getMembreConnected();
+		List<Message> tout = proxyMessage.getByMembre(membreCourant);
+		List<Proposition> resultat = new ArrayList<Proposition>();
+		
+		for(Message message : tout){
+			if(!resultat.contains(message.getProposition()) && message.isLu()==true){
 				resultat.add(message.getProposition());
 			}
 		}
 		return resultat;
 	}
+	
+	public List<Proposition> getAllDiscussionsNonLues(){
+		membreCourant = identifBean.getMembreConnected();
+		List<Message> tout = proxyMessage.getByMembre(membreCourant);
+		List<Proposition> resultat = new ArrayList<Proposition>();
+		for(Message message : tout){
+			if(!getAllDiscussionsLues().contains(message.getProposition()) && !resultat.contains(message.getProposition())){
+				resultat.add(message.getProposition());
+			}
+		}
+		
+		return resultat;
+	}
+	
 
 	public IServiceMessage getProxyMessage() {
 		return proxyMessage;
