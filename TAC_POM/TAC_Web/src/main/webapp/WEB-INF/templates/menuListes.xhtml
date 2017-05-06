@@ -1,7 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core">
+	xmlns:f="http://java.sun.com/jsf/core">
 
 <head>
 <title><ui:insert name="title">MENU COMPTE</ui:insert></title>
@@ -17,56 +17,7 @@
 					<h3 class="panel-title">Mes Listes d'envies</h3>
 				</div>
 				<!--Categorie du menu debut-->
-<<<<<<< HEAD
-
-				<div class="panel-body">
-					<ul class="nav nav-pills nav-stacked category-menu">
-						<ui:repeat var="liste" value="#{mbEnvie.listesByMembre}"
-							varStatus="listeStatut">
-							<li><a data-toggle="collapse" data-parent="#accordion"
-								href="#collapse#{listeStatut.index +1}">#{liste.titreListe}
-									<span class="badge pull-right">#{mbEnvie.getEnvieByList(liste).size()}</span>
-							</a>
-								<div id="collapse1" class="panel-collapse collapse">
-									<ul>
-										<ui:repeat var="envie"
-											value="#{mbEnvie.getEnvieByList(liste)}">
-											<li><a href="shop-category.html">#{envie.intitule} </a></li>
-
-										</ui:repeat>
-									</ul>
-								</div></li>
-						</ui:repeat>
-
-					</ul>
-				</div>
-
-				<!--Liste des favoris-->
-=======
->>>>>>> refs/heads/cyril
 				<h:form>
-<<<<<<< HEAD
-					<div class="panel-body">
-						<ul class="nav nav-pills nav-stacked category-menu">
-							<li><h:commandLink action="#{mbFavori.loadFavori()}"
-									value="" rel="#{mbFavori.loadFavori()}">
-									<a data-toggle="collapse" data-parent="#accordion"
-										href="#collapse3" >Liste de mes Favoris <span
-										class="badge pull-right">#{mbFavori.favorisDuMembre.size()}</span>
-										
-									</a>
-								
-								</h:commandLink>
-								
-								<div id="collapse3" class="panel-collapse collapse">
-									<ul>
-										<ui:repeat var="favori" value="#{mbFavori.favorisDuMembre}">
-											<li><a href="">#{favori.intitule}
-											</a></li>
-										</ui:repeat>
-									</ul>
-								</div></li>
-=======
 					<!--Liste des favoris-->
 
 					<div class="panel-body">
@@ -113,7 +64,6 @@
 									</h:panelGroup></li>
 							</ui:repeat>
 
->>>>>>> refs/heads/cyril
 						</ul>
 					</div>
 				</h:form>
