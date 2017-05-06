@@ -1,7 +1,7 @@
 package com.tac.controller;
 
 import javax.ejb.EJB;
-
+import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
@@ -21,6 +21,18 @@ public class IdentificationManagedBean implements Serializable {
 	private String mail = "bob.toto@toto.com";
 	private String mdp = "pass";
 	private Membre membreConnected;
+	
+	public void securePage() {
+		
+		if(membreConnected == null) {
+			ConfigurableNavigationHandler  nav =
+					(ConfigurableNavigationHandler)
+					FacesContext.getCurrentInstance()
+					.getApplication()
+					.getNavigationHandler();
+			nav.performNavigation("/accueil.xhtml?faces-redirect=true");
+		}
+	}
 	
 	public String seConnecter(){
 		String nav = "";
