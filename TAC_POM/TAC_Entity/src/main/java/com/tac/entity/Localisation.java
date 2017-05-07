@@ -24,7 +24,7 @@ public class Localisation implements Serializable {
 	private String adresse;
 
 	@Column(name="code_postal")
-	private Integer codePostal;
+	private String codePostal;
 
 	@Column(name="latitude")
 	private Float latitude;
@@ -76,11 +76,11 @@ public class Localisation implements Serializable {
 		this.adresse = adresse;
 	}
 
-	public Integer getCodePostal() {
+	public String getCodePostal() {
 		return this.codePostal;
 	}
 
-	public void setCodePostal(Integer codePostal) {
+	public void setCodePostal(String codePostal) {
 		this.codePostal = codePostal;
 	}
 

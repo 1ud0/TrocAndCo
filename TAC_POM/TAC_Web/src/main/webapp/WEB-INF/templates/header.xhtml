@@ -346,6 +346,7 @@ _________________________________________________________ -->
 		<!-- *** LOGIN MODAL END *** -->
 
 
+		
 		<div class="container" id="search">
 			<div class="row">
 				<h:form id="formSeek">
@@ -358,6 +359,7 @@ _________________________________________________________ -->
 								<img src="img/custom/cat.png" alt="cat" />
 							</span>
 							<h:selectOneMenu value="#{mbRecherche.critere.cat}" >
+								<f:selectItem itemLabel="Catégorie..." itemValue="0"/>
 								<f:selectItems value="#{mbRecherche.categories}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
 							</h:selectOneMenu>
 						</div>
@@ -390,13 +392,12 @@ _________________________________________________________ -->
 						</div>
 					</div>
 					<div class="col-sm-2">
-						<h:commandButton action="#{mbRecherche.seekAndNotDestroy(mbRecherche.critere)}" id="btnSeek" style="display: none;"  />
+						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}" id="btnSeek" style="display: none;" />
 						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek" >
 							Rechercher<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>
 				</h:form>
-
 			</div>
 		</div>
 

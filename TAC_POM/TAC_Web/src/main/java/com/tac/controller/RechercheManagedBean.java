@@ -8,13 +8,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
@@ -27,11 +24,11 @@ import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
-import com.tac.util.Catz;
 import com.tac.util.CritereSearch;
+import com.tac.util.MutableInt;
 
 @ManagedBean(name = "mbRecherche")
-@ViewScoped
+@SessionScoped
 public class RechercheManagedBean {
 
 	public static final List<String> DISTANCES = Collections
@@ -60,33 +57,22 @@ public class RechercheManagedBean {
 	private List<Etat> etats;
 	private List<Valeur> valeurs;
 	private List<Localisation> adresses;
-	
-	
 
 	private List<Entry<Categorie, List<Categorie>>> catsEntries;
 	private Map<Categorie, List<Categorie>> mycats;
-	private List<Categorie> cartouches;
-	private Map<Catz, List<Catz>> catzs;
+	private Map<Categorie, MutableInt> catsCount;
 
-	@PostConstruct
-	public void coucou() {
-		System.out.println("postconstruct");
-	}
-
-	@PreDestroy
-	public void destroy() {
-		System.out.println("predestroy");
-	}
 	
-	public String seekAndNotDestroy(CritereSearch crit) {
-		System.out.println(crit.getIntitule());
+	
+	//Méthodes
+	public String seekAndNotDestroy() {
 		return "/resultatRecherche.xhtml?faces-redirect=true";
 	}
 	
 	public void loadingPage() {
-		System.out.println(critere.getIntitule());
-		propositions = proxyRecherche.getPropositionsBidon();
+		propositions = proxyRecherche.rechercher(critere, connexionBean.getMembreConnected());
 		mycats = new HashMap<>();
+		catsCount = new HashMap<>();
 		for (Proposition proposition : propositions) {
 			List<Localisation> localisations = proxyLocalisation.getPropositionLocalisations(proposition);
 			proposition.setLocalisations(localisations);
@@ -96,43 +82,28 @@ public class RechercheManagedBean {
 			if (!mycats.containsKey(cat)) {
 				sousCategories.add(sousCat);
 				mycats.put(cat, sousCategories);
-				
-				
+				catsCount.put(cat, new MutableInt());
+				catsCount.put(sousCat, new MutableInt());
 			} else {
+				MutableInt compteur = catsCount.get(cat);
+				compteur.increment();
 				sousCategories = mycats.get(cat);
 				if (!sousCategories.contains(sousCat)) {
 					sousCategories.add(sousCat);
+					catsCount.put(sousCat, new MutableInt());
+				} else {
+					compteur = catsCount.get(sousCat);
+					compteur.increment();
 				}
 			}
 		}
 		catsEntries = new ArrayList<>(mycats.entrySet());
 	}
 	
-	
-	
-	public void loaddP() {
-		propositions = proxyRecherche.getPropositionsBidon();
-		cartouches = new ArrayList<>();
-		for (Proposition proposition : propositions) {
-			List<Localisation> localisations = proxyLocalisation.getPropositionLocalisations(proposition);
-			proposition.setLocalisations(localisations);
-			Categorie cat = proposition.getCategorie();
-			Categorie sousCat = proposition.getSousCategorie();
-			int inexCat = cartouches.indexOf(cat);
-			List<Categorie> sousCategories = new ArrayList<>();
-			if (inexCat == -1) {
-				sousCategories.add(sousCat);
-				cat.setSousCategories(sousCategories);
-				cartouches.add(cat);
-			} else {
-				Categorie catFound = cartouches.get(inexCat);
-				List<Categorie> souscatFound = catFound.getSousCategories();
-				if (!souscatFound.contains(sousCat)) {
-					souscatFound.add(sousCat);
-				}
-			}
-		}
+	public Integer getNbOccurence(Categorie cat) {
+		return catsCount.get(cat).get();
 	}
+	
 	
 	// getters & setters
 	public List<Categorie> getCategories() {
@@ -254,23 +225,15 @@ public class RechercheManagedBean {
 		this.mycats = mycats;
 	}
 
-	public Map<Catz, List<Catz>> getCatzs() {
-		return catzs;
+
+	public Map<Categorie, MutableInt> getCatsCount() {
+		return catsCount;
 	}
 
-	public void setCatzs(Map<Catz, List<Catz>> catzs) {
-		this.catzs = catzs;
+	public void setCatsCount(Map<Categorie, MutableInt> catsCount) {
+		this.catsCount = catsCount;
 	}
 
-	public List<Categorie> getCartouches() {
-		return cartouches;
-	}
-
-	public void setCartouches(List<Categorie> cartouches) {
-		this.cartouches = cartouches;
-	}
-
-	
 
 
 }

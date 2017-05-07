@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.tac.entity.Proposition;
 import com.tac.exception.DataAccessException;
+import com.tac.util.CritereSearch;
 
 public interface IDaoProposition {
 
@@ -14,7 +15,7 @@ public interface IDaoProposition {
 	List<Proposition> getByMembre(int idMembre);
 	List<Proposition> getPropDispo();
 	List<Proposition> getNouveautes(int nombre);
-	List<Proposition> getPropoDispoByMembre( int idMembre);
-	
+	List<Proposition> getPropoDispoByMembre(int idMembre);
+	List<Proposition> rechercher(CritereSearch carac, Integer idMembre);
 	
 }
