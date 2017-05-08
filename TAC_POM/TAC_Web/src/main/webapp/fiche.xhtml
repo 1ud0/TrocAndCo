@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:m="http://code.google.com/p/gmaps4jsf/">
 
 <h:head>
 	<title>RECHERCHE OBJET</title>
@@ -9,20 +10,24 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
-	
+
 		<ui:define name="headPerso">
 			<!-- **style CSS pour la google map -->
+			<script
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZnM_O8BFFutbT4s_XlCFPA5XH9DSwsQ"
+				type="text/javascript"></script>
+
 			<style>
-				#gmap_canvas img {
-					max-width: none !important;
-					background: none !important
-				}
-			</style>
+#gmap_canvas img {
+	max-width: none !important;
+	background: none !important
+}
+</style>
 		</ui:define>
-		
+
 		<ui:define name="content">
 
-			
+
 
 			<f:metadata>
 				<f:viewParam name="id" value="#{mbObjet.entryId}" required="true"
@@ -34,68 +39,72 @@
 
 			<!-- Message erreur si chargement echoue -->
 			<div class="container">
-			<h:messages globalOnly="true" rendered="#{mbObjet.selectedProp == null}" style="height: 600px;"/>
+				<h:messages globalOnly="true"
+					rendered="#{mbObjet.selectedProp == null}" style="height: 600px;" />
 			</div>
-			
-			
+
+
 			<!-- *** DEBUT DU CORPS DE LA PAGE *** _________________________________________________________ -->
 			<h:panelGroup id="corps" rendered="#{mbObjet.selectedProp != null}">
-			<div class="container">
+				<div class="container">
 
-				<h:messages globalOnly="true" style="color: red;"/>
-				<!-- *** LEFT COLUMN *** _________________________________________________________ -->
-				
-				<ul class="breadcrumb">
-					<li><a href="#">Home</a></li>
-					<li><a href="#"> <h:outputText
-								value="#{mbObjet.selectedProp.categorie.intitule}" /></a></li>
-					<li class="active"><h:outputText
-							value="#{mbObjet.selectedProp.sousCategorie.intitule}" /></li>
-				</ul>
-				<div class="col-md-9">
+					<h:messages globalOnly="true" style="color: red;" />
+					<!-- *** LEFT COLUMN *** _________________________________________________________ -->
 
-					<div class="row objet" id="productMain">
-						<div class="col-sm-5">
-							<div id="mainImage">
-								<img src="" alt="" class="img-responsive" id="grossePhoto"></img>
+					<ul class="breadcrumb">
+						<li><a href="#">Home</a></li>
+						<li><a href="#"> <h:outputText
+									value="#{mbObjet.selectedProp.categorie.intitule}" /></a></li>
+						<li class="active"><h:outputText
+								value="#{mbObjet.selectedProp.sousCategorie.intitule}" /></li>
+					</ul>
+					<div class="col-md-9">
+
+						<div class="row objet" id="productMain">
+							<div class="col-sm-5">
+								<div id="mainImage">
+									<img src="" alt="" class="img-responsive" id="grossePhoto"></img>
+								</div>
+
+								<div class="ribbon sale">
+									<div class="theribbon">&lt;5km</div>
+									<div class="ribbon-background"></div>
+								</div>
+								<!-- /.ribbon -->
+								<br></br>
+								<div class="row" id="thumbs">
+									<ui:repeat var="photo" value="#{mbObjet.selectedProp.photos}">
+										<div class="col-xs-4">
+											<a href="#{photo.url}" class="thumb"> <img
+												src="#{photo.url}" alt="" class="img-responsive"></img></a>
+										</div>
+									</ui:repeat>
+
+								</div>
+
 							</div>
+							<div class="col-sm-7">
+								<div>
+									<h:form id="myFormFav">
+										<div class="sizes">
+											<h3>
+												<h:outputText value="#{mbObjet.selectedProp.intitule}" />
+											</h3>
+										</div>
+										<p class="price">
+											<img src="img/custom/feuille orange.png" height="50"
+												width="50" border="1px"></img>
+											<h:outputText value="#{mbObjet.selectedProp.valeur.valeur}" />
+										</p>
+										<p class="text-center">
 
-							<div class="ribbon sale">
-								<div class="theribbon">&lt;5km</div>
-								<div class="ribbon-background"></div>
-							</div>
-							<!-- /.ribbon -->
-							<br></br>
-							<div class="row" id="thumbs">
-								<ui:repeat var="photo" value="#{mbObjet.selectedProp.photos}">
-									<div class="col-xs-4">
-										<a href="#{photo.url}" class="thumb"> <img
-											src="#{photo.url}" alt="" class="img-responsive"></img></a>
-									</div>
-								</ui:repeat>
+											<h:commandButton
+												action="#{mbEchange.loadPropositionEtMembre()}"
+												value="Proposer un
+											échange"
+												styleClass="btn btn-template-main" />
 
-							</div>
 
-						</div>
-						<div class="col-sm-7">
-							<div>
-								<h:form id="myFormFav">
-									<div class="sizes">
-										<h3>
-											<h:outputText value="#{mbObjet.selectedProp.intitule}" />
-										</h3>
-									</div>
-									<p class="price">
-										<img src="img/custom/feuille orange.png" height="50"
-											width="50" border="1px"></img>
-										<h:outputText value="#{mbObjet.selectedProp.valeur.valeur}" />
-									</p>
-									<p class="text-center">
-										
-										<h:commandButton action="#{mbEchange.loadPropositionEtMembre()}" value="Proposer un
-											échange" styleClass="btn btn-template-main" />
-										
-									
 											<h:panelGroup rendered="#{!mbObjet.dejaFavori()}">
 												<h:commandButton action="#{mbObjet.ajouterFavori()}"
 													id="btnAjtFav" style="display:none">
@@ -109,7 +118,7 @@
 												</button>
 											</h:panelGroup>
 											<h:panelGroup rendered="#{mbObjet.dejaFavori()}">
-												 <h:commandButton action="#{mbObjet.deleteFavori()}"
+												<h:commandButton action="#{mbObjet.deleteFavori()}"
 													id="btndelFav" style="display:none">
 												</h:commandButton>
 												<button type="submit" id="myFormFav:btndelFav"
@@ -120,196 +129,218 @@
 													<i class="fa fa-heart" style="color: red"></i>
 												</button>
 											</h:panelGroup>
-										
-									</p>
-								</h:form>
-							</div>
 
-							<div class="box" id="details">
-
-								<h4>Details</h4>
-								<p>
-									<h:outputText value="#{mbObjet.selectedProp.description}" />
-								</p>
-
-
-								<blockquote>
-									<p>
-										<em>Etat : <h:outputText
-												value="#{mbObjet.selectedProp.etat.intitule}" />
-										</em>
-									</p>
-									<p>
-										<em>Catégorie : <h:outputText
-												value=" #{mbObjet.selectedProp.categorie.intitule}" /></em> <br></br>
-										<em>Sous-catégorie : <h:outputText
-												value="#{mbObjet.selectedProp.sousCategorie.intitule}" />
-										</em>
-									</p>
-
-								</blockquote>
-
-							</div>
-						</div>
-					</div>
-				</div>
-				<!-- /.col-md-9 -->
-
-
-				<!-- *** LEFT COLUMN END *** -->
-
-				<div class="col-md-3 objetside">
-					<div>
-
-
-						<script src='https://maps.googleapis.com/maps/api/js?v=3.exp'></script>
-						<div style='overflow: hidden; height: 280px;'>
-							<div id='gmap_canvas' style='height: 440px;'></div>
-							<div>
-								<small><a href="http://embedgooglemaps.com">google
-										maps carte</a></small>
-							</div>
-							<div>
-								<small><a href="http://youtubeembedcode.com">embed
-										youtube code</a></small>
-							</div>
-
-						</div>
-						<script type='text/javascript'>function init_map(){var myOptions = {zoom:13,center:new google.maps.LatLng(48.81903901478888,2.3199924764770863),mapTypeId: google.maps.MapTypeId.ROADMAP};map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(48.81903901478888,2.3199924764770863)});infowindow = new google.maps.InfoWindow({content:'<strong>Titre</strong><br></br>Paris, France<br></br>'});google.maps.event.addListener(marker, 'click', function(){infowindow.open(map,marker);});infowindow.open(map,marker);}google.maps.event.addDomListener(window, 'load', init_map);</script>
-					</div>
-
-					<!-- partie sur le propriétaire -->
-
-					<!--***partie pour la photo et les info perso*** _________________________________________________________ -->
-					<br></br>
-					<div class="box-simple box-white same-height">
-						<div class="partieProprio ">
-							<h3 class="text-uppercase">Intéressé ?</h3>
-							<div class="row">
-								<div class="col-sm-4 col-md-6 ">
-									<div class="image">
-										<a href=""> <img
-											src="#{mbObjet.selectedProp.membre.avatar}" alt=""
-											class="img-responsive img-circle tailleMaxImage"></img>
-										</a>
-									</div>
+										</p>
+									</h:form>
 								</div>
-								<div class="col-sm-4 col-md-6 ">
-									<h4>
-										<h:outputText value="#{mbObjet.selectedProp.membre.pseudo}" />
-									</h4>
-									<h:panelGroup rendered="#{mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
-									<p class="rating-num">
-										-/5
+
+								<div class="box" id="details">
+
+									<h4>Details</h4>
+									<p>
+										<h:outputText value="#{mbObjet.selectedProp.description}" />
 									</p>
-									</h:panelGroup>
-									<h:panelGroup rendered="#{!mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
-									<p class="rating-num">
-										<h:outputText value="#{mbObjet.getNoteMoyenne(mbObjet.selectedProp.membre)}" />
-										/5
-									</p>
-									</h:panelGroup>
+
+
+									<blockquote>
+										<p>
+											<em>Etat : <h:outputText
+													value="#{mbObjet.selectedProp.etat.intitule}" />
+											</em>
+										</p>
+										<p>
+											<em>Catégorie : <h:outputText
+													value=" #{mbObjet.selectedProp.categorie.intitule}" /></em> <br></br>
+											<em>Sous-catégorie : <h:outputText
+													value="#{mbObjet.selectedProp.sousCategorie.intitule}" />
+											</em>
+										</p>
+
+									</blockquote>
+
 								</div>
 							</div>
-
 						</div>
-
-						<!--***Fin partie pour la photo et les info perso***  -->
-
-						<div class="partieLiens">
-							<p>
-								<h:form>
-									<h:commandLink
-										action="#{mbObjet.LoadMembre(mbObjet.selectedProp.membre)}"
-										value="">
-										<strong>Voir le profil du propriétaire</strong>
-									</h:commandLink>
-								</h:form>
-							</p>
-							<p>
-								<a href="compte-messages.xhtml"><strong>Contacter
-										le propriétaire</strong></a>
-							</p>
-						</div>
-
 					</div>
-				</div>
-			</div>
-			<!-- container pour les envies du propriétaire de l'objet -->
-			<div class="container">
-				<h4>Vous souhaitez l'échanger contre un de vos objets?</h4>
-				<button type="button" class="btn btn-template-main"
-					data-toggle="collapse" data-target="#demo">Consulter ses
-					envies</button>
-				<br></br>
-				<div id="demo" class="collapse">
-					<div class="row">
-						<!-- Premiere envie -->
-						<h:panelGroup rendered="#{empty mbEnvie.enviesDuMembre}">
+					<!-- /.col-md-9 -->
+
+
+					<!-- *** LEFT COLUMN END *** -->
+					<h:form>
+						<h:commandLink
+							onclick="init_map(#{mbObjet.selectedProp.localisations.get(0).latitude},#{mbObjet.selectedProp.localisations.get(0).longitude});"
+							value="voir" />
+					</h:form>
+					<div class="col-md-3 objetside">
+						<div>
+
+
+							<div style='overflow: hidden; height: 280px;'>
+								<div id='gmap_canvas' style='height: 440px;'></div>
+								<div>
+									<small><a href="http://embedgooglemaps.com">google
+											maps carte</a></small>
+								</div>
+
+
+
+							</div>
+							<script type='text/javascript'>
+						var lat;
+						var lng;
+						var intitule;
+						function init_map(lat,lng){
+							var myOptions = {zoom:13,center:new google.maps.LatLng(lat,lng),mapTypeId: google.maps.MapTypeId.ROADMAP};
+							var contentString ='dans la place';
+						map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
+						
+						marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(lat,lng) ,title: "#{mbObjet.selectedProp.intitule}"});
+
+						
+						marker.addListener(marker, 'click', function(){infowindow.open(map,marker);});
+
+						infowindow.open(map,marker);
+						}
+						google.maps.event.addDomListener(window, 'load', init_map);</script>
+						</div>
+
+						<!-- partie sur le propriétaire -->
+
+						<!--***partie pour la photo et les info perso*** _________________________________________________________ -->
 						<br></br>
-						<div class="col-md-6 col-sm-12 ">
-						Ce membre ne possède pas encore d'envie.
-						</div>
-						</h:panelGroup>
-						<ui:repeat var="envie" value="#{mbObjet.getEnviesAutreMembre(mbObjet.selectedProp.membre)}"
-				varStatus="envieStatut">
-						<div class="col-md-6 col-sm-12 ">
-							<div class="box-simple boxEnvie">
-								<div class="text">
-									<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-										N° #{envieStatut.index +1}</h4>
-									<h3>
-										<div class="col-md-10 col-sm-10">#{envie.intitule}</div>
-										<div class="col-md-2 col-sm-2">
-											
-												<h:panelGroup rendered="#{!mbEnvie.valeurVide(envie)}">
-									<label> #{envie.valeur.valeur}</label> <img
-										src="img/custom/feuille orange.png" alt=""></img>
-										</h:panelGroup>
-										<h:panelGroup rendered="#{mbEnvie.valeurVide(envie)}">
-									<label> ?</label> <img
-										src="img/custom/feuille orange.png" alt=""></img>
-										</h:panelGroup>
-										
-										</div>
-									</h3>
-									<div class="row">
-										<div class="col-md-6 col-sm-12 orientationTextLeft">
-											<h4>Détails:</h4>
-											<p>
-												<label> Catégorie: </label> <label class="italic">
-													#{envie.categorie.intitule}</label> <br /> <label> Sous-catégorie: </label> <label
-													class="italic"> #{envie.sousCategorie.intitule} </label> <br /> <label>
-													Distance: </label> <label class="italic"> moins de #{envie.distance} km </label>
-											</p>
-										</div>
-										<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
-											<h4>Adresses:</h4>
-											<ui:repeat var="adresse"
-											value="#{mbObjet.getLocalisationByMembre(mbObjet.selectedProp.membre)}">
-											<div class="row">
-
-												<p>
-													<span class="glyphicon glyphicon-map-marker"
-														aria-hidden="true"></span> <label>#{adresse.adresse}<br /> #{adresse.ville}
-													</label>
-
-												</p>
-											</div>
-											</ui:repeat>
+						<div class="box-simple box-white same-height">
+							<div class="partieProprio ">
+								<h3 class="text-uppercase">Intéressé ?</h3>
+								<div class="row">
+									<div class="col-sm-4 col-md-6 ">
+										<div class="image">
+											<a href=""> <img
+												src="#{mbObjet.selectedProp.membre.avatar}" alt=""
+												class="img-responsive img-circle tailleMaxImage"></img>
+											</a>
 										</div>
 									</div>
+									<div class="col-sm-4 col-md-6 ">
+										<h4>
+											<h:outputText value="#{mbObjet.selectedProp.membre.pseudo}" />
+										</h4>
+										<h:panelGroup
+											rendered="#{mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+											<p class="rating-num">-/5</p>
+										</h:panelGroup>
+										<h:panelGroup
+											rendered="#{!mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+											<p class="rating-num">
+												<h:outputText
+													value="#{mbObjet.getNoteMoyenne(mbObjet.selectedProp.membre)}" />
+												/5
+											</p>
+										</h:panelGroup>
+									</div>
 								</div>
-								<!-- /.text -->
+
 							</div>
+
+							<!--***Fin partie pour la photo et les info perso***  -->
+
+							<div class="partieLiens">
+								<p>
+									<h:form>
+										<h:commandLink
+											action="#{mbObjet.LoadMembre(mbObjet.selectedProp.membre)}"
+											value="">
+											<strong>Voir le profil du propriétaire</strong>
+										</h:commandLink>
+									</h:form>
+								</p>
+								<p>
+									<a href="compte-messages.xhtml"><strong>Contacter
+											le propriétaire</strong></a>
+								</p>
+							</div>
+
 						</div>
-						</ui:repeat>
-						
-						<!-- Premiere envie -->
-						
 					</div>
 				</div>
-			</div>
+				<!-- container pour les envies du propriétaire de l'objet -->
+				<div class="container">
+					<h4>Vous souhaitez l'échanger contre un de vos objets?</h4>
+					<button type="button" class="btn btn-template-main"
+						data-toggle="collapse" data-target="#demo">Consulter ses
+						envies</button>
+					<br></br>
+					<div id="demo" class="collapse">
+						<div class="row">
+							<!-- Premiere envie -->
+							<h:panelGroup rendered="#{empty mbEnvie.enviesDuMembre}">
+								<br></br>
+								<div class="col-md-6 col-sm-12 ">Ce membre ne possède pas
+									encore d'envie.</div>
+							</h:panelGroup>
+							<ui:repeat var="envie"
+								value="#{mbObjet.getEnviesAutreMembre(mbObjet.selectedProp.membre)}"
+								varStatus="envieStatut">
+								<div class="col-md-6 col-sm-12 ">
+									<div class="box-simple boxEnvie">
+										<div class="text">
+											<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
+												N° #{envieStatut.index +1}</h4>
+											<h3>
+												<div class="col-md-10 col-sm-10">#{envie.intitule}</div>
+												<div class="col-md-2 col-sm-2">
+
+													<h:panelGroup rendered="#{!mbEnvie.valeurVide(envie)}">
+														<label> #{envie.valeur.valeur}</label>
+														<img src="img/custom/feuille orange.png" alt=""></img>
+													</h:panelGroup>
+													<h:panelGroup rendered="#{mbEnvie.valeurVide(envie)}">
+														<label> ?</label>
+														<img src="img/custom/feuille orange.png" alt=""></img>
+													</h:panelGroup>
+
+												</div>
+											</h3>
+											<div class="row">
+												<div class="col-md-6 col-sm-12 orientationTextLeft">
+													<h4>Détails:</h4>
+													<p>
+														<label> Catégorie: </label> <label class="italic">
+															#{envie.categorie.intitule}</label> <br /> <label>
+															Sous-catégorie: </label> <label class="italic">
+															#{envie.sousCategorie.intitule} </label> <br /> <label>
+															Distance: </label> <label class="italic"> moins de
+															#{envie.distance} km </label>
+													</p>
+												</div>
+												<div
+													class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
+													<h4>Adresses:</h4>
+													<ui:repeat var="adresse"
+														value="#{mbObjet.getLocalisationByMembre(mbObjet.selectedProp.membre)}">
+														<div class="row">
+
+															<p>
+																<span class="glyphicon glyphicon-map-marker"
+																	aria-hidden="true"></span> <label>#{adresse.adresse}<br />
+																	#{adresse.ville}
+																</label>
+
+															</p>
+														</div>
+													</ui:repeat>
+												</div>
+											</div>
+										</div>
+										<!-- /.text -->
+									</div>
+								</div>
+							</ui:repeat>
+
+							<!-- Premiere envie -->
+
+						</div>
+					</div>
+				</div>
 			</h:panelGroup>
 			<div class="marginBottom"></div>
 		</ui:define>

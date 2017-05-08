@@ -19,10 +19,11 @@
 		<class>com.tac.entity.Tag</class>
 		<class>com.tac.entity.Valeur</class>
 		<class>com.tac.entity.Photo</class>
+		<class>com.tac.entity.Departement</class>
 		<properties>
 			<property name="hibernate.show_sql" value="false" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
-			<property name="hibernate.hbm2ddl.auto" value="validate" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
 		</properties>
 	</persistence-unit>
 </persistence>
