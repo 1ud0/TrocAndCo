@@ -33,7 +33,7 @@
 							<i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i
 							class="fa fa-star-o"></i><i class="fa fa-star-o"></i> <br />Evaluation</a>
 					</li>
-					<li class="#{view.viewId eq '/echangeRecap.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-eye"></i><br />Récapitulatif</a>
+					<li class="#{view.viewId eq '/echangeRecapAcquereur.xhtml' or view.viewId eq '/echangeRecapDonneur.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-eye"></i><br />Récapitulatif</a>
 					</li>
 				</ul>
 				<div class="echangeEtape">
@@ -42,13 +42,13 @@
 							<div class="row">
 								<div class="col-sm-4">
 									<div class="image">
-										<a href=""> <img src="#{mbIdentif.membreConnected.avatar}" alt=""
+										<a href=""> <img src="#{mbEchange.membreAutre.avatar}" alt=""
 											class="img-responsive img-circle MaxHeightImg100" /></a>
 									</div>
 								</div>
 								<div class="col-sm-8">
-									<h4>#{mbEchange.membreCourant.pseudo}</h4>
-									<p>#{mbEchange.membreCourant.nom} #{mbEchange.membreCourant.prenom}</p>
+									<h4>#{mbEchange.membreAutre.pseudo}</h4>
+									<p>#{mbEchange.membreAutre.nom} #{mbEchange.membreAutre.prenom}</p>
 									
 								</div>
 							</div>
@@ -69,7 +69,7 @@
 											<h:commandLink action="#{mbEchange.redirigerEchange()}" value="#{mbEchange.selectedProp.intitule}" />
 											</h3>
 											<p class="price">
-												#{mbEchange.selectedProp.valeur.valeur}<img alt="feuille" src="img/custom/feuille.png" class="iconeFeuille"/>
+												Valeur: #{mbEchange.selectedProp.valeur.valeur}<img alt="feuille" src="img/custom/feuille.png" class="iconeFeuille"/>
 											</p>
 											</h:form>
 										</div>

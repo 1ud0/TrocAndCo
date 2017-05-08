@@ -14,6 +14,8 @@ public interface IServiceEchange {
 	Echange refuserEchange (Echange echange);
 	Echange annulerEchange (Echange echange);
 	Echange validerEchange (Echange echange);
+	Echange noterEchange (Echange echange);
+	
 	Rdv programmerRdv(Rdv rdv);
 	Echange getByNumero(Echange echange);
 	List<Echange> getByMembre(Membre membre);

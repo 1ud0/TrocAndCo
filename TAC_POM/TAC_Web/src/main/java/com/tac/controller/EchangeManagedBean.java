@@ -6,8 +6,11 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.swing.plaf.SliderUI;
 
+import com.tac.business.api.IServiceCompte;
 import com.tac.business.api.IServiceEchange;
+import com.tac.business.api.IServiceInscription;
 import com.tac.business.api.IServiceProposition;
 import com.tac.business.api.IServiceValeur;
 import com.tac.entity.Echange;
@@ -34,19 +37,32 @@ public class EchangeManagedBean {
 	@EJB
 	IServiceEchange proxyEchange;
 	
+	@EJB
+	IServiceCompte proxyCompteMembre;
+	
 	private Membre membreCourant;
+	private Membre membreAutre;
+	
+	
 	private Proposition selectedProp;	
 	private List<Proposition> propositionsMembre;
 	private Proposition propositionPourEchange;	
 	private List<Valeur> valeurs;
 	private Valeur valeurPourEchange;
 	private boolean prixFixe=false;
+	private String codeRentre;
+	
+	private String note;
+	private String commentaire;
 	
 	private Echange echangePropose;
+	
+	private Echange echangeCourant;
 	
 	public String loadPropositionEtMembre(){
 		membreCourant=identifBean.getMembreConnected();
 		selectedProp=objetSelectedBean.getSelectedProp();
+		membreAutre = selectedProp.getMembre();
 		
 		echangePropose = new Echange();
 		valeurPourEchange = new Valeur();
@@ -60,11 +76,115 @@ public class EchangeManagedBean {
 	}
 	
 	
+	/**
+	 *  a modifier
+	 * @param echange
+	 * @return
+	 */
+	public String loadEchangeAcquereur(Echange echange) {
+		membreCourant=identifBean.getMembreConnected();
+		selectedProp= echange.getProposition();
+		membreAutre = selectedProp.getMembre();
+		
+		echangeCourant = echange;
+		String nav = "";
+		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
+			nav = "/echangeRecapAcquereur.xhtml?faces-redirect=true";
+		}
+		else if (echange.getDateValidation() != null) {
+			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
+		}
+		else if(echange.getDateAcceptation()!= null){
+			nav = "/echangeCodeAcquereur.xhtml?faces-redirect=true";
+		}
+		else {
+			nav = "/echangeAttenteValidation.xhtml?faces-redirect=true";
+		}
+		return nav;
+	}
+	
+	public String loadEchangeDonneur(Echange echange) {
+		membreCourant=identifBean.getMembreConnected();
+		selectedProp= echange.getProposition();
+		membreAutre = echange.getMembre();
+		
+		echangeCourant = echange;
+		System.out.println("Date acceptation " + echangeCourant.getDateAcceptation());
+		String nav = "";
+		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
+			nav = "/echangeRecapDonneur.xhtml?faces-redirect=true";
+		}
+		else if (echange.getDateValidation() != null) {
+			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
+		}
+		else if(echange.getDateAcceptation()!= null){
+			nav = "/echangeCodeDonneur.xhtml?faces-redirect=true";
+		}
+		else {
+			nav = "/echangeInitDonneur.xhtml?faces-redirect=true";
+		};
+		return nav;
+	}
+	
+	
+	
+	public String noterEchange(){
+		String nav = "";
+		if (membreCourant.getPseudo().equals(echangeCourant.getMembre().getPseudo())){
+			// si c'est l'acquereur
+			echangeCourant.setComChercheur(commentaire);
+			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			nav = loadEchangeAcquereur(echangeCourant);
+		}
+		else{
+			echangeCourant.setComDonneur(commentaire);
+			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			nav = loadEchangeDonneur(echangeCourant);
+		}
+		return nav;
+	}
 
 	public String redirigerEchange(){
 		return "/fiche.xhtml?faces-redirect=true&id=" + selectedProp.getIdProposition();
 	}
 	
+	public String accepterEchange(){
+		echangeCourant = proxyEchange.accepterEchange(echangeCourant);	
+		return loadEchangeDonneur(echangeCourant);
+	}
+	
+	public String refuserEchange(){
+		echangeCourant = proxyEchange.refuserEchange(echangeCourant);
+		System.out.println(echangeCourant.getDateRefus());
+		return loadEchangeDonneur(echangeCourant);
+	}
+	
+	public String annulerEchangeDonneur(){
+		echangeCourant = proxyEchange.annulerEchange(echangeCourant);
+		return loadEchangeDonneur(echangeCourant);
+	}
+	
+	public String annulerEchangeAcquereur(){
+		echangeCourant = proxyEchange.annulerEchange(echangeCourant);
+		return loadEchangeAcquereur(echangeCourant);
+	}
+	
+	public String validerCode(){
+		String nav = "";	
+		if (codeRentre != null){
+			try {
+				System.out.println("code" + codeRentre);
+				int code = Integer.parseInt(codeRentre);
+				if (code == echangeCourant.getCodeEchange()){
+					echangeCourant = proxyEchange.validerEchange(echangeCourant);
+					nav = loadEchangeDonneur(echangeCourant);
+				}
+			} catch(NumberFormatException e){
+				
+			};
+		}
+		return nav;
+	}
 	
 	public void parametragePrixEchange(){
 		if(prixFixe){
@@ -195,6 +315,56 @@ public class EchangeManagedBean {
 
 	public void setProxyEchange(IServiceEchange proxyEchange) {
 		this.proxyEchange = proxyEchange;
+	}
+
+
+	public Echange getEchangeCourant() {
+		return echangeCourant;
+	}
+
+
+	public void setEchangeCourant(Echange echangeCourant) {
+		this.echangeCourant = echangeCourant;
+	}
+
+
+	public Membre getMembreAutre() {
+		return membreAutre;
+	}
+
+
+	public void setMembreAutre(Membre membreAutre) {
+		this.membreAutre = membreAutre;
+	}
+
+
+	public String getCodeRentre() {
+		return codeRentre;
+	}
+
+
+	public void setCodeRentre(String codeRentre) {
+		this.codeRentre = codeRentre;
+	}
+
+
+	public String getNote() {
+		return note;
+	}
+
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
 	
 	

@@ -49,6 +49,7 @@ public class ServiceEchange implements IServiceEchange {
 	@Override
 	public Echange refuserEchange(Echange echange) {
 		echange.setDateRefus(new Date());
+		echange = proxyEchange.updateEchange(echange);
 		return echange;
 	}
 
@@ -146,6 +147,11 @@ public class ServiceEchange implements IServiceEchange {
 	public List<Echange> getByMembreChercheur(Integer idMembreChercheur) {
 
 		return proxyEchange.getByMembreChercheur(idMembreChercheur);
+	}
+
+	@Override
+	public Echange noterEchange(Echange echange) {
+		return proxyEchange.updateEchange(echange);
 	}
 
 
