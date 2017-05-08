@@ -10,7 +10,6 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoMessage;
 import com.tac.entity.Message;
-import com.tac.entity.Proposition;
 
 @Remote(IDaoMessage.class)
 @Stateless

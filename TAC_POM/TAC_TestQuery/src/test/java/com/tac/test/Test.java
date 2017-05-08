@@ -9,7 +9,6 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
-import com.tac.entity.Echange;
 import com.tac.entity.Proposition;
 
 

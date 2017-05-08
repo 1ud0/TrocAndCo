@@ -12,7 +12,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
