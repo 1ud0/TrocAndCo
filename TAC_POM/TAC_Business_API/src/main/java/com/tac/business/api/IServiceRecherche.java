@@ -9,5 +9,6 @@ import com.tac.util.CritereSearch;
 public interface IServiceRecherche {
 
 	List<Proposition> getPropositionsBidon();
+	List<Proposition> getNewProps(int nombre, Membre membre);
 	List<Proposition> rechercher(CritereSearch carac, Membre membre);
 }

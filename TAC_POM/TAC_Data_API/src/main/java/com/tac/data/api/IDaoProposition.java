@@ -14,7 +14,7 @@ public interface IDaoProposition {
 	Proposition getById(int idProposition) throws DataAccessException;
 	List<Proposition> getByMembre(int idMembre);
 	List<Proposition> getPropDispo();
-	List<Proposition> getNouveautes(int nombre);
+	List<Proposition> getNouveautes(int nombre, Integer idMembre);
 	List<Proposition> getPropoDispoByMembre(int idMembre);
 	List<Proposition> rechercher(CritereSearch carac, Integer idMembre);
 	

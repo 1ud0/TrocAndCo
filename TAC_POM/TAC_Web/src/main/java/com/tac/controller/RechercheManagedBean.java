@@ -12,6 +12,7 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.context.FacesContext;
 
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
@@ -70,7 +71,15 @@ public class RechercheManagedBean {
 	}
 	
 	public void startSearching() {
-		
+		System.out.println("click sur le bouton");
+	}
+	
+	public void resetFilter() {
+		critere = new CritereSearch();
+	}
+	
+	public void getNewPropositions() {
+		propositions = proxyRecherche.getNewProps(20, connexionBean.getMembreConnected());
 	}
 	
 	public void loadingPage() {
@@ -110,7 +119,11 @@ public class RechercheManagedBean {
 	}
 	
 	public void listenerCat(Categorie cat) {
-		critere.setCat(cat.getIdCategorie().toString());
+		if (cat == null) {
+			critere.setCat(null);
+		} else {
+			critere.setCat(cat.getIdCategorie().toString());
+		}
 		critere.setSousCat(null);
 	}
 	

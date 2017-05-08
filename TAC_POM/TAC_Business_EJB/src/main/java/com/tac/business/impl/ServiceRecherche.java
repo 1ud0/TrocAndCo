@@ -29,7 +29,7 @@ public class ServiceRecherche implements IServiceRecherche {
 	
 	@Override
 	public List<Proposition> getPropositionsBidon() {
-		return proxyProposition.getNouveautes(20);
+		return proxyProposition.getNouveautes(20, null);
 	}
 
 	public List<Proposition> testseek(CritereSearch carac) {
@@ -53,11 +53,6 @@ public class ServiceRecherche implements IServiceRecherche {
 		Integer idMembre = membre == null ? null : membre.getIdMembre();
 		List<Localisation> locs = new ArrayList<>();
 		if (carac.getLieux().size() != 0) {
-			
-			//on set la distance par défaut si aucune définie
-			if (carac.getDistanceMax() == null || carac.getDistanceMax().equals("0")) {
-				carac.setDistanceMax(DEFAULT_DISTANCE_MAX);
-			}
 			try {
 				Integer dist = Integer.parseInt(carac.getDistanceMax());
 				carac.setRayonRecherche(dist * DEGREE_PER_KM);
@@ -73,10 +68,13 @@ public class ServiceRecherche implements IServiceRecherche {
 		}
 		carac.setLocalisations(locs);
 		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre);
-//		for (Proposition proposition : propositions) {
-//			System.out.println(proposition.getIntitule());
-//		}
 		return propositions;
+	}
+
+	@Override
+	public List<Proposition> getNewProps(int nombre, Membre membre) {
+		Integer idMembre = membre == null ? null : membre.getIdMembre();
+		return proxyProposition.getNouveautes(nombre, idMembre);
 	}
 
 }

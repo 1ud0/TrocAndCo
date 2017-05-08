@@ -46,7 +46,7 @@ public class ServiceAccueil implements IServiceAccueil{
 
 	@Override
 	public List<Proposition> getNouveaute(int nbNouveaute) {
-		return proxyProposition.getNouveautes(nbNouveaute);
+		return proxyProposition.getNouveautes(nbNouveaute, null);
 	}
 
 }

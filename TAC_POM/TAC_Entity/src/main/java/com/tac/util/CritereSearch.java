@@ -10,6 +10,7 @@ public class CritereSearch implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int KEYWORD_MIN_LENGTH = 2;
+	public static final String DEFAULT_DISTANCE_MAX = "0";
 	
 	private String intitule;
 	private String cat;
@@ -23,6 +24,13 @@ public class CritereSearch implements Serializable {
 	private List<Localisation> localisations;
 	
 	public CritereSearch() {
+		etat = "0";
+		valeurs.add("1");
+		valeurs.add("2");
+		valeurs.add("3");
+		valeurs.add("4");
+		valeurs.add("5");
+		distanceMax = DEFAULT_DISTANCE_MAX;
 	}
 	
 	public List<String> getKeyWords() {

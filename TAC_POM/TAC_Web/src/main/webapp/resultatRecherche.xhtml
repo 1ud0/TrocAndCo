@@ -35,31 +35,38 @@ _________________________________________________________ -->
 								<!-- *** MENUS AND FILTERS ***
 _________________________________________________________ -->
 							<h:form id="filterSeek">
+							
+								<h:commandButton action="#{mbRecherche.resetFilter()}" id="btnReset" styleClass="btn btn-default btn-sm btn-template-main" value="REINITIALISER LES FILTRES">
+									<f:ajax render="recherche" execute="@form"/>
+								</h:commandButton><br /><br />
 								<!--Categorie du menu debut-->
 								<div class="panel panel-default sidebar-menu">
 									<div class="panel-heading">
-										<h3 class="panel-title">Categories</h3>
+										<h3 class="panel-title">
+											<f:ajax render="recherche">
+												<h:commandLink action="#{mbRecherche.listenerCat(null)}" value="Catégories" />
+											</f:ajax>
+										</h3>
 									</div>
 									<div  class="panel-body">
 										<ul class="nav nav-pills nav-stacked category-menu">
-											<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
-												<li>
-													<h:outputLink>
-														<h:outputText value="#{entry.key.intitule}" />
-														<f:ajax listener="#{mbRecherche.listenerCat(entry.key)}" render="recherche" execute="@this" event="click" />
-													</h:outputLink>
-													<ul>
-														<ui:repeat var="sousCat" value="#{entry.value}">
-															<li>
-																<h:outputLink>
-																	<h:outputText value="#{sousCat.intitule}" /><span class="badge pull-right"><h:outputText value="#{mbRecherche.getNbOccurence(sousCat)}" /></span>
-																	<f:ajax listener="#{mbRecherche.listenerSousCat(sousCat)}" render="recherche" execute="@this" event="click" />
-																</h:outputLink>
-															</li>
-														</ui:repeat>
-													</ul>
-												</li>
-											</ui:repeat>
+											<f:ajax render="recherche">
+												
+												<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
+													<li>
+														<h:commandLink action="#{mbRecherche.listenerCat(entry.key)}" value="#{entry.key.intitule}" />
+														<ul>
+															<ui:repeat var="sousCat" value="#{entry.value}">
+																<li>
+																	<h:commandLink action="#{mbRecherche.listenerSousCat(sousCat)}" value="#{sousCat.intitule}">
+																		<span class="badge pull-right"><h:outputText value="#{mbRecherche.getNbOccurence(sousCat)}" /></span>
+																	</h:commandLink>
+																</li>
+															</ui:repeat>
+														</ul>
+													</li>
+												</ui:repeat>
+											</f:ajax>
 										</ul>
 									</div>
 								</div>
@@ -67,13 +74,13 @@ _________________________________________________________ -->
 								<!-- panel adresse -->
 								<h:panelGroup styleClass="panel panel-default sidebar-menu" rendered="#{mbIdentif.membreConnected != null}">
 									<div class="panel-heading">
-										<h3 class="panel-title">Adresse</h3>
+										<h3 class="panel-title">Localisation</h3>
 									</div>
 									<div class="panel-body">
-
+										<h5>Vos Adresses</h5>
 											<div class="form-group">
 												<h:selectManyCheckbox value="#{mbRecherche.critere.lieux}" styleClass="checkbox-inline" layout="pageDirection">
-													<f:selectItems value="#{mbRecherche.adresses}" var="currentAdr" itemLabel="#{currentAdr.titreAdresse}" itemValue="#{currentAdr.idLocalisation}"/>
+													<f:selectItems value="#{mbRecherche.adresses}" var="currentAdr" itemLabel="#{currentAdr.titreAdresse}" itemValue="#{currentAdr.idLocalisation}" />
 												</h:selectManyCheckbox>
 											</div>
 
@@ -82,11 +89,9 @@ _________________________________________________________ -->
 								
 								<!-- panel distance -->
 								<h:panelGroup styleClass="panel panel-default sidebar-menu" rendered="#{mbIdentif.membreConnected != null}">
-									<div class="panel-heading">
-										<h3 class="panel-title">Distance</h3>
-									</div>
+									
 									<div class="panel-body">
-
+										<h5>Distance</h5>
 											<div class="form-group">
 												<h:selectOneRadio value="#{mbRecherche.critere.distanceMax}" styleClass="radio-inline" layout="pageDirection">
 													<f:selectItem itemLabel="5km" itemValue="5"/>
@@ -96,6 +101,9 @@ _________________________________________________________ -->
 													<f:selectItem itemLabel="Pas de filtre" itemValue="0"/>
 												</h:selectOneRadio>
 											</div>
+											<h:commandButton action="#{mbRecherche.startSearching()}" id="btnLoc" styleClass="btn btn-default btn-sm btn-template-main" value="APPLIQUER" onclick="javascript:window.location='#recherche'">
+												<f:ajax render="recherche" execute="@form"/>
+											</h:commandButton>
 
 									</div>
 								</h:panelGroup>
@@ -114,6 +122,10 @@ _________________________________________________________ -->
 													<f:selectItems var="valeur" value="#{mbRecherche.valeurs}" itemLabel="#{valeur.valeur}" itemValue="#{valeur.idValeur}"/>
 												</h:selectManyCheckbox>
 											</div>
+											<h:commandButton action="#{mbRecherche.startSearching()}" id="btnVal" styleClass="btn btn-default btn-sm btn-template-main" value="APPLIQUER" onclick="javascript:window.location='#recherche'">
+												<f:ajax render="recherche" execute="@form"/>
+											</h:commandButton>
+											
 											
 									</div>
 								</div>
@@ -128,6 +140,7 @@ _________________________________________________________ -->
 												<h:selectOneRadio value="#{mbRecherche.critere.etat}" styleClass="radio-inline" layout="pageDirection">
 													<f:selectItems var="etat" value="#{mbRecherche.etats}" itemLabel="#{etat.intitule}" itemValue="#{etat.idEtat}" />
 													<f:selectItem itemLabel="Tous" itemValue="0"/>
+													<f:ajax render="recherche" execute="@this"/>
 												</h:selectOneRadio>
 											</div>
 										
@@ -149,7 +162,7 @@ _________________________________________________________ -->
 
 
 							<!--Resultat recherche DEBUT-->
-							<h5 class="text">Résultat de la recherche : <h:outputText value="#{mbRecherche.propositions.size()}" /> objets trouvés</h5>
+							<h5 class="text">Résultat de la recherche : <h:outputText value="#{mbRecherche.propositions.size()}" /> objet<h:outputText value="s" rendered="#{mbRecherche.propositions.size() > 1}"/> trouvé<h:outputText value="s" rendered="#{mbRecherche.propositions.size() > 1}"/></h5>
 							<br /> <br /> <br />
 							
 							

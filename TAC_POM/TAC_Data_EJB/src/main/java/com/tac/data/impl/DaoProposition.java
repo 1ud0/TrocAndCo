@@ -75,9 +75,17 @@ public class DaoProposition implements IDaoProposition {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Proposition> getNouveautes(int nombre) {
-		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.dateSuppression IS NULL ORDER BY p.dateAjout DESC";
-		Query query = em.createQuery(req);
+	public List<Proposition> getNouveautes(int nombre, Integer idMembre) {
+		StringBuilder req = new StringBuilder();
+		req.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.dateSuppression IS NULL");
+		if (idMembre != null && idMembre != 0) {
+			req.append(" AND p.membre.idMembre != :pid");
+		}
+		req.append(" ORDER BY p.dateAjout DESC");
+		Query query = em.createQuery(req.toString());
+		if (idMembre != null && idMembre != 0) {
+			query.setParameter("pid", idMembre);
+		}
 		query.setMaxResults(nombre);
 		return query.getResultList();
 	}
@@ -98,7 +106,7 @@ public class DaoProposition implements IDaoProposition {
 		System.out.println(requete);
 		System.out.println("id membre = " + idMembre);
 		Query query = setParam(requete, carac, idMembre);
-		return query.getResultList();
+ 		return query.getResultList();
 	}
 
 	//methode pour set les paramètres de la requete
