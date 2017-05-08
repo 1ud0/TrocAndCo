@@ -10,50 +10,68 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+
 		</ui:define>
-		
+
 		<ui:define name="content">
 
 			<div class="introRubrique">
 				<p class="lead">Retrouvez ici tous vos rendez-vous.</p>
-				<p class="text-muted">Consultez la liste des rendez vous pour les échanges à venir et les échanges passés.</p>
+				<p class="text-muted">Consultez la liste des rendez vous pour
+					les échanges à venir et les échanges passés.</p>
 			</div>
 			<div id="wrapper">
-			
-				
-				
-				
+<DIV hidden="true">
+				<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
+					varStatus="nbRdv" id="repetRdv" >
+
+					<h:outputText value="lieu : #{rdv.lieu} "
+						id="lieuRdv#{nbRdv.index}" /><br></br>
+						
+					<h:outputText value="#{rdv.dateRdv.date}" id="rdvDay#{nbRdv.index}" /> <br></br>
+					<h:outputText value="#{rdv.dateRdv.month}" id="rdvMonth#{nbRdv.index}" /><br></br>
+					<h:outputText value="#{rdv.dateRdv.year + 1900}" id="rdvYear#{nbRdv.index}" /><br></br>
+					<h:outputText value="#{rdv.dateRdv.hours}" id="rdvHours#{nbRdv.index}" /><br></br>
+					<h:outputText value="#{rdv.dateRdv.minutes}" id="rdvMinutes#{nbRdv.index}" />
+					
+
+				</ui:repeat>
+</DIV>
+
+
 				<div id="myScheduler"></div>
 			</div>
 
 			<script type="text/javascript">
-				YUI().use(
-			  'aui-scheduler',
+				YUI({lang:"fr-FR"}).use('aui-scheduler',
 			  function(Y) {
-			    var events = [
-			      {
-			        content: 'Partial Lunar Eclipse',
-			        endDate: new Date(2013, 3, 25, 5),
-			        startDate: new Date(2013, 3, 25, 1)
-			      },
-			      {
-			        color: "#8d8",
-			        content: 'Earth Day Lunch',
-			        disabled: true,
-			        endDate: new Date(2013, 3, 22, 13),
-			        meeting: true,
-			        reminder: true,
-			        startDate: new Date(2013, 3, 22, 12)
-			      },
-			      {
-			        content: "Weeklong",
-			        endDate: new Date(2013, 3, 27),
-			        startDate: new Date(2013, 3, 21)
-			      }
-			    ];
+				
+					var allBtn= [];
+					allBtn = document.getElementsByClassName("scheduler-base-today btn btn-default");
+					var btnSingle = allBtn[0];					
+					console.log(btnSingle);			  
+
+				  var rep = "repetRdv:";
+				  var lieu = ":lieuRdv";
+				  var i = 0;
+				  var events = [];
+				  while (document.getElementById(rep + i + lieu) !== null) {
+					  
+							var monObjet = 
+								{
+									color: "#20bb8e",
+					    	       content: document.getElementById(rep + i + lieu).textContent,
+					    	       disabled: true,
+					    	       meeting: true,
+					    	       reminder: true,
+					    	       startDate: new Date(document.getElementById("repetRdv:" + i + ":rdvYear").textContent, document.getElementById("repetRdv:" + i + ":rdvMonth").textContent, document.getElementById("repetRdv:" + i + ":rdvDay").textContent,document.getElementById("repetRdv:" + i + ":rdvHours").textContent , document.getElementById("repetRdv:" + i + ":rdvMinutes").textContent)
+								};
+							events.push(monObjet);
+							i++;
+					  }
+			      
 			
 			    var agendaView = new Y.SchedulerAgendaView();
 			    var dayView = new Y.SchedulerDayView();
@@ -64,21 +82,23 @@
 			
 			    new Y.Scheduler(
 			      {
+				      
 			        activeView: weekView,
 			        boundingBox: '#myScheduler',
-			        date: new Date(2013, 3, 25),
+			        date: new Date(),
 			        eventRecorder: eventRecorder,
 			        items: events,
 			        render: true,
 			        views: [dayView, weekView, monthView, agendaView]
 			      }
 			    );
+			    console.log(document.getElementById("toto"));
 			  }
 			);
 				
 			</script>
-			
-		
+
+
 
 
 

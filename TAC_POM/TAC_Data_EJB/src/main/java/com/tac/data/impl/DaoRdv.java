@@ -40,7 +40,7 @@ public class DaoRdv implements IDaoRdv{
 				+ " LEFT JOIN IdMembre"
 				+ " WHERE r.idRDV like :pidRdv";*/
 		
-		final String req = "SELECT r FROM Rdv  WHERE r.echange.membre.idMembre = :pidMembre";
+		final String req = "SELECT r FROM Rdv r WHERE r.echange.membre.idMembre = :pidMembre";
 		Query query = em.createQuery(req).setParameter("pidMembre", IdMembre);
 		return query.getResultList();
 		
