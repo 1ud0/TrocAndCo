@@ -52,6 +52,9 @@ public class EchangeManagedBean {
 	private boolean prixFixe=false;
 	private String codeRentre;
 	
+	private String note;
+	private String commentaire;
+	
 	private Echange echangePropose;
 	
 	private Echange echangeCourant;
@@ -120,6 +123,24 @@ public class EchangeManagedBean {
 		else {
 			nav = "/echangeInitDonneur.xhtml?faces-redirect=true";
 		};
+		return nav;
+	}
+	
+	
+	
+	public String noterEchange(){
+		String nav = "";
+		if (membreCourant.getPseudo().equals(echangeCourant.getMembre().getPseudo())){
+			// si c'est l'acquereur
+			echangeCourant.setComChercheur(commentaire);
+			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			nav = loadEchangeAcquereur(echangeCourant);
+		}
+		else{
+			echangeCourant.setComDonneur(commentaire);
+			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			nav = loadEchangeDonneur(echangeCourant);
+		}
 		return nav;
 	}
 
@@ -324,6 +345,26 @@ public class EchangeManagedBean {
 
 	public void setCodeRentre(String codeRentre) {
 		this.codeRentre = codeRentre;
+	}
+
+
+	public String getNote() {
+		return note;
+	}
+
+
+	public void setNote(String note) {
+		this.note = note;
+	}
+
+
+	public String getCommentaire() {
+		return commentaire;
+	}
+
+
+	public void setCommentaire(String commentaire) {
+		this.commentaire = commentaire;
 	}
 	
 	

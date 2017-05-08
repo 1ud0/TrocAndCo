@@ -149,6 +149,11 @@ public class ServiceEchange implements IServiceEchange {
 		return proxyEchange.getByMembreChercheur(idMembreChercheur);
 	}
 
+	@Override
+	public Echange noterEchange(Echange echange) {
+		return proxyEchange.updateEchange(echange);
+	}
+
 
 
 }
