@@ -29,16 +29,16 @@
 						<!-- *** LEFT COLUMN ***
 _________________________________________________________ -->
 						<div class="row products">
+						
+							<h:form id="filterSeek">
 
 							<div class="col-md-3 col-sm-3">
 
 								<!-- *** MENUS AND FILTERS ***
 _________________________________________________________ -->
-							<h:form id="filterSeek">
 							
-								<h:commandButton action="#{mbRecherche.resetFilter()}" id="btnReset" styleClass="btn btn-default btn-sm btn-template-main" value="REINITIALISER LES FILTRES">
-									<f:ajax render="recherche" execute="@form"/>
-								</h:commandButton><br /><br />
+							
+								
 								<!--Categorie du menu debut-->
 								<div class="panel panel-default sidebar-menu">
 									<div class="panel-heading">
@@ -152,7 +152,7 @@ _________________________________________________________ -->
 									data-toggle="modal" data-target="#ModalEnregistrementEnvie">
 									Enregistrer une envie</button>
 
-								</h:form>
+								
 							</div>
 							
 							<!-- /.col-md-3 -->
@@ -162,15 +162,21 @@ _________________________________________________________ -->
 
 
 							<!--Resultat recherche DEBUT-->
+							<h:commandButton action="#{mbRecherche.resetFilter()}" id="btnReset" styleClass="btn btn-default btn-sm btn-template-main pull-right" value="REINITIALISER LES FILTRES">
+								<f:ajax render="recherche" execute="@form"/>
+							</h:commandButton>
+							</h:form>
 							<h5 class="text">Résultat de la recherche : <h:outputText value="#{mbRecherche.propositions.size()}" /> objet<h:outputText value="s" rendered="#{mbRecherche.propositions.size() > 1}"/> trouvé<h:outputText value="s" rendered="#{mbRecherche.propositions.size() > 1}"/></h5>
+							
 							<br /> <br /> <br />
 							
 							
 							<!-- products -->
 							<div class=" col-md-9 col-sm-12 ">
+							<h:form>
 								<div class="row">
 									<ui:repeat var="prop" value="#{mbRecherche.propositions}">
-										<h:form>
+										
 											<div class=" col-md-3 col-sm-9 ">
 												
 												<div class="product ">
@@ -197,9 +203,10 @@ _________________________________________________________ -->
 													</h:commandLink>
 												</div>
 											</div>
-										</h:form>
+										
 									</ui:repeat>
 								</div>
+								</h:form>
 							</div>
 							<!-- /.products -->
 

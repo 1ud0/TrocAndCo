@@ -14,11 +14,13 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 
 import com.tac.business.api.IServiceCategorie;
+import com.tac.business.api.IServiceDepartement;
 import com.tac.business.api.IServiceEtat;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceRecherche;
 import com.tac.business.api.IServiceValeur;
 import com.tac.entity.Categorie;
+import com.tac.entity.Departement;
 import com.tac.entity.Etat;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
@@ -45,6 +47,8 @@ public class RechercheManagedBean {
 	private IServiceValeur proxyValeur;
 	@EJB
 	private IServiceCategorie proxyCat;
+	@EJB
+	private IServiceDepartement proxyDep;
 
 	// managedBean
 	@ManagedProperty(value = "#{mbIdentif}")
@@ -57,6 +61,7 @@ public class RechercheManagedBean {
 	private List<Etat> etats;
 	private List<Valeur> valeurs;
 	private List<Localisation> adresses;
+	private List<Departement> departements;
 
 	private List<Entry<Categorie, List<Categorie>>> catsEntries;
 	private Map<Categorie, List<Categorie>> mycats;
@@ -87,8 +92,6 @@ public class RechercheManagedBean {
 		mycats = new HashMap<>();
 		catsCount = new HashMap<>();
 		for (Proposition proposition : propositions) {
-			List<Localisation> localisations = proxyLocalisation.getPropositionLocalisations(proposition);
-			proposition.setLocalisations(localisations);
 			Categorie cat = proposition.getCategorie();
 			Categorie sousCat = proposition.getSousCategorie();
 			List<Categorie> sousCategories = new ArrayList<>();
@@ -258,6 +261,22 @@ public class RechercheManagedBean {
 
 	public void setCatsCount(Map<Categorie, MutableInt> catsCount) {
 		this.catsCount = catsCount;
+	}
+
+	public IServiceDepartement getProxyDep() {
+		return proxyDep;
+	}
+
+	public void setProxyDep(IServiceDepartement proxyDep) {
+		this.proxyDep = proxyDep;
+	}
+
+	public List<Departement> getDepartements() {
+		return proxyDep.getAllDepartements();
+	}
+
+	public void setDepartements(List<Departement> departements) {
+		this.departements = departements;
 	}
 
 

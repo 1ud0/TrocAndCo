@@ -19,8 +19,6 @@ import com.tac.util.CritereSearch;
 @Stateless
 public class ServiceRecherche implements IServiceRecherche {
 
-	public static final String DEFAULT_DISTANCE_MAX = "10";
-	public static final float DEGREE_PER_KM = 0.00898f;
 	
 	@EJB
 	private IDaoProposition proxyProposition;
@@ -53,12 +51,6 @@ public class ServiceRecherche implements IServiceRecherche {
 		Integer idMembre = membre == null ? null : membre.getIdMembre();
 		List<Localisation> locs = new ArrayList<>();
 		if (carac.getLieux().size() != 0) {
-			try {
-				Integer dist = Integer.parseInt(carac.getDistanceMax());
-				carac.setRayonRecherche(dist * DEGREE_PER_KM);
-			} catch (NumberFormatException e) {
-				carac.setRayonRecherche(Integer.parseInt(DEFAULT_DISTANCE_MAX) * DEGREE_PER_KM);
-			}
 			//on recupère la liste des adresses de depart pour la recherche
 			for (String lieu : carac.getLieux()) {
 				try {
@@ -68,6 +60,9 @@ public class ServiceRecherche implements IServiceRecherche {
 		}
 		carac.setLocalisations(locs);
 		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre);
+		for (Proposition proposition : propositions) {
+			proposition.setLocalisations(proxyLoc.getPropositionLocalisations(proposition));
+		}
 		return propositions;
 	}
 

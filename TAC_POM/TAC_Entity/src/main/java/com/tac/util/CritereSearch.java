@@ -6,31 +6,35 @@ import java.util.List;
 
 import com.tac.entity.Localisation;
 
+/**
+ * Objet servant au transport des critères de recherche
+ * @author Ludo
+ *
+ */
 public class CritereSearch implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	private static final int KEYWORD_MIN_LENGTH = 2;
 	public static final String DEFAULT_DISTANCE_MAX = "0";
+	public static final float DEGREE_PER_KM = 0.00898f;
 	
 	private String intitule;
 	private String cat;
 	private String sousCat;
 	private String departement;
 	private List<String> lieux = new ArrayList<>();
-	private String distanceMax;
+	private String distanceMax = "0";
 	private List<String> valeurs = new ArrayList<>();
-	private String etat;
-	private Float rayonRecherche;
+	private String etat = "0";
+	private Float rayonRecherche = 0.0f;
 	private List<Localisation> localisations;
 	
 	public CritereSearch() {
-		etat = "0";
 		valeurs.add("1");
 		valeurs.add("2");
 		valeurs.add("3");
 		valeurs.add("4");
 		valeurs.add("5");
-		distanceMax = DEFAULT_DISTANCE_MAX;
 	}
 	
 	public List<String> getKeyWords() {
@@ -118,6 +122,11 @@ public class CritereSearch implements Serializable {
 		return distanceMax;
 	}
 	public void setDistanceMax(String distanceMax) {
+		try {
+			rayonRecherche = Integer.parseInt(distanceMax) * DEGREE_PER_KM;
+		} catch (NumberFormatException e) {
+			rayonRecherche = 0.0f;
+		}
 		this.distanceMax = distanceMax;
 	}
 	public List<String> getValeurs() {

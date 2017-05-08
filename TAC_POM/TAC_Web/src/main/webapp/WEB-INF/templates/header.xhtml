@@ -368,27 +368,10 @@ _________________________________________________________ -->
 						<div class="input-group selecteur">
 							<span class="input-group-addon"><img
 								src="img/custom/location.png" alt="cat"></img></span> 
-							<select
-								id="lunch" class="selectpicker form-control"
-								data-live-search="true" title="Please select a lunch ...">
-								<option value="0" selected="selected">Toutes les régions</option>
-								<option value="1" id="list_rub" class="noir">Auvergne-Rhône-Alpes</option>
-								<option value="2" id="list_rub" class="noir">Bourgogne-Franche-Comté</option>
-								<option value="3" id="list_rub" class="noir">Bretagne</option>
-								<option value="4" id="list_rub" class="noir">Centre-Val
-									de Loire</option>
-								<option value="5" id="list_rub" class="noir">Corse</option>
-								<option value="6" id="list_rub" class="noir">Grand Est</option>
-								<option value="7" id="list_rub" class="noir">Hauts-de-France</option>
-								<option value="8" id="list_rub" class="noir">Île-de-France</option>
-								<option value="9" id="list_rub" class="noir">Normandie</option>
-								<option value="10" id="list_rub" class="noir">Nouvelle-Aquitaine</option>
-								<option value="11" id="list_rub" class="noir">Occitanie</option>
-								<option value="12" id="list_rub" class="noir">Pays de
-									la Loire</option>
-								<option value="13" id="list_rub" class="noir">Provence-Alpes-Côte
-									d'Azur</option>
-							</select>
+							<h:selectOneMenu value="#{mbRecherche.critere.departement}" >
+								<f:selectItem itemLabel="Département..." itemValue="0"/>
+								<f:selectItems value="#{mbRecherche.departements}" var="currentDep" itemLabel="#{currentDep.numDepartement} - #{currentDep.nomDepartement}" itemValue="#{currentDep.numDepartement}"/>
+							</h:selectOneMenu>
 						</div>
 					</div>
 					<div class="col-sm-2">

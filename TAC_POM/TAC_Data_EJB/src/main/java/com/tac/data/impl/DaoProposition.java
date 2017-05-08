@@ -112,7 +112,6 @@ public class DaoProposition implements IDaoProposition {
 	//methode pour set les paramètres de la requete
 	private Query setParam(String requete, CritereSearch carac, Integer idMembre) {
 		Query query = em.createQuery(requete);
-		//Query query = em.createNativeQuery(requete, Proposition.class);
 		//clause id membre
 		if (idMembre != null) {
 			query.setParameter("pid", idMembre);
@@ -126,7 +125,7 @@ public class DaoProposition implements IDaoProposition {
 		}
 		//clause departement
 		String departement = carac.getDepartement();
-		if (departement != null && carac.getLieux().size() == 0) {
+		if (departement != null && !carac.getDepartement().equals("0") && carac.getLieux().size() == 0) {
 			query.setParameter("pdep", departement + "%");
 		}
 		//clause etat
@@ -171,7 +170,7 @@ public class DaoProposition implements IDaoProposition {
 			addClauseLike(carac.getKeyWords(), requete);
 		}
 		//clause departement
-		if (carac.getDepartement() != null && carac.getLieux().size() == 0) {
+		if (carac.getDepartement() != null && !carac.getDepartement().equals("0") && carac.getLieux().size() == 0) {
 			requete.append(" AND EXISTS (SELECT loc FROM Localisation loc WHERE loc.codePostal LIKE :pdep AND p MEMBER OF loc.proposedHere)");
 		}
 		//clause etat
