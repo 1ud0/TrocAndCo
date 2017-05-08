@@ -62,7 +62,7 @@
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'refus'}">
 											<span class="label label-warning">Refusé</span>
 											</h:panelGroup>
-											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'encours'}">
+											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'en cours'}">
 											<span class="label label-info">En cours</span>
 											</h:panelGroup>
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'effectue'}">
@@ -71,7 +71,7 @@
 											</td>
 											<td>22/06/2013</td>
 											<td><h:form>
-											<h:commandLink action="#{mbCompteEchange.loadEchange(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 
+											<h:commandLink action="#{mbEchange.loadEchangeAcquereur(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 
 										</h:form>
 											</td>
 										</tr>
@@ -127,7 +127,7 @@
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'refus'}">
 											<span class="label label-warning">Refusé</span>
 											</h:panelGroup>
-											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'encours'}">
+											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'en cours'}">
 											<span class="label label-info">En cours</span>
 											</h:panelGroup>
 											<h:panelGroup rendered="#{mbCompteEchange.statusEchange(echange) == 'effectue'}">
@@ -136,7 +136,7 @@
 											</td>
 											<td>22/06/2013</td>
 											<td><h:form>
-											<h:commandLink action="#{mbCompteEchange.loadEchange(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 
+											<h:commandLink action="#{mbEchange.loadEchangeDonneur(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 
 										</h:form>
 											</td>
 										</tr>

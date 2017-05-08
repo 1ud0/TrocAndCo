@@ -49,6 +49,7 @@ public class ServiceEchange implements IServiceEchange {
 	@Override
 	public Echange refuserEchange(Echange echange) {
 		echange.setDateRefus(new Date());
+		echange = proxyEchange.updateEchange(echange);
 		return echange;
 	}
 

@@ -47,15 +47,14 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	 * @return
 	 */
 	public String statusEchange(Echange echange) {
-		if (echange.getDateAnnul() != null && echange.getDateinit() != null) {
+		if (echange.getDateAnnul() != null) {
 			status = "annule";
 		} else if (echange.getDateRefus() != null) {
 			status = "refus";
 		} else if (echange.getDateValidation() != null) {
 			status = "effectue";
-		} else if (echange.getDateAcceptation() != null && echange.getDateAnnul() == null
-				&& echange.getDateRefus() == null && echange.getDateValidation() == null) {
-			status = "encours";
+		} else {
+			status = "en cours";
 		}
 		return status;
 	}
@@ -92,20 +91,7 @@ public class CompteMesEchangesManagedBean implements Serializable {
 		return donDuMembre;
 	}
 
-	/**
-	 *  a modifier
-	 * @param echange
-	 * @return
-	 */
-	public String loadEchangeAcquereur(Echange echange) {
-		String nav = "";
-		selectedEchange = echange;
 
-		if (selectedEchange != null) {
-			nav = "/echangeRecap.xhtml?faces-redirect=true";
-		}
-		return nav;
-	}
 
 
 
