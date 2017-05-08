@@ -421,34 +421,34 @@ INSERT INTO `message` (`id_message`, `date_envoi`, `lu`, `texte`, `membre_id_eme
 /*		TABLE LOCALISATION	  */
 /*============================*/
 
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (1,'34 rue de picpus','75012','paris',2.39535,48.8452,1,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (2,'92 avenue du général michel bizot','75012','paris',2.40387,48.8375,2,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (3,'9 Boulevard du Général de Gaulle','92120','Montrouge',2.32717,48.8164,3,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (4,'1 rue d Alésia','75014','Paris',2.34114,48.8264,4,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (5,'3 rue de la pomme','31000','Toulouse',1.44703,43.6019,5,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (6,'4 rue des messageries','75010','Paris',2.35083,48.8762,5,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (7,'5 rue Monge','75005','Paris',2.34968,48.8494,6,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (8,'50 boulevard du minervois','11700','Pepieux',2.68208,43.2969,6,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (9,'3 avenue verdier','92120','Montrouge',2.32027,48.8144,7,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (10,'15 rue pasteur','73200','albertville',6.38809,45.6697,7,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (11,'5 rue de la paix','75002','Paris',2.33122,48.8696,8,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (12,'3 boulevard du roi','78000','Versailles',2.12515,48.8103,9,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (13,'Palais du louvre','75001','Paris',2.33856,48.8604,9,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (14,'67 boulevard de la reine','78000','Versailles',2.1308,48.8097,10,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (15,'25 Avenue Danielle casanova','94200','Ivry-sur-seine',2.38165,48.8175,11,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (16,'12 Allée Sonia Delaunay','94800','VilleJuif',2.347641,48.788771,12,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (17,'65 Quai du Rancy','94380','Bonneuil-sur-Marne',2.48085,48.779723,12,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (18,'16 Rue Montbauron','78000','Versailles',2.136154,48.80415,13,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (19,'49 Boulevard Pasteur','93120','La Courneuve',2.383347,48.922499,14,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (20,'62 Rue Ernest Savart','93100','Montreuil',2.439651,48.868328 ,14,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (21,'120 Avenue Pablo Picasso','92000','Nanterre',2.225418,48.888198,15,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (22,'13 Rue Petitpas','28100','Dreux',1.365738,48.731738,16,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (23,'20 Rue de la Baume','75008','Paris',2.313137,48.874425,16,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (24,'91 Rue Championnet','75018','Paris',2.342362,48.895534,17,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (25,'68 Boulevard de Clichy','75018','Paris',2.33403,48.883683,17,'Travail');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (26,'35 bis Rue du Borrégo','75020','Paris',2.40107,48.873296,18,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (27,'63 Boulevard Richard Lenoir','75011','Paris',2.372231,48.860085,19,'Adresse Principale');
-INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (28,'44 Rue Frémicourt','75015','Paris',2.301335,48.84783 ,20,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (1,'34 rue de picpus',75012,'paris',2.39535,48.8452,1,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (2,'92 avenue du général michel bizot',75012,'paris',2.40387,48.8375,2,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (3,'9 Boulevard du Général de Gaulle',92120,'Montrouge',2.32717,48.8164,3,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (4,'1 rue d Alésia',75014,'Paris',2.34114,48.8264,4,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (5,'3 rue de la pomme',31000,'Toulouse',1.44703,43.6019,5,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (6,'4 rue des messageries',75010,'Paris',2.35083,48.8762,5,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (7,'5 rue Monge',75005,'Paris',2.34968,48.8494,6,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (8,'50 boulevard du minervois',11700,'Pepieux',2.68208,43.2969,6,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (9,'3 avenue verdier',92120,'Montrouge',2.32027,48.8144,7,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (10,'15 rue pasteur',73200,'albertville',6.38809,45.6697,7,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (11,'5 rue de la paix',75002,'Paris',2.33122,48.8696,8,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (12,'3 boulevard du roi',78000,'Versailles',2.12515,48.8103,9,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (13,'Palais du louvre',75001,'Paris',2.33856,48.8604,9,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (14,'67 boulevard de la reine',78000,'Versailles',2.1308,48.8097,10,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (15,'25 Avenue Danielle casanova',94200,'Ivry-sur-seine',2.38165,48.8175,11,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (16,'12 Allée Sonia Delaunay',94800,'VilleJuif',2.347641,48.788771,12,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (17,'65 Quai du Rancy',94380,'Bonneuil-sur-Marne',2.48085,48.779723,12,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (18,'16 Rue Montbauron',78000,'Versailles',2.136154,48.80415,13,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (19,'49 Boulevard Pasteur',93120,'La Courneuve',2.383347,48.922499,14,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (20,'62 Rue Ernest Savart',93100,'Montreuil',2.439651,48.868328 ,14,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (21,'120 Avenue Pablo Picasso',92000,'Nanterre',2.225418,48.888198,15,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (22,'13 Rue Petitpas',28100,'Dreux',1.365738,48.731738,16,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (23,'20 Rue de la Baume',75008,'Paris',2.313137,48.874425,16,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (24,'91 Rue Championnet',75018,'Paris',2.342362,48.895534,17,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (25,'68 Boulevard de Clichy',75018,'Paris',2.33403,48.883683,17,'Travail');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (26,'35 bis Rue du Borrégo',75020,'Paris',2.40107,48.873296,18,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (27,'63 Boulevard Richard Lenoir',75011,'Paris',2.372231,48.860085,19,'Adresse Principale');
+INSERT INTO `localisation` (`id_localisation`, `adresse`, `code_postal`, `ville`, `longitude`, `latitude`, `membre_id`, `titre_adresse`) VALUES (28,'44 Rue Frémicourt',75015,'Paris',2.301335,48.84783 ,20,'Adresse Principale');
 
 
 
@@ -510,15 +510,13 @@ INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acc
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (12,12,'2017-04-06','2017-04-10',NULL,'2017-04-11','yeah',4,'youhhou',4,1454,4,1,44,NULL);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (13,13,'2017-04-06','2017-04-07','2017-04-08',NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,45,NULL);
 INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (14,14,'2017-04-06','2017-04-07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,46,NULL);
-INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (15,15,'2017-04-06','2017-04-07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,47,'2017-04-7');
-INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (16,16,'2017-04-06','2017-04-10',NULL,NULL,'yeah',4,'youhhou',4,1454,4,2,44,'2017-04-11');
-
+INSERT INTO `echange` (`id_echange`, `reference_echange`, `date_init`, `date_acceptation`, `date_refus`, `date_validation`, `comm_chercheur`, `note_chercheur`, `comm_donneur`, `note_donneur`, `code_echange`, `prix`, `membre_id`, `proposition_id`, `date_annul`) VALUES (15,15,'2017-05-06','2017-05-07',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,1,47,'2017-05-8');
  
 /*============================*/
 /*		TABLE RDV			  */
 /*============================*/
 
-INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (1, NULL, 'Cela vous va?', '2017-03-15', 'Paris', 2);
+INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (1, NULL, 'Cela vous va?', '2017-05-8', 'Paris', 12);
 INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (2, NULL, 'Cela vous va?', '2017-03-16', 'Paris', 5);
 INSERT INTO `rdv` (`id_rdv`, `date_annulation`, `commentaire`, `date_rdv`, `lieu`, `echange_id`) VALUES (3, NULL, 'Cela vous va?', '2017-03-11', 'Paris', 6);
 
@@ -579,6 +577,7 @@ INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (50,'img/imgPro
 INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (51,'img/imgProposition/faucille.jpg',45);
 INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (52,'img/imgProposition/faucille.jpg',46);
 INSERT INTO `photo` (`id_photo`, `url`, `proposition_id`) VALUES (53,'img/imgProposition/faucille.jpg',47);
+
 /*============================*/
 /*		TABLE LOCALISER       */
 /*============================*/
@@ -647,3 +646,105 @@ INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,44);
 INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,45);
 INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,46);
 INSERT INTO `localiser` (`localisation_id`, `proposition_id`) VALUES (5,47);
+
+/*============================*/
+/*		TABLE DEPARTEMENT       */
+/*============================*/
+
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (1,'Ain','1');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (2,'Aisne','2');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (3,'Allier','3');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (4,'Alpes de Hautes-Provence','4');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (5,'Hautes-Alpes','5');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (6,'Alpes-Maritimes','6');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (7,'Ardèche','7');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (8,'Ardennes','8');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (9,'Ariège','9');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (10,'Aube','10');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (11,'Aude','11');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (12,'Aveyron','12');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (13,'Bouches-du-Rhône','13');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (14,'Calvados','14');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (15,'Cantal','15');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (16,'Charente','16');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (17,'Charente-Maritime','17');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (18,'Cher','18');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (19,'Corrèze','19');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (20,'Corse-du-Sud','2A');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (21,'Haute-Corse','2B');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (22,'Côte-d''Or','21');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (23,'Côtes d''Armor','22');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (24,'Creuse','23');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (25,'Dordogne','24');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (26,'Doubs','25');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (27,'Drôme','26');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (28,'Eure','27');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (29,'Eure-et-Loir','28');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (30,'Finistère','29');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (31,'Gard','30');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (32,'Haute-Garonne','31');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (33,'Gers','32');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (34,'Gironde','33');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (35,'Hérault','34');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (36,'Ille-et-Vilaine','35');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (37,'Indre','36');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (38,'Indre-et-Loire','37');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (39,'Isère','38');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (40,'Jura','39');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (41,'Landes','40');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (42,'Loir-et-Cher','41');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (43,'Loire','42');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (44,'Haute-Loire','43');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (45,'Loire-Atlantique','44');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (46,'Loiret','45');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (47,'Lot','46');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (48,'Lot-et-Garonne','47');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (49,'Lozère','48');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (50,'Maine-et-Loire','49');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (51,'Manche','50');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (52,'Marne','51');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (53,'Haute-Marne','52');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (54,'Mayenne','53');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (55,'Meurthe-et-Moselle','54');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (56,'Meuse','55');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (57,'Morbihan','56');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (58,'Moselle','57');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (59,'Nièvre','58');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (60,'Nord','59');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (61,'Oise','60');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (62,'Orne','61');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (63,'Pas-de-Calais','62');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (64,'Puy-de-Dôme','63');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (65,'Pyrénées-Atlantiques','64');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (66,'Hautes-Pyrénées','65');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (67,'Pyrénées-Orientales','66');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (68,'Bas-Rhin','67');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (69,'Haut-Rhin','68');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (70,'Rhône','69');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (71,'Haute-Saône','70');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (72,'Saône-et-Loire','71');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (73,'Sarthe','72');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (74,'Savoie','73');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (75,'Haute-Savoie','74');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (76,'Paris','75');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (77,'Seine-Maritime','76');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (78,'Seine-et-Marne','77');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (79,'Yvelines','78');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (80,'Deux-Sèvres','79');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (81,'Somme','80');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (82,'Tarn','81');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (83,'Tarn-et-Garonne','82');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (84,'Var','83');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (85,'Vaucluse','84');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (86,'Vendée','85');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (87,'Vienne','86');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (88,'Haute-Vienne','87');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (89,'Vosges','88');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (90,'Yonne','89');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (91,'Territoire-de-Belfort','90');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (92,'Essonne','91');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (93,'Hauts-de-Seine','92');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (94,'Seine-Saint-Denis','93');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (95,'Val-de-Marne','94');
+INSERT INTO`departement` (`id_deptartement`, `nom_departement`, `num_departement`) VALUES (96,'Val-d''Oise','95');
+

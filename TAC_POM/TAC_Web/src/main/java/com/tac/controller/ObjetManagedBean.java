@@ -152,7 +152,8 @@ public class ObjetManagedBean {
 	}
 
 	public Proposition getSelectedProp() {
-
+		selectedProp.setLocalisations(proxyLocalisation.getPropositionLocalisations(selectedProp));
+		
 		return selectedProp;
 	}
 

@@ -9,235 +9,354 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+
 		</ui:define>
-		
+
 		<ui:define name="content">
-<!-- *** DEBUT DU CORPS DE LA PAGE *** ____________ -->
+			<!-- *** DEBUT DU CORPS DE LA PAGE *** ____________ -->
 
-            <div id="content" class="clearfix">
-                <div class="container">
-                    <div class="row">                    
-                        <!-- ***Je commence ici ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
-                        <div class="col-md-9 clearfix" id="customer-account">                           
+			<div id="content" class="clearfix">
+				<div class="container">
+					<div class="row">
+						<!-- ***Je commence ici ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
+						<div class="col-md-9 clearfix" id="customer-account">
+								
+							<div id="row">
+							<div class="row">
+								<div class="col-sm-6 col-md-6">
+									<div class="heading">
+										<h4 class="text-uppercase">Mes acquisitions</h4>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>Objet</th>
+													<th>Statut</th>
+												</tr>
+											</thead>
+											<tbody>
+												<h:panelGroup>
+													<ui:repeat var="echange"
+														value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}">
+														<h:form>
+															<h:commandLink
+																action="#{mbCompteTB.compteEchangeBean.echangeDuMembre(echange)}"
+																value="">
+																<tr>
+																	<td>#{echange.proposition.intitule}</td>
+																	<td><h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
+																			<span class="label label-danger">Annulé</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
+																			<span class="label label-warning">Refusé</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
+																			<span class="label label-info">En cours</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
+																			<span class="label label-success">Effectué</span>
+																		</h:panelGroup></td>
+																	<td><a href="compte-echanges.xhtml"
+																		class="btn btn-template-main btn-sm">Voir</a></td>
+																</tr>
+															</h:commandLink>
+														</h:form>
+													</ui:repeat>
 
-                            <div id="row">
-                                <div class="col-sm-6 col-md-6">
-                                    <div class="heading">
-                                        <h4 class="text-uppercase">Mes échanges</h4>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Objet</th>
-                                                    <th>Statut</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Autocollants McDonalds Monopoly</td>
-                                                    <td><span class="label label-info">Autre statut</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Livre "Le babyfoot pour les nuls"</td>
-                                                    <td><span class="label label-warning">En attente</span>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Cd Les reprises de Maxime</td>
-                                                    <td><span class="label label-danger">Annulé</span></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Batte de Baseball</td>
-                                                    <td><span class="label label-success">Effectué</span>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>  
-                                </div>
+												</h:panelGroup>
 
-                                <div class="col-sm-6 col-md-6 clearfix echanges"> 
-                                    <div class="heading">
-                                        <h4 class="text-uppercase">Mes messages</h4>
-                                    </div>
-                                    <div class="table-responsive mailbox-messages">
-                                        <table class="table table-hover">
-                                            <tbody>
-                                                <tr>
-                                                    <td class="mailbox-name"><a href="#">Machine à laver</a></td>
-                                                    <td class="mailbox-name"><a href="#">Je suis occupée le mardi soir mais...</a></td>
-                                                    <td class="mailbox-attachment"></td>
-                                                    <td class="mailbox-date">Il y a 5 mins</td>
-                                                </tr>
-                                                <tr>
-                                                    <td class="mailbox-name"><a href="#">Iphone 53S</a></td>
-                                                    <td class="mailbox-name"><a href="#">Il est jailbreaké ton Iphone?</a></td>
-                                                    <td class="mailbox-attachment"></td>
-                                                    <td class="mailbox-date">Il y a 28 mins</td>
-                                                </tr>
-                                                <tr class="lu">
-                                                    <td class="mailbox-subject">Cd Les reprises de Maxime</td>
-                                                    <td class="mailbox-subject">Bonjour, je suis intéressé par votre...</td>
-                                                    <td class="mailbox-attachment"></td>
-                                                    <td class="mailbox-date">Il y a 12 jours</td>
-                                                </tr>
-                                                <tr class="lu">
-                                                    <td class="mailbox-subject">Batmobile</td>
-                                                    <td class="mailbox-subject">La version d'Alan Moore...</td>
-                                                    <td class="mailbox-attachment"></td>
-                                                    <td class="mailbox-date">Il y a 29 jours</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div> 
+											</tbody>
+										</table>
+									</div>
+								</div>
+								<div class="col-sm-6 col-md-6">
+									<div class="heading">
+										<h4 class="text-uppercase">Mes dons</h4>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>Objet</th>
+													<th>Statut</th>
+												</tr>
+											</thead>
+											<tbody>
+												<h:panelGroup>
+													<ui:repeat var="echange"
+														value="#{mbCompteTB.compteEchangeBean.donDuMembre}">
+														<h:form>
+															<h:commandLink
+																action="#{mbCompteTB.compteEchangeBean.donDuMembre(echange)}"
+																value="">
+																<tr>
+																	<td>#{echange.proposition.intitule}</td>
+																	<td><h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
+																			<span class="label label-danger">Annulé</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
+																			<span class="label label-warning">Refusé</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
+																			<span class="label label-info">En cours</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
+																			<span class="label label-success">Effectué</span>
+																		</h:panelGroup></td>
+																	<td><a href="compte-echanges.xhtml"
+																		class="btn btn-template-main btn-sm">Voir</a></td>
+																</tr>
+															</h:commandLink>
+														</h:form>
+													</ui:repeat>
 
-                                <div class="col-sm-6 col-md-6 clearfix echanges">
-                                    <div class="heading">
-                                        <h4 class="text-uppercase">Mes rendez-vous à venir</h4>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <thead>
-                                                <tr>
-                                                    <th>Objet</th>
-                                                    <th>Date</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <tr>
-                                                    <td>Autocollants McDonalds Monopoly</td>
-                                                    <td>01/06/2017</td>
-                                                    <td><a href="customer-order.html" class="btn btn-template-main btn-sm">Voir</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Machine à laver C'estBeauC'estBosh</td>
-                                                    <td>08/06/2017</td>
-                                                    <td><a href="customer-order.html" class="btn btn-template-main btn-sm">Voir</a>
-                                                    </td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Livre "Le babyfoot pour les nuls"</td>
-                                                    <td>22/06/2013</td>
-                                                    <td><a href="customer-order.html" class="btn btn-template-main btn-sm">Voir</a>
-                                                    </td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
+												</h:panelGroup>
 
-                                <div class="col-sm-6 col-md-6 clearfix echanges">
-                                    <div class="heading">
-                                        <h4 class="text-uppercase">Mes évaluations</h4>
-                                    </div>
-                                    <div class="table-responsive">
-                                        <table class="table table-hover">
-                                            <tbody>
-                                                <tr>
-                                                    <td><a href="#">Cd Les reprises de Maxime</a></td>
-                                                    <td class="fa fa-star-o"></td>
-                                                    <td class="imageAvatarSize"><img class="img-responsive img-circle" src="img/person-1.jpg" alt=""></img></td>
-                                                    <td class="mailbox-date"><a href="#">Il y a 10 mins</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td><a href="#">Batte de Baseball</a></td>
-                                                    <td class="fa fa-star-o"></td>
-                                                    <td class="imageAvatarSize"><img class=" img-responsive img-circle" src="img/person-4.jpg" alt=""></img></td>
-                                                    <td class="mailbox-date"><a href="#">Il y a 43 mins</a></td>
-                                                </tr>
-                                                <tr>
-                                                    <td>Batmobile</td>
-                                                    <td class="fa fa-star-o"></td>
-                                                    <td class="imageAvatarSize"><img class=" img-responsive img-circle" src="img/person-3.png" alt=""></img></td>
-                                                    <td class="mailbox-date">Il y a 21 jours</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
-                                </div>
-                            </div>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								</div>
+								<div class="rox">
+								<div class="col-sm-6 col-md-6 clearfix echanges">
+									<div class="heading">
+										<h4 class="text-uppercase">Mes messages</h4>
+									</div>
+									<div class="table-responsive mailbox-messages">
+										<table class="table table-hover">
+											<tbody>
+												<tr>
+													<td class="mailbox-name"><a href="#">Intitulé de la proposition associée au message</a></td>
+													<td class="mailbox-name"><a href="#">Je suis
+															occupée le mardi soir mais...</a></td>
+													<td class="mailbox-attachment"></td>
+													<td class="mailbox-date">Il y a 5 mins</td>
+												</tr>
+												<tr>
+													<td class="mailbox-name"><a href="#">Iphone 53S</a></td>
+													<td class="mailbox-name"><a href="#">Il est
+															jailbreaké ton Iphone?</a></td>
+													<td class="mailbox-attachment"></td>
+													<td class="mailbox-date">Il y a 28 mins</td>
+												</tr>
+												<tr class="lu">
+													<td class="mailbox-subject">Cd Les reprises de Maxime</td>
+													<td class="mailbox-subject">Bonjour, je suis intéressé
+														par votre...</td>
+													<td class="mailbox-attachment"></td>
+													<td class="mailbox-date">Il y a 12 jours</td>
+												</tr>
+												<tr class="lu">
+													<td class="mailbox-subject">Batmobile</td>
+													<td class="mailbox-subject">La version d'Alan Moore...</td>
+													<td class="mailbox-attachment"></td>
+													<td class="mailbox-date">Il y a 29 jours</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
 
-                        </div>
-                        <!-- ***Je finis la ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-       <!-- /caroussel -->
+								<div class="col-sm-6 col-md-6 clearfix echanges">
+									<div class="heading">
+										<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>Commentaires</th>
+													<th>Date</th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr>
+													<td>Autocollants McDonalds Monopoly</td>
+													<td>01/06/2017</td>
+													<td><a href="customer-order.html"
+														class="btn btn-template-main btn-sm">Voir</a></td>
+												</tr>
+												<tr>
+													<td>Machine à laver C'estBeauC'estBosh</td>
+													<td>08/06/2017</td>
+													<td><a href="customer-order.html"
+														class="btn btn-template-main btn-sm">Voir</a></td>
+												</tr>
+												<tr>
+													<td>Livre "Le babyfoot pour les nuls"</td>
+													<td>22/06/2013</td>
+													<td><a href="customer-order.html"
+														class="btn btn-template-main btn-sm">Voir</a></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+								</div>
+								<div class="col-sm-6 col-md-6 clearfix echanges">
+									<div class="heading">
+										<h4 class="text-uppercase">Mes évaluations</h4>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<tbody><thead>
+												<tr>
+													<th>Intitulé</th>
+													<th>Note et commentaire</th>
+													<th>Qui ?</th>
+												</tr>
+											</thead>
+												<h:panelGroup>
+													<ui:repeat var="eval"
+														value="#{mbCompteTB.getEchangesQuandDonneur(mbCompteTB.membreCourant)}">
+														<h:form>
 
-            <div class="container">            
-                <div class="col-sm-12 col-md-9">
-                <h3>Des suggestions pour vos envies ?</h3>
-                    <div class="row dernieresEntrees">
-                        <div class="carousel slide" id="myCarousel">
-                            <div class="carousel-inner">
+															<tr>
+																<td><a href="#">#{eval.proposition.intitule}</a></td>
+																<td>
+																	<div class="col-sm-9">
+																		<div class="review-block-rate">
+																			<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
+																				<span class="glyphicon glyphicon-star"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
+																				<span class="glyphicon glyphicon-star-empty"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
+																				<span class="glyphicon glyphicon-star"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
+																				<span class="glyphicon glyphicon-star-empty"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
+																				<span class="glyphicon glyphicon-star"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
+																				<span class="glyphicon glyphicon-star-empty"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
+																				<span class="glyphicon glyphicon-star"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
+																				<span class="glyphicon glyphicon-star-empty"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
+																				<span class="glyphicon glyphicon-star"></span>
+																			</h:panelGroup>
+																			<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
+																				<span class="glyphicon glyphicon-star-empty"></span>
+																			</h:panelGroup>
+																		</div>
+																		<br/>
+																		<div class="review-block-description">#{eval.comDonneur}</div>
+																	</div>
+																</td>
+																<td class="imageAvatarSize"><img
+																	class="img-responsive img-circle"
+																	src="#{eval.membre.avatar}" alt=""></img></td>
+																<td><a href="compte-evaluations.xhtml"
+																	class="btn btn-template-main btn-sm">Voir</a></td>
+															</tr>
 
-                                <div class="item active">
-                                    <div class="col-sm-3">
-                                        <div class="article">
-                                            <div class="photo">
-                                                <img src="img/custom/art4.png" alt="E1" class="img-responsive"></img>
-                                            </div>
-                                            <div class="texteArticle">
-                                                <span class="categorie">Vêtements</span>
-                                                <span class="nomArticle">Basket  taille 36 très bon état</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="col-sm-3">
-                                        <div class="article">
-                                            <div class="photo">
-                                                <img src="img/custom/art2.png" alt="E1" class="img-responsive"></img>
-                                            </div>
-                                            <div class="texteArticle">
-                                                <span class="categorie">Photo</span>
-                                                <span class="nomArticle">Boitier argentiue Canon AE1</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="col-sm-3">        
-                                        <div class="article">
-                                            <div class="photo">
-                                                <img src="img/custom/art3.png" alt="E1" class="img-responsive"></img>
-                                            </div>
+														</h:form>
+													</ui:repeat>
+												</h:panelGroup>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 
-                                            <div class="texteArticle">
-                                                <span class="categorie">High-Tech</span>
-                                                <span class="nomArticle">Platine vinyle beogram
-                                                    bon état de fonctionnement</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="item active">
-                                    <div class="col-sm-3">        
-                                        <div class="article">
-                                            <div class="photo">
-                                                <img src="img/custom/art1.png" alt="E1" class="img-responsive"></img>
-                                            </div>
-                                            <div class="texteArticle">
-                                                <span class="categorie">Ameublement</span>
-                                                <span class="nomArticle">Fauteuil IKEA bleu marine et bois</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
+						</div>
+						<!-- ***Je finis la ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
+						<!-- /caroussel -->
 
-                            </div>  
-                        </div>
-                        <a class="left carousel-control" href="#myCarousel" data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-                        <a class="right carousel-control" href="#myCarousel" data-slide="next"><i class="glyphicon glyphicon-chevron-right"></i></a>
-                    </div>
-                </div>
-            </div>
-            </div>
-            </div>
-            </div>
+						<div class="container">
+							<div class="col-sm-12 col-md-9">
+								<h3>Des suggestions pour vos envies ?</h3>
+								<div class="row dernieresEntrees">
+									<div class="carousel slide" id="myCarousel">
+										<div class="carousel-inner">
+
+											<div class="item active">
+												<div class="col-sm-3">
+													<div class="article">
+														<div class="photo">
+															<img src="img/custom/art4.png" alt="E1"
+																class="img-responsive"></img>
+														</div>
+														<div class="texteArticle">
+															<span class="categorie">Vêtements</span> <span
+																class="nomArticle">Basket taille 36 très bon état</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="item active">
+												<div class="col-sm-3">
+													<div class="article">
+														<div class="photo">
+															<img src="img/custom/art2.png" alt="E1"
+																class="img-responsive"></img>
+														</div>
+														<div class="texteArticle">
+															<span class="categorie">Photo</span> <span
+																class="nomArticle">Boitier argentiue Canon AE1</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="item active">
+												<div class="col-sm-3">
+													<div class="article">
+														<div class="photo">
+															<img src="img/custom/art3.png" alt="E1"
+																class="img-responsive"></img>
+														</div>
+
+														<div class="texteArticle">
+															<span class="categorie">High-Tech</span> <span
+																class="nomArticle">Platine vinyle beogram bon
+																état de fonctionnement</span>
+														</div>
+													</div>
+												</div>
+											</div>
+											<div class="item active">
+												<div class="col-sm-3">
+													<div class="article">
+														<div class="photo">
+															<img src="img/custom/art1.png" alt="E1"
+																class="img-responsive"></img>
+														</div>
+														<div class="texteArticle">
+															<span class="categorie">Ameublement</span> <span
+																class="nomArticle">Fauteuil IKEA bleu marine et
+																bois</span>
+														</div>
+													</div>
+												</div>
+											</div>
+
+										</div>
+									</div>
+									<a class="left carousel-control" href="#myCarousel"
+										data-slide="prev"><i
+										class="glyphicon glyphicon-chevron-left"></i></a> <a
+										class="right carousel-control" href="#myCarousel"
+										data-slide="next"><i
+										class="glyphicon glyphicon-chevron-right"></i></a>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>
