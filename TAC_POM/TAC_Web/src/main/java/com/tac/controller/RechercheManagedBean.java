@@ -69,7 +69,12 @@ public class RechercheManagedBean {
 		return "/resultatRecherche.xhtml?faces-redirect=true";
 	}
 	
+	public void startSearching() {
+		
+	}
+	
 	public void loadingPage() {
+		System.out.println("COUCOU");
 		propositions = proxyRecherche.rechercher(critere, connexionBean.getMembreConnected());
 		mycats = new HashMap<>();
 		catsCount = new HashMap<>();
@@ -104,6 +109,15 @@ public class RechercheManagedBean {
 		return catsCount.get(cat).get();
 	}
 	
+	public void listenerCat(Categorie cat) {
+		critere.setCat(cat.getIdCategorie().toString());
+		critere.setSousCat(null);
+	}
+	
+	public void listenerSousCat(Categorie sousCat) {
+		critere.setCat(null);
+		critere.setSousCat(sousCat.getIdCategorie().toString());
+	}
 	
 	// getters & setters
 	public List<Categorie> getCategories() {

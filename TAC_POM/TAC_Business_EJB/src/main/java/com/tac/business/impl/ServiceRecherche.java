@@ -50,7 +50,6 @@ public class ServiceRecherche implements IServiceRecherche {
 
 	@Override
 	public List<Proposition> rechercher(CritereSearch carac, Membre membre) {
-		testseek(carac);
 		Integer idMembre = membre == null ? null : membre.getIdMembre();
 		List<Localisation> locs = new ArrayList<>();
 		if (carac.getLieux().size() != 0) {
@@ -74,9 +73,9 @@ public class ServiceRecherche implements IServiceRecherche {
 		}
 		carac.setLocalisations(locs);
 		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre);
-		for (Proposition proposition : propositions) {
-			System.out.println(proposition.getIntitule());
-		}
+//		for (Proposition proposition : propositions) {
+//			System.out.println(proposition.getIntitule());
+//		}
 		return propositions;
 	}
 

@@ -96,7 +96,7 @@ public class DaoProposition implements IDaoProposition {
 	public List<Proposition> rechercher(CritereSearch carac, Integer idMembre) {
 		String requete = constructQuery(carac, idMembre);
 		System.out.println(requete);
-		System.out.println(idMembre);
+		System.out.println("id membre = " + idMembre);
 		Query query = setParam(requete, carac, idMembre);
 		return query.getResultList();
 	}
@@ -202,7 +202,6 @@ public class DaoProposition implements IDaoProposition {
 	}
 
 	private void addClauseLocalize(StringBuilder requete, CritereSearch carac) {
-		System.out.println("dans la methode localize");
 		requete.append(" AND EXISTS (SELECT loc FROM Localisation loc WHERE p MEMBER OF loc.proposedHere AND (");
 		int nbLocs = carac.getLocalisations().size();
 		for (int i = 0; i < nbLocs; i++) {

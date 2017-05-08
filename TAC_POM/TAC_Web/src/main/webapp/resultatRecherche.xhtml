@@ -20,7 +20,7 @@
 		
 		<ui:define name="content">
 
-			<div id="recherche">
+			<h:panelGroup layout="block" id="recherche">
 
 				<!-- RESULTAT RECHERCHE DEBUT -->
 
@@ -40,18 +40,20 @@ _________________________________________________________ -->
 									<div class="panel-heading">
 										<h3 class="panel-title">Categories</h3>
 									</div>
-									<div class="panel-body">
+									<div  class="panel-body">
 										<ul class="nav nav-pills nav-stacked category-menu">
 											<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
 												<li>
 													<h:outputLink>
 														<h:outputText value="#{entry.key.intitule}" />
+														<f:ajax listener="#{mbRecherche.listenerCat(entry.key)}" render="recherche" execute="@this" event="click" />
 													</h:outputLink>
 													<ul>
 														<ui:repeat var="sousCat" value="#{entry.value}">
 															<li>
 																<h:outputLink>
 																	<h:outputText value="#{sousCat.intitule}" /><span class="badge pull-right"><h:outputText value="#{mbRecherche.getNbOccurence(sousCat)}" /></span>
+																	<f:ajax listener="#{mbRecherche.listenerSousCat(sousCat)}" render="recherche" execute="@this" event="click" />
 																</h:outputLink>
 															</li>
 														</ui:repeat>
@@ -209,7 +211,7 @@ _________________________________________________________ -->
 				<!-- FIN DU CORPS DE LA PAGE -->
 
 
-			</div>
+			</h:panelGroup>
 
 
 			<!-- Modal pour enregistrer une envie-->
