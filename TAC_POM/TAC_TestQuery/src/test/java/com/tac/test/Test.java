@@ -9,6 +9,7 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.tac.entity.Message;
 import com.tac.entity.Proposition;
 
 
@@ -21,16 +22,14 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-        final String req = "SELECT p FROM Proposition p WHERE EXISTS (SELECT loc FROM Localisation loc WHERE p MEMBER OF loc.proposedHere AND loc.codePostal LIKE :pdep)";
+        final String req = "SELECT m FROM Message m WHERE m.emetteur.idMembre =:pid group by m.recepteur.nom, m.proposition.intitule CASE WHEN m.recepteur =:pid THEN group by m.emetteur";
 		Query query = em.createQuery(req);
-		query.setParameter("pdep", "73%");
-		List<Proposition> props= query.getResultList();
+		query.setParameter("pid", 6);
+		List<Message> messages= query.getResultList();
 		
-		for (Proposition proposition : props) {
-			System.out.println(proposition.getIntitule());
+		for (Message message : messages) {
+			System.out.println(message.getIdMessage() + " texte message : "+ message.getTexte() +" nom proposition : "+ message.getProposition().getIntitule()+ " nom recepteur:"+ message.getRecepteur().getNom());
 		}
-		
-
         tx.commit();
         em.close();
         emf.close();

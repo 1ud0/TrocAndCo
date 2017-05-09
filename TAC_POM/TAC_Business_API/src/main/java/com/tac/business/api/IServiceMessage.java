@@ -13,5 +13,6 @@ public interface IServiceMessage {
 	List<Message> getConversation(Membre membre1, Membre membre2);
 	List<Message> getMsgAboutProp(Membre chercheur, Proposition prop);
 	Message messageLu(Message msg);
-
+	List<Message> getConversationAboutProposition(int idMembre1, int idMembre2, int idProposition) ;
+	List<Message> getConversationList(Membre membre);
 }

@@ -27,9 +27,7 @@ public class ServiceMessage implements IServiceMessage {
 	@Override
 	public List<Message> getByMembre(Membre membre) {
 		return proxyDaoMessage.getByMembreId(membre.getIdMembre());
-	}
-
-	
+	}	
 
 	@Override
 	public List<Message> getMsgAboutProp(Membre chercheur, Proposition prop) {
@@ -44,6 +42,17 @@ public class ServiceMessage implements IServiceMessage {
 	@Override
 	public List<Message> getConversation(Membre membre1, Membre membre2) {
 		return proxyDaoMessage.getConversations(membre1.getIdMembre(), membre2.getIdMembre());
+	}
+
+	@Override
+	public List<Message> getConversationAboutProposition(int idMembre1, int idMembre2, int idProposition) {		
+		return proxyDaoMessage.getConversationAboutProposition(idMembre1, idMembre2, idProposition);
+	}
+
+	@Override
+	public List<Message> getConversationList(Membre membre) {
+		
+		return proxyDaoMessage.getAllConversations(membre.getIdMembre());
 	}
 
 }
