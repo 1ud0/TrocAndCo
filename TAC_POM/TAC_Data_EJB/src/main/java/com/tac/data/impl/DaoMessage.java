@@ -65,11 +65,21 @@ public class DaoMessage implements IDaoMessage {
 		query.setParameter("mid", idMembre);
 		return query.getResultList();
 	}
+	
+	
 
 	@Override
 	public List<Message> getByConversation(int idMembre) {
 		
 		return null;
+	}
+
+	@Override
+	public List<Message> getWhereRecepteur(int idMembre) {
+		String req="SELECT m FROM Message m WHERE m.recepteur.idMembre= :mid ORDER BY m.dateEnvoi";
+		Query query = em.createQuery(req);
+		query.setParameter("mid", idMembre);
+		return query.getResultList();
 	}
 	
 	
