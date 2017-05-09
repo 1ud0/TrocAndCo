@@ -287,8 +287,8 @@ _________________________________________________________ -->
 							<span class="input-group-addon">
 								<img src="img/custom/cat.png" alt="cat" />
 							</span>
-							<h:selectOneMenu value="#{mbRecherche.critere.cat}" >
-								<f:selectItem itemLabel="Catégorie..." itemValue="0"/>
+							<h:selectOneMenu value="#{mbRecherche.idCategorieSelected}" >
+								<f:selectItem itemLabel="Catégorie..." itemValue="#{null}"/>
 								<f:selectItems value="#{mbRecherche.categories}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
 							</h:selectOneMenu>
 						</div>

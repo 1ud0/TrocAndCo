@@ -47,4 +47,9 @@ public class ServiceCategorie implements IServiceCategorie{
 		return proxyDaoCategorie.getCategorieFille(IdMere);
 	}
 
+	@Override
+	public Categorie getById(Integer idCategorie) {
+		return proxyDaoCategorie.getById(idCategorie);
+	}
+
 }

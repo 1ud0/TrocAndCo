@@ -94,18 +94,8 @@ public class ServiceRecherche implements IServiceRecherche {
 	}
 	
 	private void setData(CritereSearch carac, Suggestion suggestion) {
-		Integer cat = carac.getCatCast();
-		if (cat != null && cat != 0) {
-			suggestion.setCategorie(proxyCat.getById(cat));
-		} else {
-			suggestion.setCategorie(null);
-		}
-		Integer sousCat = carac.getSousCatCast();
-		if (sousCat != null && sousCat != 0) {
-			suggestion.setSousCategorie(proxyCat.getById(sousCat));
-		} else {
-			suggestion.setSousCategorie(null);
-		}
+		suggestion.setCategorie(carac.getCat());
+		suggestion.setSousCategorie(carac.getSousCat());
 		suggestion.setIntitule(carac.getIntitule());
 	}
 
@@ -121,14 +111,8 @@ public class ServiceRecherche implements IServiceRecherche {
 			Suggestion suggestion = proxySugg.getSuggestionByIdMembre(membre.getIdMembre());
 			if (suggestion != null) {
 				CritereSearch criteres = new CritereSearch();
-				Categorie cat = suggestion.getCategorie();
-				if (cat != null) {
-					criteres.setCat(cat.getIdCategorie().toString());
-				}
-				Categorie sousCat = suggestion.getSousCategorie();
-				if (sousCat != null) {
-					criteres.setSousCat(sousCat.getIdCategorie().toString());
-				}
+				criteres.setCat(suggestion.getCategorie());
+				criteres.setSousCat(suggestion.getSousCategorie());
 				criteres.setIntitule(suggestion.getIntitule());
 				return proxyProposition.rechercher(criteres, membre.getIdMembre(), GET_SUGGESTIONS);
 			}

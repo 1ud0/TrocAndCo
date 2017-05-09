@@ -11,4 +11,5 @@ public interface IServiceCategorie {
 	void  deleteCategorie(Categorie categorieToDelete);
 	List<Categorie> getCategorieMere();
 	List<Categorie> getCategorieFille(Integer IdMere);
+	Categorie getById(Integer idCategorie);
 }

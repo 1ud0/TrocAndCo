@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tac.entity.Categorie;
+import com.tac.entity.Departement;
 import com.tac.entity.Localisation;
 
 /**
@@ -19,8 +21,8 @@ public class CritereSearch implements Serializable {
 	public static final float DEGREE_PER_KM = 0.00898f;
 	
 	private String intitule;
-	private String cat;
-	private String sousCat;
+	private Categorie cat;
+	private Categorie sousCat;
 	private String departement;
 	private List<String> lieux = new ArrayList<>();
 	private String distanceMax = "0";
@@ -70,39 +72,11 @@ public class CritereSearch implements Serializable {
 		return idValeurs;
 	}
 	
-	public Integer getCatCast() {
-		try {
-			return Integer.parseInt(cat);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-	}
-	
-	public Integer getSousCatCast() {
-		try {
-			return Integer.parseInt(sousCat);
-		} catch (NumberFormatException e) {
-			return null;
-		}
-	}
-	
 	public String getIntitule() {
 		return intitule;
 	}
 	public void setIntitule(String intitule) {
 		this.intitule = intitule;
-	}
-	public String getCat() {
-		return cat;
-	}
-	public void setCat(String cat) {
-		this.cat = cat;
-	}
-	public String getSousCat() {
-		return sousCat;
-	}
-	public void setSousCat(String sousCat) {
-		this.sousCat = sousCat;
 	}
 	public String getDepartement() {
 		return departement;
@@ -156,6 +130,22 @@ public class CritereSearch implements Serializable {
 
 	public void setLocalisations(List<Localisation> localisations) {
 		this.localisations = localisations;
+	}
+
+	public Categorie getCat() {
+		return cat;
+	}
+
+	public void setCat(Categorie cat) {
+		this.cat = cat;
+	}
+
+	public Categorie getSousCat() {
+		return sousCat;
+	}
+
+	public void setSousCat(Categorie sousCat) {
+		this.sousCat = sousCat;
 	}
 	
 }

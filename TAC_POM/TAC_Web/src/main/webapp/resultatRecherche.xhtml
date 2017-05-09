@@ -13,11 +13,11 @@
 	</f:metadata>
 
 	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+
 		</ui:define>
-		
+
 		<ui:define name="content">
 
 			<h:panelGroup layout="block" id="recherche">
@@ -29,155 +29,188 @@
 						<!-- *** LEFT COLUMN ***
 _________________________________________________________ -->
 						<div class="row products">
-						
+
 							<h:form id="filterSeek">
 
-							<div class="col-md-3 col-sm-3">
+								<div class="col-md-3 col-sm-3">
 
-								<!-- *** MENUS AND FILTERS ***
+									<!-- *** MENUS AND FILTERS ***
 _________________________________________________________ -->
-							
-							
-								
-								<!--Categorie du menu debut-->
-								<div class="panel panel-default sidebar-menu">
-									<div class="panel-heading">
-										<h3 class="panel-title">
-											<f:ajax render="recherche">
-												<h:commandLink action="#{mbRecherche.listenerCat(null)}" value="Catégories" />
-											</f:ajax>
-										</h3>
+
+
+
+									<!--Categorie du menu debut-->
+									<div class="panel panel-default sidebar-menu">
+										<div class="panel-heading">
+											<h3 class="panel-title">
+												<f:ajax render="recherche">
+													<h:commandLink action="#{mbRecherche.listenerCat(null)}"
+														value="Catégories" />
+												</f:ajax>
+											</h3>
+										</div>
+										<div class="panel-body">
+											<ul class="nav nav-pills nav-stacked category-menu">
+												<f:ajax render="recherche">
+
+													<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
+														<li><h:commandLink
+																action="#{mbRecherche.listenerCat(entry.key)}"
+																value="#{entry.key.intitule}" />
+															<ul>
+																<ui:repeat var="sousCat" value="#{entry.value}">
+																	<li><h:commandLink
+																			action="#{mbRecherche.listenerSousCat(sousCat)}"
+																			value="#{sousCat.intitule}">
+																			<span class="badge pull-right"><h:outputText
+																					value="#{mbRecherche.getNbOccurence(sousCat)}" /></span>
+																		</h:commandLink></li>
+																</ui:repeat>
+															</ul></li>
+													</ui:repeat>
+												</f:ajax>
+											</ul>
+										</div>
 									</div>
-									<div  class="panel-body">
-										<ul class="nav nav-pills nav-stacked category-menu">
-											<f:ajax render="recherche">
-												
-												<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
-													<li>
-														<h:commandLink action="#{mbRecherche.listenerCat(entry.key)}" value="#{entry.key.intitule}" />
-														<ul>
-															<ui:repeat var="sousCat" value="#{entry.value}">
-																<li>
-																	<h:commandLink action="#{mbRecherche.listenerSousCat(sousCat)}" value="#{sousCat.intitule}">
-																		<span class="badge pull-right"><h:outputText value="#{mbRecherche.getNbOccurence(sousCat)}" /></span>
-																	</h:commandLink>
-																</li>
-															</ui:repeat>
-														</ul>
-													</li>
-												</ui:repeat>
-											</f:ajax>
-										</ul>
-									</div>
-								</div>
-								
-								<!-- panel adresse -->
-								<h:panelGroup styleClass="panel panel-default sidebar-menu" rendered="#{mbIdentif.membreConnected != null}">
-									<div class="panel-heading">
-										<h3 class="panel-title">Localisation</h3>
-									</div>
-									<div class="panel-body">
-										<h5>Vos Adresses</h5>
+
+									<!-- panel adresse -->
+									<h:panelGroup styleClass="panel panel-default sidebar-menu"
+										rendered="#{mbIdentif.membreConnected != null}">
+										<div class="panel-heading">
+											<h3 class="panel-title">Localisation</h3>
+										</div>
+										<div class="panel-body">
+											<h5>Vos Adresses</h5>
 											<div class="form-group">
-												<h:selectManyCheckbox value="#{mbRecherche.critere.lieux}" styleClass="checkbox-inline" layout="pageDirection">
-													<f:selectItems value="#{mbRecherche.adresses}" var="currentAdr" itemLabel="#{currentAdr.titreAdresse}" itemValue="#{currentAdr.idLocalisation}" />
+												<h:selectManyCheckbox value="#{mbRecherche.critere.lieux}"
+													styleClass="checkbox-inline" layout="pageDirection">
+													<f:selectItems value="#{mbRecherche.adresses}"
+														var="currentAdr" itemLabel="#{currentAdr.titreAdresse}"
+														itemValue="#{currentAdr.idLocalisation}" />
 												</h:selectManyCheckbox>
 											</div>
 
-									</div>
-								</h:panelGroup>
-								
-								<!-- panel distance -->
-								<h:panelGroup styleClass="panel panel-default sidebar-menu" rendered="#{mbIdentif.membreConnected != null}">
-									
-									<div class="panel-body">
-										<h5>Distance</h5>
+										</div>
+									</h:panelGroup>
+
+									<!-- panel distance -->
+									<h:panelGroup styleClass="panel panel-default sidebar-menu"
+										rendered="#{mbIdentif.membreConnected != null}">
+
+										<div class="panel-body">
+											<h5>Distance</h5>
 											<div class="form-group">
-												<h:selectOneRadio value="#{mbRecherche.critere.distanceMax}" styleClass="radio-inline" layout="pageDirection">
-													<f:selectItem itemLabel="5km" itemValue="5"/>
-													<f:selectItem itemLabel="10km" itemValue="10"/>
-													<f:selectItem itemLabel="25km" itemValue="25"/>
-													<f:selectItem itemLabel="50km" itemValue="50"/>
-													<f:selectItem itemLabel="Pas de filtre" itemValue="0"/>
+												<h:selectOneRadio value="#{mbRecherche.critere.distanceMax}"
+													styleClass="radio-inline" layout="pageDirection">
+													<f:selectItem itemLabel="5km" itemValue="5" />
+													<f:selectItem itemLabel="10km" itemValue="10" />
+													<f:selectItem itemLabel="25km" itemValue="25" />
+													<f:selectItem itemLabel="50km" itemValue="50" />
+													<f:selectItem itemLabel="Pas de filtre" itemValue="0" />
 												</h:selectOneRadio>
 											</div>
-											<h:commandButton action="#{mbRecherche.startSearching()}" id="btnLoc" styleClass="btn btn-default btn-sm btn-template-main" value="APPLIQUER" onclick="javascript:window.location='#recherche'">
-												<f:ajax render="recherche" execute="@form"/>
+											<h:commandButton action="#{mbRecherche.startSearching()}"
+												id="btnLoc"
+												styleClass="btn btn-default btn-sm btn-template-main"
+												value="APPLIQUER"
+												onclick="javascript:window.location='#recherche'">
+												<f:ajax render="recherche" execute="@form" />
 											</h:commandButton>
 
-									</div>
-								</h:panelGroup>
+										</div>
+									</h:panelGroup>
 
-								<!-- panel Valeur -->
-								<div class="panel panel-default sidebar-menu">
-									<div class="panel-heading">
-										<h3 class="panel-title">
-											Valeur <img src="img/custom/feuille orange.png" alt=""></img>
-										</h3>
-									</div>
-									<div class="panel-body">
-									
+									<!-- panel Valeur -->
+									<div class="panel panel-default sidebar-menu">
+										<div class="panel-heading">
+											<h3 class="panel-title">
+												Valeur <img src="img/custom/feuille orange.png" alt=""></img>
+											</h3>
+										</div>
+										<div class="panel-body">
+
 											<div class="form-group">
-												<h:selectManyCheckbox value="#{mbRecherche.critere.valeurs}" styleClass="checkbox-inline" layout="pageDirection">
-													<f:selectItems var="valeur" value="#{mbRecherche.valeurs}" itemLabel="#{valeur.valeur}" itemValue="#{valeur.idValeur}"/>
+												<h:selectManyCheckbox value="#{mbRecherche.critere.valeurs}"
+													styleClass="checkbox-inline" layout="pageDirection">
+													<f:selectItems var="valeur" value="#{mbRecherche.valeurs}"
+														itemLabel="#{valeur.valeur}"
+														itemValue="#{valeur.idValeur}" />
 												</h:selectManyCheckbox>
 											</div>
-											<h:commandButton action="#{mbRecherche.startSearching()}" id="btnVal" styleClass="btn btn-default btn-sm btn-template-main" value="APPLIQUER" onclick="javascript:window.location='#recherche'">
-												<f:ajax render="recherche" execute="@form"/>
+											<h:commandButton action="#{mbRecherche.startSearching()}"
+												id="btnVal"
+												styleClass="btn btn-default btn-sm btn-template-main"
+												value="APPLIQUER"
+												onclick="javascript:window.location='#recherche'">
+												<f:ajax render="recherche" execute="@form" />
 											</h:commandButton>
-											
-											
+
+
+										</div>
 									</div>
-								</div>
-								
-								<!-- panel Etat -->
-								<div class="panel panel-default sidebar-menu">
-									<div class="panel-heading">
-										<h3 class="panel-title">Etat d'usure</h3>
-									</div>
-									<div class="panel-body">
+
+									<!-- panel Etat -->
+									<div class="panel panel-default sidebar-menu">
+										<div class="panel-heading">
+											<h3 class="panel-title">Etat d'usure</h3>
+										</div>
+										<div class="panel-body">
 											<div class="form-group">
-												<h:selectOneRadio value="#{mbRecherche.critere.etat}" styleClass="radio-inline" layout="pageDirection">
-													<f:selectItems var="etat" value="#{mbRecherche.etats}" itemLabel="#{etat.intitule}" itemValue="#{etat.idEtat}" />
-													<f:selectItem itemLabel="Tous" itemValue="0"/>
-													<f:ajax render="recherche" execute="@this"/>
+												<h:selectOneRadio value="#{mbRecherche.critere.etat}"
+													styleClass="radio-inline" layout="pageDirection">
+													<f:selectItems var="etat" value="#{mbRecherche.etats}"
+														itemLabel="#{etat.intitule}" itemValue="#{etat.idEtat}" />
+													<f:selectItem itemLabel="Tous" itemValue="0" />
+													<f:ajax render="recherche" execute="@this" />
 												</h:selectOneRadio>
 											</div>
-										
+
+										</div>
 									</div>
+									
+									<!-- bouton save envie-->
+									<h:commandButton value="Enregistrer une envie" onclick="$('#ModalEnregistrementEnvie').modal('show');" styleClass="btn btn-vert btn-lg" rendered="#{mbIdentif.membreConnected != null}">
+										<f:ajax event="click" listener="#{mbRecherche.listenerEnvie()}"	render="formAddEnvie"></f:ajax>
+									</h:commandButton>
+
 								</div>
-								
-								<!-- bouton save envie-->
-								<h:commandButton value="Enregistrer une envie"  onclick="$('#ModalEnregistrementEnvie').modal('show');" styleClass="btn btn-vert btn-lg">
-									<f:ajax event="click" listener="#{mbRecherche.startSearching()}" render="formAddEnvie"></f:ajax>
+
+								<!-- /.col-md-3 -->
+
+								<!-- *** LEFT COLUMN END *** -->
+								<!--Categorie du menu fin-->
+
+
+								<!--Resultat recherche DEBUT-->
+								<h:commandButton action="#{mbRecherche.resetFilter()}"
+									id="btnReset"
+									styleClass="btn btn-default btn-sm btn-template-main pull-right"
+									value="REINITIALISER LES FILTRES">
+									<f:ajax render="recherche" execute="@form" />
 								</h:commandButton>
-								
-							</div>
-							
-							<!-- /.col-md-3 -->
-
-							<!-- *** LEFT COLUMN END *** -->
-							<!--Categorie du menu fin-->
-
-
-							<!--Resultat recherche DEBUT-->
-							<h:commandButton action="#{mbRecherche.resetFilter()}" id="btnReset" styleClass="btn btn-default btn-sm btn-template-main pull-right" value="REINITIALISER LES FILTRES">
-								<f:ajax render="recherche" execute="@form"/>
-							</h:commandButton>
 							</h:form>
-							<h5 class="text">Résultat de la recherche : <h:outputText value="#{mbRecherche.propositions.size()}" /> objet<h:outputText value="s" rendered="#{mbRecherche.propositions.size() > 1}"/> trouvé<h:outputText value="s" rendered="#{mbRecherche.propositions.size() > 1}"/></h5>
-							
+							<h5 class="text">
+								Résultat de la recherche :
+								<h:outputText value="#{mbRecherche.propositions.size()}" />
+								objet
+								<h:outputText value="s"
+									rendered="#{mbRecherche.propositions.size() > 1}"  />
+								trouvé
+								<h:outputText value="s"
+									rendered="#{mbRecherche.propositions.size() > 1}" />
+							</h5>
+
 							<br /> <br /> <br />
-							
-							
+
+
 							<!-- products -->
 							<div class=" col-md-9 col-sm-12 ">
-							<h:form>
-								<div class="row">
-									<ui:repeat var="prop" value="#{mbRecherche.propositions}">
-										
+								<h:form>
+									<div class="row">
+										<ui:repeat var="prop" value="#{mbRecherche.propositions}">
+
 											<div class=" col-md-3 col-sm-9 ">
-												
+
 												<div class="product ">
 
 													<h:commandLink action="#{mbObjet.loadProposition(prop)}"
@@ -191,7 +224,8 @@ _________________________________________________________ -->
 															<h3>#{prop.intitule}</h3>
 															<span class="glyphicon glyphicon-map-marker"
 																aria-hidden="true"></span>
-															<p class="text-muted">#{prop.localisations.get(0).ville} </p>
+															<p class="text-muted">#{prop.localisations.get(0).ville}
+															</p>
 															<p class="price">
 																#{prop.valeur.valeur} <img
 																	src="img/custom/feuille orange.png" alt=""></img>
@@ -202,9 +236,9 @@ _________________________________________________________ -->
 													</h:commandLink>
 												</div>
 											</div>
-										
-									</ui:repeat>
-								</div>
+
+										</ui:repeat>
+									</div>
 								</h:form>
 							</div>
 							<!-- /.products -->
@@ -240,84 +274,90 @@ _________________________________________________________ -->
 					<!-- Modal content-->
 					<div class="modal-content">
 						<h:form id="formAddEnvie">
-						<h:panelGroup id ="addEnvie">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">x</button>
-								<h4 class="modal-title">Enregistrer une envie:</h4>
-							</div>
-							<div class="modal-body">
+							<h:panelGroup id="addEnvie">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">x</button>
+									<h4 class="modal-title">Enregistrer une envie:</h4>
+								</div>
+								<div class="modal-body">
 
-								<div class="row ">
+									<div class="row ">
 
-									<div class="col-sm-6 col-md-6 ">
-										<h4>Description:</h4>
-										<p>
-											<label> Catégorie: </label> <label class="italic">
-												blabla</label>
-										</p>
-										<p>
-											<label> Sous-catégorie: </label> <label class="italic">
-												blabla </label>
-										</p>
-										<p>
-											<label> Etat d'usure: </label> <label class="italic">
-												blabla </label>
-										</p>
-										<p class="price">
-											<label> Valeur: </label><label class="italic"> 3</label> <img
-												src="img/custom/feuille orange.png" alt=""></img>
-										</p>
-										<p>
-											<label>Adresse: </label> <label class="italic">
-												blabla </label>
-										</p>
-										<p>
-											<label>Nom: </label> <input type="text"></input>
-										</p>
-									</div>
-									<div class="col-sm-6 col-md-6 orientationCenter borderLeft">
-										<h4>Ajouter à vos listes d'envies:</h4>
-										<div>
-											<div class="input-group" id="selecteur">
-												<select id="lunch" class="selectpicker form-control"
-													data-live-search="true" title="Choisir un objet">
-													<option value="0"></option>
-													<option value="1" id="list_rub" class="noir">Ma
-														liste</option>
-													<option value="2" id="list_rub" class="noir">Liste
-														mamie</option>
-													<option value="3" id="list_rub" class="noir">Liste
-														papa</option>
+										<div class="col-sm-6 col-md-6 ">
+											<h4>Description:</h4>
+											<p>
+												<label> Catégorie: </label> <label class="italic"> <h:outputText
+														value="#{mbRecherche.envie.categorie.intitule}" />
+												</label>
+											</p>
+											<p>
+												<label> Sous-catégorie: </label> <label class="italic">
+													<h:outputText
+														value="#{mbRecherche.envie.sousCategorie.intitule}" />
+												</label>
+											</p>
+											<p class="price">
+												<label> Valeur: </label><label class="italic"><h:outputText
+														value="#{mbRecherche.envie.valeur.valeur}" /> </label> <img
+													src="img/custom/feuille orange.png" alt=""></img>
+											</p>
+											<p>
+												<label>Adresse: </label> <label class="italic">
+													blabla </label>
+											</p>
+											<p>
+												<label>Nom: </label> <input type="text"></input>
+											</p>
+										</div>
+										<div class="col-sm-6 col-md-6 borderLeft">
+											<h4>Ajouter à vos listes d'envies:</h4>
+											<div>
+												<div class="input-group" id="selecteur">
 
-												</select>
+													<select id="lunch" class="selectpicker form-control"
+														data-live-search="true" title="Choisir un objet">
+														<option value="0"></option>
+														<option value="1" id="list_rub" class="noir">Ma
+															liste</option>
+														<option value="2" id="list_rub" class="noir">Liste
+															mamie</option>
+														<option value="3" id="list_rub" class="noir">Liste
+															papa</option>
+
+													</select>
+												</div>
+												<f:ajax render="formAddEnvie">
+													<h:commandLink action="#{mbRecherche.afficherModalListe()}" value="Creer une nouvelle liste" styleClass="btn btn-link">
+													</h:commandLink>
+												</f:ajax>
 											</div>
-											<button type="submit" class="btn btn-link">Créer une
-												nouvelle Liste</button>
+											<h:panelGroup id="AjoutListe" rendered="#{mbRecherche.modalRendered}">
+												
+													<p>
+														<label>Nom de la liste: </label> <input type="text"></input>
+													</p>
+													<h:commandButton value="Créer"
+														styleClass="btn btn-custom btn-lg" />
+													<button type="button" class="btn btn-custom btn-lg">Annuler</button>
+												
+											</h:panelGroup>
 										</div>
-										<div>
-											<h:form>
-												<p>
-													<label>Nom de la liste: </label> <input type="text"></input>
-												</p>
-												<button type="submit" class="btn btn-custom btn-lg">Créer</button>
-												<button type="button" class="btn btn-custom btn-lg">Annuler</button>
 
-											</h:form>
 
-										</div>
+									</div>
+									<div class="modal-footer">
+										<h:commandButton value="Enregistrer" onclick="$('#ModalEnregistrementEnvie').modal('hide');" styleClass=" btn btn-vert btn-lg">
+										<f:ajax event="click" ></f:ajax>
+										</h:commandButton>
+										
+												
+
+										<button type="button" class="btn btn-vert btn-lg"
+											data-dismiss="modal">Annuler</button>
+
 									</div>
 
 								</div>
-								<div class="modal-footer">
-									<button type="submit" class="btn btn-vert btn-lg"
-										data-dismiss="modal">Enregistrer</button>
-
-									<button type="button" class="btn btn-vert btn-lg"
-										data-dismiss="modal">Annuler</button>
-
-								</div>
-
-							</div>
 							</h:panelGroup>
 						</h:form>
 					</div>

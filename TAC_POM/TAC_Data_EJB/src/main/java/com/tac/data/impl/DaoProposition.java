@@ -10,6 +10,7 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoProposition;
+import com.tac.entity.Categorie;
 import com.tac.entity.Localisation;
 import com.tac.entity.Proposition;
 import com.tac.exception.DataAccessException;
@@ -144,14 +145,14 @@ public class DaoProposition implements IDaoProposition {
 			addParamLocalize(query, carac);
 		}
 		//clause categorie
-		Integer idCategorie = carac.getCatCast();
-		if (idCategorie != null && idCategorie != 0) {
-			query.setParameter("pcat", idCategorie);
+		Categorie cat = carac.getCat();
+		if (cat != null) {
+			query.setParameter("pcat", cat.getIdCategorie());
 		}
 		//clause sous categorie
-		Integer idSsCategorie = carac.getSousCatCast();
-		if (idSsCategorie != null && idSsCategorie != 0) {
-			query.setParameter("psscat", idSsCategorie);
+		Categorie sousCat = carac.getSousCat();
+		if (sousCat != null) {
+			query.setParameter("psscat", sousCat.getIdCategorie());
 		}
 		return query;
 	}
@@ -197,13 +198,11 @@ public class DaoProposition implements IDaoProposition {
 			addClauseLocalize(requete, carac);
 		}
 		//clause categorie
-		Integer categorie = carac.getCatCast();
-		if (categorie != null && categorie != 0) {
+		if (carac.getCat() != null) {
 			requete.append(" AND p.categorie.idCategorie = :pcat");
 		}
 		//clause sous categorie
-		Integer sousCategorie = carac.getSousCatCast();
-		if (sousCategorie != null && sousCategorie != 0) {
+		if (carac.getSousCat() != null) {
 			requete.append(" AND p.sousCategorie.idCategorie = :psscat");
 		}
 		return requete.toString();

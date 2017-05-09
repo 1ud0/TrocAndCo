@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -16,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceDepartement;
 import com.tac.business.api.IServiceEtat;
+import com.tac.business.api.IServiceListe;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceRecherche;
 import com.tac.business.api.IServiceValeur;
@@ -23,6 +25,7 @@ import com.tac.entity.Categorie;
 import com.tac.entity.Departement;
 import com.tac.entity.Envie;
 import com.tac.entity.Etat;
+import com.tac.entity.Liste;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
@@ -50,6 +53,8 @@ public class RechercheManagedBean {
 	private IServiceCategorie proxyCat;
 	@EJB
 	private IServiceDepartement proxyDep;
+	@EJB
+	private IServiceListe proxyListe;
 
 	// managedBean
 	@ManagedProperty(value = "#{mbIdentif}")
@@ -64,16 +69,34 @@ public class RechercheManagedBean {
 	private List<Localisation> adresses;
 	private List<Departement> departements;
 	private Envie envie = new Envie();
+	private boolean modalRendered;
+	private Integer idCategorieSelected;
+	private List<Liste> listes;
 
 	private List<Entry<Categorie, List<Categorie>>> catsEntries;
 	private Map<Categorie, List<Categorie>> mycats;
 	private Map<Categorie, MutableInt> catsCount;
 
+	@PostConstruct
+	public void loadData() {
+		valeurs = proxyValeur.getAllValeur();
+		etats = proxyEtat.getAllEtat();
+		departements = proxyDep.getAllDepartements();
+	}
 	
 	
 	//Méthodes
 	public String seekAndNotDestroy() {
+		if (idCategorieSelected != null)
+			critere.setCat(proxyCat.getById(idCategorieSelected));
+		else
+			critere.setCat(null);
 		return "/resultatRecherche.xhtml?faces-redirect=true";
+	}
+	
+	public void afficherModalListe() {
+		modalRendered = !modalRendered;
+		
 	}
 	
 	public void startSearching() {
@@ -125,20 +148,22 @@ public class RechercheManagedBean {
 		if (cat == null) {
 			critere.setCat(null);
 		} else {
-			critere.setCat(cat.getIdCategorie().toString());
+			critere.setCat(cat);
 		}
 		critere.setSousCat(null);
 	}
 	
 	public void listenerSousCat(Categorie sousCat) {
 		critere.setCat(null);
-		critere.setSousCat(sousCat.getIdCategorie().toString());
+		critere.setSousCat(sousCat);
 	}
 	
 	public void listenerEnvie() {
-		if (critere.getCatCast() != null) {
-			
-		}
+		listes = proxyListe.getByMembre(connexionBean.getMembreConnected());
+		envie.setCategorie(critere.getCat());
+		envie.setSousCategorie(critere.getSousCat());
+		envie.setIntitule(critere.getIntitule());
+		envie.setValeur(valeurs.get(4));
 	}
 	
 	// getters & setters
@@ -230,7 +255,7 @@ public class RechercheManagedBean {
 	}
 
 	public List<Etat> getEtats() {
-		return proxyEtat.getAllEtat();
+		return etats;
 	}
 
 	public void setEtats(List<Etat> etats) {
@@ -238,7 +263,7 @@ public class RechercheManagedBean {
 	}
 
 	public List<Valeur> getValeurs() {
-		return proxyValeur.getAllValeur();
+		return valeurs;
 	}
 
 	public void setValeurs(List<Valeur> valeurs) {
@@ -279,7 +304,7 @@ public class RechercheManagedBean {
 	}
 
 	public List<Departement> getDepartements() {
-		return proxyDep.getAllDepartements();
+		return departements;
 	}
 
 	public void setDepartements(List<Departement> departements) {
@@ -292,6 +317,46 @@ public class RechercheManagedBean {
 
 	public void setEnvie(Envie envie) {
 		this.envie = envie;
+	}
+
+
+	public boolean isModalRendered() {
+		return modalRendered;
+	}
+
+
+	public void setModalRendered(boolean modalRendered) {
+		this.modalRendered = modalRendered;
+	}
+
+
+	public Integer getIdCategorieSelected() {
+		return idCategorieSelected;
+	}
+
+
+	public void setIdCategorieSelected(Integer idCategorieSelected) {
+		this.idCategorieSelected = idCategorieSelected;
+	}
+
+
+	public List<Liste> getListes() {
+		return listes;
+	}
+
+
+	public void setListes(List<Liste> listes) {
+		this.listes = listes;
+	}
+
+
+	public IServiceListe getProxyListe() {
+		return proxyListe;
+	}
+
+
+	public void setProxyListe(IServiceListe proxyListe) {
+		this.proxyListe = proxyListe;
 	}
 
 
