@@ -138,96 +138,25 @@ _________________________________________________________ -->
 								<ul class="dropdown-menu">
 									<li>
 										<div class="yamm-content">
-											<div class="row">
-												<div class="col-sm-3">
-													<h5>Multimédia</h5>
-													<ul>
-														<li><a href="index.html">Option 1: Default Page</a></li>
-														<li><a href="index2.html">Option 2: Application</a></li>
-														<li><a href="index3.html">Option 3: Startup</a></li>
-														<li><a href="index4.html">Option 4: Agency</a></li>
-														<li><a href="index5.html">Option 5: Portfolio</a></li>
-													</ul>
-													<h5>Jouets</h5>
-													<ul>
-														<li><a href="about.html">About us</a></li>
-														<li><a href="team.html">Our team</a></li>
-														<li><a href="team-member.html">Team member</a></li>
-														<li><a href="services.html">Services</a></li>
-													</ul>
-													<h5>Culture</h5>
-													<ul>
-														<li><a href="packages.html">Packages</a></li>
-													</ul>
-												</div>
-												<div class="col-sm-3">
-													<h5>Sport</h5>
-													<ul>
-														<li><a href="portfolio-2.html">2 columns</a></li>
-														<li><a href="portfolio-no-space-2.html">2 columns
-																with negative space</a></li>
-														<li><a href="portfolio-3.html">3 columns</a></li>
-														<li><a href="portfolio-no-space-3.html">3 columns
-																with negative space</a></li>
-														<li><a href="portfolio-4.html">4 columns</a></li>
-														<li><a href="portfolio-no-space-4.html">4 columns
-																with negative space</a></li>
-														<li><a href="portfolio-detail.html">Portfolio -
-																detail</a></li>
-														<li><a href="portfolio-detail-2.html">Portfolio -
-																detail 2</a></li>
-													</ul>
-													<h5>Loisirs</h5>
-													<ul>
-														<li><a href="customer-register.html">Register /
-																login</a></li>
-														<li><a href="customer-orders.html">Orders history</a>
-														</li>
-														<li><a href="customer-order.html">Order history
-																detail</a></li>
-														<li><a href="customer-wishlist.html">Wishlist</a></li>
-														<li><a href="customer-account.html">Customer
-																account / change password</a></li>
-													</ul>
-												</div>
-												<div class="col-sm-3">
-													<h5>Décoration</h5>
-													<ul>
-														<li><a href="shop-category.html">Category -
-																sidebar right</a></li>
-														<li><a href="shop-category-left.html">Category -
-																sidebar left</a></li>
-														<li><a href="shop-category-full.html">Category -
-																full width</a></li>
-														<li><a href="shop-detail.html">Product detail</a></li>
-													</ul>
-													<h5>Meubles</h5>
-													<ul>
-														<li><a href="shop-basket.html">Shopping cart</a></li>
-														<li><a href="shop-checkout1.html">Checkout - step
-																1</a></li>
-														<li><a href="shop-checkout2.html">Checkout - step
-																2</a></li>
-														<li><a href="shop-checkout3.html">Checkout - step
-																3</a></li>
-														<li><a href="shop-checkout4.html">Checkout - step
-																4</a></li>
-													</ul>
-												</div>
-												<div class="col-sm-3">
-													<h5>Musique</h5>
-													<ul>
-														<li><a href="contact.html">Contact</a></li>
-														<li><a href="contact2.html">Contact - version 2</a></li>
-														<li><a href="contact3.html">Contact - version 3</a></li>
-													</ul>
-												</div>
-											</div>
+											<ui:repeat var="categorie"
+												value="#{mbHeader.recupererCategoriesMeres()}" varStatus="loop">
+												<h:outputText value="&lt;div class='row'&gt;" escape="false" rendered="#{loop.index % 4 == 0}" />
+													<div class="col-sm-3">
+														<h5>#{categorie.intitule}</h5>
+														<ul>
+															<ui:repeat var="souCat"
+																value="#{categorie.sousCategories}">
+																<li><a href="index.html">#{souCat.intitule}</a></li>
+															</ui:repeat>
+														</ul>
+													</div>
+												<h:outputText value="&lt;/div&gt;" escape="false" rendered="#{(loop.index + 1) % 4 == 0}" />
+											</ui:repeat>
+
 										</div> <!-- /.yamm-content -->
 									</li>
 								</ul></li>
 							<!-- ========== FULL WIDTH MEGAMENU END ================== -->
-
 
 							<li><a href="#">Aide</a></li>
 
