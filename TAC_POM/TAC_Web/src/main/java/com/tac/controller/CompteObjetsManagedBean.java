@@ -86,8 +86,8 @@ public class CompteObjetsManagedBean implements Serializable {
 	}
 	
 	public void listenerAjoutObjet(){
-		descriptionSelected = "test";
-		intituleSelected = "test";
+		descriptionSelected = "";
+		intituleSelected = "";
 		categorieSelected = new Categorie();
 		sousCategorieSelected = new Categorie();
 		valeurSelected = new Valeur();

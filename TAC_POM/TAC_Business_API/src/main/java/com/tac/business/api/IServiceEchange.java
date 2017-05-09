@@ -6,10 +6,11 @@ import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Rdv;
+import com.tac.exception.NotEnoughCreditException;
 
 public interface IServiceEchange {
 
-	Echange initierEchange(Echange echange);
+	Echange initierEchange(Echange echange) throws NotEnoughCreditException;
 	Echange accepterEchange (Echange echange);
 	Echange refuserEchange (Echange echange);
 	Echange annulerEchange (Echange echange);

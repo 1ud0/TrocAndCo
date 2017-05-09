@@ -16,6 +16,7 @@ import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Rdv;
+import com.tac.exception.NotEnoughCreditException;
 
 @Remote(IServiceEchange.class)
 @Stateless
@@ -32,11 +33,15 @@ public class ServiceEchange implements IServiceEchange {
 	
 	
 	@Override
-	public Echange initierEchange(Echange echange) {
-		echange.setDateinit(new Date());
-		echange.setCodeEchange((int)(Math.random()*9000)+1000);
-		echange = proxyEchange.addEchange(echange);
-		return echange;
+	public Echange initierEchange(Echange echange) throws NotEnoughCreditException{
+		if (echange.getPrix()>totalCredit(echange.getMembre())){
+			throw new NotEnoughCreditException("pas assez de crédit");
+		} else {
+			echange.setDateinit(new Date());
+			echange.setCodeEchange((int)(Math.random()*9000)+1000);
+			echange = proxyEchange.addEchange(echange);
+			return echange;
+		}	
 	}
 
 	@Override

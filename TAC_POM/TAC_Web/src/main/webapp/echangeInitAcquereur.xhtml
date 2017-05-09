@@ -16,7 +16,7 @@
 		</ui:define>
 		
 		<ui:define name="content">
-		<h:form>
+		<h:form id="proposition">
 			<div class="row">
 
 				<div class="col-sm-6 col-sm-12 text-center">
@@ -25,12 +25,12 @@
 
 					<div class="row vertical">
 						<div class="col-md-5 col-sm-12">
-							<button type="submit" class="btn btn-default tailleBouton"
-								data-placement="top" title=""
-								data-original-title="Echanger contre un objet que vous proposez"
-								data-toggle="modal" data-target="#ModalEchangeObjet">
-								<p class="taillePolice150">un objet</p>
-							</button>
+							<h:commandButton value="un objet"
+											onclick="$('#ModalEchangeObjet').modal('show');"
+											styleClass="btn btn-default tailleBouton">
+								<f:ajax render=":echangeFeuille:echangeFeuillePanel" execute="@form"
+												event="click"></f:ajax>
+							</h:commandButton>
 						</div>
 						<div class="col-md-2 col-sm-12">
 							<p class="taillePoliceOu">ou</p>
@@ -39,9 +39,9 @@
 						<h:commandButton value="une valeur"
 											onclick="$('#ModalEchangeFeuille').modal('show');"
 											styleClass="btn btn-default tailleBouton">
-											<f:ajax render=":echangeFeuille:echangeFeuillePanel" execute="@form"
+							<f:ajax render=":echangeObjet:echangeObjetPanel" execute="@form"
 												event="click"></f:ajax>
-										</h:commandButton>		
+						</h:commandButton>		
 						
 						</div>
 					</div>
@@ -71,7 +71,20 @@
 
 			</div>
 			
-</h:form>
+			
+			<h:inputHidden id="showAlert" value="#{mbEchange.showAlertModif}" />
+			<h:outputScript rendered="#{mbEchange.showAlertModif}">
+				$.notify({
+					title: '<strong>Attention!</strong>',
+					icon: 'glyphicon glyphicon-alert',
+					message: "Crédit insufisant."
+				},{
+					type: 'warning'
+				});
+				document.getElementById("proposition:showAlert").value = false;
+			</h:outputScript>
+			
+			</h:form>
 
 			<!-- Modal echanger contre feuilles-->
 			<div class="modal fade" id="ModalEchangeFeuille" role="dialog">
@@ -131,13 +144,14 @@
 				<div class="modal-dialog">
 					<!-- Modal content-->
 					<div class="modal-content">
-					<h:form>
+					<h:form id="echangeObjet">
+					<h:panelGroup id="echangeObjetPanel">
 						<div class="modal-header">
 							<button type="button" class="close" data-dismiss="modal">x</button>
 							<h4 class="modal-title">Sélectionner un objet:</h4>
 						</div>
 						<div class="modal-body">
-							<form name="top_search" method="get" autocomplete="on" action="#">
+							
 								<div class="row">
 									<div class="col-sm-6 col-md-5 orientationCenter">
 										<div class="form-group selecteur" id="selecteur">
@@ -153,10 +167,11 @@
 										<p class="orientationTextCenterEchange">OU</p>
 									</div>
 									<div class="col-sm-6 col-md-5 orientationCenter">
-										<button type="submit" class="btn btn-link"
-											data-original-title="Echanger contre des feuilles"
-											data-toggle="modal" data-target="#modalObjet">Nouvel
-											Objet</button>
+										<h:commandButton value="Ajouter un objet"
+											onclick="$('#modalAjoutObjet').modal('show');"
+											styleClass="btn btn-default">
+											<f:ajax event="click" listener="#{mbCompteObjet.listenerAjoutObjet()}" render="formAjoutObjet"></f:ajax>
+										</h:commandButton>
 									</div>
 								</div>
 								<div class="modal-footer">
@@ -166,13 +181,168 @@
 									<button type="button" class="btn btn-vert btn-lg"
 										data-dismiss="modal">Annuler</button>
 								</div>
-							</form>
+			
 						</div>
+						</h:panelGroup>
 						</h:form>
 					</div>
 				</div>
 			</div>
 			<!-- Fin Echange Modale echanger contre un objet-->
+			
+			<!-- ******************************MODALE AJOUTER DEBUT****************************** -->
+
+				<div class="modal fade" id="modalAjoutObjet" role="dialog">
+					<div class="modal-dialog">
+
+						<!-- Modal content-->
+						<div class="modal-content">
+							<h:form id="formAjoutObjet">
+								<h:panelGroup id="ajoutObjet">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal">x</button>
+										<h4 class="modal-title">Ajouter une proposition
+										</h4>
+
+									</div>
+									<div class="modal-body">
+										<br></br>
+										<div class="row ">
+											<div class="col-sm-4">
+												<div class="image ">
+													<a href="#"> <img src="img/camera-flat.png"
+														alt="Appareil-photo" class="img-responsive"></img>
+													</a>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="image ">
+													<a href="#"> <img src="img/camera-flat.png"
+														alt="Appareil-photo" class="img-responsive"></img>
+													</a>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div class="image ">
+													<a href="#"> <img src="img/camera-flat.png"
+														alt="Appareil-photo" class="img-responsive"></img>
+													</a>
+												</div>
+											</div>
+										</div>
+										<br></br>
+										<div class="row">
+											<div class="col-md-6">
+												<div class="form-group">
+													<div>
+														<label>Intitulé:</label>
+													</div>
+													<div>
+														<h:inputText value="#{mbCompteObjet.intituleSelected}"
+															styleClass="form-control" />
+													</div>
+												</div>
+												<div>
+													<div>
+														<label>Catégorie:</label>
+													</div>
+													<div class="form-group selecteur" id="catDeLObjetNouveau">
+
+
+														<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.categorieSelected.idCategorie}">
+															<f:selectItems value="#{mbCompteObjet.allCategorie}"
+																var="categorie" itemLabel="${categorie.intitule}"
+																itemValue="${categorie.idCategorie}" />
+															<f:ajax event="change" execute="@form"
+																render=":formAjoutObjet:ComboSousCatNouveau"
+																listener="#{mbCompteObjet.listenerChargementSousCat()}"></f:ajax>
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div>
+													<div>
+														<label>Sous-catégorie:</label>
+													</div>
+													<div class="form-group selecteur" id="sousCatDeLObjetNouveau">
+														<h:selectOneMenu id="ComboSousCatNouveau"
+															styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.sousCategorieSelected.idCategorie}">
+															<f:selectItems
+																value="#{mbCompteObjet.sousCategoriesSelected}"
+																var="categorie" itemLabel="${categorie.intitule}"
+																itemValue="${categorie.idCategorie}" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div>
+													<div>
+														<label>Etat d'usure:</label>
+													</div>
+													<div class="form-group selecteur" id="etatDeLObjetNouveau">
+														<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.etatSelected.idEtat}">
+															<f:selectItems value="#{mbCompteObjet.allEtat}"
+																var="etat" itemLabel="${etat.intitule}"
+																itemValue="${etat.idEtat}" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div>
+													<div>
+														<label>Valeur:</label>
+													</div>
+
+													<div class="form-group selecteur" id="valeurDeLObjetNouveau">
+														<h:selectOneMenu styleClass="selectpicker form-control"
+															value="#{mbCompteObjet.valeurSelected.idValeur}">
+															<f:selectItems value="#{mbCompteObjet.allValeur}"
+																var="valeur" itemLabel="${valeur.intitule}"
+																itemValue="${valeur.idValeur}" />
+														</h:selectOneMenu>
+													</div>
+												</div>
+												<div>
+													<div>
+														<label>Adresses:</label>
+													</div>
+													<h:selectManyCheckbox
+														value="#{mbCompteObjet.idAdressesSelected}" >
+														<f:selectItems value="#{mbCompteObjet.adresseByMembre}"
+															var="adresse" itemLabel="${adresse.adresse}"
+															itemValue="${adresse.idLocalisation}"></f:selectItems>
+													</h:selectManyCheckbox>
+												</div>
+											</div>
+											<div class="col-md-6">
+												<div>
+													<div>
+														<label>Description de la proposition:</label>
+													</div>
+													<div class="styleDescription">
+														<h:inputTextarea rows="10"
+															value="#{mbCompteObjet.descriptionSelected}"
+															styleClass="form-control" />
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="modal-footer">
+											<h:commandButton action="#{mbCompteObjet.ajoutProposition()}"
+												value="Valider" styleClass="btn btn-vert btn-lg"
+												onclick="$('#modalObjet').modal('hide');"></h:commandButton>
+											<button type="button" class="btn btn-vert btn-lg"
+												data-dismiss="modal">Annuler</button>
+										</div>
+									</div>
+								</h:panelGroup>
+							</h:form>
+						</div>
+
+					</div>
+				</div>
+
+				<!-- ******************************MODALE FIN AJOUTER****************************** -->
 
 
 			

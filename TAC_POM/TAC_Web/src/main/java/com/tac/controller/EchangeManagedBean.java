@@ -6,17 +6,16 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
-import javax.swing.plaf.SliderUI;
 
 import com.tac.business.api.IServiceCompte;
 import com.tac.business.api.IServiceEchange;
-import com.tac.business.api.IServiceInscription;
 import com.tac.business.api.IServiceProposition;
 import com.tac.business.api.IServiceValeur;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
+import com.tac.exception.NotEnoughCreditException;
 
 @ManagedBean(name = "mbEchange")
 @SessionScoped
@@ -54,6 +53,7 @@ public class EchangeManagedBean {
 	private String note;
 	private String commentaire;
 	private String status;
+	private Boolean showAlertModif;
 
 	private Echange echangePropose;
 
@@ -211,8 +211,20 @@ public class EchangeManagedBean {
 	public String ajouterEchange() {
 		echangePropose.setProposition(selectedProp);
 		echangePropose.setMembre(membreCourant);
-		echangePropose = proxyEchange.initierEchange(echangePropose);
-		return "/echangeAttenteValidation.xhtml?faces-redirect=true";
+		try {
+			echangePropose = proxyEchange.initierEchange(echangePropose);
+			return "/echangeAttenteValidation.xhtml?faces-redirect=true";
+		} catch (NotEnoughCreditException e) {
+			System.out.println("MORT");
+			System.out.println(e.getMessage());
+			showAlertModif = true;
+			return "";
+		}
+		
+	}
+	
+	public void hideAlert(){
+		showAlertModif = false;
 	}
 
 	public String statusEchange() {
@@ -395,6 +407,14 @@ public class EchangeManagedBean {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public Boolean getShowAlertModif() {
+		return showAlertModif;
+	}
+
+	public void setShowAlertModif(Boolean showAlertModif) {
+		this.showAlertModif = showAlertModif;
 	}
 
 }
