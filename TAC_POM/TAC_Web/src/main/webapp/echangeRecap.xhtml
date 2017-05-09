@@ -17,16 +17,25 @@
 		<ui:define name="content">
 			<div class="resumeEchange">
 			<h:panelGroup rendered="#{mbEchange.statusEchange()}">
-				Statut de l'échange: <span class="label label-danger">Annulé</span><br></br>
-				Date de l'annulation: #{mbEchange.echangeCourant.dateAnnul}
+				Statut de l'échange : <span class="label label-danger">Annulé</span><br></br>
+				Date de l'annulation :
+				<h:outputText value="#{mbEchange.echangeCourant.dateAnnul}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'refus'}">
-				Statut de l'échange: <span class="label label-warning">Refusé</span><br></br>
-				Date du refus: #{mbEchange.echangeCourant.dateRefus}
+				Statut de l'échange : <span class="label label-warning">Refusé</span><br></br>
+				Date de refus :
+				<h:outputText value="#{mbEchange.echangeCourant.dateRefus}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
 			</h:panelGroup>
 			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'effectue'}">
-				Statut de l'échange: <span class="label label-success">Effectué</span><br></br>
-				Date de validation: #{mbEchange.echangeCourant.dateValidation}
+				Statut de l'échange : <span class="label label-success">Effectué</span><br></br>
+				Date de validation :
+				<h:outputText value="#{mbEchange.echangeCourant.dateValidation}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
 			</h:panelGroup>
 			</div>
 			<div class="row ">

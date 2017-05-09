@@ -279,7 +279,7 @@ _________________________________________________________ -->
 		<div class="container" id="search">
 			<div class="row">
 				<h:form id="formSeek">
-					<div class="col-sm-12 col-md-4">
+					<div class="col-sm-12 col-md-3">
 						<h:inputText value="#{mbRecherche.critere.intitule}" id="string_search" name="string_search" p:placeholder="Rechercher..." styleClass="form-control"/>
 					</div>
 					<div class="col-sm-6 col-md-3">
@@ -303,7 +303,7 @@ _________________________________________________________ -->
 							</h:selectOneMenu>
 						</div>
 					</div>
-					<div class="col-sm-2">
+					<div class="col-sm-2 col-sm-offset-1">
 						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}" id="btnSeek" style="display: none;" />
 						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek" >
 							Rechercher<span class="glyphicon glyphicon-search"></span>
