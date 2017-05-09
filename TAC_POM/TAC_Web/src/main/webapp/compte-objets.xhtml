@@ -31,19 +31,12 @@
 									<!-- /.image -->
 									<div class="text">
 										<h3>${proposition.intitule}</h3>
-										<h:commandButton value="modification"
-											onclick="$('#modalObjet').modal('show');"
-											styleClass="btn btn-default">
-											<f:ajax render=":formModifObjet:modifObjet" execute="@form"
-												event="click"
-												listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}"></f:ajax>
+										<h:commandButton value="modification" onclick="$('#modalObjet').modal('show');"	styleClass="btn btn-default">
+											<f:ajax render=":formModifObjet:modifObjet" execute="@form" event="click" listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}" />
 										</h:commandButton>
-										<h:commandButton value="suppression"
-											onclick="$('#suppressionObjet').modal('show');"
-											styleClass="btn btn-default">
-											<f:ajax event="click" listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}"></f:ajax>
+										<h:commandButton value="suppression" onclick="$('#suppressionObjet').modal('show');" styleClass="btn btn-default">
+											<f:ajax event="click" listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}" />
 										</h:commandButton>
-
 									</div>
 									<!-- /.text -->
 								</h:form>
@@ -403,11 +396,9 @@
 				<!-- ******************************MODALE SUPPRIMER FIN****************************** -->
 
 				<div class="col-md-12 col-sm-12 CentrerBoutons">					
-					<h:commandButton value="Ajouter un objet"
-											onclick="$('#modalAjoutObjet').modal('show');"
-											styleClass="btn btn-default">
-											<f:ajax event="click" listener="#{mbCompteObjet.listenerAjoutObjet()}" render="formAjoutObjet"></f:ajax>
-				</h:commandButton>
+					<h:commandButton value="Ajouter un objet"  onclick="$('#modalAjoutObjet').modal('show');" styleClass="btn btn-default">
+						<f:ajax event="click" listener="#{mbCompteObjet.listenerAjoutObjet()}" render="formAjoutObjet"></f:ajax>
+					</h:commandButton>
 				</div>
 
 

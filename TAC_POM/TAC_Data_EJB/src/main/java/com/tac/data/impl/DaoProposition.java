@@ -101,11 +101,12 @@ public class DaoProposition implements IDaoProposition {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Proposition> rechercher(CritereSearch carac, Integer idMembre) {
+	public List<Proposition> rechercher(CritereSearch carac, Integer idMembre, int nombreResult) {
 		String requete = constructQuery(carac, idMembre);
-		System.out.println(requete);
-		System.out.println("id membre = " + idMembre);
 		Query query = setParam(requete, carac, idMembre);
+		if (nombreResult != 0) {
+			query.setMaxResults(nombreResult);
+		}
  		return query.getResultList();
 	}
 
@@ -139,7 +140,7 @@ public class DaoProposition implements IDaoProposition {
 			query.setParameter("pval" + i, valeurs.get(i));
 		}
 		//clause adresse + dist max
-		if (carac.getLocalisations().size() != 0) {
+		if (carac.getLocalisations() != null && carac.getLocalisations().size() != 0) {
 			addParamLocalize(query, carac);
 		}
 		//clause categorie
@@ -192,7 +193,7 @@ public class DaoProposition implements IDaoProposition {
 		}
 		
 		//clause adresse + dist max
-		if (carac.getLocalisations().size() != 0) {
+		if (carac.getLocalisations() != null && carac.getLocalisations().size() != 0) {
 			addClauseLocalize(requete, carac);
 		}
 		//clause categorie

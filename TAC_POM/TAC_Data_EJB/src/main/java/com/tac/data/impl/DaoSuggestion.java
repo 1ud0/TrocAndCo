@@ -33,12 +33,22 @@ public class DaoSuggestion implements IDaoSuggestion {
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Suggestion> getSuggestionsByIdMembre(int idMembre) {
+	public Suggestion getSuggestionByIdMembre(int idMembre) {
 		String req = "SELECT s FROM Suggestion s WHERE s.membre.idMembre = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
-		
-		return query.getResultList();
+		List<Suggestion> suggestions = query.getResultList();
+		if (suggestions.size() == 0) {
+			return null;
+		} else {
+			return suggestions.get(0);
+		}
+	}
+
+	@Override
+	public Suggestion updateSuggestion(Suggestion suggestion) {
+		em.merge(suggestion);
+		return suggestion;
 	}
 
 }

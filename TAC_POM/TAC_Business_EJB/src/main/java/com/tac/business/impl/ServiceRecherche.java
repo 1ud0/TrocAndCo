@@ -8,22 +8,32 @@ import javax.ejb.Remote;
 import javax.ejb.Stateless;
 
 import com.tac.business.api.IServiceRecherche;
+import com.tac.data.api.IDaoCategorie;
 import com.tac.data.api.IDaoLocalisation;
 import com.tac.data.api.IDaoProposition;
+import com.tac.data.api.IDaoSuggestion;
+import com.tac.entity.Categorie;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
+import com.tac.entity.Suggestion;
 import com.tac.util.CritereSearch;
 
 @Remote(IServiceRecherche.class)
 @Stateless
 public class ServiceRecherche implements IServiceRecherche {
 
+	public static final int GET_ALL_RESULTS = 0;
+	public static final int GET_SUGGESTIONS = 4;
 	
 	@EJB
 	private IDaoProposition proxyProposition;
 	@EJB
 	private IDaoLocalisation proxyLoc;
+	@EJB
+	private IDaoSuggestion proxySugg;
+	@EJB
+	private IDaoCategorie proxyCat;
 	
 	@Override
 	public List<Proposition> getPropositionsBidon() {
@@ -59,17 +69,72 @@ public class ServiceRecherche implements IServiceRecherche {
 			}
 		}
 		carac.setLocalisations(locs);
-		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre);
+		addToSuggestion(carac, membre);
+		//on récupère les localisations pour chaque proposition
+		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre, GET_ALL_RESULTS);
 		for (Proposition proposition : propositions) {
 			proposition.setLocalisations(proxyLoc.getPropositionLocalisations(proposition));
 		}
 		return propositions;
 	}
 
+	private void addToSuggestion(CritereSearch carac, Membre membre) {
+		if (membre != null) {
+			Suggestion suggestion = proxySugg.getSuggestionByIdMembre(membre.getIdMembre());
+			if (suggestion == null) {
+				suggestion = new Suggestion();
+				suggestion.setMembre(membre);
+				setData(carac, suggestion);
+				proxySugg.addSuggestion(suggestion);
+			} else {
+				setData(carac, suggestion);
+				proxySugg.updateSuggestion(suggestion);
+			}
+		}
+	}
+	
+	private void setData(CritereSearch carac, Suggestion suggestion) {
+		Integer cat = carac.getCatCast();
+		if (cat != null && cat != 0) {
+			suggestion.setCategorie(proxyCat.getById(cat));
+		} else {
+			suggestion.setCategorie(null);
+		}
+		Integer sousCat = carac.getSousCatCast();
+		if (sousCat != null && sousCat != 0) {
+			suggestion.setSousCategorie(proxyCat.getById(sousCat));
+		} else {
+			suggestion.setSousCategorie(null);
+		}
+		suggestion.setIntitule(carac.getIntitule());
+	}
+
 	@Override
 	public List<Proposition> getNewProps(int nombre, Membre membre) {
 		Integer idMembre = membre == null ? null : membre.getIdMembre();
 		return proxyProposition.getNouveautes(nombre, idMembre);
+	}
+
+	@Override
+	public List<Proposition> findSuggestion(Membre membre) {
+		if (membre != null) {
+			Suggestion suggestion = proxySugg.getSuggestionByIdMembre(membre.getIdMembre());
+			if (suggestion != null) {
+				CritereSearch criteres = new CritereSearch();
+				Categorie cat = suggestion.getCategorie();
+				if (cat != null) {
+					criteres.setCat(cat.getIdCategorie().toString());
+				}
+				Categorie sousCat = suggestion.getSousCategorie();
+				if (sousCat != null) {
+					criteres.setSousCat(sousCat.getIdCategorie().toString());
+				}
+				criteres.setIntitule(suggestion.getIntitule());
+				return proxyProposition.rechercher(criteres, membre.getIdMembre(), GET_SUGGESTIONS);
+			}
+			
+		}
+		return null;
 	}
 
 }

@@ -21,6 +21,7 @@ import com.tac.business.api.IServiceRecherche;
 import com.tac.business.api.IServiceValeur;
 import com.tac.entity.Categorie;
 import com.tac.entity.Departement;
+import com.tac.entity.Envie;
 import com.tac.entity.Etat;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
@@ -62,6 +63,7 @@ public class RechercheManagedBean {
 	private List<Valeur> valeurs;
 	private List<Localisation> adresses;
 	private List<Departement> departements;
+	private Envie envie = new Envie();
 
 	private List<Entry<Categorie, List<Categorie>>> catsEntries;
 	private Map<Categorie, List<Categorie>> mycats;
@@ -87,7 +89,6 @@ public class RechercheManagedBean {
 	}
 	
 	public void loadingPage() {
-		System.out.println("COUCOU");
 		propositions = proxyRecherche.rechercher(critere, connexionBean.getMembreConnected());
 		mycats = new HashMap<>();
 		catsCount = new HashMap<>();
@@ -132,6 +133,12 @@ public class RechercheManagedBean {
 	public void listenerSousCat(Categorie sousCat) {
 		critere.setCat(null);
 		critere.setSousCat(sousCat.getIdCategorie().toString());
+	}
+	
+	public void listenerEnvie() {
+		if (critere.getCatCast() != null) {
+			
+		}
 	}
 	
 	// getters & setters
@@ -277,6 +284,14 @@ public class RechercheManagedBean {
 
 	public void setDepartements(List<Departement> departements) {
 		this.departements = departements;
+	}
+
+	public Envie getEnvie() {
+		return envie;
+	}
+
+	public void setEnvie(Envie envie) {
+		this.envie = envie;
 	}
 
 
