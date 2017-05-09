@@ -75,6 +75,14 @@ public class EchangeManagedBean {
 		return nav;
 	}
 	
+	public Echange loadEchangeObjetPhotos(Echange echange){
+		Proposition prop = proxyEchange.getPropByEchange(echange);
+		prop.setPhotos(proxyProposition.getByProposition(prop));
+		echange.setProposition(prop);
+		selectedProp= echange.getProposition();
+		echangeCourant = echange;
+		return echange;
+	}
 	
 	/**
 	 *  a modifier
@@ -82,14 +90,15 @@ public class EchangeManagedBean {
 	 * @return
 	 */
 	public String loadEchangeAcquereur(Echange echange) {
-		membreCourant=identifBean.getMembreConnected();
-		selectedProp= echange.getProposition();
-		membreAutre = selectedProp.getMembre();
+		// On reload l'échange avec la proposition et ses photos
+		echange = loadEchangeObjetPhotos(echange);		
 		
-		echangeCourant = echange;
+		membreCourant=identifBean.getMembreConnected();	
+		membreAutre = selectedProp.getMembre();		
+		
 		String nav = "";
 		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
-			nav = "/echangeRecapAcquereur.xhtml?faces-redirect=true";
+			nav = "/echangeRecap.xhtml?faces-redirect=true";
 		}
 		else if (echange.getDateValidation() != null) {
 			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
@@ -103,16 +112,15 @@ public class EchangeManagedBean {
 		return nav;
 	}
 	
-	public String loadEchangeDonneur(Echange echange) {
+	public String loadEchangeDonneur(Echange echange) {	
+		echange = loadEchangeObjetPhotos(echange);	
+		
 		membreCourant=identifBean.getMembreConnected();
-		selectedProp= echange.getProposition();
 		membreAutre = echange.getMembre();
 		
-		echangeCourant = echange;
-		System.out.println("Date acceptation " + echangeCourant.getDateAcceptation());
 		String nav = "";
-		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
-			nav = "/echangeRecapDonneur.xhtml?faces-redirect=true";
+		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComDonneur() != null)) {
+			nav = "/echangeRecap.xhtml?faces-redirect=true";
 		}
 		else if (echange.getDateValidation() != null) {
 			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
@@ -130,17 +138,26 @@ public class EchangeManagedBean {
 	
 	public String noterEchange(){
 		String nav = "";
+		echangeCourant = proxyEchange.getByNumero(echangeCourant);
+		System.out.println("note :" + note);
 		if (membreCourant.getPseudo().equals(echangeCourant.getMembre().getPseudo())){
 			// si c'est l'acquereur
 			echangeCourant.setComChercheur(commentaire);
+			int noteChercheur = Integer.parseInt(note);
+			System.out.println("note du chercheur" + noteChercheur);
+			echangeCourant.setNoteChercheur(noteChercheur);
 			echangeCourant = proxyEchange.noterEchange(echangeCourant);
 			nav = loadEchangeAcquereur(echangeCourant);
 		}
 		else{
 			echangeCourant.setComDonneur(commentaire);
-			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			int noteDonneur = Integer.parseInt(note);
+			System.out.println("note du donneur" + noteDonneur);
+			echangeCourant.setNoteDonneur(noteDonneur);
+			echangeCourant = proxyEchange.noterEchange(echangeCourant);		
 			nav = loadEchangeDonneur(echangeCourant);
 		}
+		System.out.println("nav eval" + nav);
 		return nav;
 	}
 

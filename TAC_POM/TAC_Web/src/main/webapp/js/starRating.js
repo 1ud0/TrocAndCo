@@ -20,7 +20,7 @@ var starPleine = "fa fa-star fa-2x";
     	 document.getElementById("star"+i).className=starVide;
     	 done=false;
     	 document.getElementById("vote").innerHTML="Votre vote : 0 étoile(s)";
-    	 document.getElementById("formEval:etoile").innerHTML = level;
+    	 document.getElementById("formEval:etoile").value = level;
      }
  }
  function valider(level){
@@ -31,6 +31,6 @@ var starPleine = "fa fa-star fa-2x";
 	 }	
 
 	 document.getElementById("vote").innerHTML="Votre vote : "+level+" étoile(s)";
-	 document.getElementById("formEval:etoile").innerHTML = level;
+	 document.getElementById("formEval:etoile").value = level;
  }
  

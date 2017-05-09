@@ -19,20 +19,23 @@
 				<!--  -->
 				<div class="col-md-6 col-sm-12">
 					<div class="orientationImageEchange orientationCenter">
-						<h1>En échange de :</h1>
+						<span class="prix">En échange de :</span>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12">
-					<div class="row">
-						<div class=" col-sm-12">
-							<div class="product" id="produitDuDonneur">
+					
+							<h:panelGroup rendered="#{mbEchange.echangeCourant.prix != null}">
+								<p class="price">
+									<span class="prix">#{mbEchange.echangeCourant.prix}</span><img alt="feuille" src="img/custom/feuille.png"/>
+								</p>
+							</h:panelGroup>
+							<h:panelGroup layout="block" styleClass="product" id="produitDuDonneur" rendered="#{mbEchange.echangeCourant.prix == null}">
 								<div class="orientationCenter">
 									<div>
 										<img src="img/custom/casserole.jpg" alt=""
 											class="img-responsive MaxHeightImg200 " />
 									</div>
 								</div>
-
 								<!-- /.image -->
 								<div class="text">
 									<h3>
@@ -43,17 +46,8 @@
 									</p>
 								</div>
 								<!-- /.text -->
-							</div>
-							<div class="orientationCenter" id="feuilleDonneur">
-								<h1>
-									3 <img src="img/custom/feuille orange.png" alt=""
-										height="100px" width="100px" />
-								</h1>
-								<!-- /.text -->
-							</div>
-							<!-- /.product -->
-						</div>
-					</div>
+							</h:panelGroup>
+					
 				</div>
 			</div>
 		</ui:define>

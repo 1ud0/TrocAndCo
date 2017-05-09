@@ -969,3 +969,15 @@ p.taillePolice150 {
   .infoBulle {
  	 
  }
+ 
+ .prix {
+ 	font-size: 2.25em;
+ 	font-style: 900;
+ 	color: #333333;
+ 	margin-right: 15px;
+ }
+ 
+ .price{
+ 	display: flex;
+ 	align-items: center;
+ }

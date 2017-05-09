@@ -33,7 +33,7 @@
 							<i class="fa fa-star"></i> <i class="fa fa-star-half-o"></i><i
 							class="fa fa-star-o"></i><i class="fa fa-star-o"></i> <br />Evaluation</a>
 					</li>
-					<li class="#{view.viewId eq '/echangeRecapAcquereur.xhtml' or view.viewId eq '/echangeRecapDonneur.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-eye"></i><br />Récapitulatif</a>
+					<li class="#{view.viewId eq '/echangeRecap.xhtml' ? 'active' : 'disabled'}"><a href="#"><i class="fa fa-eye"></i><br />Récapitulatif</a>
 					</li>
 				</ul>
 				<div class="echangeEtape">
@@ -68,9 +68,7 @@
 											<h3>
 											<h:commandLink action="#{mbEchange.redirigerEchange()}" value="#{mbEchange.selectedProp.intitule}" />
 											</h3>
-											<p class="price">
 												Valeur: #{mbEchange.selectedProp.valeur.valeur}<img alt="feuille" src="img/custom/feuille.png" class="iconeFeuille"/>
-											</p>
 											</h:form>
 										</div>
 										<!-- /.text -->

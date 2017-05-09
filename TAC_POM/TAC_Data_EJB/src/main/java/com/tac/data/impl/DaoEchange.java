@@ -171,7 +171,10 @@ public class DaoEchange implements IDaoEchange {
 		List<Echange> echangesDuChercheur = queryGetByIdMembreChercheur.getResultList();
 		int credit = 0;
 		for (Echange echange : echangesDuChercheur) {
-			credit = credit - echange.getPrix();
+			if (echange.getPrix() != null) {
+				credit = credit - echange.getPrix();
+			}
+			
 		}
 
 		return credit;
