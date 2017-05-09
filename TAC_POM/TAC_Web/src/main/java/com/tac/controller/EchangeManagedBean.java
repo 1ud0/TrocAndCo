@@ -18,129 +18,126 @@ import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
 
-@ManagedBean (name="mbEchange")
+@ManagedBean(name = "mbEchange")
 @SessionScoped
 public class EchangeManagedBean {
 
-	@ManagedProperty(value="#{mbObjet}")
+	@ManagedProperty(value = "#{mbObjet}")
 	private ObjetManagedBean objetSelectedBean;
-	
-	@ManagedProperty(value="#{mbIdentif}")
+
+	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
-	
+
 	@EJB
 	IServiceProposition proxyProposition;
-	
+
 	@EJB
 	IServiceValeur proxyValeur;
-	
+
 	@EJB
 	IServiceEchange proxyEchange;
-	
+
 	@EJB
 	IServiceCompte proxyCompteMembre;
-	
+
 	private Membre membreCourant;
 	private Membre membreAutre;
-	
-	
-	private Proposition selectedProp;	
+
+	private Proposition selectedProp;
 	private List<Proposition> propositionsMembre;
-	private Proposition propositionPourEchange;	
+	private Proposition propositionPourEchange;
 	private List<Valeur> valeurs;
 	private Valeur valeurPourEchange;
-	private boolean prixFixe=false;
+	private boolean prixFixe = false;
 	private String codeRentre;
-	
+
 	private String note;
 	private String commentaire;
-	
+	private String status;
+
 	private Echange echangePropose;
-	
+
 	private Echange echangeCourant;
-	
-	public String loadPropositionEtMembre(){
-		membreCourant=identifBean.getMembreConnected();
-		selectedProp=objetSelectedBean.getSelectedProp();
+
+	public String loadPropositionEtMembre() {
+		membreCourant = identifBean.getMembreConnected();
+		selectedProp = objetSelectedBean.getSelectedProp();
 		membreAutre = selectedProp.getMembre();
-		
+
 		echangePropose = new Echange();
 		valeurPourEchange = new Valeur();
 		propositionPourEchange = new Proposition();
-		
+
 		String nav = "";
 		if (selectedProp != null) {
 			nav = "/echangeInitAcquereur.xhtml?faces-redirect=true";
 		}
 		return nav;
 	}
-	
-	public Echange loadEchangeObjetPhotos(Echange echange){
+
+	public Echange loadEchangeObjetPhotos(Echange echange) {
 		Proposition prop = proxyEchange.getPropByEchange(echange);
 		prop.setPhotos(proxyProposition.getByProposition(prop));
 		echange.setProposition(prop);
-		selectedProp= echange.getProposition();
+		selectedProp = echange.getProposition();
 		echangeCourant = echange;
+		status = statusEchange();
 		return echange;
 	}
-	
+
 	/**
-	 *  a modifier
+	 * a modifier
+	 * 
 	 * @param echange
 	 * @return
 	 */
 	public String loadEchangeAcquereur(Echange echange) {
 		// On reload l'échange avec la proposition et ses photos
-		echange = loadEchangeObjetPhotos(echange);		
-		
-		membreCourant=identifBean.getMembreConnected();	
-		membreAutre = selectedProp.getMembre();		
-		
+		echange = loadEchangeObjetPhotos(echange);
+
+		membreCourant = identifBean.getMembreConnected();
+		membreAutre = selectedProp.getMembre();
+
 		String nav = "";
-		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
+		if (echange.getDateAnnul() != null || echange.getDateRefus() != null
+				|| (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
 			nav = "/echangeRecap.xhtml?faces-redirect=true";
-		}
-		else if (echange.getDateValidation() != null) {
+		} else if (echange.getDateValidation() != null) {
 			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
-		}
-		else if(echange.getDateAcceptation()!= null){
+		} else if (echange.getDateAcceptation() != null) {
 			nav = "/echangeCodeAcquereur.xhtml?faces-redirect=true";
-		}
-		else {
+		} else {
 			nav = "/echangeAttenteValidation.xhtml?faces-redirect=true";
 		}
 		return nav;
 	}
-	
-	public String loadEchangeDonneur(Echange echange) {	
-		echange = loadEchangeObjetPhotos(echange);	
-		
-		membreCourant=identifBean.getMembreConnected();
+
+	public String loadEchangeDonneur(Echange echange) {
+		echange = loadEchangeObjetPhotos(echange);
+
+		membreCourant = identifBean.getMembreConnected();
 		membreAutre = echange.getMembre();
-		
+
 		String nav = "";
-		if (echange.getDateAnnul() != null || echange.getDateRefus() != null || (echange.getDateValidation() != null && echange.getComDonneur() != null)) {
+		if (echange.getDateAnnul() != null || echange.getDateRefus() != null
+				|| (echange.getDateValidation() != null && echange.getComDonneur() != null)) {
 			nav = "/echangeRecap.xhtml?faces-redirect=true";
-		}
-		else if (echange.getDateValidation() != null) {
+		} else if (echange.getDateValidation() != null) {
 			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
-		}
-		else if(echange.getDateAcceptation()!= null){
+		} else if (echange.getDateAcceptation() != null) {
 			nav = "/echangeCodeDonneur.xhtml?faces-redirect=true";
-		}
-		else {
+		} else {
 			nav = "/echangeInitDonneur.xhtml?faces-redirect=true";
-		};
+		}
+		;
 		return nav;
 	}
-	
-	
-	
-	public String noterEchange(){
+
+	public String noterEchange() {
 		String nav = "";
 		echangeCourant = proxyEchange.getByNumero(echangeCourant);
 		System.out.println("note :" + note);
-		if (membreCourant.getPseudo().equals(echangeCourant.getMembre().getPseudo())){
+		if (membreCourant.getPseudo().equals(echangeCourant.getMembre().getPseudo())) {
 			// si c'est l'acquereur
 			echangeCourant.setComChercheur(commentaire);
 			int noteChercheur = Integer.parseInt(note);
@@ -148,79 +145,90 @@ public class EchangeManagedBean {
 			echangeCourant.setNoteChercheur(noteChercheur);
 			echangeCourant = proxyEchange.noterEchange(echangeCourant);
 			nav = loadEchangeAcquereur(echangeCourant);
-		}
-		else{
+		} else {
 			echangeCourant.setComDonneur(commentaire);
 			int noteDonneur = Integer.parseInt(note);
 			System.out.println("note du donneur" + noteDonneur);
 			echangeCourant.setNoteDonneur(noteDonneur);
-			echangeCourant = proxyEchange.noterEchange(echangeCourant);		
+			echangeCourant = proxyEchange.noterEchange(echangeCourant);
 			nav = loadEchangeDonneur(echangeCourant);
 		}
 		System.out.println("nav eval" + nav);
 		return nav;
 	}
 
-	public String redirigerEchange(){
+	public String redirigerEchange() {
 		return "/fiche.xhtml?faces-redirect=true&id=" + selectedProp.getIdProposition();
 	}
-	
-	public String accepterEchange(){
-		echangeCourant = proxyEchange.accepterEchange(echangeCourant);	
+
+	public String accepterEchange() {
+		echangeCourant = proxyEchange.accepterEchange(echangeCourant);
 		return loadEchangeDonneur(echangeCourant);
 	}
-	
-	public String refuserEchange(){
+
+	public String refuserEchange() {
 		echangeCourant = proxyEchange.refuserEchange(echangeCourant);
 		System.out.println(echangeCourant.getDateRefus());
 		return loadEchangeDonneur(echangeCourant);
 	}
-	
-	public String annulerEchangeDonneur(){
+
+	public String annulerEchangeDonneur() {
 		echangeCourant = proxyEchange.annulerEchange(echangeCourant);
 		return loadEchangeDonneur(echangeCourant);
 	}
-	
-	public String annulerEchangeAcquereur(){
+
+	public String annulerEchangeAcquereur() {
 		echangeCourant = proxyEchange.annulerEchange(echangeCourant);
 		return loadEchangeAcquereur(echangeCourant);
 	}
-	
-	public String validerCode(){
-		String nav = "";	
-		if (codeRentre != null){
+
+	public String validerCode() {
+		String nav = "";
+		if (codeRentre != null) {
 			try {
 				System.out.println("code" + codeRentre);
 				int code = Integer.parseInt(codeRentre);
-				if (code == echangeCourant.getCodeEchange()){
+				if (code == echangeCourant.getCodeEchange()) {
 					echangeCourant = proxyEchange.validerEchange(echangeCourant);
 					nav = loadEchangeDonneur(echangeCourant);
 				}
-			} catch(NumberFormatException e){
-				
-			};
+			} catch (NumberFormatException e) {
+
+			}
+			;
 		}
 		return nav;
 	}
-	
-	public void parametragePrixEchange(){
-		if(prixFixe){
-			echangePropose.setPrix(selectedProp.getValeur().getValeur());			
-		}else{
+
+	public void parametragePrixEchange() {
+		if (prixFixe) {
+			echangePropose.setPrix(selectedProp.getValeur().getValeur());
+		} else {
 			echangePropose.setPrix(valeurPourEchange.getValeur());
 		}
 	}
-	
-	public String ajouterEchange(){
+
+	public String ajouterEchange() {
 		echangePropose.setProposition(selectedProp);
 		echangePropose.setMembre(membreCourant);
 		echangePropose = proxyEchange.initierEchange(echangePropose);
 		return "/echangeAttenteValidation.xhtml?faces-redirect=true";
 	}
 
-	
-	
-	//GETTER SETTER
+	public String statusEchange() {
+		if (echangeCourant.getDateAnnul() != null) {
+			status = "annule";
+		} else if (echangeCourant.getDateRefus() != null) {
+			status = "refus";
+		} else if (echangeCourant.getDateValidation() != null) {
+			status = "effectue";
+		} else {
+			status = "en cours";
+		}
+		return status;
+	}
+
+	// GETTER SETTER
 	public Membre getMembreCourant() {
 		return membreCourant;
 	}
@@ -321,7 +329,6 @@ public class EchangeManagedBean {
 		this.echangePropose = echangePropose;
 	}
 
-	
 	public void setPrixFixe(boolean prixFixe) {
 		this.prixFixe = prixFixe;
 	}
@@ -334,55 +341,60 @@ public class EchangeManagedBean {
 		this.proxyEchange = proxyEchange;
 	}
 
-
 	public Echange getEchangeCourant() {
 		return echangeCourant;
 	}
-
 
 	public void setEchangeCourant(Echange echangeCourant) {
 		this.echangeCourant = echangeCourant;
 	}
 
-
 	public Membre getMembreAutre() {
 		return membreAutre;
 	}
-
 
 	public void setMembreAutre(Membre membreAutre) {
 		this.membreAutre = membreAutre;
 	}
 
-
 	public String getCodeRentre() {
 		return codeRentre;
 	}
-
 
 	public void setCodeRentre(String codeRentre) {
 		this.codeRentre = codeRentre;
 	}
 
-
 	public String getNote() {
 		return note;
 	}
-
 
 	public void setNote(String note) {
 		this.note = note;
 	}
 
-
 	public String getCommentaire() {
 		return commentaire;
 	}
 
-
 	public void setCommentaire(String commentaire) {
 		this.commentaire = commentaire;
 	}
-	
-	
+
+	public IServiceCompte getProxyCompteMembre() {
+		return proxyCompteMembre;
+	}
+
+	public void setProxyCompteMembre(IServiceCompte proxyCompteMembre) {
+		this.proxyCompteMembre = proxyCompteMembre;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 }

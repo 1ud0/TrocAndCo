@@ -15,14 +15,29 @@
 		</ui:define>
 		
 		<ui:define name="content">
-			<div class="row alignVertical">
+			<div class="resumeEchange">
+			<h:panelGroup rendered="#{mbEchange.statusEchange()}">
+				Statut de l'échange: <span class="label label-danger">Annulé</span><br></br>
+				Date de l'annulation: #{mbEchange.echangeCourant.dateAnnul}
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'refus'}">
+				Statut de l'échange: <span class="label label-warning">Refusé</span><br></br>
+				Date du refus: #{mbEchange.echangeCourant.dateRefus}
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'effectue'}">
+				Statut de l'échange: <span class="label label-success">Effectué</span><br></br>
+				Date de validation: #{mbEchange.echangeCourant.dateValidation}
+			</h:panelGroup>
+			</div>
+			<div class="row ">
 				<!--  -->
 				<div class="col-md-6 col-sm-12">
-					<div class="orientationImageEchange orientationCenter">
+					<div class="">
 						<span class="prix">En échange de :</span>
 					</div>
 				</div>
 				<div class="col-md-6 col-sm-12">
+							
 					
 							<h:panelGroup rendered="#{mbEchange.echangeCourant.prix != null}">
 								<p class="price">
@@ -30,7 +45,7 @@
 								</p>
 							</h:panelGroup>
 							<h:panelGroup layout="block" styleClass="product" id="produitDuDonneur" rendered="#{mbEchange.echangeCourant.prix == null}">
-								<div class="orientationCenter">
+								<div class="">
 									<div>
 										<img src="img/custom/casserole.jpg" alt=""
 											class="img-responsive MaxHeightImg200 " />
