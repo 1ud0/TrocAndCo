@@ -14,5 +14,6 @@ public interface IServiceMessage {
 	List<Message> getMsgAboutProp(Membre chercheur, Proposition prop);
 	Message messageLu(Message msg);
 	List<Message> messageNonLuQuandRecepteur(Membre membre);
-
+	List<Message> getConversationAboutProposition(int idMembre1, int idMembre2, int idProposition) ;
+	List<Message> getConversationList(Membre membre);
 }
