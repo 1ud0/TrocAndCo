@@ -88,5 +88,24 @@ public class DaoMembre implements IDaoMembre{
 		Membre membreChecked = (Membre) query.getSingleResult();
 		return membreChecked;
 	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Membre> getAllActif() {
+		final String reqGetAll = "SELECT m FROM Membre m WHERE m.dateRadiation is NULL";
+		Query queryGetAll = em.createQuery(reqGetAll);
+		List<Membre> membres= queryGetAll.getResultList();
+		return membres;
+	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Membre> getAllRadie() {
+		final String reqGetAll = "SELECT m FROM Membre m WHERE m.dateRadiation is NOT NULL";
+		Query queryGetAll = em.createQuery(reqGetAll);
+		List<Membre> membres= queryGetAll.getResultList();
+		return membres;
+	}
+
+
+	
 }

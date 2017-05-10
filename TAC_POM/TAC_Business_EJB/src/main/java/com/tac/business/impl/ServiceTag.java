@@ -38,6 +38,11 @@ public class ServiceTag implements IServiceTag {
 	public List<Tag> getTagsForCat(Categorie cat) {
 		return proxyDaoTag.getTagsByIdCat(cat.getIdCategorie());
 	}
+
+	@Override
+	public List<Tag> getAllTag() {
+		return proxyDaoTag.getAllTag();
+	}
 	
 	
 

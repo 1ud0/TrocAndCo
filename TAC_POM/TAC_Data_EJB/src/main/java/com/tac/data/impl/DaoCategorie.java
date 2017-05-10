@@ -62,4 +62,12 @@ public class DaoCategorie implements IDaoCategorie{
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Categorie> getAllCategorieFilles() {
+		final String req = "SELECT c FROM Categorie c WHERE c.categorieMere.idCategorie is NOT NULL";
+		Query query = em.createQuery(req);
+		return query.getResultList();
+	}
+
 }

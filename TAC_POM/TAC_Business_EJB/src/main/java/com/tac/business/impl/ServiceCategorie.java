@@ -52,4 +52,10 @@ public class ServiceCategorie implements IServiceCategorie{
 		return proxyDaoCategorie.getById(idCategorie);
 	}
 
+	@Override
+	public List<Categorie> getAllCategorieFille() {
+		
+		return proxyDaoCategorie.getAllCategorieFilles();
+	}
+
 }

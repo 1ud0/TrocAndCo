@@ -12,4 +12,5 @@ public interface IServiceCategorie {
 	List<Categorie> getCategorieMere();
 	List<Categorie> getCategorieFille(Integer IdMere);
 	Categorie getById(Integer idCategorie);
+	List<Categorie> getAllCategorieFille();
 }

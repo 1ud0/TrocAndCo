@@ -10,5 +10,7 @@ public interface IDaoTag {
 	Tag updateTag(Tag tag);
 	void deleteTag(Tag tag);
 	List<Tag> getTagsByIdCat (int idCat);
+	List<Tag> getAllTag();
+
 
 }

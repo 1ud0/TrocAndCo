@@ -11,5 +11,5 @@ public interface IServiceTag {
 	Tag updateTag(Tag tag);
 	void deleteTag(Tag tag);
 	List<Tag> getTagsForCat(Categorie cat);
-
+	List<Tag> getAllTag();
 }

@@ -7,7 +7,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
 
-import com.tac.business.api.IServiceAuthentificationBackOffice;
+import com.tac.business.api.back.IServiceAuthentificationBackOffice;
 import com.tac.entity.Membre;
 import java.io.Serializable;
 
