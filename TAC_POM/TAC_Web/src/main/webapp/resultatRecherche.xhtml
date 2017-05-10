@@ -121,15 +121,16 @@ _________________________________________________________ -->
 									</h:panelGroup>
 
 
-								<!-- panel Valeur -->
-								<div class="panel panel-default sidebar-menu">
-									<div class="panel-heading">
-										<h3 class="panel-title">
-											Valeur <img src="img/custom/feuille.png" class ="iconeFeuille" alt=""></img>
-										</h3>
-									</div>
-									<div class="panel-body">
-									
+									<!-- panel Valeur -->
+									<div class="panel panel-default sidebar-menu">
+										<div class="panel-heading">
+											<h3 class="panel-title">
+												Valeur <img src="img/custom/feuille.png"
+													class="iconeFeuille" alt=""></img>
+											</h3>
+										</div>
+										<div class="panel-body">
+
 											<div class="form-group">
 												<h:selectManyCheckbox value="#{mbRecherche.critere.valeurs}"
 													styleClass="checkbox-inline" layout="pageDirection">
@@ -168,10 +169,15 @@ _________________________________________________________ -->
 
 										</div>
 									</div>
-									
+
 									<!-- bouton save envie-->
-									<h:commandButton value="Enregistrer une envie" onclick="$('#ModalEnregistrementEnvie').modal('show');" styleClass="btn btn-vert btn-lg" rendered="#{mbIdentif.membreConnected != null}">
-										<f:ajax event="click" listener="#{mbRecherche.listenerEnvie()}"	render="formAddEnvie"></f:ajax>
+									<h:commandButton value="Enregistrer une envie"
+										onclick="$('#ModalEnregistrementEnvie').modal('show');"
+										styleClass="btn btn-vert btn-lg"
+										rendered="#{mbIdentif.membreConnected != null}">
+										<f:ajax event="click"
+											listener="#{mbRecherche.listenerEnvie()}"
+											render="formAddEnvie"></f:ajax>
 									</h:commandButton>
 
 								</div>
@@ -195,7 +201,7 @@ _________________________________________________________ -->
 								<h:outputText value="#{mbRecherche.propositions.size()}" />
 								objet
 								<h:outputText value="s"
-									rendered="#{mbRecherche.propositions.size() > 1}"  />
+									rendered="#{mbRecherche.propositions.size() > 1}" />
 								trouvé
 								<h:outputText value="s"
 									rendered="#{mbRecherche.propositions.size() > 1}" />
@@ -222,15 +228,20 @@ _________________________________________________________ -->
 														</div>
 														<!-- /.image -->
 														<div class="text">
-															<h3>#{prop.intitule}</h3>
+															<h3>#{prop.intitule}
+															
+															<h:panelGroup rendered="#{mbObjet.indicationFavori(prop)}">
+																	<i class="fa fa-heart" style="color: red" ></i>
+																	</h:panelGroup>
+															</h3>
 															<span class="glyphicon glyphicon-map-marker"
 																aria-hidden="true"></span>
 															<p class="text-muted">#{prop.localisations.get(0).ville}
 															</p>
 															<p class="price">
-																#{prop.valeur.valeur} <img
-																	src="img/custom/feuille.png" class = "iconeFeuille" alt=""></img>
-															</p>
+																#{prop.valeur.valeur} <img src="img/custom/feuille.png"
+																	class="iconeFeuille" alt=""></img>
+																	</p>
 
 														</div>
 														<!-- /.text -->
@@ -326,30 +337,34 @@ _________________________________________________________ -->
 													</select>
 												</div>
 												<f:ajax render="formAddEnvie">
-													<h:commandLink action="#{mbRecherche.afficherModalListe()}" value="Creer une nouvelle liste" styleClass="btn btn-link">
+													<h:commandLink action="#{mbRecherche.afficherModalListe()}"
+														value="Creer une nouvelle liste" styleClass="btn btn-link">
 													</h:commandLink>
 												</f:ajax>
 											</div>
-											<h:panelGroup id="AjoutListe" rendered="#{mbRecherche.modalRendered}">
-												
-													<p>
-														<label>Nom de la liste: </label> <input type="text"></input>
-													</p>
-													<h:commandButton value="Créer"
-														styleClass="btn btn-custom btn-lg" />
-													<button type="button" class="btn btn-custom btn-lg">Annuler</button>
-												
+											<h:panelGroup id="AjoutListe"
+												rendered="#{mbRecherche.modalRendered}">
+
+												<p>
+													<label>Nom de la liste: </label> <input type="text"></input>
+												</p>
+												<h:commandButton value="Créer"
+													styleClass="btn btn-custom btn-lg" />
+												<button type="button" class="btn btn-custom btn-lg">Annuler</button>
+
 											</h:panelGroup>
 										</div>
 
 
 									</div>
 									<div class="modal-footer">
-										<h:commandButton value="Enregistrer" onclick="$('#ModalEnregistrementEnvie').modal('hide');" styleClass=" btn btn-vert btn-lg">
-										<f:ajax event="click" ></f:ajax>
+										<h:commandButton value="Enregistrer"
+											onclick="$('#ModalEnregistrementEnvie').modal('hide');"
+											styleClass=" btn btn-vert btn-lg">
+											<f:ajax event="click"></f:ajax>
 										</h:commandButton>
-										
-												
+
+
 
 										<button type="button" class="btn btn-vert btn-lg"
 											data-dismiss="modal">Annuler</button>

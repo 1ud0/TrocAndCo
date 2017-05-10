@@ -60,7 +60,6 @@ public class DaoFavori implements IDaoFavori {
 			localisations.size();
 			photos.size();
 		}
-
 		return propositions;
 
 	}

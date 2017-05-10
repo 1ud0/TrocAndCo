@@ -1,32 +1,40 @@
 package com.tac.controller;
 
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
+import javax.faces.component.UIComponent;
+import javax.faces.context.FacesContext;
+import javax.faces.validator.ValidatorException;
+import javax.servlet.http.Part;
 
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
 import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceLocaliserProposition;
+import com.tac.business.api.IServicePhoto;
 import com.tac.business.api.IServiceProposition;
 import com.tac.business.api.IServiceValeur;
 import com.tac.entity.Categorie;
 import com.tac.entity.Etat;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
+import com.tac.entity.Photo;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
 
 @ManagedBean(name = "mbCompteObjet")
-@ViewScoped
+@SessionScoped
 public class CompteObjetsManagedBean implements Serializable {
-
+	
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -43,6 +51,9 @@ public class CompteObjetsManagedBean implements Serializable {
 	private IServiceLocaliserProposition proxyLocaliserProposition;	
 	@EJB
 	private IServiceFavori proxyFavori;
+	
+	@EJB
+	private IServicePhoto proxyPhoto;
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
@@ -60,6 +71,10 @@ public class CompteObjetsManagedBean implements Serializable {
 	private Proposition propositionSelected = new Proposition();
 	private Categorie categorieSelected = new Categorie();
 	private String descriptionSelected = "";
+	private Part file1;
+	private Part file2;
+	private Part file3;
+
 	
 	// METHODES
 
@@ -188,6 +203,77 @@ public class CompteObjetsManagedBean implements Serializable {
 
 		proxyObjet.deleteProposition(propositionSelected);
 	}
+	
+	public void uploadPhoto1(){
+		uploadPhoto(file1);
+	}
+	public void uploadPhoto2(){
+		uploadPhoto(file2);
+	}
+	public void uploadPhoto3(){
+		uploadPhoto(file3);
+	}
+	
+	public String uploadPhoto(Part fileAUploader) {		
+		String path = Thread.currentThread().getContextClassLoader().getResource("bidon.txt").getPath();
+		path = path.split("WEB-INF")[0] + "img/";
+		path = path.substring(1);
+		int positionImage=0;
+		try {
+			fileAUploader.write(path + getFilename(fileAUploader));
+			if(fileAUploader.equals(file1)){
+				positionImage=1;
+			}else if(fileAUploader.equals(file2)){
+				positionImage=2;
+			}else{
+				positionImage=3;
+			}	
+			System.out.println("position image : "+positionImage);
+			if (positionImage>propositionSelected.getPhotos().size()||propositionSelected.getPhotos().size()==0){				
+				Photo photoAAjouter = new Photo();
+				photoAAjouter.setUrl("img/" + getFilename(fileAUploader));
+				photoAAjouter.setProposition(propositionSelected);
+				propositionSelected.getPhotos().add(photoAAjouter);				
+				proxyPhoto.addPhoto(photoAAjouter);
+			} else{
+				Photo photoAUpdater = propositionSelected.getPhotos().get(positionImage-1);	
+				photoAUpdater.setUrl("img/" + getFilename(fileAUploader));
+				proxyPhoto.updatePhoto(photoAUpdater);
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "";
+	}
+
+	private static String getFilename(Part part) {
+		for (String cd : part.getHeader("content-disposition").split(";")) {
+			if (cd.trim().startsWith("filename")) {
+				String filename = cd.substring(cd.indexOf('=') + 1).trim().replace("\"", "");
+				return filename.substring(filename.lastIndexOf('/') + 1).substring(filename.lastIndexOf('\\') + 1); // MSIE
+																													// fix.
+			}
+		}
+		return null;
+	}
+
+	public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
+		List<FacesMessage> msgs = new ArrayList<FacesMessage>();
+		Part file = (Part) value;
+		String contentType = file.getContentType();
+		System.out.println(contentType);
+		if (file.getSize() > 500*1024) {
+			msgs.add(new FacesMessage("fichier trop volumineux"));
+		}
+		if (!"image/gif".equals(contentType) && !"image/jpeg".equals(contentType) && !"image/png".equals(contentType)){
+			msgs.add(new FacesMessage("pas une image"));
+		}
+		if (!msgs.isEmpty()) {
+			throw new ValidatorException(msgs);
+		}
+	}
+	
 
 	// GETTER SETTER
 
@@ -375,6 +461,38 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	public void setProxyFavori(IServiceFavori proxyFavori) {
 		this.proxyFavori = proxyFavori;
+	}
+
+	public IServicePhoto getProxyPhoto() {
+		return proxyPhoto;
+	}
+
+	public void setProxyPhoto(IServicePhoto proxyPhoto) {
+		this.proxyPhoto = proxyPhoto;
+	}
+
+	public Part getFile1() {
+		return file1;
+	}
+
+	public void setFile1(Part file1) {
+		this.file1 = file1;
+	}
+
+	public Part getFile2() {
+		return file2;
+	}
+
+	public void setFile2(Part file2) {
+		this.file2 = file2;
+	}
+
+	public Part getFile3() {
+		return file3;
+	}
+
+	public void setFile3(Part file3) {
+		this.file3 = file3;
 	}
 
 }

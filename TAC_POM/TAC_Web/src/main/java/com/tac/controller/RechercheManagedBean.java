@@ -17,6 +17,7 @@ import javax.faces.bean.SessionScoped;
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceDepartement;
 import com.tac.business.api.IServiceEtat;
+import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceListe;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceRecherche;
@@ -55,6 +56,9 @@ public class RechercheManagedBean {
 	private IServiceDepartement proxyDep;
 	@EJB
 	private IServiceListe proxyListe;
+	
+	@EJB
+	private IServiceFavori proxyFavori;
 
 	// managedBean
 	@ManagedProperty(value = "#{mbIdentif}")
@@ -72,6 +76,7 @@ public class RechercheManagedBean {
 	private boolean modalRendered;
 	private Integer idCategorieSelected;
 	private List<Liste> listes;
+	
 
 	private List<Entry<Categorie, List<Categorie>>> catsEntries;
 	private Map<Categorie, List<Categorie>> mycats;
@@ -136,9 +141,10 @@ public class RechercheManagedBean {
 					compteur.increment();
 				}
 			}
+			
 		}
 		catsEntries = new ArrayList<>(mycats.entrySet());
-	}
+	}	
 	
 	public Integer getNbOccurence(Categorie cat) {
 		return catsCount.get(cat).get();

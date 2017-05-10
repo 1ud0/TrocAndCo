@@ -61,6 +61,19 @@ public class ObjetManagedBean {
 		}
 		return false;
 	}
+	
+	public boolean indicationFavori(Proposition propEnCours) {
+		membreCourant = identifBean.getMembreConnected();
+		if (membreCourant != null) {
+			for (Proposition proposition : proxyFavori.getFavorisMembre(membreCourant)) {
+				System.out.println(proposition.getIntitule());
+				if (proposition.getIdProposition() == propEnCours.getIdProposition()) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
 	/**
 	 *  permet d'ajouter l'objet visualisé aux favoris du membre en session
 	 * @return
@@ -99,7 +112,7 @@ public class ObjetManagedBean {
 		
 		return nav;
 	}
-	
+
 	
 	/**
 	 * charge les informations du membre qui possède l'objet visualisé
@@ -228,5 +241,6 @@ public class ObjetManagedBean {
 	public void setProxyEchange(IServiceEchange proxyEchange) {
 		this.proxyEchange = proxyEchange;
 	}
+
 
 }
