@@ -26,48 +26,48 @@
 						<div class="col-md-9 clearfix" id="customer-account">
 
 							<div id="row">
-								<div class="row">
-									<div class="col-sm-6 col-md-6">
-										<div class="heading">
-											<h4 class="text-uppercase">Mes acquisitions</h4>
-										</div>
-										<div class="table-responsive">
-											<table class="table table-hover">
-												<thead>
-													<tr>
-														<th>Objet</th>
-														<th>Statut</th>
-													</tr>
-												</thead>
-												<tbody>
-													<h:panelGroup>
-														<ui:repeat var="echange"
-															value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}">
-															<h:form>
-																<h:commandLink
-																	action="#{mbCompteTB.compteEchangeBean.echangeDuMembre(echange)}"
-																	value="">
-																	<tr>
-																		<td>#{echange.proposition.intitule}</td>
-																		<td><h:panelGroup
-																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
-																				<span class="label label-danger">Annulé</span>
-																			</h:panelGroup> <h:panelGroup
-																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
-																				<span class="label label-warning">Refusé</span>
-																			</h:panelGroup> <h:panelGroup
-																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
-																				<span class="label label-info">En cours</span>
-																			</h:panelGroup> <h:panelGroup
-																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
-																				<span class="label label-success">Effectué</span>
-																			</h:panelGroup></td>
-																		<td><a href="compte-echanges.xhtml"
-																			class="btn btn-template-main btn-sm">Voir</a></td>
-																	</tr>
-																</h:commandLink>
-															</h:form>
-														</ui:repeat>
+							<div class="row">
+								<div class="col-sm-6 col-md-6">
+									<div class="heading">
+										<h4 class="text-uppercase">Mes acquisitions</h4>
+									</div>
+									<div class="table-responsive">
+										<table class="table table-hover">
+											<thead>
+												<tr>
+													<th>Objet</th>
+													<th>Statut</th>
+												</tr>
+											</thead>
+											<tbody>
+												<h:panelGroup>
+													<ui:repeat var="echange"
+														value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}">
+														<h:form>
+															<h:commandLink
+																action="#{mbCompteTB.compteEchangeBean.echangeDuMembre(echange)}"
+																value="">
+																<tr>
+																	<td>#{echange.proposition.intitule}</td>
+																	<td><h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
+																			<span class="label label-danger">Annulé</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
+																			<span class="label label-warning">Refusé</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'en cours'}">
+																			<span class="label label-info">En cours</span>
+																		</h:panelGroup> <h:panelGroup
+																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
+																			<span class="label label-success">Effectué</span>
+																		</h:panelGroup></td>
+																	<td><a href="compte-echanges.xhtml"
+																		class="btn btn-template-main btn-sm">Voir</a></td>
+																</tr>
+															</h:commandLink>
+														</h:form>
+													</ui:repeat>
 
 													</h:panelGroup>
 

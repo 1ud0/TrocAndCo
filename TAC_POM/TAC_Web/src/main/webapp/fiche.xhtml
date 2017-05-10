@@ -1,8 +1,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets"
-	xmlns:m="http://code.google.com/p/gmaps4jsf/">
+	xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
 	<title>RECHERCHE OBJET</title>
@@ -13,16 +12,18 @@
 
 		<ui:define name="headPerso">
 			<!-- **style CSS pour la google map -->
+			<script type="text/javascript" src="js/map.js"></script>
 			<script
-				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZnM_O8BFFutbT4s_XlCFPA5XH9DSwsQ"
-				type="text/javascript"></script>
-
+				src="https://maps.googleapis.com/maps/api/js?v=3.exp&amp;key=AIzaSyAFZnM_O8BFFutbT4s_XlCFPA5XH9DSwsQ&amp;callbakc=init_map"
+				type="text/javascript">
+	
+			</script>
 			<style>
-			#gmap_canvas img {
-				max-width: none !important;
-				background: none !important
-			}
-			</style>
+#gmap_canvas img {
+	max-width: none !important;
+	background: none !important
+}
+</style>
 		</ui:define>
 
 		<ui:define name="content">
@@ -160,43 +161,30 @@
 
 
 					<!-- *** LEFT COLUMN END *** -->
-					<h:form>
-						<h:commandLink
-							onclick="init_map(#{mbObjet.selectedProp.localisations.get(0).latitude},#{mbObjet.selectedProp.localisations.get(0).longitude});"
-							value="voir" />
+					<h:form id="myMap">
+						<script type="text/javascript">
+
+							lat= #{mbObjet.selectedProp.localisations.get(0).latitude};
+							lng= #{mbObjet.selectedProp.localisations.get(0).longitude};
+							intitule = "#{mbObjet.selectedProp.intitule}";
+						</script>
+						
 					</h:form>
 					<div class="col-md-3 objetside">
-						<div>
-
-
-							<div style='overflow: hidden; height: 280px;'>
-								<div id='gmap_canvas' style='height: 440px;'></div>
-								<div>
-									<small><a href="http://embedgooglemaps.com">google
-											maps carte</a></small>
-								</div>
 
 
 
+						<div style='overflow: hidden; height: 280px;'>
+							<div id='gmap_canvas' style='height: 440px;'></div>
+							<div>
+								<small><a href="http://embedgooglemaps.com">google
+										maps carte</a></small>
 							</div>
-							<script type='text/javascript'>
-						var lat;
-						var lng;
-						var intitule;
-						function init_map(lat,lng){
-							var myOptions = {zoom:13,center:new google.maps.LatLng(lat,lng),mapTypeId: google.maps.MapTypeId.ROADMAP};
-							var contentString ='dans la place';
-						map = new google.maps.Map(document.getElementById('gmap_canvas'), myOptions);
-						
-						marker = new google.maps.Marker({map: map,position: new google.maps.LatLng(lat,lng) ,title: "#{mbObjet.selectedProp.intitule}"});
 
-						
-						marker.addListener(marker, 'click', function(){infowindow.open(map,marker);});
 
-						infowindow.open(map,marker);
-						}
-						google.maps.event.addDomListener(window, 'load', init_map);</script>
+
 						</div>
+
 
 						<!-- partie sur le propriétaire -->
 
@@ -336,7 +324,41 @@
 					</div>
 				</div>
 			</h:panelGroup>
-			<div class="marginBottom"></div>
+			<div class="marginBottom">
+			
+			<div >
+
+
+							<table id="TabLoc" style="visibility: hidden">
+								<thead>
+									<tr>
+										<th>Nom adresse</th>
+										<th>lat</th>
+										<th>lng</th>
+									</tr>
+								</thead>
+								<tbody>
+									<ui:repeat var="local"
+										value="#{mbObjet.selectedProp.localisations}">
+										<tr>
+											<td class="tdNomLoc">#{local.titreAdresse} </td> 
+											<td class="tdLat">#{local.latitude}</td>
+											<td class="tdLng">#{local.longitude}</td>
+										
+										</tr>
+										
+										
+
+									</ui:repeat>
+								</tbody>
+
+								
+
+							</table>
+
+						</div>
+			
+			</div>
 		</ui:define>
 	</ui:composition>
 </h:body>

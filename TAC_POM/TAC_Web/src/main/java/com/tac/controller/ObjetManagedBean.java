@@ -8,6 +8,7 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
+import javax.script.ScriptContext;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceEnvie;
@@ -95,8 +96,11 @@ public class ObjetManagedBean {
 		if (selectedProp != null) {
 			nav = "/fiche.xhtml?faces-redirect=true&id=" + selectedProp.getIdProposition();
 		}
+		
 		return nav;
 	}
+	
+	
 	/**
 	 * charge les informations du membre qui possède l'objet visualisé
 	 * @param membre
