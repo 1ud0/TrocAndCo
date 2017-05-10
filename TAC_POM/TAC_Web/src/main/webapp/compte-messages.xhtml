@@ -56,11 +56,15 @@
 					<table class="table table-hover">
 						<ui:repeat var="discussion" value="#{mbMessage.LesVraiesDiscussions()}">
 						<h:form id="formConversation">
-							<tr  class="lu">
+							<tr  class="#{mbMessage.dernierMessage(discussion).lu or mbMessage.dernierMessage(discussion).emetteur.idMembre==mbIdentif.membreConnected.idMembre ? 'lu' : '' }">
 								<td><input type="checkbox"></input></td>
 								<td class="mailbox-star"><a href="#"><i
 										class="fa fa-arrow-down text-yellow"></i></a></td>
-								<td class="mailbox-name"><h:commandLink action="#{mbMessage.GetAllMessageOfPropositionSelected(discussion)}" value="#{mbMessage.avecQui(discussion)}" /></td>
+								<td class="mailbox-name">
+								<h:commandLink value="#{mbMessage.avecQui(discussion)}">
+									<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat"/>
+								</h:commandLink>
+								</td>
 								<td class="mailbox-subject"><b>#{discussion.proposition.intitule}</b> -   #{mbMessage.debutDernierMessage(discussion)} </td>
 								<td class="mailbox-attachment"></td>
 								<td class="mailbox-date">#{mbMessage.depuisQuand(discussion)}</td>
@@ -87,13 +91,13 @@
 
 			<aside id="sidebar_secondary"
 				class="tabbed_sidebar ng-scope chat_sidebar">
-
+				<h:form id="fenetreChat">
 				<div class="popup-head">
 					<div class="popup-head-left pull-left">
 						<a target="_blank" href="shop-detail.html"> <img
 							class="md-user-image md-object" alt="objet echange" title=""
-							src="img/custom/art3.png"></img>
-							<h1>#{mbMessage.propositionAvecMessagesSelected.intitule}</h1></a>
+							src="#{mbMessage.propAvecPhotos(mbMessage.chat.get(0).proposition.idProposition).photos.get(0).url}"></img>
+							<h1>#{mbMessage.chat.get(0).proposition.intitule}</h1></a>
 					</div>
 					<div class="pull-right">
 						<button data-widget="remove" id="removeClass"
@@ -107,31 +111,45 @@
 					class="chat_box_wrapper chat_box_small chat_box_active"
 					style="opacity: 1; display: block; transform: translateX(0px);">
 					<div class="chat_box touchscroll chat_box_colors_a">
-					<ui:repeat var="message" value="#{mbMessage.messagesOfPropositionSelected}">
-						<div class="chat_message_wrapper">
+					<ui:repeat var="message" value="#{mbMessage.chat}" varStatus="loop">
+					
+						<div class="#{message.emetteur.idMembre!=mbIdentif.membreConnected.idMembre ? 'chat_message_wrapper' : 'chat_message_wrapper chat_message_right'}">
+							
 							<div class="chat_user_avatar">
 								 <img alt=""
-									title="Gurdeep Osahan (Web Designer)" src="#{mbMessage.membreCourant.avatar}"
+									src="#{message.emetteur.avatar}"
 									class="md-user-image"></img>
 							</div>
+					
 							<ul class="chat_message">
 								<li>
-									<p>test emetteur <span class="chat_message_time">13:38</span></p>
+									<p>#{message.texte}
+									<span class="chat_message_time">
+										<h:outputText value="#{message.dateEnvoi}" >
+											<f:convertDateTime pattern="dd/MM/yy hh:mm" timeZone="Europe/Paris" />
+										</h:outputText>
+									</span></p>
 								</li>
 								
 							</ul>
 						</div>
+
+					
 						</ui:repeat>
 						
 					</div>
 				</div>
 				<div class="chat_submit_box">
-					<input type="text" placeholder="Type a message" id="submit_message"
-						name="submit_message" class="md-input"></input><a href="#"><i
-						class="fa fa-send"></i></a>
+					<h:inputText value="#{mbMessage.messageAEnvoyer}" styleClass="md-input">
+						
+					</h:inputText>
+					<h:commandLink action="#{mbMessage.envoyerMessage()}" value="" >
+						<i class="fa fa-send"></i>
+					</h:commandLink>
+					
 				</div>
 
-
+			</h:form>
 			</aside>
 
 

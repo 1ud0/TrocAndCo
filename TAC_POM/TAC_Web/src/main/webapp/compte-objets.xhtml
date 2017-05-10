@@ -27,7 +27,7 @@
 							<div class="product ">
 								<h:form id="formObjet">
 									<div class="image ">
-										<img src="#{proposition.photos.get(0).url}" alt=""></img>
+										<img src="#{proposition.photos.size()>0 ? proposition.photos.get(0).url : 'img/camera-flat.png'}" alt=""></img>
 
 									</div>
 									<!-- /.image -->

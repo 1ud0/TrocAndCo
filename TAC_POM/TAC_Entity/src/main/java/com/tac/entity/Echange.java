@@ -76,7 +76,7 @@ public class Echange implements Serializable {
 	//bi-directional many-to-one association to Rdv
 	@OneToMany(mappedBy="echange")
 	private List<Rdv> rdvs;
-
+	
 	public Echange() {
 	}
 
