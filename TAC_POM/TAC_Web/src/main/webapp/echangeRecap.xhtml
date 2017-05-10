@@ -1,0 +1,80 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>INDEX</title>
+</h:head>
+<h:body bgcolor='white'>
+
+	<ui:composition template="/WEB-INF/templates/templateEchange.xhtml">
+	
+		<ui:define name="headPerso">
+		
+		</ui:define>
+		
+		<ui:define name="content">
+			<div class="resumeEchange">
+			<h:panelGroup rendered="#{mbEchange.statusEchange()}">
+				Statut de l'échange : <span class="label label-danger">Annulé</span><br></br>
+				Date de l'annulation :
+				<h:outputText value="#{mbEchange.echangeCourant.dateAnnul}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'refus'}">
+				Statut de l'échange : <span class="label label-warning">Refusé</span><br></br>
+				Date de refus :
+				<h:outputText value="#{mbEchange.echangeCourant.dateRefus}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
+			</h:panelGroup>
+			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'effectue'}">
+				Statut de l'échange : <span class="label label-success">Effectué</span><br></br>
+				Date de validation :
+				<h:outputText value="#{mbEchange.echangeCourant.dateValidation}" >
+					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+				</h:outputText>
+			</h:panelGroup>
+			</div>
+			<div class="row ">
+				<!--  -->
+				<div class="col-md-6 col-sm-12">
+					<div class="">
+						<span class="prix">En échange de :</span>
+					</div>
+				</div>
+				<div class="col-md-6 col-sm-12">
+							
+					
+							<h:panelGroup rendered="#{mbEchange.echangeCourant.prix != null}">
+								<p class="price">
+									<span class="prix">#{mbEchange.echangeCourant.prix}</span><img alt="feuille" src="img/custom/feuille.png"/>
+								</p>
+							</h:panelGroup>
+							<h:panelGroup layout="block" styleClass="product" id="produitDuDonneur" rendered="#{mbEchange.echangeCourant.prix == null}">
+								<div class="">
+									<div>
+										<img src="img/custom/casserole.jpg" alt=""
+											class="img-responsive MaxHeightImg200 " />
+									</div>
+								</div>
+								<!-- /.image -->
+								<div class="text">
+									<h3>
+										<a href="shop-detail.html">Casserole</a>
+									</h3>
+									<p class="price">
+										3<img src="img/custom/feuille orange.png" alt="" />
+									</p>
+								</div>
+								<!-- /.text -->
+							</h:panelGroup>
+					
+				</div>
+			</div>
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>

@@ -24,10 +24,11 @@ padding: 20px 10px;
 margin-bottom: 20px;
 }
 
-select{
-	border: none;
-	margin-top: 2px;
-	background: transparent url("img/custom/flecheselect.png") no-repeat right center;
+select, select:hover, select:active, select:focus{
+	border: none !important;
+	border-color: white;
+	margin-top: 10px !important;
+	_background: transparent  url('../img/custom/flecheselect.png') no-repeat right center !important;
 }
 
 
@@ -54,17 +55,17 @@ select{
 
 
 .selecteur{
-	border-radius: 20px;
-	border: 1px solid #b7b7b7;
-	height: 3em;
-	padding: 0 20px;
-	margin-bottom: 10px;
+	border-radius: 20px !important;
+	border: 1px solid #b7b7b7 !important;
+	height: 3em !important;
+	padding: 0 20px !important;
+	margin-bottom: 10px !important;
 }
 
 
 .input-group-addon{
-	border: none;
-	background-color: transparent;
+	border: none !important;
+	background-color: transparent !important;
 }
 
 .btn-custom{
@@ -968,4 +969,24 @@ p.taillePolice150 {
   
   .infoBulle {
  	 
+ }
+ 
+ .prix {
+ 	font-size: 2.25em;
+ 	font-style: 900;
+ 	color: #333333;
+ 	margin-right: 15px;
+ }
+ 
+ .price{
+ 	display: flex;
+ 	align-items: center;
+ }
+ 
+ .resumeEchange{
+ 	font-size: 2.25em;
+ 	font-style: 900;
+ 	color: #333333;
+ 	margin-bottom : 50px;
+
  }

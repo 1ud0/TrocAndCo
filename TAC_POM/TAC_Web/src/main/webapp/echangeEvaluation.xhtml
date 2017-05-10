@@ -44,8 +44,8 @@
 								id="star5" onclick="valider(5)" onmouseenter="rate(5)"
 								onmouseleave="unrate()" /></a> <br /> <br />
 							<div id="vote">Votre vote : 0 étoile(s)</div>
-							<div hidden="true">
-								<h:inputText  id="etoile" value="#{mbEchange.note}" />
+							<div>
+								<h:inputHidden  id="etoile" value="#{mbEchange.note}" />
 							</div>
 							
 							<br /> <br /> <input type="hidden" name="resultVote"
@@ -53,7 +53,7 @@
 						</div>
 					</div>
 					<div class="col-sm-1 orientationCenter">
-						<button class="btn btn-vert btn-lg">Envoyer</button>
+						<h:commandLink action="#{mbEchange.noterEchange()}" value="" styleClass="btn btn-vert btn-lg">Envoyer</h:commandLink>
 					</div>
 				</div>
 			</h:form>
