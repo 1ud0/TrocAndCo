@@ -39,8 +39,7 @@
 						<p>#{mbCompteEvaluation.membreCourant.nom}
 							#{mbCompteEvaluation.membreCourant.prenom}</p>
 						<p>#{mbCompteEvaluation.membreCourant.localisations.get(0).adresse}</p>
-						<p>#{mbCompteEvaluation.membreCourant.localisations.get(0).codePostal}
-							#{mbCompteEvaluation.membreCourant.localisations.get(0).adresse}</p>
+						<p>#{mbCompteEvaluation.membreCourant.localisations.get(0).codePostal} #{mbCompteEvaluation.membreCourant.localisations.get(0).ville} </p>
 					</div>
 
 				</div>
@@ -48,93 +47,129 @@
 				<!--***Note moyenne et étoiles*** _________________________________________________________ -->
 				<div class="col-md-6">
 
-					<div class="row">
-						<div class="col-xs-6 col-md-6 text-center">
-							<h1 class="rating-num">4.0</h1>
-							<div class="rating">
-								<span class="glyphicon glyphicon-star"></span><span
-									class="glyphicon glyphicon-star"> </span><span
-									class="glyphicon glyphicon-star"></span><span
-									class="glyphicon glyphicon-star"> </span><span
-									class="glyphicon glyphicon-star-empty"></span>
+						<div class="row">
+							<div class="col-xs-6 col-md-6 text-center">
+								<h:panelGroup rendered="#{mbObjet.NoteVide(mbIdentif.membreConnected)}">
+									<p class="rating-num">
+										-
+									</p>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{!mbObjet.NoteVide(mbIdentif.membreConnected)}">
+									<p class="rating-num">
+										<h:outputText value="#{mbObjet.getNoteMoyenne(mbIdentif.membreConnected)}" />
+										
+									</p>
+									</h:panelGroup>
+								<div class="rating">
+								
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 1}">
+									<span class="glyphicon glyphicon-star"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 1}">
+									<span class="glyphicon glyphicon-star-empty"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 2}">
+									<span class="glyphicon glyphicon-star"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 2}">
+									<span class="glyphicon glyphicon-star-empty"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 3}">
+									<span class="glyphicon glyphicon-star"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 3}">
+									<span class="glyphicon glyphicon-star-empty"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 4}">
+									<span class="glyphicon glyphicon-star"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 4}">
+									<span class="glyphicon glyphicon-star-empty"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 5}">
+									<span class="glyphicon glyphicon-star"></span>
+									</h:panelGroup>
+									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 5}">
+									<span class="glyphicon glyphicon-star-empty"></span>
+									</h:panelGroup>
+								</div>
+								<div>
+									<span class="glyphicon glyphicon-user"></span> #{mbProfil.getNombreNote(mbIdentif.membreConnected)}
+								</div>
 							</div>
-							<div>
-								<span class="glyphicon glyphicon-user"></span>${nbtotcom} total
+							<div class="col-xs-6 col-md-6">
+								<div class="row rating-desc">
+									<div class="col-xs-3 col-md-3 text-right">
+										<span class="glyphicon glyphicon-star"></span>5
+									</div>
+									<div class="col-xs-8 col-md-9">
+										<div class="progress progress-striped">
+											<div class="progress-bar progress-bar-success"
+												role="progressbar" aria-valuenow="20" aria-valuemin="0"
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(5, mbIdentif.membreConnected)}%">
+												<span class="sr-only">80%</span>
+											</div>
+										</div>
+									</div>
+									<!-- end 5 -->
+									<div class="col-xs-3 col-md-3 text-right">
+										<span class="glyphicon glyphicon-star"></span>4
+									</div>
+									<div class="col-xs-8 col-md-9">
+										<div class="progress">
+											<div class="progress-bar progress-bar-success"
+												role="progressbar" aria-valuenow="20" aria-valuemin="0"
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(4, mbIdentif.membreConnected)}%">
+												<span class="sr-only">60%</span>
+											</div>
+										</div>
+									</div>
+									<!-- end 4 -->
+									<div class="col-xs-3 col-md-3 text-right">
+										<span class="glyphicon glyphicon-star"></span>3
+									</div>
+									<div class="col-xs-8 col-md-9">
+										<div class="progress">
+											<div class="progress-bar progress-bar-info"
+												role="progressbar" aria-valuenow="20" aria-valuemin="0"
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(3, mbIdentif.membreConnected)}%">
+												<span class="sr-only">40%</span>
+											</div>
+										</div>
+									</div>
+									<!-- end 3 -->
+									<div class="col-xs-3 col-md-3 text-right">
+										<span class="glyphicon glyphicon-star"></span>2
+									</div>
+									<div class="col-xs-8 col-md-9">
+										<div class="progress">
+											<div class="progress-bar progress-bar-warning"
+												role="progressbar" aria-valuenow="20" aria-valuemin="0"
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(2, mbIdentif.membreConnected)}%">
+												<span class="sr-only">20%</span>
+											</div>
+										</div>
+									</div>
+									<!-- end 2 -->
+									<div class="col-xs-3 col-md-3 text-right">
+										<span class="glyphicon glyphicon-star"></span>1
+									</div>
+									<div class="col-xs-8 col-md-9">
+										<div class="progress">
+											<div class="progress-bar progress-bar-danger"
+												role="progressbar" aria-valuenow="80" aria-valuemin="0"
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(1, mbIdentif.membreConnected)}%">
+												<span class="sr-only">15%</span>
+											</div>
+										</div>
+									</div>
+									<!-- end 1 -->
+								</div>
+								<!-- end row -->
 							</div>
 						</div>
-						<div class="col-xs-6 col-md-6">
-							<div class="row rating-desc">
-								<div class="col-xs-3 col-md-3 text-right">
-									<span class="glyphicon glyphicon-star"></span>5
-								</div>
-								<div class="col-xs-8 col-md-9">
-									<div class="progress progress-striped">
-										<div class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="20" aria-valuemin="0"
-											aria-valuemax="100" style="width: 80%">
-											<span class="sr-only">80%</span>
-										</div>
-									</div>
-								</div>
-								<!-- end 5 -->
-								<div class="col-xs-3 col-md-3 text-right">
-									<span class="glyphicon glyphicon-star"></span>4
-								</div>
-								<div class="col-xs-8 col-md-9">
-									<div class="progress">
-										<div class="progress-bar progress-bar-success"
-											role="progressbar" aria-valuenow="20" aria-valuemin="0"
-											aria-valuemax="100" style="width: 60%">
-											<span class="sr-only">60%</span>
-										</div>
-									</div>
-								</div>
-								<!-- end 4 -->
-								<div class="col-xs-3 col-md-3 text-right">
-									<span class="glyphicon glyphicon-star"></span>3
-								</div>
-								<div class="col-xs-8 col-md-9">
-									<div class="progress">
-										<div class="progress-bar progress-bar-info" role="progressbar"
-											aria-valuenow="20" aria-valuemin="0" aria-valuemax="100"
-											style="width: 40%">
-											<span class="sr-only">40%</span>
-										</div>
-									</div>
-								</div>
-								<!-- end 3 -->
-								<div class="col-xs-3 col-md-3 text-right">
-									<span class="glyphicon glyphicon-star"></span>2
-								</div>
-								<div class="col-xs-8 col-md-9">
-									<div class="progress">
-										<div class="progress-bar progress-bar-warning"
-											role="progressbar" aria-valuenow="20" aria-valuemin="0"
-											aria-valuemax="100" style="width: 20%">
-											<span class="sr-only">20%</span>
-										</div>
-									</div>
-								</div>
-								<!-- end 2 -->
-								<div class="col-xs-3 col-md-3 text-right">
-									<span class="glyphicon glyphicon-star"></span>1
-								</div>
-								<div class="col-xs-8 col-md-9">
-									<div class="progress">
-										<div class="progress-bar progress-bar-danger"
-											role="progressbar" aria-valuenow="80" aria-valuemin="0"
-											aria-valuemax="100" style="width: 15%">
-											<span class="sr-only">15%</span>
-										</div>
-									</div>
-								</div>
-								<!-- end 1 -->
-							</div>
-							<!-- end row -->
-						</div>
-					</div>
 
-				</div>
+					</div>
 			</div>
 
 			<!--*** FIN Note moyenne et étoiles*** _________________________________________________________ -->
@@ -150,56 +185,54 @@
 								</h4>
 							</div>
 							<div id="collapse1" class="panel-collapse collapse">
-								<ul class="list-group">
-									<ui:repeat var="eval"
-										value="#{mbCompteEvaluation.getEchangesQuandDonneur(mbCompteEvaluation.membreCourant)}">
+									<ul class="list-group">
+										<ui:repeat var="eval" value="#{mbProfil.getEchangesQuandDonneur(mbIdentif.membreConnected)}">
 										<li class="list-group-item">
 											<div class="review-block">
 
 												<div class="row">
 													<div class="col-sm-3">
-														<img src="#{eval.membre.avatar}" class="img-rounded"
-															style="height: 100px"></img>
+														<img
+															src="#{eval.membre.avatar}"
+															class="img-rounded" style="height: 100px"></img>
 														<div class="review-block-name">
 															<a href="#">#{eval.membre.pseudo}</a>
 														</div>
 														<div class="review-block-date">
-															<h:outputText value="#{eval.dateValidation}">
-																<f:convertDateTime pattern="dd-MM-yyyy" />
-															</h:outputText>
+															<h:outputText value="#{eval.dateValidation}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText>
 														</div>
 													</div>
 													<div class="col-sm-9">
 														<div class="review-block-rate">
 															<h:panelGroup rendered="#{eval.noteDonneur ge 1}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur lt 1}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur ge 2}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur lt 2}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur ge 3}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur lt 3}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur ge 4}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur lt 4}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur ge 5}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteDonneur lt 5}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 														</div>
 														<div class="review-block-description">#{eval.comDonneur}</div>
@@ -207,56 +240,54 @@
 												</div>
 											</div>
 										</li>
-									</ui:repeat>
-									<ui:repeat var="eval"
-										value="#{mbCompteEvaluation.getEchangesQuandDonneur(mbCompteEvaluation.membreCourant)}">
+										</ui:repeat>
+										<ui:repeat var="eval" value="#{mbProfil.getEchangesQuandAcheteur(mbIdentif.membreConnected)}">
 										<li class="list-group-item">
 											<div class="review-block">
 
 												<div class="row">
 													<div class="col-sm-3">
-														<img src="#{eval.membre.avatar}" class="img-rounded"
-															style="height: 100px"></img>
+														<img
+															src="#{eval.proposition.membre.avatar}"
+															class="img-rounded" style="height: 100px"></img>
 														<div class="review-block-name">
 															<a href="#">#{eval.proposition.membre.pseudo}</a>
 														</div>
 														<div class="review-block-date">
-															<h:outputText value="#{eval.dateValidation}">
-																<f:convertDateTime pattern="dd-MM-yyyy" />
-															</h:outputText>
+															<h:outputText value="#{eval.dateValidation}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText>
 														</div>
 													</div>
 													<div class="col-sm-9">
 														<div class="review-block-rate">
 															<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
-																<span class="glyphicon glyphicon-star"></span>
+															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
 															<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
-																<span class="glyphicon glyphicon-star-empty"></span>
+															<span class="glyphicon glyphicon-star-empty"></span>
 															</h:panelGroup>
 														</div>
 														<div class="review-block-description">#{eval.comChercheur}</div>
@@ -264,10 +295,10 @@
 												</div>
 											</div>
 										</li>
-									</ui:repeat>
-								</ul>
-
-							</div>
+										</ui:repeat>
+									</ul>
+									
+								</div>
 						</div>
 					</div>
 				</div>
