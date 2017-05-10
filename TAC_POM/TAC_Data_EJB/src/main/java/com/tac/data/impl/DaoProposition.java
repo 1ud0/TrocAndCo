@@ -141,7 +141,7 @@ public class DaoProposition implements IDaoProposition {
 			query.setParameter("pval" + i, valeurs.get(i));
 		}
 		//clause adresse + dist max
-		if (carac.getLocalisations() != null && carac.getLocalisations().size() != 0) {
+		if (carac.getLocalisations() != null && carac.getLocalisations().size() != 0 && carac.getRayonRecherche() != 0) {
 			addParamLocalize(query, carac);
 		}
 		//clause categorie
@@ -194,7 +194,7 @@ public class DaoProposition implements IDaoProposition {
 		}
 		
 		//clause adresse + dist max
-		if (carac.getLocalisations() != null && carac.getLocalisations().size() != 0) {
+		if (carac.getLocalisations() != null && carac.getLocalisations().size() != 0 && carac.getRayonRecherche() != 0) {
 			addClauseLocalize(requete, carac);
 		}
 		//clause categorie

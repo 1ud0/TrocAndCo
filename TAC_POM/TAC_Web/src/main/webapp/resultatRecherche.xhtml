@@ -15,7 +15,7 @@
 	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
 
 		<ui:define name="headPerso">
-
+		
 		</ui:define>
 
 		<ui:define name="content">
@@ -193,11 +193,9 @@ _________________________________________________________ -->
 							<h5 class="text">
 								Résultat de la recherche :
 								<h:outputText value="#{mbRecherche.propositions.size()}" />
-								objet
-								<h:outputText value="s"
+								objet<h:outputText value="s"
 									rendered="#{mbRecherche.propositions.size() > 1}"  />
-								trouvé
-								<h:outputText value="s"
+								trouvé<h:outputText value="s"
 									rendered="#{mbRecherche.propositions.size() > 1}" />
 							</h5>
 
@@ -224,8 +222,14 @@ _________________________________________________________ -->
 														<div class="text">
 															<h3>#{prop.intitule}</h3>
 															<span class="glyphicon glyphicon-map-marker"
-																aria-hidden="true"></span>
-															<p class="text-muted">#{prop.localisations.get(0).ville}
+																	aria-hidden="true"></span>
+															<p class="text-muted" style="height: 40px">
+															<ui:param name="limit" value="2" />
+															<ui:repeat var="loc" value="#{prop.localisations}" varStatus="nb">
+																<ui:fragment rendered="#{nb.index lt limit}">
+																	#{loc.ville}<br />
+																</ui:fragment>
+															</ui:repeat>
 															</p>
 															<p class="price">
 																#{prop.valeur.valeur} <img
@@ -285,45 +289,49 @@ _________________________________________________________ -->
 										<div class="col-sm-6 col-md-6 ">
 											<h4>Description:</h4>
 											<p>
-												<label> Catégorie: </label> <label class="italic"> <h:outputText
-														value="#{mbRecherche.envie.categorie.intitule}" />
+												<label> Catégorie: </label> <label class="italic"> 
+													<h:selectOneMenu value="#{mbRecherche.idCatModale}">
+														<f:selectItem itemLabel="" itemValue="#{null}"/>
+														<f:selectItems value="#{mbRecherche.categoriesMere}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
+														<f:ajax event="change" listener="#{mbRecherche.listenerDDLCat()}" render="formAddEnvie"></f:ajax>
+													</h:selectOneMenu>
 												</label>
 											</p>
 											<p>
 												<label> Sous-catégorie: </label> <label class="italic">
-													<h:outputText
-														value="#{mbRecherche.envie.sousCategorie.intitule}" />
+													<h:selectOneMenu value="#{mbRecherche.idSousCatModale}">
+														<f:selectItem itemLabel="" itemValue="#{null}"/>
+														<f:selectItems value="#{mbRecherche.categoriesFille}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
+													</h:selectOneMenu>
 												</label>
 											</p>
 											<p class="price">
-												<label> Valeur: </label><label class="italic"><h:outputText
-														value="#{mbRecherche.envie.valeur.valeur}" /> </label> <img
-													src="img/custom/feuille orange.png" alt=""></img>
+												<label> Valeur max: </label><label class="italic">
+													<h:selectOneMenu value="#{mbRecherche.valeurMaxSelected}">
+														<f:selectItems value="#{mbRecherche.valeurs}" var="currentVal" itemLabel="#{currentVal.valeur}" itemValue="#{currentVal.valeur}"/>
+													</h:selectOneMenu>
+												 </label>
+												 <img src="img/custom/feuille orange.png" alt=""/>
 											</p>
 											<p>
-												<label>Adresse: </label> <label class="italic">
-													blabla </label>
+												<label>Distance max: </label> <label class="italic">
+													 <h:selectOneMenu value="#{mbRecherche.distanceModale}">
+														<f:selectItems value="#{mbRecherche.distances}" var="currentDist" itemLabel="#{currentDist.texte}" itemValue="#{currentDist.valeur}"/>
+													</h:selectOneMenu>
+												</label>
 											</p>
 											<p>
-												<label>Nom: </label> <input type="text"></input>
+												<label>Nom: </label> <h:inputText id="intituleEnvie" value="#{mbRecherche.intituleModale}" required="true" requiredMessage="Entrer un intitule"/><br />
+												<h:message for="intituleEnvie" style="color: red;"/>
 											</p>
 										</div>
 										<div class="col-sm-6 col-md-6 borderLeft">
 											<h4>Ajouter à vos listes d'envies:</h4>
 											<div>
 												<div class="input-group" id="selecteur">
-
-
-													<select id="lunch" class="selectpicker form-control"
-														data-live-search="true" title="Choisir un objet">
-														<option value="0"></option>
-														<option value="1" id="list_rub" class="noir">Ma
-															liste</option>
-														<option value="2" id="list_rub" class="noir">Liste
-															mamie</option>
-														<option value="3" id="list_rub" class="noir">Liste
-															papa</option>
-													</select>
+													<h:selectOneMenu value="#{mbRecherche.idListeSelected}">
+														<f:selectItems value="#{mbRecherche.listes}" var="currentListe" itemLabel="#{currentListe.titreListe}" itemValue="#{currentListe.idListe}"/>
+													</h:selectOneMenu>
 												</div>
 												<f:ajax render="formAddEnvie">
 													<h:commandLink action="#{mbRecherche.afficherModalListe()}" value="Creer une nouvelle liste" styleClass="btn btn-link">
@@ -333,11 +341,15 @@ _________________________________________________________ -->
 											<h:panelGroup id="AjoutListe" rendered="#{mbRecherche.modalRendered}">
 												
 													<p>
-														<label>Nom de la liste: </label> <input type="text"></input>
+														<label>Nom de la liste: </label> <h:inputText id="titreListe" value="#{mbRecherche.newListeName}" required="true" requiredMessage="Entrer un nom"/><br />
+														<h:message for="titreListe" style="color: red;"/>
 													</p>
-													<h:commandButton value="Créer"
-														styleClass="btn btn-custom btn-lg" />
-													<button type="button" class="btn btn-custom btn-lg">Annuler</button>
+													<h:commandButton value="Créer" styleClass="btn btn-custom btn-lg" >
+														<f:ajax listener="#{mbRecherche.listenerBtnCreateListe()}" render="formAddEnvie" execute="@form"/>
+													</h:commandButton>
+													<h:commandButton value="Annuler" styleClass="btn btn-custom btn-lg" >
+														<f:ajax listener="#{mbRecherche.listenerBtnCreateListe()}" render="formAddEnvie"/>
+													</h:commandButton>
 												
 											</h:panelGroup>
 										</div>
@@ -346,7 +358,7 @@ _________________________________________________________ -->
 									</div>
 									<div class="modal-footer">
 										<h:commandButton value="Enregistrer" onclick="$('#ModalEnregistrementEnvie').modal('hide');" styleClass=" btn btn-vert btn-lg">
-										<f:ajax event="click" ></f:ajax>
+											<f:ajax event="click" listener="#{mbRecherche.listenerAjoutEnvie()}" execute="@form" render="formAddEnvie"/>
 										</h:commandButton>
 										
 												

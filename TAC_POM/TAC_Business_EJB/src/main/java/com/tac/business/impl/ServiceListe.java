@@ -1,5 +1,6 @@
 package com.tac.business.impl;
 
+import java.util.Date;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.ejb.Remote;
@@ -18,6 +19,7 @@ private IDaoListe proxyDaoListe;
 	
 	@Override
 	public Liste addListe(Liste liste) {
+		liste.setDateCreation(new Date());
 		return proxyDaoListe.addListe(liste);
 	}
 
@@ -34,6 +36,11 @@ private IDaoListe proxyDaoListe;
 	@Override
 	public List<Liste> getByMembre(Membre membre) {
 		return proxyDaoListe.getByMembreId(membre.getIdMembre());
+	}
+
+	@Override
+	public Liste getById(Integer idListe) {
+		return proxyDaoListe.getById(idListe);
 	}
 
 

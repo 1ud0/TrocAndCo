@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.tac.entity.Categorie;
-import com.tac.entity.Departement;
 import com.tac.entity.Localisation;
 
 /**

@@ -94,10 +94,13 @@
 												<h4>Détails:</h4>
 												<p>
 													<label> Catégorie: </label> <label class="italic">
-														#{envie.categorie}</label> <br /> <label> Sous-catégorie:
-													</label> <label class="italic"> #{envie.sousCategorie} </label> <br />
-													<label> Distance: </label> <label class="italic">
-														moins de #{envie.distance} km </label>
+														#{envie.categorie.intitule}</label> <br /> <label> Sous-catégorie:
+													</label> <label class="italic"> #{envie.sousCategorie.intitule} </label> <br />
+													<label> Distance: </label> 
+													<h:panelGroup rendered="#{envie.distance != 0}">
+														<label class="italic">moins de #{envie.distance} km </label>
+													</h:panelGroup>
+														
 												</p>
 											</div>
 											<div
@@ -130,152 +133,40 @@
 							<div class="col-md-12 col-sm-12 ">
 								<h4>SUGGESTIONS</h4>
 								<div class="row dernieresEntrees">
-									<div class="carousel multi-item-carousel slide" id="myCarousel">
-										<div class="carousel-inner">
-											<div class="item active">
-												<div class="row">
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art4.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">Vêtements</span> <span
-																	class="nomArticle">Basket h&amp;m taille 36 très
-																	bon état</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art2.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">Photo</span> <span
-																	class="nomArticle">Boitier argentiue Canon AE1</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art3.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">High-Tech</span> <span
-																	class="nomArticle">Platine vinyle beogram bon
-																	état de fonctionnement</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art1.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">Ameublement</span> <span
-																	class="nomArticle">Fauteuil IKEA bleu marine et
-																	bois</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
+									
+									<ui:repeat var="prop" value="#{mbEnvieFavori.loadPropositions(envie)}">
+										<div class="col-sm-3">
+											<h:commandLink action="#{mbObjet.loadProposition(prop)}" value="">
+												<div class="image ">
+													<h:graphicImage value="#{prop.photos.size() > 0 ? prop.photos.get(0).url : 'img/camera-flat.png'}" styleClass="img-responsive" />
 												</div>
-											</div>
-											<div class="item">
-												<div class="row">
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art3.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">Vêtements</span> <span
-																	class="nomArticle">Basket h&amp;m taille 36 très
-																	bon état</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art1.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">Photo</span> <span
-																	class="nomArticle">Boitier argentiue Canon AE1</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art2.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">High-Tech</span> <span
-																	class="nomArticle">Platine vinyle beogram bon
-																	état de fonctionnement</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
-													<div class="col-sm-3">
-														<div class="article">
-															<div class="photo">
-																<img src="img/custom/art4.png" alt="E1"
-																	class="img-responsive"></img>
-															</div>
-															<div class="texteArticle">
-																<span class="categorie">Ameublement</span> <span
-																	class="nomArticle">Fauteuil IKEA bleu marine et
-																	bois</span>
-															</div>
-															<div class="timer text-center">
-																<span class="glyphicon glyphicon-time"
-																	aria-hidden="true"></span> Il y a 20 minutes
-															</div>
-														</div>
-													</div>
+												<!-- /.image -->
+												<div class="text">
+													<h3>#{prop.intitule}</h3>
+													<span class="glyphicon glyphicon-map-marker"
+															aria-hidden="true"></span>
+													<p class="text-muted" style="height: 40px">
+													<ui:param name="limit" value="2" />
+													<ui:repeat var="loc" value="#{prop.localisations}" varStatus="nb">
+														<ui:fragment rendered="#{nb.index lt limit}">
+															#{loc.ville}<br />
+														</ui:fragment>
+													</ui:repeat>
+													</p>
+													<p class="price">
+														#{prop.valeur.valeur} <img
+															src="img/custom/feuille.png" class = "iconeFeuille" alt=""></img>
+													</p>
+
 												</div>
-											</div>
+												<!-- /.text -->
+											</h:commandLink>
 										</div>
-									</div>
+									</ui:repeat>
+									
+									
+									
+									
 								</div>
 								<a class="left carousel-control" href="#myCarousel"
 									data-slide="prev"><i

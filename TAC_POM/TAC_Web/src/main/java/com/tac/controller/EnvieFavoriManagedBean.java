@@ -11,11 +11,13 @@ import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceListe;
 import com.tac.business.api.IServiceLocalisation;
+import com.tac.business.api.IServiceRecherche;
 import com.tac.entity.Envie;
 import com.tac.entity.Liste;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
+import com.tac.util.CritereSearch;
 
 @ManagedBean(name = "mbEnvieFavori")
 @SessionScoped
@@ -23,27 +25,29 @@ public class EnvieFavoriManagedBean {
 
 	@EJB
 	private IServiceEnvie proxyEnvie;
-
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
-
 	@EJB
 	private IServiceListe proxyListe;
-
 	@EJB
 	private IServiceFavori proxyFavori;
+	@EJB
+	private IServiceRecherche proxyRecherche;
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
 	private Membre membreCourant;
-
 	private Proposition selectedProp;
-
 	private List<Envie> envies;
-
 	private List<Proposition> favoris;
 
+	
+	public List<Proposition> loadPropositions(Envie envie) {
+		System.out.println("je cherche");
+		return proxyRecherche.rechercherEnvie(envie);
+	}
+	
 	public void chargerFavoris() {
 		viderTout();
 		favoris = proxyFavori.getFavorisMembre(getMembreCourant());

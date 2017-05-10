@@ -8,6 +8,7 @@ import com.tac.entity.Membre;
 
 public interface IServiceEnvie {
 	
+	Envie addEnvie(Envie envie);
 	void deleteEnvie(Envie envie);
 	Envie getEnvie(int idEnvie);
 	List<Envie> getByList(Liste liste);

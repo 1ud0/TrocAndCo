@@ -40,4 +40,9 @@ public class ServiceEnvie implements IServiceEnvie{
 		return proxyDaoEnvie.getByMembreId(membre.getIdMembre());
 	}
 
+	@Override
+	public Envie addEnvie(Envie envie) {
+		return proxyDaoEnvie.addEnvie(envie);
+	}
+
 }

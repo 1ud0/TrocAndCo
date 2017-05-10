@@ -13,10 +13,12 @@ import com.tac.data.api.IDaoLocalisation;
 import com.tac.data.api.IDaoProposition;
 import com.tac.data.api.IDaoSuggestion;
 import com.tac.entity.Categorie;
+import com.tac.entity.Envie;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Suggestion;
+import com.tac.entity.Valeur;
 import com.tac.util.CritereSearch;
 
 @Remote(IServiceRecherche.class)
@@ -119,6 +121,43 @@ public class ServiceRecherche implements IServiceRecherche {
 			
 		}
 		return null;
+	}
+
+	@Override
+	public List<Proposition> rechercherEnvie(Envie envie) {
+		Membre membre = envie.getListe().getMembre();
+		Integer idMembre = membre == null ? null : membre.getIdMembre();
+		CritereSearch carac = new CritereSearch();
+		carac.setCat(envie.getCategorie());
+		carac.setSousCat(envie.getSousCategorie());
+		Integer distance = envie.getDistance();
+		if (distance != null)
+			carac.setDistanceMax(envie.getDistance().toString());
+		carac.setValeurs(getListeValeur(envie));
+		if (idMembre != null) {
+			carac.setLocalisations(proxyLoc.getMembreLocalisations(idMembre));
+		}
+		//on récupère les localisations pour chaque proposition
+		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre, GET_SUGGESTIONS);
+		for (Proposition proposition : propositions) {
+			proposition.setLocalisations(proxyLoc.getPropositionLocalisations(proposition));
+		}
+		return propositions;
+	}
+	
+	private List<String> getListeValeur(Envie envie) {
+		List<String> valeurs = new ArrayList<>();
+		Valeur val = envie.getValeur();
+		Integer valeurMax;
+		if (val == null) {
+			valeurMax = 5;
+		} else {
+			valeurMax = val.getValeur();
+		}
+		for (Integer i = 1; i <= valeurMax; i++) {
+			valeurs.add(i.toString());
+		}
+		return valeurs;
 	}
 
 }

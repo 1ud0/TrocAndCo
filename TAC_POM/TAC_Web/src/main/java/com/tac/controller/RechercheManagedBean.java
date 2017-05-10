@@ -16,6 +16,7 @@ import javax.faces.bean.SessionScoped;
 
 import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceDepartement;
+import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceEtat;
 import com.tac.business.api.IServiceListe;
 import com.tac.business.api.IServiceLocalisation;
@@ -31,14 +32,12 @@ import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
 import com.tac.util.CritereSearch;
+import com.tac.util.Distance;
 import com.tac.util.MutableInt;
 
 @ManagedBean(name = "mbRecherche")
 @SessionScoped
 public class RechercheManagedBean {
-
-	public static final List<String> DISTANCES = Collections
-			.unmodifiableList(Arrays.asList("5km", "10km", "25km", "50km", "Pas de filtre"));
 
 	// EJB
 	@EJB
@@ -55,6 +54,8 @@ public class RechercheManagedBean {
 	private IServiceDepartement proxyDep;
 	@EJB
 	private IServiceListe proxyListe;
+	@EJB
+	private IServiceEnvie proxyEnvie;
 
 	// managedBean
 	@ManagedProperty(value = "#{mbIdentif}")
@@ -62,16 +63,24 @@ public class RechercheManagedBean {
 
 	// attribut
 	private CritereSearch critere = new CritereSearch();
-	private List<Categorie> categories;
+	private List<Distance> distances;
+	private List<Categorie> categoriesMere;
+	private List<Categorie> categoriesFille;
 	private List<Proposition> propositions;
 	private List<Etat> etats;
 	private List<Valeur> valeurs;
 	private List<Localisation> adresses;
 	private List<Departement> departements;
-	private Envie envie = new Envie();
 	private boolean modalRendered;
 	private Integer idCategorieSelected;
 	private List<Liste> listes;
+	private Integer idListeSelected;
+	private String newListeName;
+	private Integer valeurMaxSelected;
+	private Integer idCatModale;
+	private Integer idSousCatModale;
+	private String intituleModale;
+	private Integer distanceModale;
 
 	private List<Entry<Categorie, List<Categorie>>> catsEntries;
 	private Map<Categorie, List<Categorie>> mycats;
@@ -82,6 +91,14 @@ public class RechercheManagedBean {
 		valeurs = proxyValeur.getAllValeur();
 		etats = proxyEtat.getAllEtat();
 		departements = proxyDep.getAllDepartements();
+		categoriesMere = proxyCat.getCategorieMere();
+		distances = new ArrayList<>();
+		distances.add(new Distance("Pas de filtre", 0));
+		distances.add(new Distance("5km", 5));
+		distances.add(new Distance("10km", 10));
+		distances.add(new Distance("25km", 25));
+		distances.add(new Distance("50km", 50));
+		
 	}
 	
 	
@@ -154,30 +171,63 @@ public class RechercheManagedBean {
 	}
 	
 	public void listenerSousCat(Categorie sousCat) {
-		critere.setCat(null);
+		critere.setCat(sousCat.getCategorieMere());
 		critere.setSousCat(sousCat);
 	}
 	
+	//listener modale ajouter une envie
 	public void listenerEnvie() {
 		listes = proxyListe.getByMembre(connexionBean.getMembreConnected());
-		envie.setCategorie(critere.getCat());
-		envie.setSousCategorie(critere.getSousCat());
-		envie.setIntitule(critere.getIntitule());
-		envie.setValeur(valeurs.get(4));
+		Categorie catMere = critere.getCat();
+		if (catMere != null) {
+			System.out.println(catMere.getIntitule());
+			categoriesFille = proxyCat.getCategorieFille(catMere.getIdCategorie());
+			idCatModale = catMere.getIdCategorie();
+		}
+		Categorie catFille = critere.getSousCat();
+		if (catFille != null) {
+			System.out.println(catFille.getIntitule());
+			idSousCatModale = catFille.getIdCategorie();
+		}
+		intituleModale = critere.getIntitule();
 	}
+	
+	public void listenerBtnCreateListe() {
+		Liste nouvelleListe = new Liste();
+		nouvelleListe.setTitreListe(newListeName);
+		nouvelleListe.setMembre(connexionBean.getMembreConnected());
+		proxyListe.addListe(nouvelleListe);
+		modalRendered = false;
+		listes = proxyListe.getByMembre(connexionBean.getMembreConnected());
+	}
+	
+	public void listenerBtnCancelAddEnvie() {
+		modalRendered = false;
+	}
+	
+	public void listenerDDLCat() {
+		if (idCatModale != null) {
+			categoriesFille = proxyCat.getCategorieFille(idCatModale);
+		}
+	}
+	
+	public void listenerAjoutEnvie() {
+		Envie envie = new Envie();
+		envie.setIntitule(intituleModale);
+		if (idCatModale != null) {
+			envie.setCategorie(proxyCat.getById(idCatModale));
+		}
+		if (idSousCatModale != null) {
+			envie.setSousCategorie(proxyCat.getById(idSousCatModale));
+		}
+		envie.setValeur(proxyValeur.getById(valeurMaxSelected));
+		envie.setListe(proxyListe.getById(idListeSelected));
+		envie.setDistance(distanceModale);
+		proxyEnvie.addEnvie(envie);
+	}
+	
 	
 	// getters & setters
-	public List<Categorie> getCategories() {
-		if (categories == null) {
-			categories = proxyCat.getCategorieMere();
-		}
-		return categories;
-	}
-
-	public void setCategories(List<Categorie> categories) {
-		this.categories = categories;
-	}
-	
 	public List<Localisation> getAdresses() {
 		Membre membreConnect = connexionBean.getMembreConnected();
 		if (membreConnect != null) {
@@ -311,15 +361,6 @@ public class RechercheManagedBean {
 		this.departements = departements;
 	}
 
-	public Envie getEnvie() {
-		return envie;
-	}
-
-	public void setEnvie(Envie envie) {
-		this.envie = envie;
-	}
-
-
 	public boolean isModalRendered() {
 		return modalRendered;
 	}
@@ -357,6 +398,116 @@ public class RechercheManagedBean {
 
 	public void setProxyListe(IServiceListe proxyListe) {
 		this.proxyListe = proxyListe;
+	}
+
+
+	public Integer getIdListeSelected() {
+		return idListeSelected;
+	}
+
+
+	public void setIdListeSelected(Integer idListeSelected) {
+		this.idListeSelected = idListeSelected;
+	}
+
+
+	public String getNewListeName() {
+		return newListeName;
+	}
+
+
+	public void setNewListeName(String newListeName) {
+		this.newListeName = newListeName;
+	}
+
+
+	public Integer getValeurMaxSelected() {
+		return valeurMaxSelected;
+	}
+
+
+	public void setValeurMaxSelected(Integer valeurMaxSelected) {
+		this.valeurMaxSelected = valeurMaxSelected;
+	}
+
+
+	public List<Categorie> getCategoriesMere() {
+		return categoriesMere;
+	}
+
+
+	public void setCategoriesMere(List<Categorie> categoriesMere) {
+		this.categoriesMere = categoriesMere;
+	}
+
+
+	public List<Categorie> getCategoriesFille() {
+		return categoriesFille;
+	}
+
+
+	public void setCategoriesFille(List<Categorie> categoriesFille) {
+		this.categoriesFille = categoriesFille;
+	}
+
+
+	public Integer getIdCatModale() {
+		return idCatModale;
+	}
+
+
+	public void setIdCatModale(Integer idCatModale) {
+		this.idCatModale = idCatModale;
+	}
+
+
+	public Integer getIdSousCatModale() {
+		return idSousCatModale;
+	}
+
+
+	public void setIdSousCatModale(Integer idSousCatModale) {
+		this.idSousCatModale = idSousCatModale;
+	}
+
+
+	public String getIntituleModale() {
+		return intituleModale;
+	}
+
+
+	public void setIntituleModale(String intituleModale) {
+		this.intituleModale = intituleModale;
+	}
+
+
+	public List<Distance> getDistances() {
+		return distances;
+	}
+
+
+	public void setDistances(List<Distance> distances) {
+		this.distances = distances;
+	}
+
+
+	public Integer getDistanceModale() {
+		return distanceModale;
+	}
+
+
+	public void setDistanceModale(Integer distanceModale) {
+		this.distanceModale = distanceModale;
+	}
+
+
+	public IServiceEnvie getProxyEnvie() {
+		return proxyEnvie;
+	}
+
+
+	public void setProxyEnvie(IServiceEnvie proxyEnvie) {
+		this.proxyEnvie = proxyEnvie;
 	}
 
 
