@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>COMPTE - MON CALENDRIER</title>
@@ -12,7 +13,12 @@
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
 
 		<ui:define name="headPerso">
-
+			<f:metadata>
+				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
+			</f:metadata>
+			<script type="text/javascript" src="js/affichageCalendrier.js">	</script>
+			<script type="text/javascript" src="js/recupRdv.js">
+			</script>
 		</ui:define>
 
 		<ui:define name="content">
@@ -23,80 +29,64 @@
 					les échanges à venir et les échanges passés.</p>
 			</div>
 			<div id="wrapper">
-<DIV hidden="true">
-				<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
-					varStatus="nbRdv" id="repetRdv" >
+				<DIV hidden="true">
+					<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
+						varStatus="nbRdv" id="repetRdv">
 
-					<h:outputText value="lieu : #{rdv.lieu} "
-						id="lieuRdv#{nbRdv.index}" /><br></br>
-						
-					<h:outputText value="#{rdv.dateRdv.date}" id="rdvDay#{nbRdv.index}" /> <br></br>
-					<h:outputText value="#{rdv.dateRdv.month}" id="rdvMonth#{nbRdv.index}" /><br></br>
-					<h:outputText value="#{rdv.dateRdv.year + 1900}" id="rdvYear#{nbRdv.index}" /><br></br>
-					<h:outputText value="#{rdv.dateRdv.hours}" id="rdvHours#{nbRdv.index}" /><br></br>
-					<h:outputText value="#{rdv.dateRdv.minutes}" id="rdvMinutes#{nbRdv.index}" />
-					
+						<h:outputText value="lieu : #{rdv.lieu} "
+							id="lieuRdv#{nbRdv.index}" />
+						<br></br>
 
-				</ui:repeat>
-</DIV>
+						<h:outputText value="#{rdv.dateRdv.date}"
+							id="rdvDay#{nbRdv.index}" />
+						<br></br>
+						<h:outputText value="#{rdv.dateRdv.month}"
+							id="rdvMonth#{nbRdv.index}" />
+						<br></br>
+						<h:outputText value="#{rdv.dateRdv.year + 1900}"
+							id="rdvYear#{nbRdv.index}" />
+						<br></br>
+						<h:outputText value="#{rdv.dateRdv.hours}"
+							id="rdvHours#{nbRdv.index}" />
+						<br></br>
+						<h:outputText value="#{rdv.dateRdv.minutes}"
+							id="rdvMinutes#{nbRdv.index}" />
+
+
+					</ui:repeat>
+				</DIV>
 
 
 				<div id="myScheduler"></div>
 			</div>
+			<h:form id="evenement">
+				<h:inputText id="inputDate" value="#{mbRdv.rdv.dateRdv}"
+					p:placeholder="Date : jj/MM/aaaa hh/mm">
+					<f:convertDateTime pattern="dd/MM/yyyy hh/mm" />
+				</h:inputText>
+				<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
+					p:placeholder="Lieu" />
+				<h:inputText id="inputCommentaire" value="#{mbRdv.rdv.commentaire}"
+					p:placeholder="Commentaire..." />
 
-			<script type="text/javascript">
-				YUI({lang:"fr-FR"}).use('aui-scheduler',
-			  function(Y) {
-				
-					var allBtn= [];
-					allBtn = document.getElementsByClassName("scheduler-base-today btn btn-default");
-					var btnSingle = allBtn[0];					
-					console.log(btnSingle);			  
 
-				  var rep = "repetRdv:";
-				  var lieu = ":lieuRdv";
-				  var i = 0;
-				  var events = [];
-				  while (document.getElementById(rep + i + lieu) !== null) {
-					  
-							var monObjet = 
-								{
-									color: "#20bb8e",
-					    	       content: document.getElementById(rep + i + lieu).textContent,
-					    	       disabled: true,
-					    	       meeting: true,
-					    	       reminder: true,
-					    	       startDate: new Date(document.getElementById("repetRdv:" + i + ":rdvYear").textContent, document.getElementById("repetRdv:" + i + ":rdvMonth").textContent, document.getElementById("repetRdv:" + i + ":rdvDay").textContent,document.getElementById("repetRdv:" + i + ":rdvHours").textContent , document.getElementById("repetRdv:" + i + ":rdvMinutes").textContent)
-								};
-							events.push(monObjet);
-							i++;
-					  }
-			      
-			
-			    var agendaView = new Y.SchedulerAgendaView();
-			    var dayView = new Y.SchedulerDayView();
-			    var weekView = new Y.SchedulerWeekView();
-			    var monthView = new Y.SchedulerMonthView();
-			
-			    var eventRecorder = new Y.SchedulerEventRecorder();
-			
-			    new Y.Scheduler(
-			      {
-				      
-			        activeView: weekView,
-			        boundingBox: '#myScheduler',
-			        date: new Date(),
-			        eventRecorder: eventRecorder,
-			        items: events,
-			        render: true,
-			        views: [dayView, weekView, monthView, agendaView]
-			      }
-			    );
-			    console.log(document.getElementById("toto"));
-			  }
-			);
-				
-			</script>
+				<h:selectOneMenu value="#{mbRdv.echangeSelected.idEchange}">
+					<f:selectItem itemLabel="Sélectionner l'échange" itemValue="0" />
+					<f:selectItems
+						value="#{mbRdv.echanges}"
+						var="currentEchange"
+						itemLabel="#{currentEchange.proposition.intitule} + #{currentEchange.idEchange}"
+						itemValue="#{currentEchange.idEchange}" />
+				</h:selectOneMenu>
+
+
+				<h:commandButton action="#{mbRdv.addRdv()}"
+					value="Enregistrer le rendez-vous" />
+
+
+			</h:form>
+
+
 
 
 

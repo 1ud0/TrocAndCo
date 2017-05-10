@@ -9,11 +9,13 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+			<f:metadata>
+				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
+			</f:metadata>
 		</ui:define>
-		
+
 		<ui:define name="content">
 
 
@@ -73,8 +75,8 @@
 							<div class="form-group">
 								<label for="meeting">Date de naissance</label>
 								<h:inputText value="#{mbIdentif.membreConnected.dateNaissance}"
-									styleClass="form-control" >
-									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
+									styleClass="form-control">
+									<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
 								</h:inputText>
 							</div>
 						</div>
@@ -99,11 +101,10 @@
 						<div class="col-sm-12 text-center">
 							<h:commandButton action="#{mbModifCompte.majDonnees()}"
 								value="Enregistrer" styleClass="btn btn-vert btn-lg">
-								<f:ajax listener="#{mbModifCompte.majDonnees()}"
-	    		 	event="click" render=":toto"
-	    			execute="@form"/>
+								<f:ajax listener="#{mbModifCompte.majDonnees()}" event="click"
+									render=":toto" execute="@form" />
 							</h:commandButton>
-					
+
 
 
 						</div>
@@ -142,26 +143,28 @@
 					</div>
 					<ui:repeat var="ad" value="#{mbModifCompte.adresses}">
 						<h:form>
-						<div class="col-md-6">
-					
-						<div class="adresse">
-							<h5>#{ad.titreAdresse}</h5>
-							<ul>
-								<li>#{ad.adresse}</li>
-								<li>#{ad.codePostal}</li>
-								<li>#{ad.ville}</li>
-							</ul>
-							<div class="row text-center">
-								<div class="col-sm-6">
-									<a href="">Modifier</a>
-								</div>
-								<div class="col-sm-6">
-									<h:commandLink action="#{mbModifCompte.deleteLocalisation(ad)}" value="Supprimer" />
+							<div class="col-md-6">
+
+								<div class="adresse">
+									<h5>#{ad.titreAdresse}</h5>
+									<ul>
+										<li>#{ad.adresse}</li>
+										<li>#{ad.codePostal}</li>
+										<li>#{ad.ville}</li>
+									</ul>
+									<div class="row text-center">
+										<div class="col-sm-6">
+											<a href="">Modifier</a>
+										</div>
+										<div class="col-sm-6">
+											<h:commandLink
+												action="#{mbModifCompte.deleteLocalisation(ad)}"
+												value="Supprimer" />
+										</div>
+									</div>
 								</div>
 							</div>
-						</div>
-					</div>
-						
+
 						</h:form>
 					</ui:repeat>
 				</div>
@@ -181,7 +184,8 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="password_old">Ancien mot de passe</label>
-									<h:inputSecret value="#{mbModifCompte.ancienMdp}" styleClass="marginBottom15 form-control" id="password_old"></h:inputSecret>
+								<h:inputSecret value="#{mbModifCompte.ancienMdp}"
+									styleClass="marginBottom15 form-control" id="password_old"></h:inputSecret>
 							</div>
 						</div>
 					</div>
@@ -189,19 +193,21 @@
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="password_1">Nouveau mot de passe</label>
-								<h:inputSecret id="password" value="#{mbModifCompte.nouveauMdp}" styleClass="marginBottom15 form-control">
-									<f:validator validatorId="passwordValidator"/>
-									<f:validateLength minimum = "3" />
+								<h:inputSecret id="password" value="#{mbModifCompte.nouveauMdp}"
+									styleClass="marginBottom15 form-control">
+									<f:validator validatorId="passwordValidator" />
+									<f:validateLength minimum="3" />
 									<f:attribute name="confirmPassword" value="#{confirmPassword}"></f:attribute>
 								</h:inputSecret>
-								<h:message for="password" style="color: red;"/>
+								<h:message for="password" style="color: red;" />
 							</div>
 						</div>
 						<div class="col-sm-6">
 							<div class="form-group">
 								<label for="password_2">Retapez le nouveau mot de passe</label>
-								<h:inputSecret styleClass="marginBottom15 form-control" id="confirmPassword" binding="#{confirmPassword}">
-									<h:message for="confirmPassword" style="color: red;"/>
+								<h:inputSecret styleClass="marginBottom15 form-control"
+									id="confirmPassword" binding="#{confirmPassword}">
+									<h:message for="confirmPassword" style="color: red;" />
 								</h:inputSecret>
 							</div>
 						</div>
@@ -210,16 +216,15 @@
 
 					<div class="text-center">
 						<h:commandButton action="#{mbModifCompte.modifPwd()}"
-								value="Enregistrer" styleClass="btn btn-vert btn-lg success">
-								<f:ajax listener="#{mbModifCompte.modifPwd()}"
-	    		 	event="click" render=":formPwd"
-	    			execute="@form"/>
+							value="Enregistrer" styleClass="btn btn-vert btn-lg success">
+							<f:ajax listener="#{mbModifCompte.modifPwd()}" event="click"
+								render=":formPwd" execute="@form" />
 						</h:commandButton>
 					</div>
 					<h:outputScript rendered="#{mbModifCompte.showAlertPwd}">
 						$.notify("Nouveau mot de passe enregistré.");
 					</h:outputScript>
-					
+
 				</h:form>
 
 			</div>
@@ -283,10 +288,10 @@
 					</div>
 				</div>
 			</div>
-			
-			
-			
-			
+
+
+
+
 			<!-- Fin de la modale -->
 		</ui:define>
 	</ui:composition>

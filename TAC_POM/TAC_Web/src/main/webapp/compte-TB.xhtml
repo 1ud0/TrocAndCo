@@ -11,7 +11,9 @@
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
 
 		<ui:define name="headPerso">
-
+			<f:metadata>
+				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
+			</f:metadata>
 		</ui:define>
 
 		<ui:define name="content">
@@ -22,181 +24,183 @@
 					<div class="row">
 						<!-- ***Je commence ici ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////// -->
 						<div class="col-md-9 clearfix" id="customer-account">
-								
+
 							<div id="row">
-							<div class="row">
-								<div class="col-sm-6 col-md-6">
-									<div class="heading">
-										<h4 class="text-uppercase">Mes acquisitions</h4>
-									</div>
-									<div class="table-responsive">
-										<table class="table table-hover">
-											<thead>
-												<tr>
-													<th>Objet</th>
-													<th>Statut</th>
-												</tr>
-											</thead>
-											<tbody>
-												<h:panelGroup>
-													<ui:repeat var="echange"
-														value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}">
-														<h:form>
-															<h:commandLink
-																action="#{mbCompteTB.compteEchangeBean.echangeDuMembre(echange)}"
-																value="">
-																<tr>
-																	<td>#{echange.proposition.intitule}</td>
-																	<td><h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
-																			<span class="label label-danger">Annulé</span>
-																		</h:panelGroup> <h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
-																			<span class="label label-warning">Refusé</span>
-																		</h:panelGroup> <h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
-																			<span class="label label-info">En cours</span>
-																		</h:panelGroup> <h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
-																			<span class="label label-success">Effectué</span>
-																		</h:panelGroup></td>
-																	<td><a href="compte-echanges.xhtml"
-																		class="btn btn-template-main btn-sm">Voir</a></td>
-																</tr>
-															</h:commandLink>
-														</h:form>
-													</ui:repeat>
+								<div class="row">
+									<div class="col-sm-6 col-md-6">
+										<div class="heading">
+											<h4 class="text-uppercase">Mes acquisitions</h4>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>Objet</th>
+														<th>Statut</th>
+													</tr>
+												</thead>
+												<tbody>
+													<h:panelGroup>
+														<ui:repeat var="echange"
+															value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}">
+															<h:form>
+																<h:commandLink
+																	action="#{mbCompteTB.compteEchangeBean.echangeDuMembre(echange)}"
+																	value="">
+																	<tr>
+																		<td>#{echange.proposition.intitule}</td>
+																		<td><h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
+																				<span class="label label-danger">Annulé</span>
+																			</h:panelGroup> <h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
+																				<span class="label label-warning">Refusé</span>
+																			</h:panelGroup> <h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
+																				<span class="label label-info">En cours</span>
+																			</h:panelGroup> <h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
+																				<span class="label label-success">Effectué</span>
+																			</h:panelGroup></td>
+																		<td><a href="compte-echanges.xhtml"
+																			class="btn btn-template-main btn-sm">Voir</a></td>
+																	</tr>
+																</h:commandLink>
+															</h:form>
+														</ui:repeat>
 
-												</h:panelGroup>
+													</h:panelGroup>
 
-											</tbody>
-										</table>
+												</tbody>
+											</table>
+										</div>
 									</div>
-								</div>
-								<div class="col-sm-6 col-md-6">
-									<div class="heading">
-										<h4 class="text-uppercase">Mes dons</h4>
-									</div>
-									<div class="table-responsive">
-										<table class="table table-hover">
-											<thead>
-												<tr>
-													<th>Objet</th>
-													<th>Statut</th>
-												</tr>
-											</thead>
-											<tbody>
-												<h:panelGroup>
-													<ui:repeat var="echange"
-														value="#{mbCompteTB.compteEchangeBean.donDuMembre}">
-														<h:form>
-															<h:commandLink
-																action="#{mbCompteTB.compteEchangeBean.donDuMembre(echange)}"
-																value="">
-																<tr>
-																	<td>#{echange.proposition.intitule}</td>
-																	<td><h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
-																			<span class="label label-danger">Annulé</span>
-																		</h:panelGroup> <h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
-																			<span class="label label-warning">Refusé</span>
-																		</h:panelGroup> <h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
-																			<span class="label label-info">En cours</span>
-																		</h:panelGroup> <h:panelGroup
-																			rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
-																			<span class="label label-success">Effectué</span>
-																		</h:panelGroup></td>
-																	<td><a href="compte-echanges.xhtml"
-																		class="btn btn-template-main btn-sm">Voir</a></td>
-																</tr>
-															</h:commandLink>
-														</h:form>
-													</ui:repeat>
+									<div class="col-sm-6 col-md-6">
+										<div class="heading">
+											<h4 class="text-uppercase">Mes dons</h4>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>Objet</th>
+														<th>Statut</th>
+													</tr>
+												</thead>
+												<tbody>
+													<h:panelGroup>
+														<ui:repeat var="echange"
+															value="#{mbCompteTB.compteEchangeBean.donDuMembre}">
+															<h:form>
+																<h:commandLink
+																	action="#{mbCompteTB.compteEchangeBean.donDuMembre(echange)}"
+																	value="">
+																	<tr>
+																		<td>#{echange.proposition.intitule}</td>
+																		<td><h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'annule'}">
+																				<span class="label label-danger">Annulé</span>
+																			</h:panelGroup> <h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'refus'}">
+																				<span class="label label-warning">Refusé</span>
+																			</h:panelGroup> <h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'encours'}">
+																				<span class="label label-info">En cours</span>
+																			</h:panelGroup> <h:panelGroup
+																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
+																				<span class="label label-success">Effectué</span>
+																			</h:panelGroup></td>
+																		<td><a href="compte-echanges.xhtml"
+																			class="btn btn-template-main btn-sm">Voir</a></td>
+																	</tr>
+																</h:commandLink>
+															</h:form>
+														</ui:repeat>
 
-												</h:panelGroup>
+													</h:panelGroup>
 
-											</tbody>
-										</table>
+												</tbody>
+											</table>
+										</div>
 									</div>
-								</div>
 								</div>
 								<div class="rox">
-								<div class="col-sm-6 col-md-6 clearfix echanges">
-									<div class="heading">
-										<h4 class="text-uppercase">Mes messages</h4>
+									<div class="col-sm-6 col-md-6 clearfix echanges">
+										<div class="heading">
+											<h4 class="text-uppercase">Mes messages</h4>
+										</div>
+										<div class="table-responsive mailbox-messages">
+											<table class="table table-hover">
+												<tbody>
+													<tr>
+														<td class="mailbox-name"><a href="#">Intitulé de
+																la proposition associée au message</a></td>
+														<td class="mailbox-name"><a href="#">Je suis
+																occupée le mardi soir mais...</a></td>
+														<td class="mailbox-attachment"></td>
+														<td class="mailbox-date">Il y a 5 mins</td>
+													</tr>
+													<tr>
+														<td class="mailbox-name"><a href="#">Iphone 53S</a></td>
+														<td class="mailbox-name"><a href="#">Il est
+																jailbreaké ton Iphone?</a></td>
+														<td class="mailbox-attachment"></td>
+														<td class="mailbox-date">Il y a 28 mins</td>
+													</tr>
+													<tr class="lu">
+														<td class="mailbox-subject">Cd Les reprises de Maxime</td>
+														<td class="mailbox-subject">Bonjour, je suis
+															intéressé par votre...</td>
+														<td class="mailbox-attachment"></td>
+														<td class="mailbox-date">Il y a 12 jours</td>
+													</tr>
+													<tr class="lu">
+														<td class="mailbox-subject">Batmobile</td>
+														<td class="mailbox-subject">La version d'Alan
+															Moore...</td>
+														<td class="mailbox-attachment"></td>
+														<td class="mailbox-date">Il y a 29 jours</td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
-									<div class="table-responsive mailbox-messages">
-										<table class="table table-hover">
-											<tbody>
-												<tr>
-													<td class="mailbox-name"><a href="#">Intitulé de la proposition associée au message</a></td>
-													<td class="mailbox-name"><a href="#">Je suis
-															occupée le mardi soir mais...</a></td>
-													<td class="mailbox-attachment"></td>
-													<td class="mailbox-date">Il y a 5 mins</td>
-												</tr>
-												<tr>
-													<td class="mailbox-name"><a href="#">Iphone 53S</a></td>
-													<td class="mailbox-name"><a href="#">Il est
-															jailbreaké ton Iphone?</a></td>
-													<td class="mailbox-attachment"></td>
-													<td class="mailbox-date">Il y a 28 mins</td>
-												</tr>
-												<tr class="lu">
-													<td class="mailbox-subject">Cd Les reprises de Maxime</td>
-													<td class="mailbox-subject">Bonjour, je suis intéressé
-														par votre...</td>
-													<td class="mailbox-attachment"></td>
-													<td class="mailbox-date">Il y a 12 jours</td>
-												</tr>
-												<tr class="lu">
-													<td class="mailbox-subject">Batmobile</td>
-													<td class="mailbox-subject">La version d'Alan Moore...</td>
-													<td class="mailbox-attachment"></td>
-													<td class="mailbox-date">Il y a 29 jours</td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
 
-								<div class="col-sm-6 col-md-6 clearfix echanges">
-									<div class="heading">
-										<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
+									<div class="col-sm-6 col-md-6 clearfix echanges">
+										<div class="heading">
+											<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
+										</div>
+										<div class="table-responsive">
+											<table class="table table-hover">
+												<thead>
+													<tr>
+														<th>Commentaires</th>
+														<th>Date</th>
+													</tr>
+												</thead>
+												<tbody>
+													<tr>
+														<td>Autocollants McDonalds Monopoly</td>
+														<td>01/06/2017</td>
+														<td><a href="customer-order.html"
+															class="btn btn-template-main btn-sm">Voir</a></td>
+													</tr>
+													<tr>
+														<td>Machine à laver C'estBeauC'estBosh</td>
+														<td>08/06/2017</td>
+														<td><a href="customer-order.html"
+															class="btn btn-template-main btn-sm">Voir</a></td>
+													</tr>
+													<tr>
+														<td>Livre "Le babyfoot pour les nuls"</td>
+														<td>22/06/2013</td>
+														<td><a href="customer-order.html"
+															class="btn btn-template-main btn-sm">Voir</a></td>
+													</tr>
+												</tbody>
+											</table>
+										</div>
 									</div>
-									<div class="table-responsive">
-										<table class="table table-hover">
-											<thead>
-												<tr>
-													<th>Commentaires</th>
-													<th>Date</th>
-												</tr>
-											</thead>
-											<tbody>
-												<tr>
-													<td>Autocollants McDonalds Monopoly</td>
-													<td>01/06/2017</td>
-													<td><a href="customer-order.html"
-														class="btn btn-template-main btn-sm">Voir</a></td>
-												</tr>
-												<tr>
-													<td>Machine à laver C'estBeauC'estBosh</td>
-													<td>08/06/2017</td>
-													<td><a href="customer-order.html"
-														class="btn btn-template-main btn-sm">Voir</a></td>
-												</tr>
-												<tr>
-													<td>Livre "Le babyfoot pour les nuls"</td>
-													<td>22/06/2013</td>
-													<td><a href="customer-order.html"
-														class="btn btn-template-main btn-sm">Voir</a></td>
-												</tr>
-											</tbody>
-										</table>
-									</div>
-								</div>
 								</div>
 								<div class="col-sm-6 col-md-6 clearfix echanges">
 									<div class="heading">
@@ -204,68 +208,69 @@
 									</div>
 									<div class="table-responsive">
 										<table class="table table-hover">
-											<tbody><thead>
+											<tbody>
+											<thead>
 												<tr>
 													<th>Intitulé</th>
 													<th>Note et commentaire</th>
 													<th>Qui ?</th>
 												</tr>
 											</thead>
-												<h:panelGroup>
-													<ui:repeat var="eval"
-														value="#{mbCompteTB.getEchangesQuandDonneur(mbCompteTB.membreCourant)}">
-														<h:form>
+											<h:panelGroup>
+												<ui:repeat var="eval"
+													value="#{mbCompteTB.getEchangesQuandDonneur(mbCompteTB.membreCourant)}">
+													<h:form>
 
-															<tr>
-																<td><a href="#">#{eval.proposition.intitule}</a></td>
-																<td>
-																	<div class="col-sm-9">
-																		<div class="review-block-rate">
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																		</div>
-																		<br/>
-																		<div class="review-block-description">#{eval.comDonneur}</div>
+														<tr>
+															<td><a href="#">#{eval.proposition.intitule}</a></td>
+															<td>
+																<div class="col-sm-9">
+																	<div class="review-block-rate">
+																		<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
+																			<span class="glyphicon glyphicon-star"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
+																			<span class="glyphicon glyphicon-star-empty"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
+																			<span class="glyphicon glyphicon-star"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
+																			<span class="glyphicon glyphicon-star-empty"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
+																			<span class="glyphicon glyphicon-star"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
+																			<span class="glyphicon glyphicon-star-empty"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
+																			<span class="glyphicon glyphicon-star"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
+																			<span class="glyphicon glyphicon-star-empty"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
+																			<span class="glyphicon glyphicon-star"></span>
+																		</h:panelGroup>
+																		<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
+																			<span class="glyphicon glyphicon-star-empty"></span>
+																		</h:panelGroup>
 																	</div>
-																</td>
-																<td class="imageAvatarSize"><img
-																	class="img-responsive img-circle"
-																	src="#{eval.membre.avatar}" alt=""></img></td>
-																<td><a href="compte-evaluations.xhtml"
-																	class="btn btn-template-main btn-sm">Voir</a></td>
-															</tr>
+																	<br />
+																	<div class="review-block-description">#{eval.comDonneur}</div>
+																</div>
+															</td>
+															<td class="imageAvatarSize"><img
+																class="img-responsive img-circle"
+																src="#{eval.membre.avatar}" alt=""></img></td>
+															<td><a href="compte-evaluations.xhtml"
+																class="btn btn-template-main btn-sm">Voir</a></td>
+														</tr>
 
-														</h:form>
-													</ui:repeat>
-												</h:panelGroup>
+													</h:form>
+												</ui:repeat>
+											</h:panelGroup>
 											</tbody>
 										</table>
 									</div>

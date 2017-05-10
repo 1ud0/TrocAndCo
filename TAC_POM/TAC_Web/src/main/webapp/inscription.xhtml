@@ -69,7 +69,7 @@ _________________________________________________________ -->
 													<div class="form-group">
 														<label>Date de naissance*</label>
 														<h:inputText id="date_naissance" value="#{mbInscription.newMembre.dateNaissance}" class="form-control" required="true" requiredMessage="champ obligatoire">
-															<f:convertDateTime pattern="yyyy-MM-dd"/>
+															<f:convertDateTime pattern="dd/MM/yyyy"/>
 														</h:inputText>
 														<h:message for="date_naissance" style="color: red;"/>
 													</div>
