@@ -58,10 +58,10 @@
 						<h:form id="formConversation">
 							<tr  class="#{mbMessage.dernierMessage(discussion).lu or mbMessage.dernierMessage(discussion).emetteur.idMembre==mbIdentif.membreConnected.idMembre ? 'lu' : '' }">
 								<td><input type="checkbox"></input></td>
-								<td class="mailbox-star"><a href="#"><i
-										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-star"><i
+										class="fa fa-envelope"></i></td>
 								<td class="mailbox-name">
-								<h:commandLink value="#{mbMessage.avecQui(discussion)}">
+								<h:commandLink value="#{mbMessage.avecQui(discussion)}" onclick="$('#sidebar_secondary').addClass('popup-box-on')">
 									<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat"/>
 								</h:commandLink>
 								</td>
@@ -71,7 +71,7 @@
 							</tr>
 							</h:form>
 						</ui:repeat>
-							
+
 
 					</table>
 					<!-- /.table -->
@@ -79,7 +79,6 @@
 				<!-- /.mail-box-messages -->
 			</div>
 			<!-- /.box-body -->
-
 
 
 
@@ -100,10 +99,13 @@
 							<h1>#{mbMessage.chat.get(0).proposition.intitule}</h1></a>
 					</div>
 					<div class="pull-right">
-						<button data-widget="remove" id="removeClass"
-							class="chat-header-button pull-right" type="button">
+						<button data-widget="remove" id="removeClass" onclick="document.getElementById('fenetreChat:boutonCache').click()"
+							class="chat-header-button pull-right" type="button">	
 							<i class="glyphicon glyphicon-remove"></i>
 						</button>
+						<h:button id="boutonCache" value="close" onclick="$('#sidebar_secondary').removeClass('popup-box-on')" style="display:none">
+									
+						</h:button>
 					</div>
 				</div>
 
