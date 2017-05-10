@@ -10,11 +10,13 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+			<f:metadata>
+				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
+			</f:metadata>
 		</ui:define>
-		
+
 		<ui:define name="content">
 			<div id="objets">
 				<div class="row products">
@@ -45,7 +47,7 @@
 					</ui:repeat>
 					<!-- produits FIN  -->
 				</div>
-
+			</div>
 				<!-- DEBUT BOUTON AJOUTER -->
 
 
@@ -69,21 +71,24 @@
 										<div class="row ">
 											<div class="col-sm-4">
 												<div class="image ">
-													<a href="#"> <img src="#{mbCompteObjet.propositionSelected.photos.size()>0 ? mbCompteObjet.propositionSelected.photos.get(0).url : 'img/camera-flat.png'}"
+													<a href="#"> <img
+														src="#{mbCompteObjet.propositionSelected.photos.size()>0 ? mbCompteObjet.propositionSelected.photos.get(0).url : 'img/camera-flat.png'}"
 														alt="Appareil-photo" class="img-responsive"></img>
 													</a>
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="image ">
-													<a href="#"> <img src="#{mbCompteObjet.propositionSelected.photos.size()>1 ? mbCompteObjet.propositionSelected.photos.get(1).url : 'img/camera-flat.png'}"
+													<a href="#"> <img
+														src="#{mbCompteObjet.propositionSelected.photos.size()>1 ? mbCompteObjet.propositionSelected.photos.get(1).url : 'img/camera-flat.png'}"
 														alt="Appareil-photo" class="img-responsive"></img>
 													</a>
 												</div>
 											</div>
 											<div class="col-sm-4">
 												<div class="image ">
-													<a href="#"> <img src="#{mbCompteObjet.propositionSelected.photos.size()>2 ? mbCompteObjet.propositionSelected.photos.get(2).url : 'img/camera-flat.png'}"
+													<a href="#"> <img
+														src="#{mbCompteObjet.propositionSelected.photos.size()>2 ? mbCompteObjet.propositionSelected.photos.get(2).url : 'img/camera-flat.png'}"
 														alt="Appareil-photo" class="img-responsive"></img>
 													</a>
 												</div>
@@ -166,7 +171,7 @@
 														<label>Adresses:</label>
 													</div>
 													<h:selectManyCheckbox
-														value="#{mbCompteObjet.idAdressesSelected}" >
+														value="#{mbCompteObjet.idAdressesSelected}">
 														<f:selectItems value="#{mbCompteObjet.adresseByMembre}"
 															var="adresse" itemLabel="${adresse.adresse}"
 															itemValue="${adresse.idLocalisation}"></f:selectItems>
@@ -200,7 +205,6 @@
 						</div>
 
 					</div>
-				</div>
 
 				<!-- ******************************MODALE FIN MODIFIER****************************** -->
 				<!-- ******************************MODALE AJOUTER DEBUT****************************** -->
@@ -214,8 +218,7 @@
 								<h:panelGroup id="ajoutObjet">
 									<div class="modal-header">
 										<button type="button" class="close" data-dismiss="modal">x</button>
-										<h4 class="modal-title">Ajouter une proposition
-										</h4>
+										<h4 class="modal-title">Ajouter une proposition</h4>
 
 									</div>
 									<div class="modal-body">
@@ -277,7 +280,8 @@
 													<div>
 														<label>Sous-catégorie:</label>
 													</div>
-													<div class="form-group selecteur" id="sousCatDeLObjetNouveau">
+													<div class="form-group selecteur"
+														id="sousCatDeLObjetNouveau">
 														<h:selectOneMenu id="ComboSousCatNouveau"
 															styleClass="selectpicker form-control"
 															value="#{mbCompteObjet.sousCategorieSelected.idCategorie}">
@@ -306,7 +310,8 @@
 														<label>Valeur:</label>
 													</div>
 
-													<div class="form-group selecteur" id="valeurDeLObjetNouveau">
+													<div class="form-group selecteur"
+														id="valeurDeLObjetNouveau">
 														<h:selectOneMenu styleClass="selectpicker form-control"
 															value="#{mbCompteObjet.valeurSelected.idValeur}">
 															<f:selectItems value="#{mbCompteObjet.allValeur}"
@@ -320,7 +325,7 @@
 														<label>Adresses:</label>
 													</div>
 													<h:selectManyCheckbox
-														value="#{mbCompteObjet.idAdressesSelected}" >
+														value="#{mbCompteObjet.idAdressesSelected}">
 														<f:selectItems value="#{mbCompteObjet.adresseByMembre}"
 															var="adresse" itemLabel="${adresse.adresse}"
 															itemValue="${adresse.idLocalisation}"></f:selectItems>
@@ -357,8 +362,8 @@
 				</div>
 
 				<!-- ******************************MODALE FIN AJOUTER****************************** -->
-				
-				
+
+
 
 				<!-- ******************************MODALE SUPPRIMER DEBUT****************************** -->
 
@@ -367,26 +372,27 @@
 					<div class="modal-dialog">
 
 						<div class="modal-content">
-						<h:form id="formSuppressionObjet">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal">x</button>
-								<h4 class="modal-title">Confirmation de la suppression</h4>
-							</div>
-							<div class="modal-body">								
+							<h:form id="formSuppressionObjet">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">x</button>
+									<h4 class="modal-title">Confirmation de la suppression</h4>
+								</div>
+								<div class="modal-body">
 									<div class="row ">
 										<div class="col-sm-12 orientationCenter">
 											<p>Êtes-vous certain(e) de vouloir supprimer cet objet ?</p>
 										</div>
 									</div>
 									<div class="modal-footer">
-										<h:commandButton action="#{mbCompteObjet.suppressionProposition()}"
-												value="Valider" styleClass="btn btn-vert btn-lg"
-												onclick="$('#modalObjet').modal('hide');"></h:commandButton>
+										<h:commandButton
+											action="#{mbCompteObjet.suppressionProposition()}"
+											value="Valider" styleClass="btn btn-vert btn-lg"
+											onclick="$('#modalObjet').modal('hide');"></h:commandButton>
 
-											<button type="button" class="btn btn-vert btn-lg"
-												data-dismiss="modal">Annuler</button>
-									</div>								
-							</div>
+										<button type="button" class="btn btn-vert btn-lg"
+											data-dismiss="modal">Annuler</button>
+									</div>
+								</div>
 							</h:form>
 						</div>
 					</div>
