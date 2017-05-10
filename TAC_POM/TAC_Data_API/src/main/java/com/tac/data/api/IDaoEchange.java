@@ -24,5 +24,6 @@ public interface IDaoEchange {
 	int getCreditEnPlus(Integer idMembre);
 	Proposition getbyEchange(Echange echange);
 	Echange getEchangeByProp(Proposition proposition);
+	List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur);
 
 }

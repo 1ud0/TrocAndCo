@@ -63,6 +63,15 @@ public class DaoEchange implements IDaoEchange {
 		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
 		return echangesDuDonneur;
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur){
+		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateAcceptation IS NULL AND e.dateRefus IS NULL";
+		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
+		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembreDonneur);
+		return queryGetByIdMembreDonneur.getResultList(); 
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override

@@ -41,26 +41,26 @@ _________________________________________________________ -->
 										data-toggle="dropdown" data-target="#">
 										<span class="glyphicon glyphicon-bell"></span>
 									</button>
-									<span class="badge badge-notify">3</span>
+									<span class="badge badge-notify">#{mbHeader.nombreNouveauxMessages() + mbHeader.nombreNvxEchanges()}</span>
 									<ul class="dropdown-menu notifications" role="menu"
 										aria-labelledby="dLabel">
 										<div class="notification-heading">
 											<h4 class="menu-title">Notifications</h4>
-											<h4 class="menu-title pull-right">
-												View all<i class="glyphicon glyphicon-circle-arrow-right"></i>
-											</h4>
+											<a href="/TrocAndCo/compte-TB.xhtml" > <h4 class="menu-title pull-right">
+												Voir tout<i class="glyphicon glyphicon-circle-arrow-right"></i>
+											</h4></a>
 										</div>
 										<li class="divider"></li>
 										<div class="notifications-wrapper">
-											<a class="content" href="#">
+											<a class="content" href="/TrocAndCo/compte-messages.xhtml">
 												<div class="notification-item">
-													<h4 class="item-title">
+												<h4 class="item-title">
 														<span class="glyphicon glyphicon-envelope"
-															aria-hidden="true"></span> <span class="notifNum">#{mbHeader.nombreNouveauxMessages(mbIdentif.membreConnected)}</span>nouveaux
+															aria-hidden="true"></span> <span class="notifNum">#{mbHeader.nombreNouveauxMessages()}</span>nouveaux
 														messages
 													</h4>
 												</div>
-											</a> <a class="content" href="#">
+											</a> <a class="content" href="/TrocAndCo/compte-evaluations.xhtml">
 												<div class="notification-item">
 													<h4 class="item-title">
 														<span class="glyphicon glyphicon glyphicon-star-empty"
@@ -68,11 +68,11 @@ _________________________________________________________ -->
 														évaluations
 													</h4>
 												</div>
-											</a> <a class="content" href="#">
+											</a> <a class="content" href="/TrocAndCo/compte-echanges.xhtml">
 												<div class="notification-item">
 													<h4 class="item-title">
 														<span class="fa fa-exchange" aria-hidden="true"></span> <span
-															class="notifNum">2</span>nouveaux échanges
+															class="notifNum">#{mbHeader.nombreNvxEchanges()} </span>nouveaux échanges
 													</h4>
 												</div>
 											</a>

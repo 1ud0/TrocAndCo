@@ -9,4 +9,5 @@ Rdv addRdv(Rdv rdv);
 Rdv updateRdv(Rdv rdv);
 void deleteRdv(Rdv rdv);
 List<Rdv> getByMembreId(Integer IdMembre);
+List<Rdv> getByMembreIdPropositionEchange(Integer idMembre);
 }

@@ -10,5 +10,6 @@ public interface IServiceRdv {
 	void deleteRdv(Rdv rdv);
 	Rdv updateRdv(Rdv rdv);
 	List<Rdv> getRdvByMembre(int idMembre);
+	List<Rdv> getRdvByMembrePropositionEchange(int idMembre);
 
 }

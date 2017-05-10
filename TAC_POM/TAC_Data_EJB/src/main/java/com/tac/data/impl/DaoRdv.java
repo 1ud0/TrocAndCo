@@ -35,13 +35,22 @@ public class DaoRdv implements IDaoRdv{
 
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Rdv> getByMembreId(Integer IdMembre) {
+	public List<Rdv> getByMembreId(Integer idMembre) {
 		/*final String req = "SELECT r FROM Rdv r LEFT JOIN IdEchange"
 				+ " LEFT JOIN IdMembre"
 				+ " WHERE r.idRDV like :pidRdv";*/
 		
 		final String req = "SELECT r FROM Rdv r WHERE r.echange.membre.idMembre = :pidMembre";
-		Query query = em.createQuery(req).setParameter("pidMembre", IdMembre);
+		Query query = em.createQuery(req).setParameter("pidMembre", idMembre);
+		return query.getResultList();
+		
+	}
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Rdv> getByMembreIdPropositionEchange(Integer idMembre) {
+		
+		final String req = "SELECT r FROM Rdv r WHERE r.echange.proposition.membre.idMembre = :pidMembre";
+		Query query = em.createQuery(req).setParameter("pidMembre", idMembre);
 		return query.getResultList();
 		
 	}
