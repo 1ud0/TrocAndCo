@@ -145,8 +145,9 @@
 					<h:inputText value="#{mbMessage.messageAEnvoyer}" styleClass="md-input">
 						
 					</h:inputText>
-					<h:commandLink action="#{mbMessage.envoyerMessage()}" value="" >
+					<h:commandLink action="#" value="" >
 						<i class="fa fa-send"></i>
+						<f:ajax event="click" listener="#{mbMessage.refreshChat(mbMessage.chat.get(0))}" render="fenetreChat" execute="@form"/>
 					</h:commandLink>
 					
 				</div>

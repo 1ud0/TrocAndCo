@@ -46,7 +46,8 @@ public class MessageManagedBean implements Serializable {
 	private String messageAEnvoyer;
 	
 	
-	public void envoyerMessage(){
+	public Message envoyerMessage(){
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA message saisi" +messageAEnvoyer);
 		membreCourant = identifBean.getMembreConnected();
 		Message nouveauMessage = new Message();
 		nouveauMessage.setEmetteur(membreCourant);
@@ -60,8 +61,9 @@ public class MessageManagedBean implements Serializable {
 			nouveauMessage.setRecepteur(chat.get(0).getEmetteur());
 		}
 		nouveauMessage.setTexte(messageAEnvoyer);
-		proxyMessage.envoyerMessage(nouveauMessage);
+		Message messageAjoute = proxyMessage.envoyerMessage(nouveauMessage);
 		messageAEnvoyer = "";
+		return messageAjoute;
 	}
 	
 	public List<Proposition> getAllPropositionAvecMessage(){
@@ -159,6 +161,12 @@ public class MessageManagedBean implements Serializable {
 			}
 		}
 		return discussion;
+	}
+	
+	public List<Message> refreshChat(Message message){
+		membreCourant = identifBean.getMembreConnected();
+		message = envoyerMessage();
+		return loadChat(message);
 	}
 	
 	public Proposition propAvecPhotos(int idProposition) throws DataAccessException{
