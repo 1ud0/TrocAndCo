@@ -90,6 +90,10 @@ public class EnvieFavoriManagedBean {
 		}
 		return false;
 	}
+	
+	public List<Envie> getEnviesDuMembre(Membre membre){
+		return proxyEnvie.getByMembre(membre);
+	}
 
 	public IServiceEnvie getProxyEnvie() {
 		return proxyEnvie;

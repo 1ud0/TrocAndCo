@@ -221,7 +221,7 @@
 															<p class="text-muted">#{prop.localisations.get(0).ville}</p>
 															<p class="price">
 																#{prop.valeur.valeur} <img
-																	src="img/custom/feuille orange.png" alt=""></img>
+																	src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 															</p>
 
 														</div>
@@ -264,11 +264,16 @@
 								</div>
 
 								<div id="demo" class="collapse">
+								<h:panelGroup rendered="#{empty mbEnvieFavori.getEnviesDuMembre(mbObjet.selectedProp.membre)}">
+								<br></br>
+								<div class="col-md-6 col-sm-12 ">Ce membre ne possède pas
+									encore d'envie.</div>
+							</h:panelGroup>
 									<!-- Premiere envie -->
 									<ui:repeat var="envie" value="#{mbObjet.getEnviesAutreMembre(mbObjet.selectedProp.membre)}"
 				varStatus="envieStatut">
 						<div class="col-md-6 col-sm-12 ">
-							<div class="box-simple boxEnvie">
+							<div class="box-simple boxEnvie active">
 								<div class="text">
 									<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
 										N° #{envieStatut.index +1}</h4>
@@ -278,11 +283,11 @@
 											
 												<h:panelGroup rendered="#{!mbEnvie.valeurVide(envie)}">
 									<label> #{envie.valeur.valeur}</label> <img
-										src="img/custom/feuille orange.png" alt=""></img>
+										src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 										</h:panelGroup>
 										<h:panelGroup rendered="#{mbEnvie.valeurVide(envie)}">
 									<label> ?</label> <img
-										src="img/custom/feuille orange.png" alt=""></img>
+										src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 										</h:panelGroup>
 										
 										</div>

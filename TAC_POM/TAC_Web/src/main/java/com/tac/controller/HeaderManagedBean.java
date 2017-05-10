@@ -8,7 +8,10 @@ import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
 import com.tac.business.api.IServiceCategorie;
+import com.tac.business.api.IServiceMessage;
 import com.tac.entity.Categorie;
+import com.tac.entity.Membre;
+import com.tac.entity.Message;
 
 
 @ManagedBean(name="mbHeader")
@@ -20,6 +23,9 @@ public class HeaderManagedBean implements Serializable{
 	@EJB
 	private IServiceCategorie proxyCategorie;
 	
+	@EJB
+	private IServiceMessage proxyMessage;
+	
 	
 	public List<Categorie> recupererCategoriesMeres(){
 		List<Categorie> categories = proxyCategorie.getCategorieMere();
@@ -27,6 +33,19 @@ public class HeaderManagedBean implements Serializable{
 			cat.setSousCategories(proxyCategorie.getCategorieFille(cat.getIdCategorie()));
 		}
 		return categories;
+	}
+	
+	//notifications
+	
+	public int nombreNouveauxMessages(Membre membre){
+		List<Message> total = proxyMessage.messageNonLuQuandRecepteur(membre);
+		int resultat = 0;
+		for(Message message : total){
+			if(message.isLu()==false){
+				resultat = resultat+1;
+			}
+		}
+		return resultat;
 	}
 	
 	

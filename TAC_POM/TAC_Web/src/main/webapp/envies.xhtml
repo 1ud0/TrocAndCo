@@ -50,7 +50,7 @@
 										</p>
 										<p class="price">
 											<h:outputText value="#{favori.valeur.valeur}" />
-											<img src="img/custom/feuille orange.png" alt=""></img>
+											<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 										</p>
 
 									</div>
@@ -80,11 +80,11 @@
 										<div class="col-md-2 col-sm-2">
 											<h:panelGroup rendered="#{!mbEnvieFavori.valeurVide(envie)}">
 												<label> #{envie.valeur.valeur}</label>
-												<img src="img/custom/feuille orange.png" alt=""></img>
+												<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 											</h:panelGroup>
 											<h:panelGroup rendered="#{mbEnvieFavori.valeurVide(envie)}">
 												<label> ?</label>
-												<img src="img/custom/feuille orange.png" alt=""></img>
+												<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 											</h:panelGroup>
 
 										</div>

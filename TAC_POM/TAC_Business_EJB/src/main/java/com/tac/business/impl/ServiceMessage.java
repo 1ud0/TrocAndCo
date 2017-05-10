@@ -46,4 +46,10 @@ public class ServiceMessage implements IServiceMessage {
 		return proxyDaoMessage.getConversations(membre1.getIdMembre(), membre2.getIdMembre());
 	}
 
+	@Override
+	public List<Message> messageNonLuQuandRecepteur(Membre membre) {
+		return proxyDaoMessage.getWhereRecepteur(membre.getIdMembre());
+		
+	}
+
 }

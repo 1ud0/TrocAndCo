@@ -120,15 +120,16 @@ _________________________________________________________ -->
 										</div>
 									</h:panelGroup>
 
-									<!-- panel Valeur -->
-									<div class="panel panel-default sidebar-menu">
-										<div class="panel-heading">
-											<h3 class="panel-title">
-												Valeur <img src="img/custom/feuille orange.png" alt=""></img>
-											</h3>
-										</div>
-										<div class="panel-body">
 
+								<!-- panel Valeur -->
+								<div class="panel panel-default sidebar-menu">
+									<div class="panel-heading">
+										<h3 class="panel-title">
+											Valeur <img src="img/custom/feuille.png" class ="iconeFeuille" alt=""></img>
+										</h3>
+									</div>
+									<div class="panel-body">
+									
 											<div class="form-group">
 												<h:selectManyCheckbox value="#{mbRecherche.critere.valeurs}"
 													styleClass="checkbox-inline" layout="pageDirection">
@@ -228,7 +229,7 @@ _________________________________________________________ -->
 															</p>
 															<p class="price">
 																#{prop.valeur.valeur} <img
-																	src="img/custom/feuille orange.png" alt=""></img>
+																	src="img/custom/feuille.png" class = "iconeFeuille" alt=""></img>
 															</p>
 
 														</div>
@@ -280,9 +281,7 @@ _________________________________________________________ -->
 									<h4 class="modal-title">Enregistrer une envie:</h4>
 								</div>
 								<div class="modal-body">
-
 									<div class="row ">
-
 										<div class="col-sm-6 col-md-6 ">
 											<h4>Description:</h4>
 											<p>
@@ -314,6 +313,7 @@ _________________________________________________________ -->
 											<div>
 												<div class="input-group" id="selecteur">
 
+
 													<select id="lunch" class="selectpicker form-control"
 														data-live-search="true" title="Choisir un objet">
 														<option value="0"></option>
@@ -323,7 +323,6 @@ _________________________________________________________ -->
 															mamie</option>
 														<option value="3" id="list_rub" class="noir">Liste
 															papa</option>
-
 													</select>
 												</div>
 												<f:ajax render="formAddEnvie">
