@@ -54,5 +54,14 @@ public class DaoRdv implements IDaoRdv{
 		return query.getResultList();
 		
 	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Rdv> getByMembreIdEtMembrePropositionPasEncorePasse(Integer idMembre){
+		final String req ="SELECT r FROM Rdv r WHERE (r.echange.membre.idMembre = :pidMembre OR r.echange.proposition.membre.idMembre = :pidMembre) AND r.dateRdv > current_date";
+		Query query = em.createQuery(req);
+		query.setParameter("pidMembre", idMembre);
+		return query.getResultList();
+	}
 
 }

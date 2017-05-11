@@ -41,8 +41,7 @@ public class RdvManagedBean {
 	public void loadData() {
 		membreSelected = identifBean.getMembreConnected();
 		if (membreSelected != null) {
-			echanges = proxyEchange.getByMembreDonneur(membreSelected.getIdMembre());
-			echanges.addAll(proxyEchange.getByMembreChercheur(membreSelected.getIdMembre()));
+			echanges = proxyEchange.getByMembreDonneurChercheurDateAcceptNull(membreSelected.getIdMembre());
 		}
 	}
 

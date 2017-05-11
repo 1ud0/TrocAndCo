@@ -16,8 +16,7 @@ import com.tac.business.api.IServiceMessage;
 import com.tac.entity.Categorie;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
-import com.tac.entity.Message;
-import com.tac.entity.Proposition;
+import com.tac.util.CritereSearch;
 
 @ManagedBean(name = "mbHeader")
 @SessionScoped
@@ -39,7 +38,8 @@ public class HeaderManagedBean implements Serializable {
 	
 	private List<Categorie> categories = new ArrayList<>();
 	
-	
+	@ManagedProperty(value = "#{mbRecherche}")
+	private RechercheManagedBean rechercheBean;
 	
 	  @PostConstruct
 	 public void init () {
@@ -55,6 +55,31 @@ public class HeaderManagedBean implements Serializable {
 		return categories;
 	}
 
+	public RechercheManagedBean getRechercheBean() {
+		return rechercheBean;
+	}
+
+	public void setRechercheBean(RechercheManagedBean rechercheBean) {
+		this.rechercheBean = rechercheBean;
+	}
+
+	public String clickCategorieMere(Categorie categorie){
+		rechercheBean.resetFilter();
+		CritereSearch critereSearch = rechercheBean.getCritere();
+		critereSearch.setCat(categorie);
+		rechercheBean.setCritere(critereSearch);
+		return rechercheBean.seekAndNotDestroy();
+	}
+	
+	public String clickSousCat(Categorie categorie){
+		rechercheBean.resetFilter();
+		CritereSearch critereSearch = rechercheBean.getCritere();
+		critereSearch.setSousCat(categorie);
+		rechercheBean.setCritere(critereSearch);
+		return rechercheBean.seekAndNotDestroy();
+	}
+	
+	
 	// notifications
 
 	public int nombreNvxEchanges() {

@@ -26,5 +26,6 @@ public interface IDaoEchange {
 	Echange getEchangeByProp(Proposition proposition);
 	List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur);
 	List<Echange> getAll();
+	List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre);
 
 }
