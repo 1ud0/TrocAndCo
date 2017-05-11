@@ -23,7 +23,7 @@
 			</section>
 			<style type="text/css">
 #boxObjet {
-	height: 400pt;
+	height: 550pt;
 	overflow: auto
 }
 </style>
@@ -68,7 +68,7 @@
 												<td>#{objet.valeur.valeur}</td>
 												<td>#{objet.localisations.get(0).ville}</td> 
 												<td>
-													<h:commandButton  value="Visualiser" onclick="$('#bs-example-modal-lg2').modal('show');" data-toggle="modal" data-target="#bs-example-modal-lg2">
+													<h:commandButton styleClass="btn btn-primary btn-block" value="Visualiser" onclick="$('#bs-example-modal-lg2').modal('show');" data-toggle="modal" data-target="#bs-example-modal-lg2">
 														<f:ajax event="click" listener="#{mbObjet.loadObject(objet)}" render=":toto" /> 														
 													</h:commandButton>
 													</td>
@@ -191,9 +191,7 @@
 				</div>
 			</section>
 			<!-- /.modal-dialog -->
-			<!-- /.modal-dialog -->
-			<!-- /.modal-dialog -->
-			<!-- /.modal-dialog --> 
+
 			<section class="col-lg-8 connectedSortable">
 				
 				<div class="modal fade" id="bs-example-modal-lg2" role="dialog">

@@ -31,14 +31,17 @@
 	height: 400pt;
 	overflow: auto
 }
+
 #boxCatM {
 	height: 400pt;
 	overflow: auto
 }
+
 #boxVal {
 	height: 400pt;
 	overflow: auto
 }
+
 #boxEtat {
 	height: 400pt;
 	overflow: auto
@@ -63,6 +66,7 @@
 
 										<th>ID</th>
 										<th>Intitulé Catégorie mère</th>
+										
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtCat"><b>Ajouter</b></a></th>
@@ -76,9 +80,11 @@
 													<span>#{categorieM.intitule}</span>
 												</div>
 											</td>
-											<td><a href="#" class="btn btn-block btn-warning"
-												type="button" data-toggle="modal"
-												data-target=".bs-example-modal-lg-modCat"><b>Modifier</b></a></td>
+											<td>
+											<h:commandButton styleClass="btn btn-primary btn-warning" value="Modifier" onclick="$('#bs-example-modal-lg-modCat').modal('show');" data-toggle="modal" data-target="#bs-example-modal-lg-modCat">
+														<f:ajax event="click" listener="#{mbBackParam.loadCategorieM(categorieM)}" render=":totoCatM" /> 														
+													</h:commandButton>
+										</td>
 										</tr>
 									</ui:repeat>
 								</table>
@@ -87,6 +93,7 @@
 						</div>
 
 					</section>
+
 					<!-- /.Param Cat -->
 					<section class="col-lg-4 connectedSortable">
 						<div class="box">
@@ -214,21 +221,22 @@
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal"
-											data-target=".bs-example-modal-lg-modssCat"><b>Ajouter</b></a></th>
+											data-target=".bs-example-modal-lg-ajtssCat"><b>Ajouter</b></a></th>
 									</tr>
-									<ui:repeat var="catFille" value="#{mbBackParam.allCategoriesFilles}">
-									<tr>
-										<td>#{catFille.idCategorie}</td>
-										<td>#{catFille.intitule}</td>
-										<td>
-											<div class="textFr">
-												<span>#{catFille.categorieMere.intitule}</span>
-											</div>
-										</td>
-										<td><a href="#" class="btn btn-block btn-warning"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg-modssCat"><b>Modifier</b></a></td>
-									</tr>
+									<ui:repeat var="catFille"
+										value="#{mbBackParam.allCategoriesFilles}">
+										<tr>
+											<td>#{catFille.idCategorie}</td>
+											<td>#{catFille.intitule}</td>
+											<td>
+												<div class="textFr">
+													<span>#{catFille.categorieMere.intitule}</span>
+												</div>
+											</td>
+											<td><a href="#" class="btn btn-block btn-warning"
+												type="button" data-toggle="modal"
+												data-target=".bs-example-modal-lg-modssCat"><b>Modifier</b></a></td>
+										</tr>
 									</ui:repeat>
 								</table>
 							</div>
@@ -241,75 +249,93 @@
 
 			<!--                      Modals                             -->
 			<section class="col-lg-8 connectedSortable">
-				<div class=" modal fade bs-example-modal-lg-ajtCat">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true"></span>
-								</button>
-								<h4 class="modal-title">Ajout</h4>
-							</div>
-							<div class="modal-body">
-								<div class="box box-info">
+				<h:form id="ajtCatMere">
+					<div class=" modal fade bs-example-modal-lg-ajtCat">
+						<div class="modal-dialog">
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true"></span>
+									</button>
+									<h4 class="modal-title">Ajout</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box box-info">
 
-									<div class="box-header with-border">
-										<h3 class="box-title">Information de la catégorie</h3>
-									</div>
-									<h4>Catégories</h4>
-									<div class="box-body">
-										<div class="input-group">
-											<input type="text" class="form-control"></input> <span
-												class="input-group-addon"><i class="fa fa-check"></i></span>
+										<div class="box-header with-border">
+											<h3 class="box-title">Information de la catégorie</h3>
 										</div>
-										<br />
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
+										<h4>Catégories</h4>
+										<div class="box-body">
+											<div class="input-group">
+												<h:inputText value="#{mbBackParam.intituleCatM}"
+													styleClass="form-control" />
+												<span class="input-group-addon"><i
+													class="fa fa-check"></i></span>
+											</div>
+											<br />
+											<h:form>
+												<h:commandButton action="#{mbBackParam.ajoutCategorieM()}"
+													value="Ajouter catégorie"
+													styleClass="btn btn-block btn-info btn-lg" />
+											</h:form>
+										</div>
 									</div>
 								</div>
+
 							</div>
-
 						</div>
-					</div>
 
-				</div>
+					</div>
+				</h:form>
 			</section>
 			<!-- /.modal-dialog -->
+			<!-- /.modal-dialog Modification catégorie mère -->
 			<section class="col-lg-8 connectedSortable">
-				<div class=" modal fade bs-example-modal-lg-modCat">
-					<div class="modal-dialog">
-						<div class="modal-content">
-							<div class="modal-header">
-								<button type="button" class="close" data-dismiss="modal"
-									aria-label="Close">
-									<span aria-hidden="true"></span>
-								</button>
-								<h4 class="modal-title">Edition</h4>
-							</div>
-							<div class="modal-body">
-								<div class="box box-info">
+				<h:form id="formModifcatM">
+					<div class=" modal fade" id="bs-example-modal-lg-modCat" role="dialog">
+						<div class="modal-dialog">
 
-									<div class="box-header with-border">
-										<h3 class="box-title">Information de la catégorie</h3>
-									</div>
-									<h4>Catégories</h4>
-									<div class="box-body">
-										<div class="input-group">
-											<input type="text" class="form-control"></input> <span
-												class="input-group-addon"><i class="fa fa-check"></i></span>
+							<div class="modal-content">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal"
+										aria-label="Close">
+										<span aria-hidden="true"></span>
+									</button>
+									<h4 class="modal-title">Edition</h4>
+								</div>
+								<div class="modal-body">
+									<div class="box box-info">
+
+										<div class="box-header with-border">
+											<h3 class="box-title">Information de la catégorie</h3>
 										</div>
-										<br />
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
+										<h4>Intitulé de la catégorie</h4>
+										<h:panelGroup layout="block" id="totoCat">
+										<div class="box-body">
+											<div class="input-group">
+											
+										
+												<h:inputText styleClass="form-control" 
+													value="#{mbBackParam.selectedCategorie.intitule}"></h:inputText>
+												<span class="input-group-addon">
+												<i class="fa fa-check"></i></span>
+											</div>
+											<br />
+											<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
+												modifications</button>
+										</div>
+										</h:panelGroup>
 									</div>
 								</div>
+
 							</div>
 
 						</div>
-					</div>
 
-				</div>
+					</div>
+				</h:form>
 			</section>
 			<!-- Modal pour editer etat -->
 			<section class="col-lg-8 connectedSortable">
@@ -336,8 +362,10 @@
 												class="input-group-addon"><i class="fa fa-check"></i></span>
 										</div>
 										<br />
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
+										<h:form>
+											<h:commandButton action="#" value="Ajouter état"
+												styleClass="btn btn-block btn-info btn-lg" />
+										</h:form>
 									</div>
 								</div>
 							</div>
@@ -416,8 +444,11 @@
 										</div>
 										<br />
 
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
+										<h:form>
+											<h:commandButton action="#" value="Ajouter valeur"
+												styleClass="btn btn-block btn-info btn-lg" />
+										</h:form>
+										>
 									</div>
 								</div>
 							</div>
@@ -509,8 +540,10 @@
 											<option>sscat</option>
 										</select> <br />
 
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
+										<h:form>
+											<h:commandButton action="#" value="Ajouter tag"
+												styleClass="btn btn-block btn-info btn-lg" />
+										</h:form>
 									</div>
 								</div>
 							</div>
@@ -607,8 +640,10 @@
 											<option>sscat</option>
 										</select> <br />
 
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
+										<h:form>
+											<h:commandButton action="#" value="Ajouter sous-catégorie"
+												styleClass="btn btn-block btn-info btn-lg" />
+										</h:form>
 									</div>
 								</div>
 							</div>

@@ -95,6 +95,8 @@ public class ObjetManagedBean {
 	public String LoadMembre(Membre membre) {
 		String nav = "";
 		selectedMembre = membre;
+		System.out.println(selectedMembre.getIdMembre());
+		selectedMembre.setLocalisations(proxyLocalisation.getMembreLocalisations(selectedMembre));
 		if (selectedMembre != null) {
 			nav = "/profil.xhtml?faces-redirect=true";
 		}
