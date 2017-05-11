@@ -30,7 +30,7 @@ public class IdentificationManagedBean implements Serializable {
 					FacesContext.getCurrentInstance()
 					.getApplication()
 					.getNavigationHandler();
-			nav.performNavigation("/accueil.xhtml?faces-redirect=true");
+			nav.performNavigation("/inscription.xhtml?faces-redirect=true");
 		}
 	}
 	

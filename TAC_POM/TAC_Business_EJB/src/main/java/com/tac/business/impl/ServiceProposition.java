@@ -30,7 +30,8 @@ public class ServiceProposition implements IServiceProposition {
 	@Override
 	public Proposition addProposition(Proposition proposition) {
 		proposition.setDateAjout(new Date());
-		return proxyDaoProposition.addProposition(proposition);
+		Proposition propositionAjoute = proxyDaoProposition.addProposition(proposition);
+		return propositionAjoute;
 	}
 
 	@Override
