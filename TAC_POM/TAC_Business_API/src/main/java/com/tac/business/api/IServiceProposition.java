@@ -17,5 +17,7 @@ public interface IServiceProposition {
 	List<Proposition> getByMembre(Membre membre);
 	List<Photo> getByProposition(Proposition proposition);
 	List<Proposition> getPropDispoByMembre(Membre membre);
+	/////////Test_Ayda
+	List<Proposition> LoadAllPropositions();
 	
 }

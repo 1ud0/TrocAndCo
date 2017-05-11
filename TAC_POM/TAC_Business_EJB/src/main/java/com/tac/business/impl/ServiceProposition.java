@@ -64,5 +64,10 @@ public class ServiceProposition implements IServiceProposition {
 	public Proposition getById(Integer idObjet) throws DataAccessException {
 		return proxyDaoProposition.getById(idObjet);
 	}
+///////////////////Test_Ayda
+	@Override
+	public List<Proposition> LoadAllPropositions() {
+		return proxyDaoProposition.LoadAllPropositions();
+	}
 
 }

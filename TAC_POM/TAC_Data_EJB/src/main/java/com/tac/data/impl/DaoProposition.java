@@ -90,7 +90,18 @@ public class DaoProposition implements IDaoProposition {
 		query.setMaxResults(nombre);
 		return query.getResultList();
 	}
-
+	
+	////////////////Test_Ayda
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Proposition> LoadAllPropositions() {
+		StringBuilder req = new StringBuilder();
+		req.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.membre.dateRadiation IS NULL");
+		Query query = em.createQuery(req.toString());
+		return query.getResultList();
+	}
+	
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getPropoDispoByMembre(int idMembre) {
@@ -245,6 +256,8 @@ public class DaoProposition implements IDaoProposition {
 		}
 		requete.append(")");
 	}
+
+
 
 	
 	
