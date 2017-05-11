@@ -3,6 +3,7 @@ package com.tac.controller;
 import java.util.ArrayList;
 import java.util.List;
 
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -17,7 +18,7 @@ import com.tac.entity.Liste;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
-import com.tac.util.CritereSearch;
+
 
 @ManagedBean(name = "mbEnvieFavori")
 @SessionScoped
@@ -43,9 +44,24 @@ public class EnvieFavoriManagedBean {
 	private List<Proposition> favoris;
 
 	
+
+
+	
 	public List<Proposition> loadPropositions(Envie envie) {
-		System.out.println("je cherche");
 		return proxyRecherche.rechercherEnvie(envie);
+	}
+	
+	public void deleteEnvie(Envie envie){
+		proxyEnvie.deleteEnvie(envie);
+		envies.remove(envie);
+	}
+	
+	public void deleteFavoris(Proposition proposition){
+		membreCourant = identifBean.getMembreConnected();
+		if(membreCourant != null){
+		proxyFavori.deleteFavori(proposition, membreCourant);
+		favoris.remove(proposition);
+		}
 	}
 	
 	public void chargerFavoris() {
@@ -62,7 +78,10 @@ public class EnvieFavoriManagedBean {
 
 	public List<Localisation> getLocalisationByMembre() {
 		membreCourant = identifBean.getMembreConnected();
+		if(membreCourant != null){
 		return proxyLocalisation.getMembreLocalisations(membreCourant);
+		}
+		return null;
 	}
 
 	public void chargerEnvie(Liste liste) {
@@ -84,8 +103,12 @@ public class EnvieFavoriManagedBean {
 	}
 
 	public List<Liste> getListesByMembre() {
-		membreCourant = getMembreCourant();
+		membreCourant = identifBean.getMembreConnected();
+		if(membreCourant != null){
+
 		return proxyListe.getByMembre(membreCourant);
+		}
+		return null;
 	}
 
 	public boolean valeurVide(Envie envie) {

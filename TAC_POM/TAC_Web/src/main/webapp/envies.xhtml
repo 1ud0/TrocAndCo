@@ -11,15 +11,15 @@
 
 
 	<ui:composition template="/WEB-INF/templates/templateEnvies.xhtml">
-	
+
 		<ui:define name="headPerso">
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
-			</f:metadata>		
+			</f:metadata>
 		</ui:define>
-		
+
 		<ui:define name="content">
-			<h:panelGroup layout="block" id="enviesAndFavoris" >
+			<h:panelGroup layout="block" id="enviesAndFavoris">
 				<h:form>
 
 					<h:panelGroup name="affichageFavoris">
@@ -41,6 +41,10 @@
 											<h:commandLink action="#{mbObjet.loadProposition(favori)}"
 												value="">
 												<h:outputText value="#{favori.intitule}" />
+											</h:commandLink>
+											<h:commandLink
+												action="#{mbEnvieFavori.deleteFavoris(favori)}" value="">
+												<i class="fa fa-heart" style="color: red"></i>
 											</h:commandLink>
 										</h3>
 										<span class="glyphicon glyphicon-map-marker"
@@ -66,116 +70,125 @@
 					<!-- Premier package envie+propositions -->
 					<ui:repeat var="envie" value="#{mbEnvieFavori.envies}"
 						varStatus="envieStatut">
-						<h:panelGroup >
-						<div class="row barreDessous" >
-							<!-- Première envie -->
-							<div class="col-md-8 col-sm-12">
-								<div class="box-simple boxEnvie active">
-									<div class="text">
-										<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-											N° #{envieStatut.index +1}</h4>
-										<div class="col-md-10 col-sm-10">
-											<h3>#{envie.intitule}</h3>
-										</div>
-										<div class="col-md-2 col-sm-2">
-											<h:panelGroup rendered="#{!mbEnvieFavori.valeurVide(envie)}">
-												<label> #{envie.valeur.valeur}</label>
-												<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
-											</h:panelGroup>
-											<h:panelGroup rendered="#{mbEnvieFavori.valeurVide(envie)}">
-												<label> ?</label>
-												<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
-											</h:panelGroup>
-
-										</div>
-
-										<div class="row">
-											<div class="col-md-6 col-sm-12 orientationTextLeft">
-												<h4>Détails:</h4>
-												<p>
-													<label> Catégorie: </label> <label class="italic">
-														#{envie.categorie.intitule}</label> <br /> <label> Sous-catégorie:
-													</label> <label class="italic"> #{envie.sousCategorie.intitule} </label> <br />
-													<label> Distance: </label> 
-													<h:panelGroup rendered="#{envie.distance != 0}">
-														<label class="italic">moins de #{envie.distance} km </label>
-													</h:panelGroup>
-														
-												</p>
+						<h:panelGroup>
+							<div class="row barreDessous">
+								<!-- Première envie -->
+								<div class="col-md-8 col-sm-12">
+									<div class="box-simple boxEnvie active">
+										<div class="text">
+											<div class="row">
+												<div class="col-sm-10">
+													<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
+														N° #{envieStatut.index +1}</h4>
+												</div>
+												<div class="col-sm-2">
+													<h:commandLink action="#{mbEnvieFavori.deleteEnvie(envie)}"
+														value="">
+														<span class="glyphicon glyphicon-trash"
+															style="color: red"></span>
+													</h:commandLink>
+												</div>
 											</div>
-											<div
-												class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
-												<h4>Adresses:</h4>
-												<ui:repeat var="adresse"
-													value="#{mbEnvieFavori.localisationByMembre}">
-													<div class="row">
+											<div class="col-md-10 col-sm-10">
+												<h3>#{envie.intitule}</h3>
+											</div>
+											<div class="col-md-2 col-sm-2">
+												<h:panelGroup rendered="#{!mbEnvieFavori.valeurVide(envie)}">
+													<label> #{envie.valeur.valeur}</label>
+													<img src="img/custom/feuille.png" class="iconeFeuille"
+														alt=""></img>
+												</h:panelGroup>
+												<h:panelGroup rendered="#{mbEnvieFavori.valeurVide(envie)}">
+													<label> ?</label>
+													<img src="img/custom/feuille.png" class="iconeFeuille"
+														alt=""></img>
+												</h:panelGroup>
 
-														<p>
-															<span class="glyphicon glyphicon-map-marker"
-																aria-hidden="true"></span> <label>#{adresse.adresse}
-																<br /> #{adresse.codePostal}
-															</label>
+											</div>
 
+											<div class="row">
+												<div class="col-md-6 col-sm-12 orientationTextLeft">
+													<h4>Détails:</h4>
+													<p>
+														<label> Catégorie: </label> <label class="italic">
+															#{envie.categorie.intitule}</label> <br /> <label>
+															Sous-catégorie: </label> <label class="italic">
+															#{envie.sousCategorie.intitule} </label> <br /> <label>
+															Distance: </label>
+														<h:panelGroup rendered="#{envie.distance != 0}">
+															<label class="italic">moins de #{envie.distance}
+																km </label>
+														</h:panelGroup>
+
+													</p>
+												</div>
+												<div
+													class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
+													<h4>Adresses:</h4>
+													<ui:repeat var="adresse"
+														value="#{mbEnvieFavori.localisationByMembre}">
+														<div class="row">
+
+															<p>
+																<span class="glyphicon glyphicon-map-marker"
+																	aria-hidden="true"></span> <label>#{adresse.adresse}
+																	<br /> #{adresse.codePostal}
+																</label>
+
+															</p>
+														</div>
+													</ui:repeat>
+
+												</div>
+											</div>
+										</div>
+										<!-- /.text -->
+									</div>
+								</div>
+
+								<!-- FIN Première envie -->
+								<!-- Caroussel première envie-->
+
+								<div class="col-md-12 col-sm-12 ">
+									<h4>SUGGESTIONS</h4>
+									<div class="row dernieresEntrees">
+
+										<ui:repeat var="prop"
+											value="#{mbEnvieFavori.loadPropositions(envie)}">
+											<div class="col-sm-3">
+												<h:commandLink action="#{mbObjet.loadProposition(prop)}"
+													value="">
+													<div class="image ">
+														<h:graphicImage
+															value="#{prop.photos.size() > 0 ? prop.photos.get(0).url : 'img/camera-flat.png'}"
+															styleClass="img-responsive" />
+													</div>
+													<!-- /.image -->
+													<div class="text">
+														<h3>#{prop.intitule}</h3>
+														<span class="glyphicon glyphicon-map-marker"
+															aria-hidden="true"></span>
+														<p class="text-muted" style="height: 40px">
+															<ui:param name="limit" value="2" />
+															<ui:repeat var="loc" value="#{prop.localisations}"
+																varStatus="nb">
+																<ui:fragment rendered="#{nb.index lt limit}">
+															#{loc.ville}<br />
+																</ui:fragment>
+															</ui:repeat>
+														</p>
+														<p class="price">
+															#{prop.valeur.valeur} <img src="img/custom/feuille.png"
+																class="iconeFeuille" alt=""></img>
 														</p>
 													</div>
-												</ui:repeat>
-
+													<!-- /.text -->
+												</h:commandLink>
 											</div>
-										</div>
+										</ui:repeat>
 									</div>
-									<!-- /.text -->
 								</div>
 							</div>
-
-							<!-- FIN Première envie -->
-							<!-- Caroussel première envie-->
-
-							<div class="col-md-12 col-sm-12 ">
-								<h4>SUGGESTIONS</h4>
-								<div class="row dernieresEntrees">
-									
-									<ui:repeat var="prop" value="#{mbEnvieFavori.loadPropositions(envie)}">
-										<div class="col-sm-3">
-											<h:commandLink action="#{mbObjet.loadProposition(prop)}" value="">
-												<div class="image ">
-													<h:graphicImage value="#{prop.photos.size() > 0 ? prop.photos.get(0).url : 'img/camera-flat.png'}" styleClass="img-responsive" />
-												</div>
-												<!-- /.image -->
-												<div class="text">
-													<h3>#{prop.intitule}</h3>
-													<span class="glyphicon glyphicon-map-marker"
-															aria-hidden="true"></span>
-													<p class="text-muted" style="height: 40px">
-													<ui:param name="limit" value="2" />
-													<ui:repeat var="loc" value="#{prop.localisations}" varStatus="nb">
-														<ui:fragment rendered="#{nb.index lt limit}">
-															#{loc.ville}<br />
-														</ui:fragment>
-													</ui:repeat>
-													</p>
-													<p class="price">
-														#{prop.valeur.valeur} <img
-															src="img/custom/feuille.png" class = "iconeFeuille" alt=""></img>
-													</p>
-
-												</div>
-												<!-- /.text -->
-											</h:commandLink>
-										</div>
-									</ui:repeat>
-									
-									
-									
-									
-								</div>
-								<a class="left carousel-control" href="#myCarousel"
-									data-slide="prev"><i
-									class="glyphicon glyphicon-chevron-left"></i></a> <a
-									class="right carousel-control" href="#myCarousel"
-									data-slide="next"><i
-									class="glyphicon glyphicon-chevron-right"></i></a>
-							</div>
-						</div>
 						</h:panelGroup>
 					</ui:repeat>
 				</h:form>

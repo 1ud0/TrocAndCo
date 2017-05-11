@@ -26,7 +26,7 @@ public class DaoEnvie implements IDaoEnvie {
 
 	@Override
 	public void deleteEnvie(Envie envie) {
-		em.remove(envie);
+		em.remove(em.merge(envie));
 		
 	}
 
