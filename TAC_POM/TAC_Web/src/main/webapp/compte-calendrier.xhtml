@@ -27,80 +27,63 @@
 				<p class="text-muted">Consultez la liste des rendez vous pour
 					les échanges à venir et les échanges passés.</p>
 			</div>
-			<div id="wrapper">
-				<DIV hidden="true">
-					<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
-						varStatus="nbRdv" id="repetRdv">
+			<div id="divCalendrierRdv">
+				<div id="wrapper">
+					<DIV hidden="true">
+						<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
+							varStatus="nbRdv" id="repetRdv">
 
-						<h:outputText value="lieu : #{rdv.lieu} "
-							id="lieuRdv#{nbRdv.index}" />
-						<br></br>
+							<h:outputText value="lieu : #{rdv.lieu} "
+								id="lieuRdv#{nbRdv.index}" />
+							<br></br>
 
-						<h:outputText value="#{rdv.dateRdv.date}"
-							id="rdvDay#{nbRdv.index}" />
-						<br></br>
-						<h:outputText value="#{rdv.dateRdv.month}"
-							id="rdvMonth#{nbRdv.index}" />
-						<br></br>
-						<h:outputText value="#{rdv.dateRdv.year + 1900}"
-							id="rdvYear#{nbRdv.index}" />
-						<br></br>
-						<h:outputText value="#{rdv.dateRdv.hours}"
-							id="rdvHours#{nbRdv.index}" />
-						<br></br>
-						<h:outputText value="#{rdv.dateRdv.minutes}"
-							id="rdvMinutes#{nbRdv.index}" />
-
-
-					</ui:repeat>
-				</DIV>
+							<h:outputText value="#{rdv.dateRdv.date}"
+								id="rdvDay#{nbRdv.index}" />
+							<br></br>
+							<h:outputText value="#{rdv.dateRdv.month}"
+								id="rdvMonth#{nbRdv.index}" />
+							<br></br>
+							<h:outputText value="#{rdv.dateRdv.year + 1900}"
+								id="rdvYear#{nbRdv.index}" />
+							<br></br>
+							<h:outputText value="#{rdv.dateRdv.hours}"
+								id="rdvHours#{nbRdv.index}" />
+							<br></br>
+							<h:outputText value="#{rdv.dateRdv.minutes}"
+								id="rdvMinutes#{nbRdv.index}" />
 
 
-				<div id="myScheduler"></div>
-			</div>
-			<h:form id="evenement">
-				<div class="row container">
-					<h:inputText id="inputDate" value="#{mbRdv.date}"
-						p:placeholder="jj/MM/aaaa" size="10">
-						<f:convertDateTime pattern="dd/MM/yyyy" />
-					</h:inputText>
-					<h:inputText value="#{mbRdv.heure}" p:placeholder="HH" size="2" />
-					<h:inputText value="#{mbRdv.minute}" p:placeholder="mm" size="2" />
+						</ui:repeat>
+					</DIV>
+
+
+					<div id="myScheduler"></div>
 				</div>
-				<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
-					p:placeholder="Lieu" />
-				<h:inputText id="inputCommentaire" value="#{mbRdv.rdv.commentaire}"
-					p:placeholder="Commentaire..." />
+				<h:form id="evenement">
+					<div class="row container">
+						<h:inputText id="inputDate" value="#{mbRdv.date}"
+							p:placeholder="jj/MM/aaaa" size="10">
+							<f:convertDateTime pattern="dd/MM/yyyy" />
+						</h:inputText>
+						<h:inputText value="#{mbRdv.heure}" p:placeholder="HH" size="2" />
+						<h:inputText value="#{mbRdv.minute}" p:placeholder="mm" size="2" />
+					</div>
+					<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
+						p:placeholder="Lieu" />
+					<h:inputText id="inputCommentaire" value="#{mbRdv.rdv.commentaire}"
+						p:placeholder="Commentaire..." />
 
 
-
-				<h:selectOneMenu value="#{mbRdv.echangeSelected.idEchange}">
-					<f:selectItem itemLabel="Sélectionner l'échange" itemValue="0" />
-					<f:selectItems value="#{mbRdv.echanges}" var="currentEchange"
-						itemLabel="#{currentEchange.proposition.intitule} + #{currentEchange.idEchange}"
-						itemValue="#{currentEchange.idEchange}" />
-				</h:selectOneMenu>
-
-
-				<h:commandButton styleClass="btn-vert" action="#{mbRdv.addRdv()}"
-					value="Enregistrer le rendez-vous" />
-
-
-
-
-
-
-
-
-
-
-			</h:form>
-
-
-
-
-
-
+					<h:selectOneMenu value="#{mbRdv.echangeSelected.idEchange}">
+						<f:selectItem itemLabel="Sélectionner l'échange" itemValue="0" />
+						<f:selectItems value="#{mbRdv.echanges}" var="currentEchange"
+							itemLabel="#{currentEchange.proposition.intitule} + #{currentEchange.idEchange}"
+							itemValue="#{currentEchange.idEchange}" />
+					</h:selectOneMenu>
+					<h:commandButton styleClass="btn-vert" action="#{mbRdv.addRdv()}"
+						value="Enregistrer le rendez-vous" />
+				</h:form>
+			</div>
 
 		</ui:define>
 	</ui:composition>
