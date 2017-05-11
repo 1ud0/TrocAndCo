@@ -54,6 +54,10 @@ public class ServiceFavori implements IServiceFavori {
 		proxyDaoFavori.deleteAllFavori(proposition);
 	}
 	
+	@Override
+	public boolean isFavorite(Proposition proposition, Membre membre) {
+		return proxyDaoFavori.isAlreadyFavorite(proposition, membre);
+	}
 	
 
 }

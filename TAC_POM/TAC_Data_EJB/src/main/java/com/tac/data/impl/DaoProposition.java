@@ -52,6 +52,8 @@ public class DaoProposition implements IDaoProposition {
 		Proposition retour = null;
 		if (!propositions.isEmpty()) {
 			retour = propositions.get(0);
+			List<Localisation> locs  = retour.getLocalisations();
+			locs.size();
 		} else {
 			throw new DataAccessException("Aucun objet trouvé");
 		}
@@ -61,9 +63,14 @@ public class DaoProposition implements IDaoProposition {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> getByMembre(int idMembre) {
-		final String req = "SELECT p FROM Proposition p WHERE p.membre.idMembre = :pid";
+		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.photos WHERE p.membre.idMembre = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
+		List<Proposition> props = query.getResultList();
+		for (Proposition prop : props) {
+			List<Localisation> locs = prop.getLocalisations();
+			locs.size();
+		}
 		return query.getResultList();
 	}
 
@@ -95,9 +102,8 @@ public class DaoProposition implements IDaoProposition {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Proposition> LoadAllPropositions() {
-		StringBuilder req = new StringBuilder();
-		req.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.membre.dateRadiation IS NULL");
-		Query query = em.createQuery(req.toString());
+		final String req = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.categorie LEFT JOIN FETCH p.photos WHERE p.membre.dateRadiation IS NULL";
+		Query query = em.createQuery(req);
 		return query.getResultList();
 	}
 	
@@ -118,6 +124,11 @@ public class DaoProposition implements IDaoProposition {
 		Query query = setParam(requete, carac, idMembre);
 		if (nombreResult != 0) {
 			query.setMaxResults(nombreResult);
+		}
+		List<Proposition> props = query.getResultList();
+		for (Proposition proposition : props) {
+			List<Localisation> locs = proposition.getLocalisations();
+			locs.size();
 		}
  		return query.getResultList();
 	}
@@ -173,7 +184,7 @@ public class DaoProposition implements IDaoProposition {
 	//methode pour contruire la query en fonction de l'objet carac
 	private String constructQuery(CritereSearch carac, Integer idMembre) {
 		StringBuilder requete = new StringBuilder();
-		requete.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.photos WHERE NOT EXISTS (SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL AND e.proposition = p)");
+		requete.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.photos WHERE NOT EXISTS (SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL AND e.proposition = p) AND p.membre.dateRadiation IS NULL AND p.membre.dateDesinscription IS NULL");
 		//clause id membre
 		if (idMembre != null) {
 			requete.append(" AND p.membre.idMembre != :pid");

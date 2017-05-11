@@ -59,9 +59,9 @@ public class EchangeManagedBean {
 
 	private Echange echangeCourant;
 
-	public String loadPropositionEtMembre() {
+	public String loadPropositionEtMembre(Proposition proposition) {
 		membreCourant = identifBean.getMembreConnected();
-		selectedProp = objetSelectedBean.getSelectedProp();
+		selectedProp = proposition;
 		membreAutre = selectedProp.getMembre();
 
 		echangePropose = new Echange();

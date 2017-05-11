@@ -1,6 +1,5 @@
 package com.tac.controller;
 
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -8,9 +7,9 @@ import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceEnvie;
@@ -31,10 +30,8 @@ public class ObjetManagedBean {
 	private IServiceProposition proxyProp;
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
-
 	@EJB
 	private IServiceEnvie proxyEnvie;
-
 	@EJB
 	private IServiceEchange proxyEchange;
 	@EJB
@@ -43,83 +40,34 @@ public class ObjetManagedBean {
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
-	@PostConstruct
-	public void init() {
-		System.out.println("dans post construct");
-		loadAllPropositions();
-	}
 	
 	private Proposition selectedProp;
-	private Proposition obj;
 	private Membre selectedMembre;
 	private Membre membreCourant;
 	private Integer entryId;
-	private List<Proposition> allPropositions;
+	private boolean favori;
 
-	public List<Proposition> getAllPropositions() {
-		return allPropositions;
-	}
-
-	public void setAllPropositions(List<Proposition> allPropositions) {
-		this.allPropositions = allPropositions;
-	}
-
-	/**
-	 * Permet de savoir si l'objet qui est affiché est déja dans les favoris du
-	 * membre en session
-	 * 
-	 * @return false pas dans les favoris // true est dans les favoris
-	 */
-	public boolean dejaFavori() {
-		membreCourant = identifBean.getMembreConnected();
-		if (membreCourant != null) {
-			for (Proposition proposition : proxyFavori.getFavorisMembre(membreCourant)) {
-				if (proposition.getIdProposition() == selectedProp.getIdProposition()) {
-					return true;
-				}
-			}
-		}
-		return false;
+	@PostConstruct
+	public void init() {
+		
 	}
 	
-	public boolean indicationFavori(Proposition propEnCours) {
-		membreCourant = identifBean.getMembreConnected();
-		if (membreCourant != null) {
-			for (Proposition proposition : proxyFavori.getFavorisMembre(membreCourant)) {
-				System.out.println(proposition.getIntitule());
-				if (proposition.getIdProposition() == propEnCours.getIdProposition()) {
-					return true;
-				}
-			}
-		}
-		return false;
-	}
-	/**
-	 * permet d'ajouter l'objet visualisé aux favoris du membre en session
-	 * 
-	 * @return
-	 */
-	public String ajouterFavori() {
-		membreCourant = identifBean.getMembreConnected();
-		System.out.println("ajout" + membreCourant.getNom() + selectedProp.getIntitule());
-		if (membreCourant != null) {
+	public void toggleFavori() {
+		System.out.println("dans le toggle");
+		if (favori) {
+			proxyFavori.deleteFavori(selectedProp, membreCourant);
+		} else {
 			proxyFavori.addToFavoris(selectedProp, membreCourant);
 		}
-		return "";
+		favori = !favori;
 	}
 
-	/**
-	 * permet de retirer l'objet visualisé aux favoris du membre en session
-	 * 
-	 * @return
-	 */
-	public String deleteFavori() {
-		membreCourant = identifBean.getMembreConnected();
-		if (membreCourant != null) {
-			proxyFavori.deleteFavori(selectedProp, membreCourant);
+	public boolean indicationFavori(Proposition proposition) {
+		Membre membreConnect = identifBean.getMembreConnected();
+		if (membreConnect != null) {
+			return proxyFavori.isFavorite(proposition, membreConnect);
 		}
-		return "";
-
+		return false;
 	}
 
 	/**
@@ -137,23 +85,6 @@ public class ObjetManagedBean {
 		return nav;
 	}
 
-	//////// Test_Ayda pr le back
-	public List<Proposition> loadAllPropositions() {
-		Date dbt = new Date();
-		allPropositions = proxyProp.LoadAllPropositions();
-		for (Proposition p : allPropositions) {
-			p.setLocalisations(proxyLocalisation.getPropositionLocalisations(p));
-		}
-		Date fin = new Date();
-		System.out.println("temps - " +( fin.getTime() - dbt.getTime()));
-		return allPropositions;
-	}
-
-	public void loadObject(Proposition prop) {
-		obj = prop;
-		System.out.println(obj.getIntitule());
-		
-	}
 
 	/**
 	 * charge les informations du membre qui possède l'objet visualisé
@@ -178,16 +109,31 @@ public class ObjetManagedBean {
 	}
 
 	public void loadEntry() {
+		
+		try {
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+					.getRequest();
+			entryId = Integer.parseInt(request.getParameter("id"));
+		} catch (Exception e) {
+			// catch misère
+		}
+		if(!FacesContext.getCurrentInstance().isPostback()) {
 		System.out.println("coucou load entry");
 		if (entryId != null && entryId != 0) {
 			try {
 				selectedProp = proxyProp.getById(entryId);
+				membreCourant = identifBean.getMembreConnected();
+				if (membreCourant != null) {
+					favori = proxyFavori.isFavorite(selectedProp, membreCourant);
+					System.out.println(favori);
+				}
 			} catch (DataAccessException e) {
 				String message = "Erreur lors du chargement de la page : " + e.getMessage();
 				FacesContext.getCurrentInstance().addMessage(null,
 						new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
 				selectedProp = null;
 			}
+		}
 		}
 	}
 
@@ -212,8 +158,6 @@ public class ObjetManagedBean {
 	}
 
 	public Proposition getSelectedProp() {
-		selectedProp.setLocalisations(proxyLocalisation.getPropositionLocalisations(selectedProp));
-
 		return selectedProp;
 	}
 
@@ -285,12 +229,12 @@ public class ObjetManagedBean {
 		this.proxyEchange = proxyEchange;
 	}
 
-	public Proposition getObj() {
-		return obj;
+	public boolean isFavori() {
+		return favori;
 	}
 
-	public void setObj(Proposition obj) {
-		this.obj = obj;
+	public void setFavori(boolean favori) {
+		this.favori = favori;
 	}
 
 }

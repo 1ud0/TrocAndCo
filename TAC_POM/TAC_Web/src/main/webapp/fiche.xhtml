@@ -31,10 +31,6 @@
 
 
 			<f:metadata>
-				<f:viewParam name="id" value="#{mbObjet.entryId}" required="true"
-					requiredMessage="Aucun objet selectionné">
-					<f:validateLongRange minimum="1" />
-				</f:viewParam>
 				<f:event listener="#{mbObjet.loadEntry()}" type="preRenderView"></f:event>
 			</f:metadata>
 
@@ -93,38 +89,18 @@
 										</p>
 										<p class="text-center">
 
-											<h:commandButton
-												action="#{mbEchange.loadPropositionEtMembre()}"
-												value="Proposer un
-											échange"
-												styleClass="btn btn-template-main" />
+											<h:commandButton action="#{mbEchange.loadPropositionEtMembre(mbObjet.selectedProp)}" value="Proposer un	échange"
+												styleClass="btn btn-template-main">
+												<f:param name="id" value="1"/>	
+											</h:commandButton>
 
-
-											<h:panelGroup rendered="#{!mbObjet.dejaFavori()}">
-												<h:commandButton action="#{mbObjet.ajouterFavori()}"
-													id="btnAjtFav" style="display:none">
-												</h:commandButton>
-												<button type="submit" id="myFormFav:btnAjtFav"
-													name="myFormFav:btnAjtFav"
-													class="btn btn-default tailleBoutonFavoris"
-													data-toggle="tooltip" data-placement="top"
-													title="Ajouter aux favoris" value="">
-													<i class="fa fa-heart-o"></i>
-												</button>
-											</h:panelGroup>
-											<h:panelGroup rendered="#{mbObjet.dejaFavori()}">
-												<h:commandButton action="#{mbObjet.deleteFavori()}"
-													id="btndelFav" style="display:none">
-												</h:commandButton>
-												<button type="submit" id="myFormFav:btndelFav"
-													name="myFormFav:btndelFav"
-													class="btn btn-default tailleBoutonFavoris"
-													data-toggle="tooltip" data-placement="top"
-													title="Retirer des favoris" value="">
-													<i class="fa fa-heart" style="color: red"></i>
-												</button>
+											<h:panelGroup rendered="#{mbObjet.favori}" id="coucou">
+												coucou
 											</h:panelGroup>
 
+											<h:commandButton id="btnAjtFav" value="Add">
+												<f:ajax render=":myFormFav" listener="#{mbObjet.toggleFavori()}" execute="@form" event="click"/>
+											</h:commandButton>
 										</p>
 									</h:form>
 								</div>

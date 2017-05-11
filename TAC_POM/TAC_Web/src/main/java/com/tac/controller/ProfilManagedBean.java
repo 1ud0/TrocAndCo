@@ -28,9 +28,9 @@ public class ProfilManagedBean {
 	@EJB
 	private IServiceEchange proxyEchange;
 
-	@ManagedProperty(value = "#{mbObjet}")
-	private ObjetManagedBean objetManagedBean;
-
+	@ManagedProperty(value="#{mbIdentif}")
+	private IdentificationManagedBean identifBean;
+	
 	private Membre membreCourant;
 	private Proposition selectedProp;
 
@@ -51,13 +51,6 @@ public class ProfilManagedBean {
 		this.proxyCompte = proxyCompte;
 	}
 
-	public ObjetManagedBean getObjetManagedBean() {
-		return objetManagedBean;
-	}
-
-	public void setObjetManagedBean(ObjetManagedBean objetManagedBean) {
-		this.objetManagedBean = objetManagedBean;
-	}
 
 	/**
 	 * donne le membre courant
@@ -65,7 +58,7 @@ public class ProfilManagedBean {
 	 * @return
 	 */
 	public Membre getMembreCourant() {
-		membreCourant = objetManagedBean.getSelectedMembre();
+		membreCourant = identifBean.getMembreConnected();
 		membreCourant.setLocalisations(proxyLocalisation.getMembreLocalisations(membreCourant));
 		List<Proposition> propositions = proxyProposition.getByMembre(membreCourant);
 		for (Proposition proposition : propositions) {
@@ -134,6 +127,30 @@ public class ProfilManagedBean {
 
 	public void setProxyProposition(IServiceProposition proxyProposition) {
 		this.proxyProposition = proxyProposition;
+	}
+
+	public IServiceEchange getProxyEchange() {
+		return proxyEchange;
+	}
+
+	public void setProxyEchange(IServiceEchange proxyEchange) {
+		this.proxyEchange = proxyEchange;
+	}
+
+	public IdentificationManagedBean getIdentifBean() {
+		return identifBean;
+	}
+
+	public void setIdentifBean(IdentificationManagedBean identifBean) {
+		this.identifBean = identifBean;
+	}
+
+	public Proposition getSelectedProp() {
+		return selectedProp;
+	}
+
+	public void setSelectedProp(Proposition selectedProp) {
+		this.selectedProp = selectedProp;
 	}
 
 }

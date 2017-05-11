@@ -72,12 +72,7 @@ public class ServiceRecherche implements IServiceRecherche {
 		}
 		carac.setLocalisations(locs);
 		addToSuggestion(carac, membre);
-		//on récupère les localisations pour chaque proposition
-		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre, GET_ALL_RESULTS);
-		for (Proposition proposition : propositions) {
-			proposition.setLocalisations(proxyLoc.getPropositionLocalisations(proposition));
-		}
-		return propositions;
+		return proxyProposition.rechercher(carac, idMembre, GET_ALL_RESULTS);
 	}
 
 	private void addToSuggestion(CritereSearch carac, Membre membre) {
@@ -137,12 +132,7 @@ public class ServiceRecherche implements IServiceRecherche {
 		if (idMembre != null) {
 			carac.setLocalisations(proxyLoc.getMembreLocalisations(idMembre));
 		}
-		//on récupère les localisations pour chaque proposition
-		List<Proposition> propositions = proxyProposition.rechercher(carac, idMembre, GET_SUGGESTIONS);
-		for (Proposition proposition : propositions) {
-			proposition.setLocalisations(proxyLoc.getPropositionLocalisations(proposition));
-		}
-		return propositions;
+		return proxyProposition.rechercher(carac, idMembre, GET_SUGGESTIONS);
 	}
 	
 	private List<String> getListeValeur(Envie envie) {

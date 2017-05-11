@@ -11,4 +11,5 @@ public interface IDaoFavori {
 	void deleteFavori(Proposition proposition, Membre membre);
 	void deleteAllFavori(Proposition proposition);
 	List<Proposition> getFavorisByMembre(Membre membre);
+	boolean isAlreadyFavorite(Proposition proposition, Membre membre);
 }

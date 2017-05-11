@@ -11,5 +11,6 @@ public interface IServiceFavori {
 	List<Proposition> getFavorisMembre (Membre membre);
 	Proposition getFavoriById(int idProposition);
 	void deleteAllFavori(Proposition proposition);
+	boolean isFavorite(Proposition proposition, Membre membre);
 
 }

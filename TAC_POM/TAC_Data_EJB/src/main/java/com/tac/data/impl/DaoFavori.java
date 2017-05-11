@@ -64,4 +64,17 @@ public class DaoFavori implements IDaoFavori {
 
 	}
 
+	@Override
+	public boolean isAlreadyFavorite(Proposition proposition, Membre membre) {
+		final String requete = "SELECT m FROM Membre m WHERE :prop MEMBER OF m.favoris AND m.idMembre = :pid";
+		Query query = em.createQuery(requete);
+		query.setParameter("prop", proposition).setParameter("pid", membre.getIdMembre());
+		List<Membre> membres = query.getResultList();
+		if (membres.size() > 0) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 }
