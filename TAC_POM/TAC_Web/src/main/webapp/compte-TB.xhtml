@@ -166,28 +166,18 @@
 												<thead>
 													<tr>
 														<th>Commentaires</th>
-														<th>Date</th>
+														<th>Date / lieu</th>
 													</tr>
 												</thead>
 												<tbody>
+												<ui:repeat var="rdv" value="#{mbCompteTB.rdvAVenir()}">
 													<tr>
-														<td>Autocollants McDonalds Monopoly</td>
-														<td>01/06/2017</td>
-														<td><a href="customer-order.html"
+														<td>#{rdv.commentaire}</td>
+														<td> <h:outputText value="#{rdv.dateRdv}"> <f:convertDateTime pattern="dd/MM/yyyy hh:mm"/> </h:outputText>  <br></br>#{rdv.lieu}</td>
+														<td><a href="/TrocAndCo/compte-calendrier.xhtml"
 															class="btn btn-template-main btn-sm">Voir</a></td>
 													</tr>
-													<tr>
-														<td>Machine à laver C'estBeauC'estBosh</td>
-														<td>08/06/2017</td>
-														<td><a href="customer-order.html"
-															class="btn btn-template-main btn-sm">Voir</a></td>
-													</tr>
-													<tr>
-														<td>Livre "Le babyfoot pour les nuls"</td>
-														<td>22/06/2013</td>
-														<td><a href="customer-order.html"
-															class="btn btn-template-main btn-sm">Voir</a></td>
-													</tr>
+													</ui:repeat>
 												</tbody>
 											</table>
 										</div>
