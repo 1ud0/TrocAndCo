@@ -3,7 +3,7 @@ package com.tac.controller;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
+
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -44,10 +44,8 @@ public class EnvieFavoriManagedBean {
 	private List<Proposition> favoris;
 
 	
-	@PostConstruct
-	public void init(){
-		membreCourant = identifBean.getMembreConnected();
-	}
+
+
 	
 	public List<Proposition> loadPropositions(Envie envie) {
 		return proxyRecherche.rechercherEnvie(envie);
@@ -59,6 +57,7 @@ public class EnvieFavoriManagedBean {
 	}
 	
 	public void deleteFavoris(Proposition proposition){
+		membreCourant = identifBean.getMembreConnected();
 		if(membreCourant != null){
 		proxyFavori.deleteFavori(proposition, membreCourant);
 		favoris.remove(proposition);
@@ -78,6 +77,7 @@ public class EnvieFavoriManagedBean {
 	}
 
 	public List<Localisation> getLocalisationByMembre() {
+		membreCourant = identifBean.getMembreConnected();
 		if(membreCourant != null){
 		return proxyLocalisation.getMembreLocalisations(membreCourant);
 		}
@@ -103,6 +103,7 @@ public class EnvieFavoriManagedBean {
 	}
 
 	public List<Liste> getListesByMembre() {
+		membreCourant = identifBean.getMembreConnected();
 		if(membreCourant != null){
 
 		return proxyListe.getByMembre(membreCourant);

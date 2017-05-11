@@ -8,14 +8,14 @@
 </h:head>
 <h:body bgcolor='white'>
 
-	
+
 
 	<ui:composition template="/WEB-INF/templates/templateBase.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+
 		</ui:define>
-		
+
 		<ui:define name="content">
 
 
@@ -31,10 +31,9 @@
 								Donnez une deuxième vie à vos objets en les proposant à
 								l'échange et participez à une économie collaborative, en
 								limitant le gaspillage.</p>
-							<button class="btn btn-vert btn-lg" type="submit">
-								Commencer<span class="glyphicon glyphicon-search"></span>
-							</button>
-
+							<a href="/TrocAndCo/inscription.xhtml"
+								class="btn btn-vert btn-lg">Commencer <span
+								class="glyphicon glyphicon-search"></span></a>
 						</div>
 					</div>
 				</div>
@@ -136,11 +135,14 @@ _________________________________________________________ -->
 												<div class="col-sm-3">
 													<div class="article">
 														<div class="photo">
-															<h:graphicImage  value="#{prop.photos.get(0).url}" alt="E1"
-																styleClass="img-responsive" rendered="#{not empty prop.photos}"></h:graphicImage >
+															<h:graphicImage value="#{prop.photos.get(0).url}"
+																alt="E1" styleClass="img-responsive"
+																rendered="#{not empty prop.photos}"></h:graphicImage>
 
-															<h:graphicImage styleClass="img-responsive" value="img/texture-turquoise.png" rendered="#{empty prop.photos}">
-																</h:graphicImage>
+															<h:graphicImage styleClass="img-responsive"
+																value="img/texture-turquoise.png"
+																rendered="#{empty prop.photos}">
+															</h:graphicImage>
 														</div>
 														<div class="texteArticle">
 															<span class="categorie"> <h:outputText
@@ -150,7 +152,8 @@ _________________________________________________________ -->
 														</div>
 														<div class="timer text-center">
 															<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-															 <h:outputText value="#{mbAccueil.dureeAjout(prop.dateAjout)}" /> 
+															<h:outputText
+																value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
 														</div>
 													</div>
 												</div>
@@ -176,7 +179,8 @@ _________________________________________________________ -->
 														</div>
 														<div class="timer text-center">
 															<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-														<h:outputText value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+															<h:outputText
+																value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
 														</div>
 													</div>
 												</div>
@@ -202,7 +206,8 @@ _________________________________________________________ -->
 														</div>
 														<div class="timer text-center">
 															<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-															<h:outputText value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+															<h:outputText
+																value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
 														</div>
 													</div>
 												</div>
@@ -221,8 +226,10 @@ _________________________________________________________ -->
 					<!-- *** BLOG HOMEPAGE END *** -->
 					<div class="row">
 						<div class="text-center">
-							<button class="btn btn-blanc btn-lg" type="submit">En
-								voir plus</button>
+							<h:form>
+								<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}"
+									styleClass="btn btn-blanc btn-lg" value="En voir plus" />
+							</h:form>
 						</div>
 					</div>
 				</div>
