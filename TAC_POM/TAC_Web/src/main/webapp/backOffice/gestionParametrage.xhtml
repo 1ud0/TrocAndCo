@@ -8,6 +8,7 @@
 </h:head>
 <h:body>
 
+
 	<ui:composition template="/WEB-INF/templates/templateBack.xhtml">
 		<ui:define name="contentBO">
 
@@ -20,7 +21,29 @@
 					<li class="active">Paramétres</li>
 				</ol>
 			</section>
+			<style type="text/css">
+#boxCat {
+	height: 400pt;
+	overflow: auto
+}
 
+#boxTag {
+	height: 400pt;
+	overflow: auto
+}
+#boxCatM {
+	height: 400pt;
+	overflow: auto
+}
+#boxVal {
+	height: 400pt;
+	overflow: auto
+}
+#boxEtat {
+	height: 400pt;
+	overflow: auto
+}
+</style>
 			<!-- Main content -->
 			<section class="content">
 				<!-- Small boxes (Stat box) -->
@@ -31,10 +54,10 @@
 					<section class="col-lg-4 connectedSortable">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Paramétrage catégorie</h3>
+								<h3 class="box-title">Paramétrage catégories</h3>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body no-padding">
+							<div class="box-body no-padding" id="boxCatM">
 								<table class="table table-condensed">
 									<tr>
 
@@ -44,18 +67,20 @@
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtCat"><b>Ajouter</b></a></th>
 									</tr>
-									<tr>
-
-										<td>Nom cat 1</td>
-										<td>
-											<div class="textFr">
-												<span>Nom de la cat mère si pas de mère "-"</span>
-											</div>
-										</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg-modCat"><b>Modifier</b></a></td>
-									</tr>
+									<ui:repeat var="categorieM"
+										value="#{mbBackParam.allCategoriesMere}">
+										<tr>
+											<td>#{categorieM.idCategorie}</td>
+											<td>
+												<div class="textFr">
+													<span>#{categorieM.intitule}</span>
+												</div>
+											</td>
+											<td><a href="#" class="btn btn-block btn-warning"
+												type="button" data-toggle="modal"
+												data-target=".bs-example-modal-lg-modCat"><b>Modifier</b></a></td>
+										</tr>
+									</ui:repeat>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -66,10 +91,10 @@
 					<section class="col-lg-4 connectedSortable">
 						<div class="box">
 							<div class="box-header">
-								<h3 class="box-title">Paramétrage des Valeurs</h3>
+								<h3 class="box-title">Paramétrage des Etats</h3>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body no-padding">
+							<div class="box-body no-padding" id="boxEtat">
 								<table class="table table-condensed">
 									<tr>
 
@@ -78,20 +103,22 @@
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal"
-											data-target=".bs-example-modal-lg-ajtEtat"><b>Modifier</b></a></th>
+											data-target=".bs-example-modal-lg-ajtEtat"><b>Ajouter</b></a></th>
 									</tr>
-									<tr>
+									<ui:repeat var="etat" value="#{mbBackParam.allEtat}">
+										<tr>
 
-										<td>état 1</td>
-										<td>
-											<div class="textFr">
-												<span>nom état</span>
-											</div>
-										</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg-modEtat"><b>Modifier</b></a></td>
-									</tr>
+											<td>#{etat.idEtat}</td>
+											<td>
+												<div class="textFr">
+													<span>#{etat.intitule}</span>
+												</div>
+											</td>
+											<td><a href="#" class="btn btn-block btn-warning"
+												type="button" data-toggle="modal"
+												data-target=".bs-example-modal-lg-modEtat"><b>Modifier</b></a></td>
+										</tr>
+									</ui:repeat>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -104,7 +131,7 @@
 								<h3 class="box-title">Paramétrage des Valeurs</h3>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body no-padding">
+							<div class="box-body no-padding" id="boxVal">
 								<table class="table table-condensed">
 									<tr>
 
@@ -114,18 +141,19 @@
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtVal"><b>Ajouter</b></a></th>
 									</tr>
-									<tr>
-
-										<td>Valeur 1</td>
-										<td>
-											<div class="textFr">
-												<span>Text associé à la valeur</span>
-											</div>
-										</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg-modVal"><b>Modifier</b></a></td>
-									</tr>
+									<ui:repeat var="valeur" value="#{mbBackParam.allValeurs}">
+										<tr>
+											<td>#{valeur.valeur}</td>
+											<td>
+												<div class="textFr">
+													<span>#{valeur.intitule}</span>
+												</div>
+											</td>
+											<td><a href="#" class="btn btn-block btn-warning"
+												type="button" data-toggle="modal"
+												data-target=".bs-example-modal-lg-modVal"><b>Modifier</b></a></td>
+										</tr>
+									</ui:repeat>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -140,7 +168,7 @@
 								<h3 class="box-title">Paramétrage Tags</h3>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body no-padding">
+							<div class="box-body no-padding" id="boxTag">
 								<table class="table table-condensed">
 									<tr>
 										<th style="width: 10px">ID</th>
@@ -150,18 +178,20 @@
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtTag"><b>Ajouter</b></a></th>
 									</tr>
-									<tr>
-										<td>1.</td>
-										<td>Nom Tag</td>
-										<td>
-											<div class="textFr">
-												<span>Nom de la cat à laquelle le tag est rattaché</span>
-											</div>
-										</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg-modTag"><b>Modifier</b></a></td>
-									</tr>
+									<ui:repeat var="tag" value="#{mbBackParam.allTag}">
+										<tr>
+											<td>#{tag.idTag}</td>
+											<td>#{tag.intitule}</td>
+											<td>
+												<div class="textFr">
+													<span>#{tag.categorie.intitule}</span>
+												</div>
+											</td>
+											<td><a href="#" class="btn btn-block btn-warning"
+												type="button" data-toggle="modal"
+												data-target=".bs-example-modal-lg-modTag"><b>Modifier</b></a></td>
+										</tr>
+									</ui:repeat>
 								</table>
 							</div>
 							<!-- /.box-body -->
@@ -175,28 +205,31 @@
 								<h3 class="box-title">Paramétrage des Sous catégorie</h3>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body no-padding">
+							<div class="box-body no-padding" id="boxCat">
 								<table class="table table-condensed">
 									<tr>
 										<th style="width: 10px">#</th>
 										<th>Sous Catégorie</th>
 										<th>Catégorie mères</th>
-										<th style="width: 40px"><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
+										<th style="width: 40px"><a href="#"
+											class="btn btn-primary btn-block" type="button"
+											data-toggle="modal"
 											data-target=".bs-example-modal-lg-modssCat"><b>Ajouter</b></a></th>
 									</tr>
+									<ui:repeat var="catFille" value="#{mbBackParam.allCategoriesFilles}">
 									<tr>
-										<td>1.</td>
-										<td>Distance</td>
+										<td>#{catFille.idCategorie}</td>
+										<td>#{catFille.intitule}</td>
 										<td>
 											<div class="textFr">
-												<span>Descriptif</span>
+												<span>#{catFille.categorieMere.intitule}</span>
 											</div>
 										</td>
-										<td><a href="#" class="btn btn-primary btn-block"
+										<td><a href="#" class="btn btn-block btn-warning"
 											type="button" data-toggle="modal"
 											data-target=".bs-example-modal-lg-modssCat"><b>Modifier</b></a></td>
 									</tr>
+									</ui:repeat>
 								</table>
 							</div>
 							<!-- /.box-body -->

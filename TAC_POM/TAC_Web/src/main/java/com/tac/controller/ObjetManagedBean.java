@@ -9,7 +9,6 @@ import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 
-
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceFavori;

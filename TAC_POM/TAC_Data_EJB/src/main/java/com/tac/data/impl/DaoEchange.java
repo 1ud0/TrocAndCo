@@ -220,4 +220,12 @@ public class DaoEchange implements IDaoEchange {
 		return (Echange) query.getSingleResult();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getAll() {
+		final String req = "SELECT e FROM Echange e ";
+		Query query = em.createQuery(req);
+		return query.getResultList();
+	}
+
 }

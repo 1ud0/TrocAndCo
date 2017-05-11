@@ -16,21 +16,22 @@
 		<class>com.tac.entity.Tag</class>
 		<class>com.tac.entity.Valeur</class>
 		<class>com.tac.entity.Photo</class>
+		<class>com.tac.entity.Departement</class>
 		<properties>
             <!-- <property name="hibernate.show_sql" value="true" /> -->
             <property name="hibernate.format_sql" value="true" />
  
             <!-- Configuration de la  BDD -->
             <property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
-            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/troctest" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test" />
             <property name="javax.persistence.jdbc.user" value="root" />
-            <property name="javax.persistence.jdbc.password" value="afcepf" />
+            <property name="javax.persistence.jdbc.password" value="passadmin" />
  
             <!-- Spécifie le 'dialecte' SQL utilisé pour communiquer avec la BDD -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
  
             <!-- Indique a Hibernate de (re-)créer la BDD au lancement de l'application -->
-            <property name="hibernate.hbm2ddl.auto" value="validate" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
         </properties>
 	</persistence-unit>
 </persistence>

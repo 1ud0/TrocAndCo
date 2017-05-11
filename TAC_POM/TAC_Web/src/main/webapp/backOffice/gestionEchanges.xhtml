@@ -24,7 +24,15 @@
 					<li class="active">Graphiques</li>
 				</ol>
 			</section>
+<style type="text/css">
+#boxEchange {
+	height: 550pt;
+	overflow: auto
+}
 
+overflow: auto
+}
+</style>
 			<!-- Main content -->
 			<section class="content">
 				<div class="col-xs-12">
@@ -35,7 +43,7 @@
 
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body table-responsive no-padding">
+						<div class="box-body table-responsive no-padding" id="boxEchange">
 							<table class="table table-hover">
 								<tbody>
 									<tr>
@@ -51,69 +59,23 @@
 										<th>Intitulé de l'objet</th>
 										<th>Edition</th>
 									</tr>
+									<ui:repeat var="echange" value="#{mbBackEchange.all}">
 									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>John Doe</td>
-										<td>11-7-2014</td>
-										<td>11-8-2014</td>
-										<td></td>
-										<td></td>
+										<td>#{echange.idEchange}</td>
+										<td>#{echange.proposition.membre.pseudo}</td>
+										<td>#{echange.membre.pseudo}</td>
+										<td>#{echange.dateinit}</td>
+										<td>#{echange.dateValidation}</td>
+										<td>#{echange.dateRefus}</td>
+										<td>#{echange.dateAnnul}</td>
 										<td><span class="label label-success">Finalisé</span></td>
-										<th>2</th>
-										<td>Bacon ipsum</td>
+										<th>#{echange.prix}</th>
+										<td>#{echange.proposition.intitule}</td>
 										<td><a href="#" class="btn btn-primary btn-block"
 											type="button" data-toggle="modal"
 											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
 									</tr>
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>John Rob</td>
-										<td>11-7-2014</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td><span class="label label-warning">Initié</span></td>
-										<th>2</th>
-										<td>Bacon ipsum dolor sit amet salami venison chicken
-											flank fatback doner.</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>John Doe</td>
-										<td>11-7-2014</td>
-										<td></td>
-										<td></td>
-										<td></td>
-										<td><span class="label label-primary">En cours</span></td>
-										<th>2</th>
-										<td>Bacon ipsum dolor sit amet salami venison chicken
-											flank fatback doner.</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>John Doe</td>
-										<td>11-7-2014</td>
-										<td></td>
-										<td></td>
-										<td>11-7-2014</td>
-										<td><span class="label label-danger">Annulé</span></td>
-										<th>2</th>
-										<td>Bacon ipsum dolor sit amet salami venison chicken
-											flank fatback doner.</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
+									</ui:repeat>
 
 								</tbody>
 							</table>

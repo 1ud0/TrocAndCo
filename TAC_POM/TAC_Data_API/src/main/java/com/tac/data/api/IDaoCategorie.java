@@ -12,4 +12,5 @@ public interface IDaoCategorie {
 	Categorie getById(Integer id);
 	List<Categorie> getCategorieMere();
 	List<Categorie> getCategorieFille(Integer IdMere);
+	List<Categorie> getAllCategorieFilles();
 }
