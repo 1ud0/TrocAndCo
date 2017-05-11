@@ -8,8 +8,9 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
-
+import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.back.IServiceMembreBO;
+import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 
 
@@ -24,6 +25,9 @@ public class MembreManagedBean implements Serializable {
 	@EJB
 	private IServiceMembreBO proxyMembre;
 	
+	@EJB
+	private IServiceLocalisation proxyLocalisation;
+	
 	private Integer entryId;
 	private Membre selectedMembre = new Membre();
 
@@ -37,9 +41,10 @@ public class MembreManagedBean implements Serializable {
 	}
 	
 	@PostConstruct
-	public void coucou() {
-		System.out.println("postconstruct -> MembreManagedBean");
-		System.out.println(selectedMembre.getIdMembre());
+	public void init() {
+		System.out.println("dans lePC MembreManagedBean");
+		getAllMembresActifs();
+		getAllMembresRadies();
 	}
 	
 	public String loadMembre(Membre membre) {
@@ -72,6 +77,7 @@ public class MembreManagedBean implements Serializable {
 		this.proxyMembre = proxyMembre;
 	}
 	public Membre getSelectedMembre() {
+		selectedMembre.setLocalisations(proxyLocalisation.getMembreLocalisations(selectedMembre));
 		return selectedMembre;
 	}
 	public void setSelectedMembre(Membre selectedMembre) {
@@ -82,6 +88,12 @@ public class MembreManagedBean implements Serializable {
 	}
 	public void setEntryId(Integer entryId) {
 		this.entryId = entryId;
+	}
+	public IServiceLocalisation getProxyLocalisation() {
+		return proxyLocalisation;
+	}
+	public void setProxyLocalisation(IServiceLocalisation proxyLocalisation) {
+		this.proxyLocalisation = proxyLocalisation;
 	}
 	
 }

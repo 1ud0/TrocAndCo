@@ -24,7 +24,7 @@ import com.tac.entity.Proposition;
 import com.tac.exception.DataAccessException;
 
 @ManagedBean(name = "mbObjet")
-@ViewScoped
+@SessionScoped
 public class ObjetManagedBean {
 
 	@EJB
@@ -164,6 +164,8 @@ public class ObjetManagedBean {
 	public String LoadMembre(Membre membre) {
 		String nav = "";
 		selectedMembre = membre;
+		System.out.println(selectedMembre.getIdMembre());
+		selectedMembre.setLocalisations(proxyLocalisation.getMembreLocalisations(selectedMembre));
 		if (selectedMembre != null) {
 			nav = "/profil.xhtml?faces-redirect=true";
 		}
@@ -212,8 +214,9 @@ public class ObjetManagedBean {
 	}
 
 	public Proposition getSelectedProp() {
+		if(selectedProp!=null){
 		selectedProp.setLocalisations(proxyLocalisation.getPropositionLocalisations(selectedProp));
-
+		}
 		return selectedProp;
 	}
 

@@ -39,7 +39,8 @@
 									<h3 class="box-title">Tous les membres actifs</h3>
 
 									<div class="box-tools pull-right">
-										<span class="label label-danger">#{mbBackMembre.allMembresActifs.size()} membres</span>
+										<span class="label label-danger">#{mbBackMembre.allMembresActifs.size()}
+											membres</span>
 										<button type="button" class="btn btn-box-tool"
 											data-widget="collapse">
 											<i class="fa fa-minus"></i>
@@ -53,13 +54,21 @@
 								<!-- /.box-header -->
 								<div class="box-body no-padding">
 									<ul class="users-list clearfix">
-										<ui:repeat var="membre" value="#{mbBackMembre.allMembresActifs}">
-											<li>
-											<img src="../#{membre.avatar}" style="height: 125px"
-												alt="User Image"></img>
+										<ui:repeat var="membre"
+											value="#{mbBackMembre.allMembresActifs}">
+											<li><img src="../#{membre.avatar}" style="height: 125px"
+												alt="User Image"></img> 
 												<h:form>
-												<h:commandLink styleClass="users-list-name" action="#{mbBackMembre.loadMembre(membre)}" value="#{membre.pseudo}" />
-												<span class="users-list-date">#{membre.nom} #{membre.prenom}</span>
+													<h:commandButton styleClass="btn btn-primary btn-block"
+														value="#{membre.pseudo}"
+														onclick="$('#bs-example-modal-lg2').modal('show');"
+														data-toggle="modal" data-target="#bs-example-modal-lg2">
+														<f:ajax event="click"
+															listener="#{mbBackMembre.loadMembre(membre)}"
+															render=":toto" />
+													</h:commandButton>
+													<span class="users-list-date">#{membre.nom}
+														#{membre.prenom}</span>
 												</h:form>
 												</li>
 										</ui:repeat>
@@ -70,47 +79,115 @@
 							</div>
 							<!--/.box -->
 						</div>
-						
+
 					</section>
-					
+
 					<section class="col-lg-6 connectedSortable"></section>
 					<div class="col-md-9">
-							<!-- USERS LIST -->
-							<div class="box box-danger">
-								<div class="box-header with-border">
-									<h3 class="box-title">Tous les membres Radiés</h3>
+						<!-- USERS LIST -->
+						<div class="box box-danger">
+							<div class="box-header with-border">
+								<h3 class="box-title">Tous les membres Radiés</h3>
 
-									<div class="box-tools pull-right">
-										<span class="label label-danger">#{mbBackMembre.allMembresRadies.size()} membres</span>
-										<button type="button" class="btn btn-box-tool"
-											data-widget="collapse">
-											<i class="fa fa-minus"></i>
-										</button>
-										<button type="button" class="btn btn-box-tool"
-											data-widget="remove">
-											<i class="fa fa-times"></i>
-										</button>
-									</div>
-								</div>
-								<!-- /.box-header -->
-								<div class="box-body no-padding">
-									<ul class="users-list clearfix">
-										<ui:repeat var="membre" value="#{mbBackMembre.allMembresRadies}">
-											<li><img src="../#{membre.avatar}" style="height: 125px"
-												alt="User Image"></img> <a class="users-list-name"
-												href="gestionMembre-Profil.xhtml">#{membre.pseudo}</a> <span
-												class="users-list-date">#{membre.nom} #{membre.prenom}</span></li>
-										</ui:repeat>
-
-									</ul>
-									<!-- /.users-list -->
+								<div class="box-tools pull-right">
+									<span class="label label-danger">#{mbBackMembre.allMembresRadies.size()}
+										membres</span>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="collapse">
+										<i class="fa fa-minus"></i>
+									</button>
+									<button type="button" class="btn btn-box-tool"
+										data-widget="remove">
+										<i class="fa fa-times"></i>
+									</button>
 								</div>
 							</div>
-							<!--/.box -->
+							<!-- /.box-header -->
+							<div class="box-body no-padding">
+								<ul class="users-list clearfix">
+									<ui:repeat var="membre"
+										value="#{mbBackMembre.allMembresRadies}">
+										<li><img src="../#{membre.avatar}" style="height: 125px"
+											alt="User Image"></img> <h:form>
+												<h:commandButton styleClass="btn btn-primary btn-block"
+													value="#{membre.pseudo}"
+													onclick="$('#bs-example-modal-lg2').modal('show');"
+													data-toggle="modal" data-target="#bs-example-modal-lg2">
+													<f:ajax event="click"
+														listener="#{mbBackMembre.loadMembre(membre)}" render=":toto" />
+												</h:commandButton>
+												<span class="users-list-date">#{membre.nom}
+													#{membre.prenom}</span>
+											</h:form></li>
+									</ui:repeat>
+
+								</ul>
+								<!-- /.users-list -->
+							</div>
 						</div>
+						<!--/.box -->
+					</div>
 				</div>
 			</section>
+			<section class="col-lg-8 connectedSortable">
 
+				<div class="modal fade" id="bs-example-modal-lg2" role="dialog">
+					<div class="modal-dialog">
+						<div class="modal-content">
+							<div class="modal-header">
+								<button type="button" class="close" data-dismiss="modal"
+									aria-label="Close">
+									<span aria-hidden="true"></span>
+								</button>
+								<h4 class="modal-title">Membre </h4>
+							</div>
+							<div class="modal-body">
+								<div class="box box-info">
+
+									<div class="box-header with-border">
+										<h3 class="box-title">Information du membre</h3>
+									</div>
+
+									<h:panelGroup layout="block" id="toto">
+										<div class="box-body">
+											<h4><STRONG>Pseudo</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.pseudo}</div>
+											<h4><STRONG>Nom Prénom</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.nom} #{mbBackMembre.selectedMembre.prenom}</div>
+											<h4><STRONG>Date Naissance</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.dateNaissance}</div>
+											<h4><STRONG>Tél :</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.telephone}</div>
+											<h4><STRONG>Mail</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.mail}</div>
+											<h4><STRONG>Type Compte</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.compte.type}</div>
+											<h4><STRONG>Date inscription</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.dateInscription}</div>
+											<h4><STRONG>Date Radiation</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.dateRadiation}</div>
+											<h4><STRONG>Motif Radiation</STRONG></h4>
+											<div class="form-group">#{mbBackMembre.selectedMembre.motifRadiation}</div>
+											<h4><STRONG>Adresses</STRONG></h4>
+											<ui:repeat var="loc" value="#{mbBackMembre.selectedMembre.localisations}">
+											<div class="form-group">#{loc.titreAdresse} : #{loc.adresse} #{loc.codePostal} #{loc.ville}</div>
+											</ui:repeat>
+											<h:form>
+											<h:commandButton action="#" value="Radier" class="btn btn-block btn-danger"  />
+											</h:form>
+										</div>
+									</h:panelGroup>
+									<!-- /.box-body -->
+
+								</div>
+							</div>
+
+						</div>
+						<!-- /.modal-content -->
+					</div>
+					<!-- /.modal-dialog -->
+				</div>
+			</section>
 
 		</ui:define>
 	</ui:composition>

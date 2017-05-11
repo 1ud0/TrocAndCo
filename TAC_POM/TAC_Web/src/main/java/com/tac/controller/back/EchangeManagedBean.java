@@ -23,6 +23,22 @@ public class EchangeManagedBean implements Serializable {
 	@EJB
 	private IServiceEchangeBO proxyEchange;
 	
+	private String status = "";
+
+	
+	public String statusEchange(Echange echange) {
+		if (echange.getDateAnnul() != null) {
+			status = "annule";
+		} else if (echange.getDateRefus() != null) {
+			status = "refus";
+		} else if (echange.getDateValidation() != null) {
+			status = "effectue";
+		} else {
+			status = "en cours";
+		}
+		return status;
+	}
+	
 	public List<Echange> getAll(){
 		return proxyEchange.getAll();
 		
