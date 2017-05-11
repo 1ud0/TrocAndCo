@@ -30,7 +30,7 @@
 
 					<div class="col-sm-4">
 						<div class="image">
-							<a href=""> <img src="img/person-2.jpg" alt=""
+							<a href=""> <img src="#{mbCompteEvaluation.membreCourant.avatar}" alt=""
 								class="img-responsive img-circle tailleMaxImage"></img></a>
 						</div>
 					</div>
@@ -94,7 +94,7 @@
 									</h:panelGroup>
 								</div>
 								<div>
-									<span class="glyphicon glyphicon-user"></span> #{mbProfil.getNombreNote(mbIdentif.membreConnected)}
+									<span class="glyphicon glyphicon-user"></span> #{mbCompteEvaluation.echangesQuandChercheur.size()+mbCompteEvaluation.echangesQuandDonneur.size()}
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-6">
@@ -106,7 +106,7 @@
 										<div class="progress progress-striped">
 											<div class="progress-bar progress-bar-success"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(5, mbIdentif.membreConnected)}%">
+												aria-valuemax="100" style="width: #{mbCompteEvaluation.getNombreNoteValeur(5)}%">
 												<span class="sr-only">80%</span>
 											</div>
 										</div>
@@ -119,7 +119,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-success"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(4, mbIdentif.membreConnected)}%">
+												aria-valuemax="100" style="width: #{mbCompteEvaluation.getNombreNoteValeur(4)}%">
 												<span class="sr-only">60%</span>
 											</div>
 										</div>
@@ -132,7 +132,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-info"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(3, mbIdentif.membreConnected)}%">
+												aria-valuemax="100" style="width: #{mbCompteEvaluation.getNombreNoteValeur(3)}%">
 												<span class="sr-only">40%</span>
 											</div>
 										</div>
@@ -145,7 +145,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-warning"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(2, mbIdentif.membreConnected)}%">
+												aria-valuemax="100" style="width: #{mbCompteEvaluation.getNombreNoteValeur(2)}%">
 												<span class="sr-only">20%</span>
 											</div>
 										</div>
@@ -158,7 +158,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-danger"
 												role="progressbar" aria-valuenow="80" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(1, mbIdentif.membreConnected)}%">
+												aria-valuemax="100" style="width: #{mbCompteEvaluation.getNombreNoteValeur(1)}%">
 												<span class="sr-only">15%</span>
 											</div>
 										</div>
@@ -185,8 +185,12 @@
 								</h4>
 							</div>
 							<div id="collapse1" class="panel-collapse collapse">
+							<h:panelGroup rendered="#{empty mbCompteEvaluation.echangesQuandDonneur and empty mbCompteEvaluation.echangesQuandChercheur}">
+								<br></br>
+								<div class="col-md-6 col-sm-12 ">Ce membre n'a pas encore finalisé d'échange.</div>
+							</h:panelGroup>
 									<ul class="list-group">
-										<ui:repeat var="eval" value="#{mbProfil.getEchangesQuandDonneur(mbIdentif.membreConnected)}">
+										<ui:repeat var="eval" value="#{mbCompteEvaluation.echangesQuandDonneur}">
 										<li class="list-group-item">
 											<div class="review-block">
 
@@ -241,7 +245,7 @@
 											</div>
 										</li>
 										</ui:repeat>
-										<ui:repeat var="eval" value="#{mbProfil.getEchangesQuandAcheteur(mbIdentif.membreConnected)}">
+										<ui:repeat var="eval" value="#{mbCompteEvaluation.echangesQuandChercheur}">
 										<li class="list-group-item">
 											<div class="review-block">
 
