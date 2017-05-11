@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
@@ -25,8 +26,6 @@ public class MessageManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
-	
-	
 	@EJB
 	private IServiceMessage proxyMessage;
 	
@@ -42,12 +41,29 @@ public class MessageManagedBean implements Serializable {
 	private List<Message> messagesOfPropositionSelected = new ArrayList<>();
 	
 	//ChatBox
-	private List<Message> chat;
+	private List<Message> chat = new ArrayList<>();
 	private String messageAEnvoyer;
+	List<Message> messagesDuMembre = new ArrayList<>();
+	
+	
+	public List<Message> getMessagesDuMembre() {
+		return messagesDuMembre;
+	}
+
+
+	public void setMessagesDuMembre(List<Message> messagesDuMembre) {
+		this.messagesDuMembre = messagesDuMembre;
+	}
+
+
+	@PostConstruct
+	void init(){
+		membreCourant = identifBean.getMembreConnected();
+		messagesDuMembre = proxyMessage.getConversationList(membreCourant);
+	}
 	
 	
 	public Message envoyerMessage(){
-		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA message saisi" +messageAEnvoyer);
 		membreCourant = identifBean.getMembreConnected();
 		Message nouveauMessage = new Message();
 		nouveauMessage.setEmetteur(membreCourant);
@@ -66,51 +82,8 @@ public class MessageManagedBean implements Serializable {
 		return messageAjoute;
 	}
 	
-	public List<Proposition> getAllPropositionAvecMessage(){
-		membreCourant = identifBean.getMembreConnected();
-		List<Message> tousSesMessages = proxyMessage.getByMembre(membreCourant);
-		List<Proposition> propositionAvecMessages = new ArrayList<Proposition>();
-		for(Message message : tousSesMessages){	
-			if(!propositionAvecMessages.contains(message.getProposition())){
-				propositionAvecMessages.add(message.getProposition());
-			}
-		}
-		return propositionAvecMessages;
-	}	
-	
-	public void GetAllMessageOfPropositionSelected (Proposition propositionSelected){
-		propositionAvecMessagesSelected=propositionSelected;
-		messagesOfPropositionSelected = getAllMessageOfProposition(propositionAvecMessagesSelected);
-	}
-	
-	public List<Message> getAllMessageOfProposition(Proposition proposition){
-		List<Message> messagesDeLaProposition = proxyMessage.getConversationAboutProposition(membreCourant.getIdMembre(), proposition.getMembre().getIdMembre(), proposition.getIdProposition());
-		return messagesDeLaProposition;		
-	}
-	
-	public List<Proposition> getAllDiscussionsLues(){
-		membreCourant = identifBean.getMembreConnected();
-		List<Message> tousSesMessages = proxyMessage.getByMembre(membreCourant);
-		List<Proposition> propositionAvecmessagesLus = new ArrayList<Proposition>();		
-		for(Message message : tousSesMessages){
-			if(!propositionAvecmessagesLus.contains(message.getProposition()) && message.isLu()==true){
-				propositionAvecmessagesLus.add(message.getProposition());
-			}
-		}
-		return propositionAvecmessagesLus;
-	}
-	
-	public List<Proposition> getAllDiscussionsNonLues(){
-		membreCourant = identifBean.getMembreConnected();
-		List<Message> tousSesMessages = proxyMessage.getByMembre(membreCourant);
-		List<Proposition> propositionAvecMessagesNonLus = new ArrayList<Proposition>();
-		for(Message message : tousSesMessages){
-			if(!getAllDiscussionsLues().contains(message.getProposition()) && !propositionAvecMessagesNonLus.contains(message.getProposition())){
-				propositionAvecMessagesNonLus.add(message.getProposition());
-			}
-		}		
-		return propositionAvecMessagesNonLus;
-	}
+
+
 	public String dureeEnvoieMessage(Date date) {
 		Date now = new Date();
 		long time = now.getTime() - date.getTime();
@@ -124,10 +97,6 @@ public class MessageManagedBean implements Serializable {
 		return tempsDepuisEnvoi;
 	}
 	
-	public List<Message> LesVraiesDiscussions(){
-		membreCourant = identifBean.getMembreConnected();
-		return proxyMessage.getConversationList(membreCourant);
-	}
 	
 	public String avecQui(Message message){
 		membreCourant = identifBean.getMembreConnected();
@@ -148,25 +117,29 @@ public class MessageManagedBean implements Serializable {
 		else{
 			autre = message.getEmetteur().getIdMembre();
 		}
-		chat = proxyMessage.getConversationAboutProposition(membreCourant.getIdMembre(), autre, message.getProposition().getIdProposition());
-		return chat;
+		return proxyMessage.getConversationAboutProposition(membreCourant.getIdMembre(), autre, message.getProposition().getIdProposition());
 	}
-	
-	public List<Message> loadChat(Message message){
+
+	public void loadChat(Message message){
+		Date dbt = new Date();
+		System.out.println("load chat");
 		membreCourant = identifBean.getMembreConnected();
-		List<Message> discussion = getAllOther(message);
-		for(Message m : discussion){
+		chat = getAllOther(message);
+		for(Message m : chat){
 			if(m.getRecepteur().getIdMembre() == membreCourant.getIdMembre()){
 				m = proxyMessage.messageLu(m);
 			}
 		}
-		return discussion;
+		System.out.println(chat);
+		System.out.println(chat.size());
+		Date fin = new Date();
+		System.out.println("temps " + (fin.getTime() - dbt.getTime() + " ms"));
 	}
 	
-	public List<Message> refreshChat(Message message){
+	public void refreshChat(Message message){
 		membreCourant = identifBean.getMembreConnected();
 		message = envoyerMessage();
-		return loadChat(message);
+		loadChat(message);
 	}
 	
 	public Proposition propAvecPhotos(int idProposition) throws DataAccessException{

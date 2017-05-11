@@ -25,8 +25,12 @@ public class DaoProposition implements IDaoProposition {
 			+ " FROM proposition p"
 			+ " WHERE NOT EXISTS (SELECT e.id_echange FROM echange e WHERE e.date_validation IS NOT NULL AND e.proposition_id = p.id_proposition)"
 			+ " AND p.date_suppression IS NULL";
-	
-	
+	// TODO POUR ACCUEIL
+	public static final String QUERY_NB_PROP_DISPO =
+			"SELECT count(p.id_proposition)"
+					+ " FROM proposition p"
+					+ " WHERE NOT EXISTS (SELECT e.id_echange FROM echange e WHERE e.date_validation IS NOT NULL AND e.proposition_id = p.id_proposition)"
+					+ " AND p.date_suppression IS NULL";
 	@PersistenceContext(unitName = "TAC_Data_EJB")
 	private EntityManager em;
 

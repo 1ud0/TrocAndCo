@@ -139,7 +139,7 @@ _________________________________________________________ -->
 									<li>
 										<div class="yamm-content">
 											<ui:repeat var="categorie"
-												value="#{mbHeader.recupererCategoriesMeres()}" varStatus="loop">
+												value="#{mbHeader.categories}" varStatus="loop">
 												<h:outputText value="&lt;div class='row'&gt;" escape="false" rendered="#{loop.index % 4 == 0}" />
 													<div class="col-sm-3">
 														<h5>#{categorie.intitule}</h5>
