@@ -41,7 +41,7 @@
 											<h:commandLink action="#{mbObjet.loadProposition(favori)}"
 												value="">
 												<h:outputText value="#{favori.intitule}" />
-											</h:commandLink>
+											</h:commandLink> <h:commandLink action="#{mbEnvieFavori.deleteFavoris(favori)}" value=""> <i class="fa fa-heart" style="color: red" ></i></h:commandLink>
 										</h3>
 										<span class="glyphicon glyphicon-map-marker"
 											aria-hidden="true"></span>
@@ -72,8 +72,9 @@
 							<div class="col-md-8 col-sm-12">
 								<div class="box-simple boxEnvie active">
 									<div class="text">
+								<h:commandLink action="#{mbEnvieFavori.deleteEnvie(envie)}" value="">	<span class="glyphicon glyphicon-trash pull-right" style="color: red"></span></h:commandLink>
 										<h4 class="orientationTextLeft borderBottom greenColor">ENVIE
-											N° #{envieStatut.index +1}</h4>
+											N° #{envieStatut.index +1} </h4>
 										<div class="col-md-10 col-sm-10">
 											<h3>#{envie.intitule}</h3>
 										</div>
@@ -157,23 +158,12 @@
 														#{prop.valeur.valeur} <img
 															src="img/custom/feuille.png" class = "iconeFeuille" alt=""></img>
 													</p>
-
 												</div>
 												<!-- /.text -->
 											</h:commandLink>
 										</div>
 									</ui:repeat>
-									
-									
-									
-									
 								</div>
-								<a class="left carousel-control" href="#myCarousel"
-									data-slide="prev"><i
-									class="glyphicon glyphicon-chevron-left"></i></a> <a
-									class="right carousel-control" href="#myCarousel"
-									data-slide="next"><i
-									class="glyphicon glyphicon-chevron-right"></i></a>
 							</div>
 						</div>
 						</h:panelGroup>
