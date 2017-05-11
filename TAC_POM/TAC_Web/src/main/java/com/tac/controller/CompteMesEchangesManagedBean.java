@@ -30,7 +30,7 @@ public class CompteMesEchangesManagedBean implements Serializable {
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
-
+	
 	private Echange selectedEchange;
 	private Proposition selectedProposition;
 	private Membre membreCourant;

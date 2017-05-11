@@ -62,8 +62,8 @@
 																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
 																				<span class="label label-success">Effectué</span>
 																			</h:panelGroup></td>
-																		<td><a href="compte-echanges.xhtml"
-																			class="btn btn-template-main btn-sm">Voir</a></td>
+																		<td><h:commandLink action="#{mbEchange.loadEchangeAcquereur(echange)}" 
+																		value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink></td>
 																	</tr>
 																</h:commandLink>
 															</h:form>
@@ -110,8 +110,8 @@
 																				rendered="#{mbCompteTB.compteEchangeBean.statusEchange(echange) == 'effectue'}">
 																				<span class="label label-success">Effectué</span>
 																			</h:panelGroup></td>
-																		<td><a href="compte-echanges.xhtml"
-																			class="btn btn-template-main btn-sm">Voir</a></td>
+																		<td><h:commandLink action="#{mbEchange.loadEchangeDonneur(echange)}" 
+																		value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink></td>
 																	</tr>
 																</h:commandLink>
 															</h:form>

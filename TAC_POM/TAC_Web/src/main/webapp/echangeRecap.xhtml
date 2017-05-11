@@ -16,7 +16,7 @@
 		
 		<ui:define name="content">
 			<div class="resumeEchange">
-			<h:panelGroup rendered="#{mbEchange.statusEchange()}">
+			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'annule'}">
 				Statut de l'échange : <span class="label label-danger">Annulé</span><br></br>
 				Date de l'annulation :
 				<h:outputText value="#{mbEchange.echangeCourant.dateAnnul}" >
@@ -73,6 +73,7 @@
 							</h:panelGroup>
 					
 				</div>
+				<a href="#{mbEchange.retourTB}">Retour au tableau de bord</a>
 			</div>
 		</ui:define>
 	</ui:composition>

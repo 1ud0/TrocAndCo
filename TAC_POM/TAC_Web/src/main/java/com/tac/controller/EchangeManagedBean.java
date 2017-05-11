@@ -21,9 +21,7 @@ import com.tac.exception.NotEnoughCreditException;
 @SessionScoped
 public class EchangeManagedBean {
 
-	@ManagedProperty(value = "#{mbObjet}")
-	private ObjetManagedBean objetSelectedBean;
-
+	
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
@@ -58,6 +56,7 @@ public class EchangeManagedBean {
 	private Echange echangePropose;
 
 	private Echange echangeCourant;
+	private String retourTB = "/compte-TB.xhtml?faces-redirect=true";
 
 	public String loadPropositionEtMembre(Proposition proposition) {
 		membreCourant = identifBean.getMembreConnected();
@@ -97,11 +96,12 @@ public class EchangeManagedBean {
 
 		membreCourant = identifBean.getMembreConnected();
 		membreAutre = selectedProp.getMembre();
-
+System.out.println("load echange acquereur avant redirection");
 		String nav = "";
 		if (echange.getDateAnnul() != null || echange.getDateRefus() != null
 				|| (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
 			nav = "/echangeRecap.xhtml?faces-redirect=true";
+
 		} else if (echange.getDateValidation() != null) {
 			nav = "/echangeEvaluation.xhtml?faces-redirect=true";
 		} else if (echange.getDateAcceptation() != null) {
@@ -109,6 +109,8 @@ public class EchangeManagedBean {
 		} else {
 			nav = "/echangeAttenteValidation.xhtml?faces-redirect=true";
 		}
+		System.out.println("nav:"+nav);
+
 		return nav;
 	}
 
@@ -255,14 +257,6 @@ public class EchangeManagedBean {
 
 	public void setSelectedProp(Proposition selectedProp) {
 		this.selectedProp = selectedProp;
-	}
-
-	public ObjetManagedBean getObjetSelectedBean() {
-		return objetSelectedBean;
-	}
-
-	public void setObjetSelectedBean(ObjetManagedBean objetSelectedBean) {
-		this.objetSelectedBean = objetSelectedBean;
 	}
 
 	public IdentificationManagedBean getIdentifBean() {
@@ -415,6 +409,14 @@ public class EchangeManagedBean {
 
 	public void setShowAlertModif(Boolean showAlertModif) {
 		this.showAlertModif = showAlertModif;
+	}
+
+	public String getRetourTB() {
+		return retourTB;
+	}
+
+	public void setRetourTB(String retourTB) {
+		this.retourTB = retourTB;
 	}
 
 }
