@@ -6,18 +6,21 @@ import java.util.Date;
 import java.util.List;
 
 import javax.ejb.EJB;
+import javax.enterprise.context.RequestScoped;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceMessage;
 import com.tac.business.api.IServiceProposition;
 import com.tac.entity.Membre;
 import com.tac.entity.Message;
 import com.tac.entity.Proposition;
+import com.tac.exception.DataAccessException;
 
 @ManagedBean(name = "mbMessage")
-@SessionScoped
+@ViewScoped
 public class MessageManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,6 +41,30 @@ public class MessageManagedBean implements Serializable {
 	private Proposition propositionAvecMessagesSelected;
 	private List<Message> messagesOfPropositionSelected = new ArrayList<>();
 	
+	//ChatBox
+	private List<Message> chat;
+	private String messageAEnvoyer;
+	
+	
+	public Message envoyerMessage(){
+		System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA message saisi" +messageAEnvoyer);
+		membreCourant = identifBean.getMembreConnected();
+		Message nouveauMessage = new Message();
+		nouveauMessage.setEmetteur(membreCourant);
+		nouveauMessage.setDateEnvoi(new Date());
+		nouveauMessage.setLu(false);
+		nouveauMessage.setProposition(chat.get(0).getProposition());
+		if(chat.get(0).getEmetteur().getIdMembre()==membreCourant.getIdMembre()){
+			nouveauMessage.setRecepteur(chat.get(0).getRecepteur());
+		}
+		else{
+			nouveauMessage.setRecepteur(chat.get(0).getEmetteur());
+		}
+		nouveauMessage.setTexte(messageAEnvoyer);
+		Message messageAjoute = proxyMessage.envoyerMessage(nouveauMessage);
+		messageAEnvoyer = "";
+		return messageAjoute;
+	}
 	
 	public List<Proposition> getAllPropositionAvecMessage(){
 		membreCourant = identifBean.getMembreConnected();
@@ -121,30 +148,63 @@ public class MessageManagedBean implements Serializable {
 		else{
 			autre = message.getEmetteur().getIdMembre();
 		}
-		return proxyMessage.getConversationAboutProposition(membreCourant.getIdMembre(), autre, message.getProposition().getIdProposition());
+		chat = proxyMessage.getConversationAboutProposition(membreCourant.getIdMembre(), autre, message.getProposition().getIdProposition());
+		return chat;
+	}
+	
+	public List<Message> loadChat(Message message){
+		membreCourant = identifBean.getMembreConnected();
+		List<Message> discussion = getAllOther(message);
+		for(Message m : discussion){
+			if(m.getRecepteur().getIdMembre() == membreCourant.getIdMembre()){
+				m = proxyMessage.messageLu(m);
+			}
+		}
+		return discussion;
+	}
+	
+	public List<Message> refreshChat(Message message){
+		membreCourant = identifBean.getMembreConnected();
+		message = envoyerMessage();
+		return loadChat(message);
+	}
+	
+	public Proposition propAvecPhotos(int idProposition) throws DataAccessException{
+		return proxyProposition.getById(idProposition);
 	}
 	
 	public String debutDernierMessage(Message message){
+		String resultat = dernierMessage(message).getTexte();
+		if(resultat.length()>28){
+			resultat=resultat.substring(0, 25);
+			resultat=resultat+"...";
+		}		
+		return resultat;
+	}
+	
+	public Boolean isMemeEmetteurQuePrecedent(int index){
+		if(index !=0){
+			if(chat.get(index).getEmetteur().getIdMembre() ==  chat.get(index-1).getEmetteur().getIdMembre()){
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Message dernierMessage(Message message){
 		membreCourant = identifBean.getMembreConnected();
 		List<Message> msgList = getAllOther(message);
-		String resultat=message.getTexte();
+		Message resultat=message;
 		Message messageCourant=message;
 		for (Message message2 : msgList) {
 			if(message2.getDateEnvoi().after(messageCourant.getDateEnvoi())){
-				resultat=message2.getTexte();
+				resultat=message2;
 				messageCourant=message2;
 			}
 		}
-		
-		if(resultat.length()>13){
-			resultat=resultat.substring(0, 10);
-			resultat=resultat+"...";
-		}
-		
-		
 		return resultat;
-		
 	}
+
 	
 	public String depuisQuand(Message message){
 		membreCourant = identifBean.getMembreConnected();
@@ -215,6 +275,22 @@ public class MessageManagedBean implements Serializable {
 
 	public void setMessagesOfPropositionSelected(List<Message> messagesOfPropositionSelected) {
 		this.messagesOfPropositionSelected = messagesOfPropositionSelected;
+	}
+
+	public List<Message> getChat() {
+		return chat;
+	}
+
+	public void setChat(List<Message> chat) {
+		this.chat = chat;
+	}
+
+	public String getMessageAEnvoyer() {
+		return messageAEnvoyer;
+	}
+
+	public void setMessageAEnvoyer(String messageAEnvoyer) {
+		this.messageAEnvoyer = messageAEnvoyer;
 	}
 	
 	

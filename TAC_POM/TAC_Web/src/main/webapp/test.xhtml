@@ -1,0 +1,342 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+	<title>COMPTE - MES MESSAGES</title>
+</h:head>
+<h:body bgcolor='white'>
+
+	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
+		<ui:define name="content">
+
+			<div class="introRubrique">
+				<p class="lead">Votre messagerie personnelle</p>
+				<p class="text-muted">Retrouvez l'ensemble de vos messages et échangez simplements</p>
+			</div>
+
+
+			<div class="box-body no-padding">
+				<div class="mailbox-controls">
+					<!-- Check all button -->
+					<input type="checkbox" id="checkAll"></input>
+					<div class="btn-group">
+						<button class="btn btn-default btn-sm">
+							<i class="glyphicon glyphicon-trash"></i>
+						</button>
+					</div>
+					<!-- /.btn-group -->
+					<button class="btn btn-default btn-sm">
+						<i class="glyphicon glyphicon-refresh"></i>
+					</button>
+					<div class="pull-right">
+						1-50/200
+						<div class="btn-group">
+							<button class="btn btn-default btn-sm">
+								<i class="glyphicon glyphicon-arrow-left"></i>
+							</button>
+							<button class="btn btn-default btn-sm">
+								<i class="glyphicon glyphicon-arrow-right"></i>
+							</button>
+						</div>
+						<!-- /.btn-group -->
+					</div>
+					<!-- /.pull-right -->
+				</div>
+				<hr></hr>
+				<div class="table-responsive mailbox-messages">
+					<table class="table table-hover">
+						<tbody>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet de la mort</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">5 mins ago</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet trop bien</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">28 mins ago</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">11 hours ago</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">15 hours ago</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">Yesterday</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">2 days ago</td>
+							</tr>
+							<tr>
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet nickel mais
+										pas trop</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">2 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">2 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">2 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">2 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">4 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">12 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-up text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">12 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">14 days ago</td>
+							</tr>
+							<tr class="lu">
+								<td><input type="checkbox"></input></td>
+								<td class="mailbox-star"><a href="#"><i
+										class="fa fa-arrow-down text-yellow"></i></a></td>
+								<td class="mailbox-name"><a href="#">Objet</a></td>
+								<td class="mailbox-subject"><b>Objet</b> - Trying to find a
+									solution to this problem...</td>
+								<td class="mailbox-attachment"></td>
+								<td class="mailbox-date">15 days ago</td>
+							</tr>
+						</tbody>
+					</table>
+					<!-- /.table -->
+				</div>
+				<!-- /.mail-box-messages -->
+			</div>
+			<!-- /.box-body -->
+
+
+
+
+
+
+
+			<!-- *** DEBUT DU CHAT *** _________________________________________________________ -->
+
+
+			<aside id="sidebar_secondary"
+				class="tabbed_sidebar ng-scope chat_sidebar">
+
+				<div class="popup-head">
+					<div class="popup-head-left pull-left">
+						<a target="_blank" href="shop-detail.html"> <img
+							class="md-user-image md-object" alt="objet echange" title=""
+							src="img/custom/art3.png"></img>
+							<h1>Platine Vinyle</h1></a>
+					</div>
+					<div class="pull-right">
+						<button data-widget="remove" id="removeClass"
+							class="chat-header-button pull-right" type="button">
+							<i class="glyphicon glyphicon-remove"></i>
+						</button>
+					</div>
+				</div>
+
+				<div id="chat"
+					class="chat_box_wrapper chat_box_small chat_box_active"
+					style="opacity: 1; display: block; transform: translateX(0px);">
+					<div class="chat_box touchscroll chat_box_colors_a">
+						<div class="chat_message_wrapper">
+							<div class="chat_user_avatar">
+								<a href="https://web.facebook.com/iamgurdeeposahan"
+									target="_blank"> <img alt="Gurdeep Osahan (Web Designer)"
+									title="Gurdeep Osahan (Web Designer)" src="img/person-2.jpg"
+									class="md-user-image"></img></a>
+							</div>
+							<ul class="chat_message">
+								<li>
+									<p>Lorem ipsum dolor sit amet, consectetur adipisicing
+										elit. Distinctio, eum?</p>
+								</li>
+								<li>
+									<p>
+										Lorem ipsum dolor sit amet.<span class="chat_message_time">13:38</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+						<div class="chat_message_wrapper chat_message_right">
+							<div class="chat_user_avatar">
+								<a href="https://web.facebook.com/iamgurdeeposahan"
+									target="_blank"> <img alt="Gurdeep Osahan (Web Designer)"
+									title="Gurdeep Osahan (Web Designer)" src="img/person-3.png"
+									class="md-user-image"></img></a>
+							</div>
+							<ul class="chat_message">
+								<li>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										Autem delectus distinctio dolor earum est hic id impedit ipsum
+										minima mollitia natus nulla perspiciatis quae quasi, quis
+										recusandae, saepe, sunt totam. <span class="chat_message_time">13:34</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+						<div class="chat_message_wrapper">
+							<div class="chat_user_avatar">
+								<a href="https://web.facebook.com/iamgurdeeposahan"
+									target="_blank"> <img alt="Gurdeep Osahan (Web Designer)"
+									title="Gurdeep Osahan (Web Designer)" src="img/person-2.jpg"
+									class="md-user-image"></img></a>
+							</div>
+							<ul class="chat_message">
+								<li>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+										Atque ea mollitia pariatur porro quae sed sequi sint <span
+											class="chat_message_time">23 Jun 1:10am</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+						<div class="chat_message_wrapper chat_message_right">
+							<div class="chat_user_avatar">
+								<a href="https://web.facebook.com/iamgurdeeposahan"
+									target="_blank"> <img alt="Gurdeep Osahan (Web Designer)"
+									title="Gurdeep Osahan (Web Designer)" src="img/person-3.png"
+									class="md-user-image"></img></a>
+							</div>
+							<ul class="chat_message">
+								<li>
+									<p>Lorem ipsum dolor sit amet, consectetur.</p>
+								</li>
+								<li>
+									<p>
+										Lorem ipsum dolor sit amet, consectetur adipisicing elit. <span
+											class="chat_message_time">Friday 13:34</span>
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+				</div>
+				<div class="chat_submit_box">
+					<input type="text" placeholder="Type a message" id="submit_message"
+						name="submit_message" class="md-input"></input><a href="#"><i
+						class="fa fa-send"></i></a>
+				</div>
+
+
+			</aside>
+
+
+
+
+
+			<!-- Check/Uncheck toutes les checkbox -->
+			<script type="text/javascript">
+				$("#checkAll").click(
+						function() {
+							$('input:checkbox').not(this).prop('checked',
+									this.checked);
+						});
+			</script>
+
+
+		</ui:define>
+	</ui:composition>
+</h:body>
+</html>
