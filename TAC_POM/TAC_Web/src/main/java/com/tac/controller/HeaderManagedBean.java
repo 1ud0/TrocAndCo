@@ -38,9 +38,6 @@ public class HeaderManagedBean implements Serializable {
 
 	public List<Categorie> recupererCategoriesMeres() {
 		List<Categorie> categories = proxyCategorie.getCategorieMere();
-		for (Categorie cat : categories) {
-			cat.setSousCategories(proxyCategorie.getCategorieFille(cat.getIdCategorie()));
-		}
 		return categories;
 	}
 

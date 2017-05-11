@@ -5,14 +5,12 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
-import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
-import javax.faces.component.UIComponent;
-import javax.faces.context.FacesContext;
-import javax.faces.validator.ValidatorException;
+import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
 import com.tac.business.api.IServiceCategorie;
@@ -26,15 +24,14 @@ import com.tac.business.api.IServiceValeur;
 import com.tac.entity.Categorie;
 import com.tac.entity.Etat;
 import com.tac.entity.Localisation;
-import com.tac.entity.Membre;
 import com.tac.entity.Photo;
 import com.tac.entity.Proposition;
 import com.tac.entity.Valeur;
 
 @ManagedBean(name = "mbCompteObjet")
-@SessionScoped
+@ViewScoped
 public class CompteObjetsManagedBean implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@EJB
@@ -48,93 +45,124 @@ public class CompteObjetsManagedBean implements Serializable {
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
 	@EJB
-	private IServiceLocaliserProposition proxyLocaliserProposition;	
+	private IServiceLocaliserProposition proxyLocaliserProposition;
 	@EJB
 	private IServiceFavori proxyFavori;
-	
+
 	@EJB
 	private IServicePhoto proxyPhoto;
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
-	private String intituleSelected = "";
-	private Etat etatSelected = new Etat();
-	private Valeur valeurSelected = new Valeur();
-	private List<Proposition> proposDuMembre = new ArrayList<>();
-	private List<Localisation> adressesDuMembre = new ArrayList<>();
+	@ManagedProperty(value = "#{mbRecherche}")
+	private RechercheManagedBean rechercheBean;
+
+	private List<Proposition> proposDuMembre;
 	private List<Localisation> adressesSelected = new ArrayList<>();
 	private List<String> idAdressesSelected = new ArrayList<>();
 	private List<Categorie> sousCategoriesSelected;
-	private Categorie sousCategorieSelected = new Categorie();
-	private List<Categorie> allCategories;
-	private Membre membreCourant;
-	private Proposition propositionSelected = new Proposition();
-	private Categorie categorieSelected = new Categorie();
-	private String descriptionSelected = "";
+	private Categorie categorieSelectedNouveauObjet;
+	private Categorie sousCategorieSelectedNouveauObjet;
+	private Integer idCatSelected;
+	private Valeur valeurSelected;
+	private Etat etatSelected;
+	private Proposition propositionSelected;
+	private String intituleSelected;
+	private String descriptionSelected;
 	private Part file1;
 	private Part file2;
 	private Part file3;
+	private List<Categorie> allCategories;
+	private List<Valeur> allValeurs;
+	private List<Etat> allEtats;
+	private List<Localisation> adressesDuMembre;
+	private List<Photo> photoDeLaNouvelleProp;
 
-	
 	// METHODES
 
-	public void listenerChargementSousCat() {
-		sousCategoriesSelected = proxyCategorie.getCategorieFille(categorieSelected.getIdCategorie());
-	}
-
-	public List<Categorie> getAllCategorie() {
-		allCategories = proxyCategorie.getCategorieMere();
-		return allCategories;
-	}
-
-	public List<Proposition> getProposDuMembre() {
-		membreCourant = identifBean.getMembreConnected();
-		proposDuMembre = proxyObjet.getPropDispoByMembre(membreCourant);
+	@PostConstruct
+	public void loadPropositionDuMembre() {
+		proposDuMembre = proxyObjet.getPropDispoByMembre(identifBean.getMembreConnected());
 		for (Proposition proposition : proposDuMembre) {
 			proposition.setPhotos(proxyObjet.getByProposition(proposition));
 		}
-		return proposDuMembre;
+		allCategories = rechercheBean.getCategoriesMere();
+		allValeurs = rechercheBean.getValeurs();
+		allEtats = rechercheBean.getEtats();
+		adressesDuMembre = rechercheBean.getAdresses();
+
 	}
 
-	public void listnerSelectionObjetPourSuppression(Proposition proposition) {
-		propositionSelected = proposition;
+	public void listenerChargementSousCat() {
+		for (Categorie cat : allCategories) {
+			if (idCatSelected == cat.getIdCategorie()) {
+				categorieSelectedNouveauObjet=cat;
+				sousCategoriesSelected = categorieSelectedNouveauObjet.getSousCategories();
+				break;
+			}
+		}
 	}
-	
-	public void listenerAjoutObjet(){
-		descriptionSelected = "";
-		intituleSelected = "";
-		categorieSelected = new Categorie();
-		sousCategorieSelected = new Categorie();
+
+	public void listenerInitObjet() {
+		idCatSelected=1;
+		propositionSelected = new Proposition();
+		categorieSelectedNouveauObjet = new Categorie();
+		sousCategorieSelectedNouveauObjet = new Categorie();
 		valeurSelected = new Valeur();
 		etatSelected = new Etat();
-		idAdressesSelected = getidAdresseProp();
-		listenerChargementSousCat();
+		intituleSelected = "";
+		descriptionSelected = "";
 	}
 
 	public void listnerSelectionObjet(Proposition proposition) {
 		propositionSelected = proposition;
-		descriptionSelected = propositionSelected.getDescription();
-		intituleSelected = propositionSelected.getIntitule();
-		categorieSelected = propositionSelected.getCategorie();
-		sousCategorieSelected = propositionSelected.getSousCategorie();
-		valeurSelected = propositionSelected.getValeur();
-		etatSelected = propositionSelected.getEtat();
-		idAdressesSelected = getidAdresseProp();
+		idCatSelected=propositionSelected.getCategorie().getIdCategorie();
 		listenerChargementSousCat();
+		idAdressesSelected = getidAdresseProp();
 	}
 
 	public String ajoutProposition() {
-		propositionSelected.setMembre(membreCourant);
-		propositionSelected.setIntitule(intituleSelected);
+		propositionSelected.setMembre(identifBean.getMembreConnected());
+		propositionSelected.setLocalisations(adressesSelected);
+		propositionSelected.setCategorie(categorieSelectedNouveauObjet);
+		propositionSelected.setSousCategorie(sousCategorieSelectedNouveauObjet);
 		propositionSelected.setValeur(valeurSelected);
 		propositionSelected.setEtat(etatSelected);
-		propositionSelected.setCategorie(categorieSelected);
-		propositionSelected.setSousCategorie(sousCategorieSelected);
-		propositionSelected.setLocalisations(adressesSelected);
 		propositionSelected.setDescription(descriptionSelected);
+		propositionSelected.setIntitule(intituleSelected);
 		propositionSelected = proxyObjet.addProposition(propositionSelected);
-		updateLocalisationProposition();
+		adressesSelected = GetListAdressesSelected(idAdressesSelected);
+		for (Localisation newLocalisation : adressesSelected) {
+			proxyLocaliserProposition.addLocalisationAUneProposition(propositionSelected, newLocalisation);
+		}
+		photoDeLaNouvelleProp = new ArrayList<>();
+		propositionSelected.setPhotos(photoDeLaNouvelleProp);
+		if (file1 != null) {
+			uploadPhoto1();
+		}
+		if (file2 != null) {
+			uploadPhoto2();
+		}
+		if (file3 != null) {
+			uploadPhoto3();
+		}
+		String nav = "";
+		return nav;
+	}
 
+	private void updateLocalisationProposition() {
+		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
+			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
+		}
+		adressesSelected = GetListAdressesSelected(idAdressesSelected);
+		for (Localisation newLocalisation : adressesSelected) {
+			proxyLocaliserProposition.addLocalisationAUneProposition(propositionSelected, newLocalisation);
+		}
+	}
+
+	public String updateObjet() {
+		updateLocalisationProposition();
+		propositionSelected = proxyObjet.updateProposition(propositionSelected);
 		String nav = "";
 		return nav;
 	}
@@ -148,31 +176,6 @@ public class CompteObjetsManagedBean implements Serializable {
 		return idAdressesPropString;
 	}
 
-	private void updateLocalisationProposition() {
-		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
-			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
-		}
-		adressesSelected = GetListAdressesSelected(idAdressesSelected);
-		for (Localisation newLocalisation : adressesSelected) {
-			proxyLocaliserProposition.addLocalisationAUneProposition(propositionSelected, newLocalisation);
-		}
-	}
-
-	
-	public String updateObjet() {
-		updateLocalisationProposition();
-		propositionSelected.setIntitule(intituleSelected);
-		propositionSelected.setValeur(valeurSelected);
-		propositionSelected.setEtat(etatSelected);
-		propositionSelected.setCategorie(categorieSelected);
-		propositionSelected.setSousCategorie(sousCategorieSelected);
-		propositionSelected.setLocalisations(adressesSelected);
-		propositionSelected.setDescription(descriptionSelected);
-		propositionSelected = proxyObjet.updateProposition(propositionSelected);
-		String nav = "";
-		return nav;
-	}
-
 	public List<Localisation> GetListAdressesSelected(List<String> idAdressesSelected) {
 		Localisation adresseSelected = new Localisation();
 		int idAdresseInt;
@@ -184,15 +187,14 @@ public class CompteObjetsManagedBean implements Serializable {
 		return adressesSelected;
 	}
 
-	public List<Localisation> getAdresseByMembre() {
-		membreCourant = identifBean.getMembreConnected();
-		adressesDuMembre = proxyLocalisation.getMembreLocalisations(membreCourant);
-		return adressesDuMembre;
-	}
-
 	public List<Localisation> getAdresseByProposition(Proposition propositionSelected) {
 		List<Localisation> localisationsPropo = proxyLocalisation.getPropositionLocalisations(propositionSelected);
 		return localisationsPropo;
+	}
+
+	// suppression d'une proposition
+	public void listnerSelectionObjetPourSuppression(Proposition proposition) {
+		propositionSelected = proposition;
 	}
 
 	public void suppressionProposition() {
@@ -203,44 +205,48 @@ public class CompteObjetsManagedBean implements Serializable {
 
 		proxyObjet.deleteProposition(propositionSelected);
 	}
-	
-	public void uploadPhoto1(){
+
+	// upload des photos
+	public void uploadPhoto1() {
 		uploadPhoto(file1);
 	}
-	public void uploadPhoto2(){
+
+	public void uploadPhoto2() {
 		uploadPhoto(file2);
 	}
-	public void uploadPhoto3(){
+
+	public void uploadPhoto3() {
 		uploadPhoto(file3);
 	}
-	
-	public String uploadPhoto(Part fileAUploader) {		
+
+	public String uploadPhoto(Part fileAUploader) {
 		String path = Thread.currentThread().getContextClassLoader().getResource("bidon.txt").getPath();
-		path = path.split("WEB-INF")[0] + "img/";
+		path = path.split("WEB-INF")[0] + "img/imgProposition/";
 		path = path.substring(1);
-		int positionImage=0;
+		int positionImage = 0;
 		try {
 			fileAUploader.write(path + getFilename(fileAUploader));
-			if(fileAUploader.equals(file1)){
-				positionImage=1;
-			}else if(fileAUploader.equals(file2)){
-				positionImage=2;
-			}else{
-				positionImage=3;
-			}	
-			System.out.println("position image : "+positionImage);
-			if (positionImage>propositionSelected.getPhotos().size()||propositionSelected.getPhotos().size()==0){				
+			if (fileAUploader.equals(file1)) {
+				positionImage = 1;
+			} else if (fileAUploader.equals(file2)) {
+				positionImage = 2;
+			} else {
+				positionImage = 3;
+			}
+			System.out.println("position image : " + positionImage);
+			System.out.println("taille liste photo : " + propositionSelected.getPhotos().size());
+			if (positionImage > propositionSelected.getPhotos().size() || propositionSelected.getPhotos().size() == 0) {
 				Photo photoAAjouter = new Photo();
-				photoAAjouter.setUrl("img/" + getFilename(fileAUploader));
+				photoAAjouter.setUrl("img/imgProposition/" + getFilename(fileAUploader));
 				photoAAjouter.setProposition(propositionSelected);
-				propositionSelected.getPhotos().add(photoAAjouter);				
+				propositionSelected.getPhotos().add(photoAAjouter);
 				proxyPhoto.addPhoto(photoAAjouter);
-			} else{
-				Photo photoAUpdater = propositionSelected.getPhotos().get(positionImage-1);	
-				photoAUpdater.setUrl("img/" + getFilename(fileAUploader));
+			} else {
+				Photo photoAUpdater = propositionSelected.getPhotos().get(positionImage - 1);
+				photoAUpdater.setUrl("img/imgProposition/" + getFilename(fileAUploader));
 				proxyPhoto.updatePhoto(photoAUpdater);
 			}
-			
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -258,87 +264,7 @@ public class CompteObjetsManagedBean implements Serializable {
 		return null;
 	}
 
-	public void validateFile(FacesContext ctx, UIComponent comp, Object value) {
-		List<FacesMessage> msgs = new ArrayList<FacesMessage>();
-		Part file = (Part) value;
-		String contentType = file.getContentType();
-		System.out.println(contentType);
-		if (file.getSize() > 500*1024) {
-			msgs.add(new FacesMessage("fichier trop volumineux"));
-		}
-		if (!"image/gif".equals(contentType) && !"image/jpeg".equals(contentType) && !"image/png".equals(contentType)){
-			msgs.add(new FacesMessage("pas une image"));
-		}
-		if (!msgs.isEmpty()) {
-			throw new ValidatorException(msgs);
-		}
-	}
-	
-
 	// GETTER SETTER
-
-	public List<Localisation> getAdressesSelected() {
-		return adressesSelected;
-	}
-
-	public void setAdressesSelected(List<Localisation> adressesSelected) {
-		this.adressesSelected = adressesSelected;
-	}
-
-	public List<Etat> getAllEtat() {
-		List<Etat> listeEtat = proxyEtat.getAllEtat();
-		return listeEtat;
-	}
-
-	public List<Valeur> getAllValeur() {
-		List<Valeur> listeValeur = proxyValeur.getAllValeur();
-		return listeValeur;
-	}
-
-	public IdentificationManagedBean getIdentifBean() {
-		return identifBean;
-	}
-
-	public Proposition getPropositionSelected() {
-		return propositionSelected;
-	}
-
-	public void setPropositionSelected(Proposition propositionSelected) {
-		this.propositionSelected = propositionSelected;
-	}
-
-	public void setIdentifBean(IdentificationManagedBean identifBean) {
-		this.identifBean = identifBean;
-	}
-
-	public void setProposDuMembre(List<Proposition> proposDuMembre) {
-		this.proposDuMembre = proposDuMembre;
-	}
-
-	public List<String> getIdAdressesSelected() {
-		return idAdressesSelected;
-	}
-
-	public void setIdAdressesSelected(List<String> idAdressesSelected) {
-		this.idAdressesSelected = idAdressesSelected;
-	}
-
-	public List<Localisation> getAdressesDuMembre() {
-		return adressesDuMembre;
-	}
-
-	public void setAdressesDuMembre(List<Localisation> adressesDuMembre) {
-		this.adressesDuMembre = adressesDuMembre;
-	}
-
-	public Membre getMembreCourant() {
-		return membreCourant;
-	}
-
-	public void setMembreCourant(Membre membreCourant) {
-		this.membreCourant = membreCourant;
-	}
-
 	public IServiceProposition getProxyObjet() {
 		return proxyObjet;
 	}
@@ -379,74 +305,6 @@ public class CompteObjetsManagedBean implements Serializable {
 		this.proxyLocalisation = proxyLocalisation;
 	}
 
-	public Categorie getSousCategorieSelected() {
-		return sousCategorieSelected;
-	}
-
-	public void setSousCategorieSelected(List<Categorie> sousCategorieSelected) {
-		this.sousCategoriesSelected = sousCategorieSelected;
-	}
-
-	public Categorie getCategorieSelected() {
-		return categorieSelected;
-	}
-
-	public void setCategorieSelected(Categorie categorieSelected) {
-		this.categorieSelected = categorieSelected;
-	}
-
-	public List<Categorie> getAllCategories() {
-		return allCategories;
-	}
-
-	public void setAllCategories(List<Categorie> allCategories) {
-		this.allCategories = allCategories;
-	}
-
-	public List<Categorie> getSousCategoriesSelected() {
-		return sousCategoriesSelected;
-	}
-
-	public void setSousCategoriesSelected(List<Categorie> sousCategoriesSelected) {
-		this.sousCategoriesSelected = sousCategoriesSelected;
-	}
-
-	public void setSousCategorieSelected(Categorie sousCategorieSelected) {
-		this.sousCategorieSelected = sousCategorieSelected;
-	}
-
-	public String getIntituleSelected() {
-		return intituleSelected;
-	}
-
-	public void setIntituleSelected(String intituleSelected) {
-		this.intituleSelected = intituleSelected;
-	}
-
-	public Etat getEtatSelected() {
-		return etatSelected;
-	}
-
-	public void setEtatSelected(Etat etatSelected) {
-		this.etatSelected = etatSelected;
-	}
-
-	public Valeur getValeurSelected() {
-		return valeurSelected;
-	}
-
-	public void setValeurSelected(Valeur valeurSelected) {
-		this.valeurSelected = valeurSelected;
-	}
-
-	public String getDescriptionSelected() {
-		return descriptionSelected;
-	}
-
-	public void setDescriptionSelected(String descriptionSelected) {
-		this.descriptionSelected = descriptionSelected;
-	}
-
 	public IServiceLocaliserProposition getProxyLocaliserProposition() {
 		return proxyLocaliserProposition;
 	}
@@ -471,6 +329,62 @@ public class CompteObjetsManagedBean implements Serializable {
 		this.proxyPhoto = proxyPhoto;
 	}
 
+	public IdentificationManagedBean getIdentifBean() {
+		return identifBean;
+	}
+
+	public void setIdentifBean(IdentificationManagedBean identifBean) {
+		this.identifBean = identifBean;
+	}
+
+	public RechercheManagedBean getRechercheBean() {
+		return rechercheBean;
+	}
+
+	public void setRechercheBean(RechercheManagedBean rechercheBean) {
+		this.rechercheBean = rechercheBean;
+	}
+
+	public List<Proposition> getProposDuMembre() {
+		return proposDuMembre;
+	}
+
+	public void setProposDuMembre(List<Proposition> proposDuMembre) {
+		this.proposDuMembre = proposDuMembre;
+	}
+
+	public List<Localisation> getAdressesSelected() {
+		return adressesSelected;
+	}
+
+	public void setAdressesSelected(List<Localisation> adressesSelected) {
+		this.adressesSelected = adressesSelected;
+	}
+
+	public List<String> getIdAdressesSelected() {
+		return idAdressesSelected;
+	}
+
+	public void setIdAdressesSelected(List<String> idAdressesSelected) {
+		this.idAdressesSelected = idAdressesSelected;
+	}
+
+	public List<Categorie> getSousCategoriesSelected() {
+		return sousCategoriesSelected;
+	}
+
+	public void setSousCategoriesSelected(List<Categorie> sousCategoriesSelected) {
+		this.sousCategoriesSelected = sousCategoriesSelected;
+	}
+
+	public Proposition getPropositionSelected() {
+		return propositionSelected;
+	}
+
+	public void setPropositionSelected(Proposition propositionSelected) {
+		this.propositionSelected = propositionSelected;
+	}
+
 	public Part getFile1() {
 		return file1;
 	}
@@ -493,6 +407,102 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	public void setFile3(Part file3) {
 		this.file3 = file3;
+	}
+
+	public List<Categorie> getAllCategories() {
+		return allCategories;
+	}
+
+	public void setAllCategories(List<Categorie> allCategories) {
+		this.allCategories = allCategories;
+	}
+
+	public List<Valeur> getAllValeurs() {
+		return allValeurs;
+	}
+
+	public void setAllValeurs(List<Valeur> allValeurs) {
+		this.allValeurs = allValeurs;
+	}
+
+	public List<Etat> getAllEtats() {
+		return allEtats;
+	}
+
+	public void setAllEtats(List<Etat> allEtats) {
+		this.allEtats = allEtats;
+	}
+
+	public List<Localisation> getAdressesDuMembre() {
+		return adressesDuMembre;
+	}
+
+	public void setAdressesDuMembre(List<Localisation> adressesDuMembre) {
+		this.adressesDuMembre = adressesDuMembre;
+	}
+
+	public Categorie getCategorieSelectedNouveauObjet() {
+		return categorieSelectedNouveauObjet;
+	}
+
+	public void setCategorieSelectedNouveauObjet(Categorie categorieSelectedNouveauObjet) {
+		this.categorieSelectedNouveauObjet = categorieSelectedNouveauObjet;
+	}
+
+	public Valeur getValeurSelected() {
+		return valeurSelected;
+	}
+
+	public void setValeurSelected(Valeur valeurSelected) {
+		this.valeurSelected = valeurSelected;
+	}
+
+	public Etat getEtatSelected() {
+		return etatSelected;
+	}
+
+	public void setEtatSelected(Etat etatSelected) {
+		this.etatSelected = etatSelected;
+	}
+
+	public Categorie getSousCategorieSelectedNouveauObjet() {
+		return sousCategorieSelectedNouveauObjet;
+	}
+
+	public void setSousCategorieSelectedNouveauObjet(Categorie sousCategorieSelectedNouveauObjet) {
+		this.sousCategorieSelectedNouveauObjet = sousCategorieSelectedNouveauObjet;
+	}
+
+	public List<Photo> getPhotoDeLaNouvelleProp() {
+		return photoDeLaNouvelleProp;
+	}
+
+	public void setPhotoDeLaNouvelleProp(List<Photo> photoDeLaNouvelleProp) {
+		this.photoDeLaNouvelleProp = photoDeLaNouvelleProp;
+	}
+
+	public String getIntituleSelected() {
+		return intituleSelected;
+	}
+
+	public void setIntituleSelected(String intituleSelected) {
+		this.intituleSelected = intituleSelected;
+	}
+
+	public String getDescriptionSelected() {
+		return descriptionSelected;
+	}
+
+	public void setDescriptionSelected(String descriptionSelected) {
+		this.descriptionSelected = descriptionSelected;
+	}
+
+	public Integer getIdCatSelected() {
+		return idCatSelected;
+	}
+
+	public void setIdCatSelected(Integer idCatSelected) {
+		this.idCatSelected = idCatSelected;
 	}
 
 }
