@@ -43,5 +43,9 @@ public class ServiceRdv implements IServiceRdv {
 		return proxyRdv.getByMembreIdPropositionEchange(idMembre);
 	}
 	
+	@Override
+	public List<Rdv> getByMembreIdEtMembrePropositionPasEncorePasse(int idMembre){
+		return proxyRdv.getByMembreIdEtMembrePropositionPasEncorePasse(idMembre);
+	}
 
 }

@@ -11,5 +11,6 @@ public interface IServiceRdv {
 	Rdv updateRdv(Rdv rdv);
 	List<Rdv> getRdvByMembre(int idMembre);
 	List<Rdv> getRdvByMembrePropositionEchange(int idMembre);
+	List<Rdv> getByMembreIdEtMembrePropositionPasEncorePasse(int idMembre);
 
 }

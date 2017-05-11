@@ -32,4 +32,5 @@ public interface IServiceEchange {
 	List<Echange> getByMembreDonneur(Integer idMembreDonneur);
 	List<Echange> getByMembreChercheur(Integer idMembreChercheur);
 	List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur);
+	List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre);
 }

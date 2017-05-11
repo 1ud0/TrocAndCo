@@ -67,10 +67,19 @@ public class DaoEchange implements IDaoEchange {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur){
-		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateAcceptation IS NULL AND e.dateRefus IS NULL";
+		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateAcceptation IS NULL AND e.dateRefus IS NULL AND e.dateAnnul IS NULL";
 		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
 		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembreDonneur);
 		return queryGetByIdMembreDonneur.getResultList(); 
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre){
+        final String reqGetByMemberId = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre OR e.membre.idMembre = :pidMembre) AND e.dateValidation IS NULL AND e.dateRefus IS NULL AND e.dateAnnul IS NULL";
+		Query queryGetByIdMembre = em.createQuery(reqGetByMemberId);
+		queryGetByIdMembre.setParameter("pidMembre", idMembre);
+		return queryGetByIdMembre.getResultList(); 
 	}
 
 	@SuppressWarnings("unchecked")

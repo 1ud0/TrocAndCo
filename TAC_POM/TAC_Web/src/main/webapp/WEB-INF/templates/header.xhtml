@@ -25,54 +25,54 @@ _________________________________________________________ -->
 							</p>
 						</div>
 						<div class="col-xs-7">
-							<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected==null}">
+							<h:panelGroup layout="block" styleClass="login"
+								rendered="#{mbIdentif.membreConnected==null}">
 								<a href="#" data-toggle="modal" data-target="#login-modal"><i
 									class="fa fa-sign-in"></i> <span
 									class="hidden-xs text-uppercase">Se connecter</span></a>
 								<a href="inscription.xhtml"><i class="fa fa-user"></i> <span
 									class="hidden-xs text-uppercase">S'enregistrer</span></a>
 							</h:panelGroup>
-							<h:panelGroup layout="block" styleClass="login" rendered="#{mbIdentif.membreConnected!=null}">
+							<h:panelGroup layout="block" styleClass="login"
+								rendered="#{mbIdentif.membreConnected!=null}">
 								<h:panelGroup styleClass="text-uppercase pseudo">#{mbIdentif.membreConnected.pseudo}</h:panelGroup>
-								<span class="credit">Crédit : #{mbProfil.getCredit(mbIdentif.membreConnected)} <img alt="feuille"
-									src="img/custom/feuille.png" /></span>
+								<span class="credit">Crédit :
+									#{mbProfil.getCredit(mbIdentif.membreConnected)} <img
+									alt="feuille" src="img/custom/feuille.png" />
+								</span>
 								<div class="dropdown">
 									<button class="btn btn-default btn-lg btn-link"
 										data-toggle="dropdown" data-target="#">
 										<span class="glyphicon glyphicon-bell"></span>
 									</button>
-									<span class="badge badge-notify">#{mbHeader.nombreNouveauxMessages() + mbHeader.nombreNvxEchanges()}</span>
+									<span class="badge badge-notify">#{mbHeader.nombreNouveauxMessages()
+										+ mbHeader.nombreNvxEchanges()}</span>
 									<ul class="dropdown-menu notifications" role="menu"
 										aria-labelledby="dLabel">
 										<div class="notification-heading">
 											<h4 class="menu-title">Notifications</h4>
-											<a href="/TrocAndCo/compte-TB.xhtml" > <h4 class="menu-title pull-right">
-												Voir tout<i class="glyphicon glyphicon-circle-arrow-right"></i>
-											</h4></a>
+											<a href="/TrocAndCo/compte-TB.xhtml">
+												<h4 class="menu-title pull-right">
+													Voir tout<i class="glyphicon glyphicon-circle-arrow-right"></i>
+												</h4>
+											</a>
 										</div>
 										<li class="divider"></li>
 										<div class="notifications-wrapper">
 											<a class="content" href="/TrocAndCo/compte-messages.xhtml">
 												<div class="notification-item">
-												<h4 class="item-title">
+													<h4 class="item-title">
 														<span class="glyphicon glyphicon-envelope"
 															aria-hidden="true"></span> <span class="notifNum">#{mbHeader.nombreNouveauxMessages()}</span>nouveaux
 														messages
-													</h4>
-												</div>
-											</a> <a class="content" href="/TrocAndCo/compte-evaluations.xhtml">
-												<div class="notification-item">
-													<h4 class="item-title">
-														<span class="glyphicon glyphicon glyphicon-star-empty"
-															aria-hidden="true"></span> <span class="notifNum">3</span>nouvelles
-														évaluations
 													</h4>
 												</div>
 											</a> <a class="content" href="/TrocAndCo/compte-echanges.xhtml">
 												<div class="notification-item">
 													<h4 class="item-title">
 														<span class="fa fa-exchange" aria-hidden="true"></span> <span
-															class="notifNum">#{mbHeader.nombreNvxEchanges()} </span>nouveaux échanges
+															class="notifNum">#{mbHeader.nombreNvxEchanges()} </span>nouveaux
+														échanges
 													</h4>
 												</div>
 											</a>
@@ -82,9 +82,11 @@ _________________________________________________________ -->
 
 								</div>
 								<h:commandLink action="#{mbIdentif.seDeconnecter()}"
-									value="Déconnexion" ><i class="fa fa-sign-out"></i><span
-								class="hidden-xs text-uppercase"></span></h:commandLink>
-								</h:panelGroup>
+									value="Déconnexion">
+									<i class="fa fa-sign-out"></i>
+									<span class="hidden-xs text-uppercase"></span>
+								</h:commandLink>
+							</h:panelGroup>
 
 						</div>
 					</div>
@@ -138,27 +140,32 @@ _________________________________________________________ -->
 								<ul class="dropdown-menu">
 									<li>
 										<div class="yamm-content">
-											<ui:repeat var="categorie"
-												value="#{mbHeader.categories}" varStatus="loop">
-												<h:outputText value="&lt;div class='row'&gt;" escape="false" rendered="#{loop.index % 4 == 0}" />
+											<h:form>
+												<ui:repeat var="categorie" value="#{mbHeader.categories}"
+													varStatus="loop">
+													<h:outputText value="&lt;div class='row'&gt;"
+														escape="false" rendered="#{loop.index % 4 == 0}" />
 													<div class="col-sm-3">
-														<h5>#{categorie.intitule}</h5>
+														<h5> <h:commandLink action="#{mbHeader.clickCategorieMere(categorie)}" value="#{categorie.intitule}"></h:commandLink> </h5>
 														<ul>
 															<ui:repeat var="souCat"
 																value="#{categorie.sousCategories}">
-																<li><a href="index.html">#{souCat.intitule}</a></li>
+																<li><h:commandLink
+																		action="#{mbHeader.clickSousCat(souCat)}"
+																		value="#{souCat.intitule}" /></li>
 															</ui:repeat>
 														</ul>
 													</div>
-												<h:outputText value="&lt;/div&gt;" escape="false" rendered="#{(loop.index + 1) % 4 == 0}" />
-											</ui:repeat>
-
+													<h:outputText value="&lt;/div&gt;" escape="false"
+														rendered="#{(loop.index + 1) % 4 == 0}" />
+												</ui:repeat>
+											</h:form>
 										</div> <!-- /.yamm-content -->
 									</li>
 								</ul></li>
 							<!-- ========== FULL WIDTH MEGAMENU END ================== -->
 
-							
+
 
 							<li class="dropdown use-yamm yamm-fw"><a href="#"
 								class="dropdown-toggle" data-toggle="dropdown">Mon compte<b
@@ -184,7 +191,8 @@ _________________________________________________________ -->
 														</li>
 														<li><a href="compte-evaluations.xhtml">Mes
 																évaluations</a></li>
-														<li><a href="compte-calendrier.xhtml">Mon calendrier</a></li>
+														<li><a href="compte-calendrier.xhtml">Mon
+																calendrier</a></li>
 													</ul>
 												</div>
 											</div>
@@ -245,11 +253,13 @@ _________________________________________________________ -->
 					<div class="modal-body">
 						<h:form action="customer-orders.html" method="post">
 							<div class="form-group">
-								<h:inputText value="#{mbIdentif.mail}" styleClass="form-control" p:placeholder="adresse mail"></h:inputText>
+								<h:inputText value="#{mbIdentif.mail}" styleClass="form-control"
+									p:placeholder="adresse mail"></h:inputText>
 
 							</div>
 							<div class="form-group">
-								<h:inputText value="#{mbIdentif.mdp}" styleClass="form-control" p:placeholder="mot de passe"></h:inputText>
+								<h:inputText value="#{mbIdentif.mdp}" styleClass="form-control"
+									p:placeholder="mot de passe"></h:inputText>
 
 							</div>
 
@@ -263,8 +273,8 @@ _________________________________________________________ -->
 
 						<p class="text-center text-muted">Pas encore inscrit?</p>
 						<p class="text-center text-muted">
-							<a href="inscription.xhtml"><strong>Inscrivez
-									vous!</strong></a><br></br>C'est rapide et facile. 2 minutes suffisent!
+							<a href="inscription.xhtml"><strong>Inscrivez vous!</strong></a><br></br>C'est
+							rapide et facile. 2 minutes suffisent!
 						</p>
 
 					</div>
@@ -275,37 +285,46 @@ _________________________________________________________ -->
 		<!-- *** LOGIN MODAL END *** -->
 
 
-		
+
 		<div class="container" id="search">
 			<div class="row">
 				<h:form id="formSeek">
 					<div class="col-sm-12 col-md-3">
-						<h:inputText value="#{mbRecherche.critere.intitule}" id="string_search" name="string_search" p:placeholder="Rechercher..." styleClass="form-control"/>
+						<h:inputText value="#{mbRecherche.critere.intitule}"
+							id="string_search" name="string_search"
+							p:placeholder="Rechercher..." styleClass="form-control" />
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="input-group selecteur">
-							<span class="input-group-addon">
-								<img src="img/custom/cat.png" alt="cat" />
+							<span class="input-group-addon"> <img
+								src="img/custom/cat.png" alt="cat" />
 							</span>
-							<h:selectOneMenu value="#{mbRecherche.idCategorieSelected}" >
-								<f:selectItem itemLabel="Catégorie..." itemValue="#{null}"/>
-								<f:selectItems value="#{mbRecherche.categoriesMere}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
+							<h:selectOneMenu value="#{mbRecherche.idCategorieSelected}">
+								<f:selectItem itemLabel="Catégorie..." itemValue="#{null}" />
+								<f:selectItems value="#{mbRecherche.categoriesMere}"
+									var="currentCat" itemLabel="#{currentCat.intitule}"
+									itemValue="#{currentCat.idCategorie}" />
 							</h:selectOneMenu>
 						</div>
 					</div>
 					<div class="col-sm-6 col-md-3">
 						<div class="input-group selecteur">
 							<span class="input-group-addon"><img
-								src="img/custom/location.png" alt="cat"></img></span> 
-							<h:selectOneMenu value="#{mbRecherche.critere.departement}" >
-								<f:selectItem itemLabel="Département..." itemValue="0"/>
-								<f:selectItems value="#{mbRecherche.departements}" var="currentDep" itemLabel="#{currentDep.numDepartement} - #{currentDep.nomDepartement}" itemValue="#{currentDep.numDepartement}"/>
+								src="img/custom/location.png" alt="cat"></img></span>
+							<h:selectOneMenu value="#{mbRecherche.critere.departement}">
+								<f:selectItem itemLabel="Département..." itemValue="0" />
+								<f:selectItems value="#{mbRecherche.departements}"
+									var="currentDep"
+									itemLabel="#{currentDep.numDepartement} - #{currentDep.nomDepartement}"
+									itemValue="#{currentDep.numDepartement}" />
 							</h:selectOneMenu>
 						</div>
 					</div>
 					<div class="col-sm-2 col-sm-offset-1">
-						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}" id="btnSeek" style="display: none;" />
-						<button class="btn btn-custom btn-lg" type="submit" id="formSeek:btnSeek" name="formSeek:btnSeek" >
+						<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}"
+							id="btnSeek" style="display: none;" />
+						<button class="btn btn-custom btn-lg" type="submit"
+							id="formSeek:btnSeek" name="formSeek:btnSeek">
 							Rechercher<span class="glyphicon glyphicon-search"></span>
 						</button>
 					</div>

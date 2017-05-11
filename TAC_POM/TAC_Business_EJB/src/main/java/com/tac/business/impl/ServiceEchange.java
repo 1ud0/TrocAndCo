@@ -155,6 +155,12 @@ public class ServiceEchange implements IServiceEchange {
 	}
 
 	@Override
+	public List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre) {
+
+		return proxyEchange.getByMembreDonneurChercheurDateAcceptNull(idMembre);
+	}
+	
+	@Override
 	public List<Echange> getByMembreChercheur(Integer idMembreChercheur) {
 
 		return proxyEchange.getByMembreChercheur(idMembreChercheur);

@@ -3,7 +3,6 @@ package com.tac.controller;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -12,10 +11,12 @@ import javax.faces.bean.RequestScoped;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceLocalisation;
+import com.tac.business.api.IServiceRdv;
 import com.tac.business.api.IServiceRecherche;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
+import com.tac.entity.Rdv;
 
 
 
@@ -32,6 +33,8 @@ public class CompteTBManagedBean implements Serializable {
 	private IServiceLocalisation proxyLocalisation;
 	@EJB
 	private IServiceRecherche proxySearch;
+	@EJB
+	private IServiceRdv proxyRdv;
 	
 	@ManagedProperty(value="#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
@@ -41,13 +44,9 @@ public class CompteTBManagedBean implements Serializable {
 	
 	@ManagedProperty(value="#{mbCompteEchange}")
 	private CompteMesEchangesManagedBean compteEchangeBean;
-	
-
-
 
 	private Membre membreCourant;
-	private List<Proposition> propositions;
-	
+
 	public Membre getMembreCourant() {
 		membreCourant = identifBean.getMembreConnected();
 		membreCourant.setLocalisations(proxyLocalisation.getMembreLocalisations(membreCourant));
@@ -56,6 +55,9 @@ public class CompteTBManagedBean implements Serializable {
 		return membreCourant;
 	}
 
+	public List<Rdv> rdvAVenir(){
+		return proxyRdv.getByMembreIdEtMembrePropositionPasEncorePasse(identifBean.getMembreConnected().getIdMembre());
+	}
 	
 	public IdentificationManagedBean getIdentifBean() {
 		return identifBean;
@@ -122,15 +124,14 @@ public class CompteTBManagedBean implements Serializable {
 		return proxySearch.findSuggestion(identifBean.getMembreConnected());
 	}
 
-	public void setPropositions(List<Proposition> propositions) {
-		this.propositions = propositions;
+	public IServiceRdv getProxyRdv() {
+		return proxyRdv;
 	}
 
 
 
-
-
-	
-
+	public void setProxyRdv(IServiceRdv proxyRdv) {
+		this.proxyRdv = proxyRdv;
+	}
 
 }
