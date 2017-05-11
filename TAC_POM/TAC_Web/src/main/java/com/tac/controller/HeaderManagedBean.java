@@ -1,8 +1,10 @@
 package com.tac.controller;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -15,6 +17,7 @@ import com.tac.entity.Categorie;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Message;
+import com.tac.entity.Proposition;
 
 @ManagedBean(name = "mbHeader")
 @SessionScoped
@@ -32,6 +35,17 @@ public class HeaderManagedBean implements Serializable {
 	private IServiceEchange proxyEchange;
 
 	private Membre membreSelected;
+	
+	
+	private List<Categorie> categories = new ArrayList<>();
+	
+	
+	
+	  @PostConstruct
+	 public void init () {
+		  categories = recupererCategoriesMeres();
+	 }
+	
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
@@ -93,6 +107,22 @@ public class HeaderManagedBean implements Serializable {
 
 	public void setIdentifBean(IdentificationManagedBean identifBean) {
 		this.identifBean = identifBean;
+	}
+
+	public Membre getMembreSelected() {
+		return membreSelected;
+	}
+
+	public void setMembreSelected(Membre membreSelected) {
+		this.membreSelected = membreSelected;
+	}
+
+	public List<Categorie> getCategories() {
+		return categories;
+	}
+
+	public void setCategories(List<Categorie> categories) {
+		this.categories = categories;
 	}
 
 }

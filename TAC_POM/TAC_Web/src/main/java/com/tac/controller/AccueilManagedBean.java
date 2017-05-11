@@ -1,8 +1,10 @@
 package com.tac.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 
@@ -32,9 +34,13 @@ public class AccueilManagedBean {
 	public int nbCO2() {
 		return proxyAccueil.getAllEchangeFini().size() * 50;
 	}
-
+	 List<Proposition> lasts = new ArrayList<>();
+	  @PostConstruct
+	 public void init () {
+		  lasts = proxyAccueil.getNouveaute(NBNOUVEAUTEACCUEIL);
+	 }
 	public List<Proposition> dernieresPropositions() {
-		return proxyAccueil.getNouveaute(NBNOUVEAUTEACCUEIL);
+		return lasts;
 	}
 
 	public String dureeAjout(Date date) {

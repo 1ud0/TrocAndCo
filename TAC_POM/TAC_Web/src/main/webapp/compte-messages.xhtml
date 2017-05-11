@@ -1,7 +1,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
-	xmlns:ui="http://java.sun.com/jsf/facelets">
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://xmlns.jcp.org/jsf/passthrough">
 
 <h:head>
 	<title>COMPTE - MES MESSAGES</title>
@@ -52,17 +53,18 @@
 					<!-- /.pull-right -->
 				</div>
 				<hr></hr>
-				<div class="table-responsive mailbox-messages">
+				<div class="table-responsive mailbox-messages" id="mailbox">
 					<table class="table table-hover">
-						<ui:repeat var="discussion" value="#{mbMessage.LesVraiesDiscussions()}">
+						<ui:repeat var="discussion" value="#{mbMessage.messagesDuMembre}">
 						<h:form id="formConversation">
 							<tr  class="#{mbMessage.dernierMessage(discussion).lu or mbMessage.dernierMessage(discussion).emetteur.idMembre==mbIdentif.membreConnected.idMembre ? 'lu' : '' }">
 								<td><input type="checkbox"></input></td>
 								<td class="mailbox-star"><i
 										class="fa fa-envelope"></i></td>
 								<td class="mailbox-name">
-								<h:commandLink value="#{mbMessage.avecQui(discussion)}" onclick="$('#sidebar_secondary').addClass('popup-box-on')">
-									<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat"/>
+								<h:commandLink value="#{mbMessage.avecQui(discussion)}" onclick="openAndJump()">
+									<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat" onevent="function(data) { if (data.status === 'success') { 
+   	 									scrollAndFocus() } }"/>
 								</h:commandLink>
 								</td>
 								<td class="mailbox-subject"><b>#{discussion.proposition.intitule}</b> -   #{mbMessage.debutDernierMessage(discussion)} </td>
@@ -87,7 +89,6 @@
 
 			<!-- *** DEBUT DU CHAT *** _________________________________________________________ -->
 
-
 			<aside id="sidebar_secondary"
 				class="tabbed_sidebar ng-scope chat_sidebar">
 				<h:form id="fenetreChat">
@@ -95,16 +96,16 @@
 					<div class="popup-head-left pull-left">
 						<a target="_blank" href="shop-detail.html"> <img
 							class="md-user-image md-object" alt="objet echange" title=""
-							src="#{mbMessage.propAvecPhotos(mbMessage.chat.get(0).proposition.idProposition).photos.get(0).url}"></img>
-							<h1>#{mbMessage.chat.get(0).proposition.intitule}</h1></a>
+							src="#{mbMessage.chat.size()>0 ? mbMessage.propAvecPhotos(mbMessage.chat.get(0).proposition.idProposition).photos.get(0).url : ''}"></img>
+							<h1>#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.intitule : ''}</h1></a>
 					</div>
 					<div class="pull-right">
 						<button data-widget="remove" id="removeClass" onclick="document.getElementById('fenetreChat:boutonCache').click()"
 							class="chat-header-button pull-right" type="button">	
 							<i class="glyphicon glyphicon-remove"></i>
 						</button>
-						<h:button id="boutonCache" value="close" onclick="$('#sidebar_secondary').removeClass('popup-box-on')" style="display:none">
-									
+						<h:button id="boutonCache" value="close" onclick="$('#sidebar_secondary').removeClass('popup-box-on')" >
+						
 						</h:button>
 					</div>
 				</div>
@@ -138,17 +139,22 @@
 
 					
 						</ui:repeat>
-						
+						<div id="ancre"></div>
 					</div>
 				</div>
 				<div class="chat_submit_box">
-					<h:inputText value="#{mbMessage.messageAEnvoyer}" styleClass="md-input">
+					<h:inputText id="messageInput" value="#{mbMessage.messageAEnvoyer}" styleClass="md-input">
 						
 					</h:inputText>
 					<h:commandLink action="#" value="" >
 						<i class="fa fa-send"></i>
-						<f:ajax event="click" listener="#{mbMessage.refreshChat(mbMessage.chat.get(0))}" render="fenetreChat" execute="@form"/>
+						<f:ajax event="click" listener="#{mbMessage.refreshChat(mbMessage.chat.get(0))}" render="fenetreChat" execute="@form" onevent="function(data) { if (data.status === 'success') { 
+   	 scrollAndFocus()} }"/>
 					</h:commandLink>
+					<h:commandButton style="display:none" action="#" value="" >
+						<f:ajax event="click" listener="#{mbMessage.refreshChat(mbMessage.chat.get(0))}" render="fenetreChat" execute="@form" onevent="function(data) { if (data.status === 'success') { 
+   	 									 scrollAndFocus() } }"/>
+					</h:commandButton>
 					
 				</div>
 
@@ -165,9 +171,23 @@
 						function() {
 							$('input:checkbox').not(this).prop('checked',
 									this.checked);
-						});
+						});	
 			</script>
+			
+			<script type="text/javascript">
+				function openAndJump(){
+					$('#sidebar_secondary').addClass('popup-box-on')
+					console.log("slip");
+				    document.getElementById('ancre').scrollIntoView();
+				}
 
+				function scrollAndFocus(){
+					document.getElementById('ancre').scrollIntoView();
+					document.getElementById('fenetreChat:messageInput').focus(); 
+					}
+			</script>
+			
+			
 
 		</ui:define>
 	</ui:composition>
