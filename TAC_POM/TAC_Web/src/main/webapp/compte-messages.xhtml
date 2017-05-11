@@ -94,7 +94,7 @@
 				<h:form id="fenetreChat">
 				<div class="popup-head">
 					<div class="popup-head-left pull-left">
-						<a target="_blank" href="shop-detail.html"> <img
+						<a target="_blank" href="fiche.xhtml?id=#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.idProposition : ''}"> <img
 							class="md-user-image md-object" alt="objet echange" title=""
 							src="#{mbMessage.chat.size()>0 ? mbMessage.propAvecPhotos(mbMessage.chat.get(0).proposition.idProposition).photos.get(0).url : ''}"></img>
 							<h1>#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.intitule : ''}</h1></a>
