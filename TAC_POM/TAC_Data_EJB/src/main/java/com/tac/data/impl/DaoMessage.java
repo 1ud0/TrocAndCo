@@ -103,7 +103,16 @@ public class DaoMessage implements IDaoMessage {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Message> getWhereRecepteur(int idMembre) {
-		String req="SELECT m FROM Message m WHERE m.recepteur.idMembre= :mid ORDER BY m.dateEnvoi";
+		String req="SELECT m FROM Message m WHERE m.recepteur.idMembre=:mid ORDER BY m.dateEnvoi";
+		Query query = em.createQuery(req);
+		query.setParameter("mid", idMembre);
+		return query.getResultList();
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Message> getWhereRecepteurNonLu(int idMembre) {
+		String req="SELECT m FROM Message m WHERE m.recepteur.idMembre= :mid AND m.lu = FALSE ORDER BY m.dateEnvoi";
 		Query query = em.createQuery(req);
 		query.setParameter("mid", idMembre);
 		return query.getResultList();

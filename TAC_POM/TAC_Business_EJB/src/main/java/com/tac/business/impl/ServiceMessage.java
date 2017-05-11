@@ -46,7 +46,7 @@ public class ServiceMessage implements IServiceMessage {
 
 	@Override
 	public List<Message> messageNonLuQuandRecepteur(Membre membre) {
-		return proxyDaoMessage.getWhereRecepteur(membre.getIdMembre());
+		return proxyDaoMessage.getWhereRecepteurNonLu(membre.getIdMembre());
 	}
 		
 	public List<Message> getConversationAboutProposition(int idMembre1, int idMembre2, int idProposition) {		

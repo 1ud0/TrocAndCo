@@ -16,4 +16,5 @@ public interface IDaoMessage {
 	List<Message> getWhereRecepteur(int idMembre);
 	List<Message> getConversationAboutProposition(int idMembre1, int idMembre2, int idProposition) ;
 	List<Message> getAllConversations(int idMembre);
+	List<Message> getWhereRecepteurNonLu(int idMembre);
 }

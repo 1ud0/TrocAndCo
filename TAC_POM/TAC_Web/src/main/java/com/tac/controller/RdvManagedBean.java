@@ -1,5 +1,7 @@
 package com.tac.controller;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,31 +16,36 @@ import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Rdv;
 
-@ManagedBean(name="mbRdv")
+@ManagedBean(name = "mbRdv")
 @ViewScoped
 public class RdvManagedBean {
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
-	
+
 	@EJB
 	private IServiceEchange proxyEchange;
 	@EJB
 	private IServiceRdv proxyRdv;
-	
-	private Rdv rdv= new Rdv();
-	private List<Echange> echanges;
-	private Echange echangeSelected = new Echange();
 
+	private Rdv rdv = new Rdv();
+	private List<Echange> echanges;
+	private List<Rdv> list;
+	private Echange echangeSelected = new Echange();
+	private Membre membreSelected;
+	private int heure;
+	private int minute;
+	private Date date;
 
 	@PostConstruct
-	public void loadData(){
-		if (identifBean.getMembreConnected() != null) {
-			echanges = proxyEchange.getByMembreDonneur(identifBean.getMembreConnected().getIdMembre());
-			echanges.addAll(proxyEchange.getByMembreChercheur(identifBean.getMembreConnected().getIdMembre()));
+	public void loadData() {
+		membreSelected = identifBean.getMembreConnected();
+		if (membreSelected != null) {
+			echanges = proxyEchange.getByMembreDonneur(membreSelected.getIdMembre());
+			echanges.addAll(proxyEchange.getByMembreChercheur(membreSelected.getIdMembre()));
 		}
 	}
-	
+
 	public List<Echange> getEchanges() {
 		return echanges;
 	}
@@ -46,7 +53,6 @@ public class RdvManagedBean {
 	public void setEchanges(List<Echange> echanges) {
 		this.echanges = echanges;
 	}
-
 
 	public Rdv getRdv() {
 		return rdv;
@@ -56,23 +62,73 @@ public class RdvManagedBean {
 		this.rdv = rdv;
 	}
 
-	public void addRdv(){
+	public void addRdv() {
+		if (date != null && echangeSelected.getIdEchange()!= 0) {
 		echangeSelected = proxyEchange.getByNumero(echangeSelected);
-		rdv.setEchange(echangeSelected);
-		if(rdv.getDateRdv() != null){
-		proxyRdv.addRdv(rdv);
+		
+			rdv.setEchange(echangeSelected);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			calendar.set(calendar.HOUR_OF_DAY, heure);
+			calendar.set(calendar.MINUTE, minute);
+			date = calendar.getTime();
+
+			rdv.setDateRdv(date);
+			
+				proxyRdv.addRdv(rdv);
+			
 		}
 	}
-	
-	public void deleteRdv(Rdv rdv){
+
+	public List<Rdv> getList() {
+		return list;
+	}
+
+	public void setList(List<Rdv> list) {
+		this.list = list;
+	}
+
+	public Membre getMembreSelected() {
+		return membreSelected;
+	}
+
+	public void setMembreSelected(Membre membreSelected) {
+		this.membreSelected = membreSelected;
+	}
+
+	public int getHeure() {
+		return heure;
+	}
+
+	public void setHeure(int heure) {
+		this.heure = heure;
+	}
+
+	public int getMinute() {
+		return minute;
+	}
+
+	public void setMinute(int minute) {
+		this.minute = minute;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public void deleteRdv(Rdv rdv) {
 		proxyRdv.deleteRdv(rdv);
 	}
-	
-	public Rdv updateRdv(Rdv rdv){
+
+	public Rdv updateRdv(Rdv rdv) {
 		rdv = proxyRdv.updateRdv(rdv);
 		return rdv;
 	}
-	
+
 	public IdentificationManagedBean getIdentifBean() {
 		return identifBean;
 	}
@@ -89,9 +145,12 @@ public class RdvManagedBean {
 		this.proxyRdv = proxyRdv;
 	}
 
-	public List<Rdv> getAllRdvByMembre(){
-
-		return proxyRdv.getRdvByMembre(identifBean.getMembreConnected().getIdMembre());
+	public List<Rdv> getAllRdvByMembre() {
+		if (membreSelected != null) {
+			list = proxyRdv.getRdvByMembre(membreSelected.getIdMembre());
+			list.addAll(proxyRdv.getRdvByMembrePropositionEchange(membreSelected.getIdMembre()));
+		}
+		return list;
 	}
 
 	public IServiceEchange getProxyEchange() {
@@ -110,6 +169,4 @@ public class RdvManagedBean {
 		this.echangeSelected = echangeSelected;
 	}
 
-	
-	
 }

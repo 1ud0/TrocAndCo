@@ -37,5 +37,11 @@ public class ServiceRdv implements IServiceRdv {
 	public List<Rdv> getRdvByMembre(int idMembre) {
 		return proxyRdv.getByMembreId(idMembre);
 	}
+	
+	@Override
+	public List<Rdv> getRdvByMembrePropositionEchange(int idMembre) {
+		return proxyRdv.getByMembreIdPropositionEchange(idMembre);
+	}
+	
 
 }

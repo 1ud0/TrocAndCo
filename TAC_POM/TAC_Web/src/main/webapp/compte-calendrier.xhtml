@@ -16,6 +16,7 @@
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
 			</f:metadata>
+			<script type="text/javascript" src="js/calendrier.js"></script>
 			<script type="text/javascript" src="js/affichageCalendrier.js">	</script>
 		</ui:define>
 
@@ -58,10 +59,14 @@
 				<div id="myScheduler"></div>
 			</div>
 			<h:form id="evenement">
-				<h:inputText id="inputDate" value="#{mbRdv.rdv.dateRdv}"
-					p:placeholder="Date : jj/MM/aaaa hh/mm">
-					<f:convertDateTime pattern="dd/MM/yyyy hh/mm" />
-				</h:inputText>
+				<div class="row container">
+					<h:inputText id="inputDate" value="#{mbRdv.date}"
+						p:placeholder="jj/MM/aaaa" size="10">
+						<f:convertDateTime pattern="dd/MM/yyyy" />
+					</h:inputText>
+					<h:inputText value="#{mbRdv.heure}" p:placeholder="HH" size="2" />
+					<h:inputText value="#{mbRdv.minute}" p:placeholder="mm" size="2" />
+				</div>
 				<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
 					p:placeholder="Lieu" />
 				<h:inputText id="inputCommentaire" value="#{mbRdv.rdv.commentaire}"
@@ -71,16 +76,22 @@
 
 				<h:selectOneMenu value="#{mbRdv.echangeSelected.idEchange}">
 					<f:selectItem itemLabel="Sélectionner l'échange" itemValue="0" />
-					<f:selectItems
-						value="#{mbRdv.echanges}"
-						var="currentEchange"
+					<f:selectItems value="#{mbRdv.echanges}" var="currentEchange"
 						itemLabel="#{currentEchange.proposition.intitule} + #{currentEchange.idEchange}"
 						itemValue="#{currentEchange.idEchange}" />
 				</h:selectOneMenu>
 
 
-				<h:commandButton action="#{mbRdv.addRdv()}"
+				<h:commandButton styleClass="btn-vert" action="#{mbRdv.addRdv()}"
 					value="Enregistrer le rendez-vous" />
+
+
+
+
+
+
+
+
 
 
 			</h:form>

@@ -72,6 +72,7 @@ YUI()
 						activeView : monthView,
 						boundingBox : '#myScheduler',
 						date : new Date(),
+						firstDayOfWeek:1,
 
 						items : events,
 						render : true,
