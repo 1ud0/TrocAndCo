@@ -18,14 +18,12 @@ import javax.servlet.http.Part;
 import com.tac.business.api.IServiceCompte;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.entity.Localisation;
+import com.tac.entity.Membre;
 
 @ManagedBean(name = "mbModifCompte")
 @RequestScoped
 public class ModifCompteManagedBean implements Serializable {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 
 	@ManagedProperty(value = "#{mbIdentif}")
@@ -33,28 +31,18 @@ public class ModifCompteManagedBean implements Serializable {
 
 	@EJB
 	private IServiceCompte proxyCompte;
-	
-	
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
 
 
 	private Part file1;
-
 	private String messageModif;
-	
 	private String ancienMdp;
 	private String nouveauMdp;
-	
 	private boolean showAlertPwd;
 	private boolean showAlertModif;
-	
 	private List<Localisation> adresses;
 	
-	
-
-	public void onload() {
-	}
 
 	public String upload() {
 		String path = Thread.currentThread().getContextClassLoader().getResource("bidon.txt").getPath();
@@ -65,7 +53,6 @@ public class ModifCompteManagedBean implements Serializable {
 		try {
 			file1.write(path + getFilename(file1));
 			identifSession.getMembreConnected().setAvatar("img/" + getFilename(file1));
-			System.out.println(identifSession.getMembreConnected().getAvatar());
 			proxyCompte.majDonnees(identifSession.getMembreConnected());
 		} catch (IOException e) {
 			System.out.println("souci d'écriture de fichier");
@@ -111,9 +98,10 @@ public class ModifCompteManagedBean implements Serializable {
 	
 	public void modifPwd() {
 		showAlertPwd = false;
-		if (identifSession.getMembreConnected().getPassword().equals(ancienMdp)){
-			identifSession.getMembreConnected().setPassword(nouveauMdp);
-			proxyCompte.majDonnees(identifSession.getMembreConnected());
+		Membre membreConnected = identifSession.getMembreConnected();
+		if (membreConnected.getPassword().equals(ancienMdp)){
+			membreConnected.setPassword(nouveauMdp);
+			proxyCompte.majDonnees(membreConnected);
 			showAlertPwd = true;
 		}
 	}
@@ -209,11 +197,5 @@ public class ModifCompteManagedBean implements Serializable {
 		this.adresses = adresses;
 	}
 
-
-
-	
-	
-	
-	
 
 }

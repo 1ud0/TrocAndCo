@@ -25,12 +25,8 @@ public class DaoProposition implements IDaoProposition {
 			+ " FROM proposition p"
 			+ " WHERE NOT EXISTS (SELECT e.id_echange FROM echange e WHERE e.date_validation IS NOT NULL AND e.proposition_id = p.id_proposition)"
 			+ " AND p.date_suppression IS NULL";
-	// TODO POUR ACCUEIL
-	public static final String QUERY_NB_PROP_DISPO =
-			"SELECT count(p.id_proposition)"
-					+ " FROM proposition p"
-					+ " WHERE NOT EXISTS (SELECT e.id_echange FROM echange e WHERE e.date_validation IS NOT NULL AND e.proposition_id = p.id_proposition)"
-					+ " AND p.date_suppression IS NULL";
+
+	
 	@PersistenceContext(unitName = "TAC_Data_EJB")
 	private EntityManager em;
 
@@ -188,7 +184,7 @@ public class DaoProposition implements IDaoProposition {
 	//methode pour contruire la query en fonction de l'objet carac
 	private String constructQuery(CritereSearch carac, Integer idMembre) {
 		StringBuilder requete = new StringBuilder();
-		requete.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.photos WHERE NOT EXISTS (SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL AND e.proposition = p) AND p.membre.dateRadiation IS NULL AND p.membre.dateDesinscription IS NULL");
+		requete.append("SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.photos WHERE NOT EXISTS (SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL AND e.proposition = p) AND p.membre.dateRadiation IS NULL AND p.membre.dateDesinscription IS NULL AND p.dateSuppression IS NULL");
 		//clause id membre
 		if (idMembre != null) {
 			requete.append(" AND p.membre.idMembre != :pid");
@@ -270,6 +266,17 @@ public class DaoProposition implements IDaoProposition {
 			requete.append(" p.intitule LIKE :pword").append(i);
 		}
 		requete.append(")");
+	}
+
+	@Override
+	public long getNbPropDispo() {
+		final String requete = "SELECT COUNT(p.idProposition) FROM Proposition p WHERE NOT EXISTS (SELECT e FROM Echange e WHERE e.dateValidation IS NOT NULL AND e.proposition = p) AND p.membre.dateRadiation IS NULL AND p.membre.dateDesinscription IS NULL AND p.dateSuppression IS NULL";
+		Query query = em.createQuery(requete);
+		try {
+			return (long)query.getSingleResult();
+		} catch (Exception e) {
+			return 0;
+		}
 	}
 
 

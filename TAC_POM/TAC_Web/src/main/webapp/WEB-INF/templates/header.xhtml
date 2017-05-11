@@ -45,8 +45,7 @@ _________________________________________________________ -->
 										data-toggle="dropdown" data-target="#">
 										<span class="glyphicon glyphicon-bell"></span>
 									</button>
-									<span class="badge badge-notify">#{mbHeader.nombreNouveauxMessages()
-										+ mbHeader.nombreNvxEchanges()}</span>
+									<span class="badge badge-notify">#{mbIdentif.nbNouveauxMessages + mbIdentif.nbNouveauxEchanges}</span>
 									<ul class="dropdown-menu notifications" role="menu"
 										aria-labelledby="dLabel">
 										<div class="notification-heading">
@@ -63,7 +62,7 @@ _________________________________________________________ -->
 												<div class="notification-item">
 													<h4 class="item-title">
 														<span class="glyphicon glyphicon-envelope"
-															aria-hidden="true"></span> <span class="notifNum">#{mbHeader.nombreNouveauxMessages()}</span>nouveaux
+															aria-hidden="true"></span> <span class="notifNum">#{mbIdentif.nbNouveauxMessages}</span>nouveaux
 														messages
 													</h4>
 												</div>
@@ -71,7 +70,7 @@ _________________________________________________________ -->
 												<div class="notification-item">
 													<h4 class="item-title">
 														<span class="fa fa-exchange" aria-hidden="true"></span> <span
-															class="notifNum">#{mbHeader.nombreNvxEchanges()} </span>nouveaux
+															class="notifNum">#{mbIdentif.nbNouveauxEchanges} </span>nouveaux
 														échanges
 													</h4>
 												</div>
@@ -299,11 +298,12 @@ _________________________________________________________ -->
 							<span class="input-group-addon"> <img
 								src="img/custom/cat.png" alt="cat" />
 							</span>
-							<h:selectOneMenu value="#{mbRecherche.idCategorieSelected}">
+							<h:selectOneMenu value="#{mbHeader.idCategorieSelected}">
 								<f:selectItem itemLabel="Catégorie..." itemValue="#{null}" />
 								<f:selectItems value="#{mbRecherche.categoriesMere}"
 									var="currentCat" itemLabel="#{currentCat.intitule}"
 									itemValue="#{currentCat.idCategorie}" />
+								<f:ajax  listener="#{mbHeader.listenerCatChange()}" execute="@this" event="change"/>
 							</h:selectOneMenu>
 						</div>
 					</div>

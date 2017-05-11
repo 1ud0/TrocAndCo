@@ -91,16 +91,23 @@
 
 											<h:commandButton action="#{mbEchange.loadPropositionEtMembre(mbObjet.selectedProp)}" value="Proposer un	échange"
 												styleClass="btn btn-template-main">
-												<f:param name="id" value="1"/>	
 											</h:commandButton>
 
-											<h:panelGroup rendered="#{mbObjet.favori}" id="coucou">
-												coucou
-											</h:panelGroup>
 
-											<h:commandButton id="btnAjtFav" value="Add">
+											<h:commandButton id="btnAjtFav" value="Add" style="display: none;">
 												<f:ajax render=":myFormFav" listener="#{mbObjet.toggleFavori()}" execute="@form" event="click"/>
 											</h:commandButton>
+											<h:panelGroup rendered="#{mbIdentif.membreConnected != null}">
+												<button type="button" class="btn btn-default tailleBoutonFavoris"
+														data-toggle="tooltip" data-placement="top"
+														title="Ajouter aux favoris" onclick="$('#myFormFav\\:btnAjtFav').click()">
+														<h:panelGroup rendered="#{!mbObjet.favori}" styleClass="fa fa-heart-o">
+														</h:panelGroup>
+														<h:panelGroup rendered="#{mbObjet.favori}" styleClass="fa fa-heart" style="color: red;">
+														</h:panelGroup>
+												</button>
+											</h:panelGroup>
+											
 										</p>
 									</h:form>
 								</div>

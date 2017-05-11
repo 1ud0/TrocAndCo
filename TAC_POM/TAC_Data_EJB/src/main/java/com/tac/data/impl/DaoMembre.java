@@ -106,6 +106,15 @@ public class DaoMembre implements IDaoMembre{
 		return membres;
 	}
 
+	@Override
+	public long getNbMembres() {
+		final String reqGetAll = "SELECT COUNT(m.idMembre) FROM Membre m";
+		Query query = em.createQuery(reqGetAll);
+		try {
+			return (long)query.getSingleResult();
+		} catch (Exception e) {
+			return 0;
+		}
+	}
 
-	
 }

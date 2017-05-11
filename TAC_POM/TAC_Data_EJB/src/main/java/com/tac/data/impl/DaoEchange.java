@@ -237,4 +237,15 @@ public class DaoEchange implements IDaoEchange {
 		return query.getResultList();
 	}
 
+	@Override
+	public long getNbEchangesFinis() {
+		final String req = "SELECT COUNT(e.idEchange) FROM Echange e WHERE e.dateValidation IS NOT NULL";
+		Query query = em.createQuery(req);
+		try {
+			return (long) query.getSingleResult();
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
 }

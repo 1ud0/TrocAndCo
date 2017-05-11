@@ -28,7 +28,6 @@ public class MessageManagedBean implements Serializable {
 	
 	@EJB
 	private IServiceMessage proxyMessage;
-	
 	@EJB
 	private IServiceProposition proxyProposition;
 	
@@ -60,7 +59,8 @@ public class MessageManagedBean implements Serializable {
 	@PostConstruct
 	void init(){
 		membreCourant = identifBean.getMembreConnected();
-		messagesDuMembre = proxyMessage.getConversationList(membreCourant);
+		if (membreCourant != null)
+			messagesDuMembre = proxyMessage.getConversationList(membreCourant);
 	}
 	
 	

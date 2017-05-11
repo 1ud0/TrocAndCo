@@ -26,35 +26,35 @@ public class HeaderManagedBean implements Serializable {
 
 	@EJB
 	private IServiceCategorie proxyCategorie;
-
 	@EJB
 	private IServiceMessage proxyMessage;
-
 	@EJB
 	private IServiceEchange proxyEchange;
 
 	private Membre membreSelected;
-	
-	
-	private List<Categorie> categories = new ArrayList<>();
-	
+	private List<Categorie> categories;
+	private Integer idCategorieSelected;
+
 	@ManagedProperty(value = "#{mbRecherche}")
 	private RechercheManagedBean rechercheBean;
-	
-	  @PostConstruct
-	 public void init () {
-		  categories = recupererCategoriesMeres();
-	 }
-	
-
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
-	public List<Categorie> recupererCategoriesMeres() {
-		List<Categorie> categories = proxyCategorie.getCategorieMere();
-		return categories;
+	@PostConstruct
+	public void init() {
+		categories = proxyCategorie.getCategorieMere();
 	}
 
+	public void listenerCatChange() {
+		for (Categorie cat : categories) {
+			if (cat.getIdCategorie() == idCategorieSelected) {
+				CritereSearch crits = rechercheBean.getCritere();
+				crits.setCat(cat);
+				break;
+			}
+		}
+	}
+	
 	public RechercheManagedBean getRechercheBean() {
 		return rechercheBean;
 	}
@@ -63,40 +63,18 @@ public class HeaderManagedBean implements Serializable {
 		this.rechercheBean = rechercheBean;
 	}
 
-	public String clickCategorieMere(Categorie categorie){
-		rechercheBean.resetFilter();
-		CritereSearch critereSearch = rechercheBean.getCritere();
+	public String clickCategorieMere(Categorie categorie) {
+		CritereSearch critereSearch = new CritereSearch();
 		critereSearch.setCat(categorie);
 		rechercheBean.setCritere(critereSearch);
 		return rechercheBean.seekAndNotDestroy();
 	}
-	
-	public String clickSousCat(Categorie categorie){
-		rechercheBean.resetFilter();
-		CritereSearch critereSearch = rechercheBean.getCritere();
+
+	public String clickSousCat(Categorie categorie) {
+		CritereSearch critereSearch = new CritereSearch();
 		critereSearch.setSousCat(categorie);
 		rechercheBean.setCritere(critereSearch);
 		return rechercheBean.seekAndNotDestroy();
-	}
-	
-	
-	// notifications
-
-	public int nombreNvxEchanges() {
-		membreSelected = identifBean.getMembreConnected();
-		if (membreSelected != null) {
-			List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreSelected.getIdMembre());
-			return echanges.size();
-		}
-		return 0;
-	}
-
-	public int nombreNouveauxMessages() {
-		membreSelected = identifBean.getMembreConnected();
-		if (membreSelected != null) {
-		return proxyMessage.messageNonLuQuandRecepteur(membreSelected).size();
-		}
-		return 0;
 	}
 
 	public IServiceCategorie getProxyCategorie() {
@@ -145,6 +123,14 @@ public class HeaderManagedBean implements Serializable {
 
 	public void setCategories(List<Categorie> categories) {
 		this.categories = categories;
+	}
+
+	public Integer getIdCategorieSelected() {
+		return idCategorieSelected;
+	}
+
+	public void setIdCategorieSelected(Integer idCategorieSelected) {
+		this.idCategorieSelected = idCategorieSelected;
 	}
 
 }

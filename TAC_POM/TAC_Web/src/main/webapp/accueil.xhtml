@@ -130,7 +130,7 @@ _________________________________________________________ -->
 									<div class="item active">
 										<div class="row">
 											<ui:repeat var="prop"
-												value="#{mbAccueil.dernieresPropositions()}" size="4"
+												value="#{mbAccueil.lasts}" size="4"
 												offset="0">
 												<div class="col-sm-3">
 													<div class="article">
@@ -163,7 +163,7 @@ _________________________________________________________ -->
 									<div class="item">
 										<div class="row">
 											<ui:repeat var="prop"
-												value="#{mbAccueil.dernieresPropositions()}" size="8"
+												value="#{mbAccueil.lasts}" size="8"
 												offset="4">
 												<div class="col-sm-3">
 													<div class="article">
@@ -190,7 +190,7 @@ _________________________________________________________ -->
 									<div class="item">
 										<div class="row">
 											<ui:repeat var="prop"
-												value="#{mbAccueil.dernieresPropositions()}" size="12"
+												value="#{mbAccueil.lasts}" size="12"
 												offset="8">
 												<div class="col-sm-3">
 													<div class="article">
@@ -279,7 +279,7 @@ _________________________________________________________ -->
 
 								<h4>
 									<span class="counter"><h:outputText
-											value="#{mbAccueil.nbPropositionDispo()}" /></span><br></br>Objets
+											value="#{mbAccueil.nbPropDispo}" /></span><br></br>Objets
 									proposés
 								</h4>
 							</div>
@@ -291,7 +291,7 @@ _________________________________________________________ -->
 								</div>
 								<h4>
 									<span class="counter"> <h:outputText
-											value="#{mbAccueil.nbMembre()}" />
+											value="#{mbAccueil.nbMembre}" />
 									</span><br></br>Adhérents
 								</h4>
 							</div>
@@ -303,7 +303,7 @@ _________________________________________________________ -->
 								</div>
 								<h4>
 									<span class="counter"> <h:outputText
-											value="#{mbAccueil.nbEchangeFini()}" />
+											value="#{mbAccueil.nbEchangesFinis}" />
 									</span><br></br>échanges effectués
 								</h4>
 							</div>
@@ -315,7 +315,7 @@ _________________________________________________________ -->
 								</div>
 								<h4>
 									<span class="counter"> <h:outputText
-											value="#{mbAccueil.nbCO2()}" />
+											value="#{mbAccueil.nbCO2}" />
 									</span><br></br>Kg CO2 éconimisé
 								</h4>
 							</div>

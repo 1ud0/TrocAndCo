@@ -14,33 +14,24 @@ import com.tac.entity.Proposition;
 @ManagedBean(name = "mbAccueil")
 public class AccueilManagedBean {
 
-	public static final int NBNOUVEAUTEACCUEIL = 12;
+	public static final int NB_NOUVEAUTE_ACCUEIL = 12;
 
 	@EJB
 	private IServiceAccueil proxyAccueil;
 
-	public int nbPropositionDispo() {
-		return proxyAccueil.getAllPropDispo().size();
-	}
+	private List<Proposition> lasts;
+	private long nbPropDispo;
+	private long nbMembre;
+	private long nbEchangesFinis;
+	private long nbCO2;
 
-	public int nbMembre() {
-		return proxyAccueil.getAllMembre().size();
-	}
-
-	public int nbEchangeFini() {
-		return proxyAccueil.getAllEchangeFini().size();
-	}
-
-	public int nbCO2() {
-		return proxyAccueil.getAllEchangeFini().size() * 50;
-	}
-	 List<Proposition> lasts = new ArrayList<>();
-	  @PostConstruct
-	 public void init () {
-		  lasts = proxyAccueil.getNouveaute(NBNOUVEAUTEACCUEIL);
-	 }
-	public List<Proposition> dernieresPropositions() {
-		return lasts;
+	@PostConstruct
+	public void init() {
+		lasts = proxyAccueil.getNouveaute(NB_NOUVEAUTE_ACCUEIL);
+		nbPropDispo = proxyAccueil.getNbPropDispo();
+		nbMembre = proxyAccueil.getNbMembre();
+		nbEchangesFinis = proxyAccueil.getNbEchangesFinis();
+		nbCO2 = nbEchangesFinis * 50;
 	}
 
 	public String dureeAjout(Date date) {
@@ -54,6 +45,54 @@ public class AccueilManagedBean {
 		long dureemin = time / msToMin - dureeheures * 60 - dureejours * 24 * 60;
 
 		return " Il y a " + dureejours + "j " + dureeheures + "h " + dureemin + "min!";
+	}
+
+	public IServiceAccueil getProxyAccueil() {
+		return proxyAccueil;
+	}
+
+	public void setProxyAccueil(IServiceAccueil proxyAccueil) {
+		this.proxyAccueil = proxyAccueil;
+	}
+
+	public List<Proposition> getLasts() {
+		return lasts;
+	}
+
+	public void setLasts(List<Proposition> lasts) {
+		this.lasts = lasts;
+	}
+
+	public long getNbPropDispo() {
+		return nbPropDispo;
+	}
+
+	public void setNbPropDispo(long nbPropDispo) {
+		this.nbPropDispo = nbPropDispo;
+	}
+
+	public long getNbMembre() {
+		return nbMembre;
+	}
+
+	public void setNbMembre(long nbMembre) {
+		this.nbMembre = nbMembre;
+	}
+
+	public long getNbEchangesFinis() {
+		return nbEchangesFinis;
+	}
+
+	public void setNbEchangesFinis(long nbEchangesFinis) {
+		this.nbEchangesFinis = nbEchangesFinis;
+	}
+
+	public long getNbCO2() {
+		return nbCO2;
+	}
+
+	public void setNbCO2(long nbCO2) {
+		this.nbCO2 = nbCO2;
 	}
 
 }

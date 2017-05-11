@@ -105,16 +105,11 @@ public class RechercheManagedBean {
 	
 	//Méthodes
 	public String seekAndNotDestroy() {
-		if (idCategorieSelected != null)
-			critere.setCat(proxyCat.getById(idCategorieSelected));
-		else
-			critere.setCat(null);
 		return "/resultatRecherche.xhtml?faces-redirect=true";
 	}
 	
 	public void afficherModalListe() {
 		modalRendered = !modalRendered;
-		
 	}
 	
 	public void startSearching() {
@@ -164,11 +159,7 @@ public class RechercheManagedBean {
 	}
 	
 	public void listenerCat(Categorie cat) {
-		if (cat == null) {
-			critere.setCat(null);
-		} else {
-			critere.setCat(cat);
-		}
+		critere.setCat(cat);
 		critere.setSousCat(null);
 	}
 	
@@ -182,13 +173,16 @@ public class RechercheManagedBean {
 		listes = proxyListe.getByMembre(connexionBean.getMembreConnected());
 		Categorie catMere = critere.getCat();
 		if (catMere != null) {
-			System.out.println(catMere.getIntitule());
-			categoriesFille = proxyCat.getCategorieFille(catMere.getIdCategorie());
+			for (Categorie categorie : categoriesMere) {
+				if (catMere.getIdCategorie() == categorie.getIdCategorie()) {
+					categoriesFille = categorie.getSousCategories();
+					break;
+				}
+			}
 			idCatModale = catMere.getIdCategorie();
 		}
 		Categorie catFille = critere.getSousCat();
 		if (catFille != null) {
-			System.out.println(catFille.getIntitule());
 			idSousCatModale = catFille.getIdCategorie();
 		}
 		intituleModale = critere.getIntitule();
@@ -198,9 +192,9 @@ public class RechercheManagedBean {
 		Liste nouvelleListe = new Liste();
 		nouvelleListe.setTitreListe(newListeName);
 		nouvelleListe.setMembre(connexionBean.getMembreConnected());
-		proxyListe.addListe(nouvelleListe);
+		nouvelleListe = proxyListe.addListe(nouvelleListe);
 		modalRendered = false;
-		listes = proxyListe.getByMembre(connexionBean.getMembreConnected());
+		listes.add(nouvelleListe);
 	}
 	
 	public void listenerBtnCancelAddEnvie() {
@@ -209,7 +203,12 @@ public class RechercheManagedBean {
 	
 	public void listenerDDLCat() {
 		if (idCatModale != null) {
-			categoriesFille = proxyCat.getCategorieFille(idCatModale);
+			for (Categorie categorie : categoriesMere) {
+				if (categorie.getIdCategorie() == idCatModale) {
+					categoriesFille = categorie.getSousCategories();
+					break;
+				}
+			}
 		}
 	}
 	

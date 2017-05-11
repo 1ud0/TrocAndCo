@@ -16,5 +16,5 @@ public interface IDaoMembre {
 	void deleteMembre(Membre membreToDelete);
 	List<Membre> getAllActif();
 	List<Membre> getAllRadie();
-
+	long getNbMembres();
 }

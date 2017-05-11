@@ -53,7 +53,6 @@ public class ObjetManagedBean {
 	}
 	
 	public void toggleFavori() {
-		System.out.println("dans le toggle");
 		if (favori) {
 			proxyFavori.deleteFavori(selectedProp, membreCourant);
 		} else {
@@ -95,7 +94,6 @@ public class ObjetManagedBean {
 	public String LoadMembre(Membre membre) {
 		String nav = "";
 		selectedMembre = membre;
-		System.out.println(selectedMembre.getIdMembre());
 		selectedMembre.setLocalisations(proxyLocalisation.getMembreLocalisations(selectedMembre));
 		if (selectedMembre != null) {
 			nav = "/profil.xhtml?faces-redirect=true";
@@ -120,14 +118,12 @@ public class ObjetManagedBean {
 			// catch misère
 		}
 		if(!FacesContext.getCurrentInstance().isPostback()) {
-		System.out.println("coucou load entry");
 		if (entryId != null && entryId != 0) {
 			try {
 				selectedProp = proxyProp.getById(entryId);
 				membreCourant = identifBean.getMembreConnected();
 				if (membreCourant != null) {
 					favori = proxyFavori.isFavorite(selectedProp, membreCourant);
-					System.out.println(favori);
 				}
 			} catch (DataAccessException e) {
 				String message = "Erreur lors du chargement de la page : " + e.getMessage();
