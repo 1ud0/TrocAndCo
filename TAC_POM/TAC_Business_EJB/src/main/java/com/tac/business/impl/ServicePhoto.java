@@ -23,4 +23,18 @@ public class ServicePhoto implements IServicePhoto {
 		return proxyPhoto.getByProposition(proposition);
 	}
 
+	@Override
+	public Photo addPhoto(Photo photoAAjouter) {
+		Photo photo = proxyPhoto.addPhoto(photoAAjouter);
+		return photo;
+	}
+
+	@Override
+	public Photo updatePhoto(Photo photoAUpdater) {
+		Photo photo = proxyPhoto.updatePhoto(photoAUpdater);
+		return photo;
+	}
+	
+	
+
 }

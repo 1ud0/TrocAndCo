@@ -34,11 +34,18 @@
 									<!-- /.image -->
 									<div class="text">
 										<h3>${proposition.intitule}</h3>
-										<h:commandButton value="modification" onclick="$('#modalObjet').modal('show');"	styleClass="btn btn-default">
-											<f:ajax render=":formModifObjet:modifObjet" execute="@form" event="click" listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}" />
+										<h:commandButton value="modification"
+											onclick="$('#modalObjet').modal('show');"
+											styleClass="btn btn-default">
+											<f:ajax render=":libelleSelected :panelImages1 :panelImages2 :panelImages3 :formModifObjet" execute="@form"
+												event="click"
+												listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}" />
 										</h:commandButton>
-										<h:commandButton value="suppression" onclick="$('#suppressionObjet').modal('show');" styleClass="btn btn-default">
-											<f:ajax event="click" listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}" />
+										<h:commandButton value="suppression"
+											onclick="$('#suppressionObjet').modal('show');"
+											styleClass="btn btn-default">
+											<f:ajax event="click"
+												listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}" />
 										</h:commandButton>
 									</div>
 									<!-- /.text -->
@@ -49,50 +56,175 @@
 					<!-- produits FIN  -->
 				</div>
 			</div>
-				<!-- DEBUT BOUTON AJOUTER -->
+			<!-- DEBUT BOUTON AJOUTER -->
 
 
-				<!-- ******************************MODALE MODIFIER DEBUT****************************** -->
+			<!-- ******************************MODALE MODIFIER DEBUT****************************** -->
 
-				<div class="modal fade" id="modalObjet" role="dialog">
-					<div class="modal-dialog">
+			<div class="modal fade" id="modalObjet" role="dialog">
+				<div class="modal-dialog">
 
-						<!-- Modal content-->
-						<div class="modal-content">
-							<h:form id="formModifObjet">
-								<h:panelGroup id="modifObjet">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">x</button>
-										<h4 class="modal-title">Modification de la proposition :
-											${mbCompteObjet.intituleSelected}</h4>
+					<!-- Modal content-->
+					<div class="modal-content">
 
-									</div>
-									<div class="modal-body">
-										<br></br>
-										<div class="row ">
-											<div class="col-sm-4">
-												<div class="image ">
-													<a href="#"> <img
-														src="#{mbCompteObjet.propositionSelected.photos.size()>0 ? mbCompteObjet.propositionSelected.photos.get(0).url : 'img/camera-flat.png'}"
-														alt="Appareil-photo" class="img-responsive"></img>
-													</a>
-												</div>
+						
+							<h:panelGroup id="modifObjet">
+								<div class="modal-header">
+									<button type="button" class="close" data-dismiss="modal">x</button>
+									<h4 class="modal-title">Modification de la proposition :
+										<h:outputLabel value="#{mbCompteObjet.intituleSelected}" id="libelleSelected"/>
+										</h4>
+
+								</div>
+
+								<div class="modal-body">
+									<br></br>
+									<div class="row ">
+										<div class="col-sm-4">
+											<div class="image ">
+											<h:panelGroup id="panelImages1" layout="block">
+											
+													<img
+														src="#{mbCompteObjet.propositionSelected.photos.size()!=0? mbCompteObjet.propositionSelected.photos.get(0).url : 'img/camera-flat.png'}"
+														class="img-responsive" alt="Appareil-photo"></img>
+											</h:panelGroup>
+													<h:form  enctype="multipart/form-data">
+													<h:inputFile styleClass="marginBottom15" id="file"
+														value="#{mbCompteObjet.file1}"
+														></h:inputFile>
+													<h:message for="file" />
+													<h:commandButton action="#{mbCompteObjet.uploadPhoto1()}"
+														value="Valider" styleClass="btn btn-vert btn-lg">
+													</h:commandButton>
+													</h:form>
+													
 											</div>
-											<div class="col-sm-4">
-												<div class="image ">
-													<a href="#"> <img
+											
+										</div>
+										<div class="col-sm-4">
+											<div class="image ">
+											<h:panelGroup id="panelImages2" layout="block">
+											
+													<img
 														src="#{mbCompteObjet.propositionSelected.photos.size()>1 ? mbCompteObjet.propositionSelected.photos.get(1).url : 'img/camera-flat.png'}"
-														alt="Appareil-photo" class="img-responsive"></img>
-													</a>
+														class="img-responsive" alt="Appareil-photo"></img>
+											</h:panelGroup>
+													<h:form  enctype="multipart/form-data">
+													<h:inputFile styleClass="marginBottom15" id="file"
+														value="#{mbCompteObjet.file2}"
+														></h:inputFile>
+													<h:message for="file" />
+													<h:commandButton action="#{mbCompteObjet.uploadPhoto2()}"
+														value="Valider" styleClass="btn btn-vert btn-lg">
+													</h:commandButton>
+													</h:form>
+													
+											</div>
+											
+										</div>
+										<div class="col-sm-4">
+											<div class="image ">
+											<h:panelGroup id="panelImages3" layout="block">											
+													<img
+														src="#{mbCompteObjet.propositionSelected.photos.size()>2 ? mbCompteObjet.propositionSelected.photos.get(2).url : 'img/camera-flat.png'}"
+														class="img-responsive" alt="Appareil-photo"></img>
+											</h:panelGroup>
+													<h:form  enctype="multipart/form-data">
+													<h:inputFile styleClass="marginBottom15" id="file"
+														value="#{mbCompteObjet.file3}"
+														></h:inputFile>
+													<h:message for="file" />
+													<h:commandButton action="#{mbCompteObjet.uploadPhoto3()}"
+														value="Valider" styleClass="btn btn-vert btn-lg">
+													</h:commandButton>
+													</h:form>
+													
+											</div>											
+										</div>										
+									</div>
+									<br></br>
+									<h:form  id="formModifObjet">
+									<div class="row">
+									
+										<div class="col-md-6">
+											<div class="form-group">
+												<div>
+													<label>Intitulé:</label>
+												</div>
+												<div>
+													<h:inputText value="#{mbCompteObjet.intituleSelected}"
+														styleClass="form-control" />
 												</div>
 											</div>
-											<div class="col-sm-4">
-												<div class="image ">
-													<a href="#"> <img
-														src="#{mbCompteObjet.propositionSelected.photos.size()>2 ? mbCompteObjet.propositionSelected.photos.get(2).url : 'img/camera-flat.png'}"
-														alt="Appareil-photo" class="img-responsive"></img>
-													</a>
+											<div>
+												<div>
+													<label>Catégorie:</label>
 												</div>
+												<div class="form-group selecteur" id="catDeLObjet">
+
+
+													<h:selectOneMenu styleClass="selectpicker form-control"
+														value="#{mbCompteObjet.categorieSelected.idCategorie}">
+														<f:selectItems value="#{mbCompteObjet.allCategorie}"
+															var="categorie" itemLabel="${categorie.intitule}"
+															itemValue="${categorie.idCategorie}" />
+														<f:ajax event="change" execute="@form"
+															render=":formModifObjet:ComboSousCat"
+															listener="#{mbCompteObjet.listenerChargementSousCat()}"></f:ajax>
+													</h:selectOneMenu>
+												</div>
+											</div>
+											<div>
+												<div>
+													<label>Sous-catégorie:</label>
+												</div>
+												<div class="form-group selecteur" id="sousCatDeLObjet">
+													<h:selectOneMenu id="ComboSousCat"
+														styleClass="selectpicker form-control"
+														value="#{mbCompteObjet.sousCategorieSelected.idCategorie}">
+														<f:selectItems
+															value="#{mbCompteObjet.sousCategoriesSelected}"
+															var="categorie" itemLabel="${categorie.intitule}"
+															itemValue="${categorie.idCategorie}" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+											<div>
+												<div>
+													<label>Etat d'usure:</label>
+												</div>
+												<div class="form-group selecteur" id="etatDeLObjet">
+													<h:selectOneMenu styleClass="selectpicker form-control"
+														value="#{mbCompteObjet.etatSelected.idEtat}">
+														<f:selectItems value="#{mbCompteObjet.allEtat}" var="etat"
+															itemLabel="${etat.intitule}" itemValue="${etat.idEtat}" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+											<div>
+												<div>
+													<label>Valeur:</label>
+												</div>
+
+												<div class="form-group selecteur" id="valeurDeLObjet">
+													<h:selectOneMenu styleClass="selectpicker form-control"
+														value="#{mbCompteObjet.valeurSelected.idValeur}">
+														<f:selectItems value="#{mbCompteObjet.allValeur}"
+															var="valeur" itemLabel="${valeur.intitule}"
+															itemValue="${valeur.idValeur}" />
+													</h:selectOneMenu>
+												</div>
+											</div>
+											<div>
+												<div>
+													<label>Adresses:</label>
+												</div>
+												<h:selectManyCheckbox
+													value="#{mbCompteObjet.idAdressesSelected}">
+													<f:selectItems value="#{mbCompteObjet.adresseByMembre}"
+														var="adresse" itemLabel="${adresse.adresse}"
+														itemValue="${adresse.idLocalisation}"></f:selectItems>
+												</h:selectManyCheckbox>
 											</div>
 										</div>
 										<br></br>
@@ -108,104 +240,33 @@
 													</div>
 												</div>
 												<div>
-													<div>
-														<label>Catégorie:</label>
-													</div>
-													<div class="form-group selecteur" id="catDeLObjet">
-
-
-														<h:selectOneMenu styleClass="selectpicker form-control"
-															value="#{mbCompteObjet.categorieSelected.idCategorie}">
-															<f:selectItems value="#{mbCompteObjet.allCategorie}"
-																var="categorie" itemLabel="${categorie.intitule}"
-																itemValue="${categorie.idCategorie}" />
-															<f:ajax event="change" execute="@form"
-																render=":formModifObjet:ComboSousCat"
-																listener="#{mbCompteObjet.listenerChargementSousCat()}"></f:ajax>
-														</h:selectOneMenu>
-													</div>
+													<label>Description de la proposition:</label>
 												</div>
-												<div>
-													<div>
-														<label>Sous-catégorie:</label>
-													</div>
-													<div class="form-group selecteur" id="sousCatDeLObjet">
-														<h:selectOneMenu id="ComboSousCat"
-															styleClass="selectpicker form-control"
-															value="#{mbCompteObjet.sousCategorieSelected.idCategorie}">
-															<f:selectItems
-																value="#{mbCompteObjet.sousCategoriesSelected}"
-																var="categorie" itemLabel="${categorie.intitule}"
-																itemValue="${categorie.idCategorie}" />
-														</h:selectOneMenu>
-													</div>
-												</div>
-												<div>
-													<div>
-														<label>Etat d'usure:</label>
-													</div>
-													<div class="form-group selecteur" id="etatDeLObjet">
-														<h:selectOneMenu styleClass="selectpicker form-control"
-															value="#{mbCompteObjet.etatSelected.idEtat}">
-															<f:selectItems value="#{mbCompteObjet.allEtat}"
-																var="etat" itemLabel="${etat.intitule}"
-																itemValue="${etat.idEtat}" />
-														</h:selectOneMenu>
-													</div>
-												</div>
-												<div>
-													<div>
-														<label>Valeur:</label>
-													</div>
-
-													<div class="form-group selecteur" id="valeurDeLObjet">
-														<h:selectOneMenu styleClass="selectpicker form-control"
-															value="#{mbCompteObjet.valeurSelected.idValeur}">
-															<f:selectItems value="#{mbCompteObjet.allValeur}"
-																var="valeur" itemLabel="${valeur.intitule}"
-																itemValue="${valeur.idValeur}" />
-														</h:selectOneMenu>
-													</div>
-												</div>
-												<div>
-													<div>
-														<label>Adresses:</label>
-													</div>
-													<h:selectManyCheckbox
-														value="#{mbCompteObjet.idAdressesSelected}">
-														<f:selectItems value="#{mbCompteObjet.adresseByMembre}"
-															var="adresse" itemLabel="${adresse.adresse}"
-															itemValue="${adresse.idLocalisation}"></f:selectItems>
-													</h:selectManyCheckbox>
+												<div class="styleDescription">
+													<h:inputTextarea rows="10"
+														value="#{mbCompteObjet.descriptionSelected}"
+														styleClass="form-control" />
 												</div>
 											</div>
-											<div class="col-md-6">
-												<div>
-													<div>
-														<label>Description de la proposition:</label>
-													</div>
-													<div class="styleDescription">
-														<h:inputTextarea rows="10"
-															value="#{mbCompteObjet.descriptionSelected}"
-															styleClass="form-control" />
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="modal-footer">
-											<h:commandButton action="#{mbCompteObjet.updateObjet()}"
-												value="Valider" styleClass="btn btn-vert btn-lg"
-												onclick="$('#modalObjet').modal('hide');"></h:commandButton>
-
-											<button type="button" class="btn btn-vert btn-lg"
-												data-dismiss="modal">Annuler</button>
 										</div>
 									</div>
-								</h:panelGroup>
-							</h:form>
-						</div>
+									<div class="modal-footer">
+										<h:commandButton action="#{mbCompteObjet.updateObjet()}"
+											value="Valider" styleClass="btn btn-vert btn-lg"
+											onclick="$('#modalObjet').modal('hide');"></h:commandButton>
+
+										<button type="button" class="btn btn-vert btn-lg"
+											data-dismiss="modal">Annuler</button>
+									</div>
+								</h:form>
+								</div>
+							</h:panelGroup>
+						
+
 
 					</div>
+
+				</div>
 
 				<!-- ******************************MODALE FIN MODIFIER****************************** -->
 				<!-- ******************************MODALE AJOUTER DEBUT****************************** -->
@@ -402,9 +463,13 @@
 
 				<!-- ******************************MODALE SUPPRIMER FIN****************************** -->
 
-				<div class="col-md-12 col-sm-12 CentrerBoutons">					
-					<h:commandButton value="Ajouter un objet"  onclick="$('#modalAjoutObjet').modal('show');" styleClass="btn btn-default">
-						<f:ajax event="click" listener="#{mbCompteObjet.listenerAjoutObjet()}" render="formAjoutObjet"></f:ajax>
+				<div class="col-md-12 col-sm-12 CentrerBoutons">
+					<h:commandButton value="Ajouter un objet"
+						onclick="$('#modalAjoutObjet').modal('show');"
+						styleClass="btn btn-default">
+						<f:ajax event="click"
+							listener="#{mbCompteObjet.listenerAjoutObjet()}"
+							render="formAjoutObjet"></f:ajax>
 					</h:commandButton>
 				</div>
 

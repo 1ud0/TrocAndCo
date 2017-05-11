@@ -18,6 +18,7 @@ import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceDepartement;
 import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceEtat;
+import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceListe;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceRecherche;
@@ -56,6 +57,8 @@ public class RechercheManagedBean {
 	private IServiceListe proxyListe;
 	@EJB
 	private IServiceEnvie proxyEnvie;
+	@EJB
+	private IServiceFavori proxyFavori;
 
 	// managedBean
 	@ManagedProperty(value = "#{mbIdentif}")
@@ -153,9 +156,10 @@ public class RechercheManagedBean {
 					compteur.increment();
 				}
 			}
+			
 		}
 		catsEntries = new ArrayList<>(mycats.entrySet());
-	}
+	}	
 	
 	public Integer getNbOccurence(Categorie cat) {
 		return catsCount.get(cat).get();
@@ -508,6 +512,16 @@ public class RechercheManagedBean {
 
 	public void setProxyEnvie(IServiceEnvie proxyEnvie) {
 		this.proxyEnvie = proxyEnvie;
+	}
+
+
+	public IServiceFavori getProxyFavori() {
+		return proxyFavori;
+	}
+
+
+	public void setProxyFavori(IServiceFavori proxyFavori) {
+		this.proxyFavori = proxyFavori;
 	}
 
 
