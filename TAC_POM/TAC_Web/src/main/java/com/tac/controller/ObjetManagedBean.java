@@ -1,14 +1,16 @@
 package com.tac.controller;
 
+import java.util.Date;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
-import javax.script.ScriptContext;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceEnvie;
@@ -22,17 +24,17 @@ import com.tac.entity.Proposition;
 import com.tac.exception.DataAccessException;
 
 @ManagedBean(name = "mbObjet")
-@SessionScoped
+@ViewScoped
 public class ObjetManagedBean {
 
 	@EJB
 	private IServiceProposition proxyProp;
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
-	
+
 	@EJB
 	private IServiceEnvie proxyEnvie;
-	
+
 	@EJB
 	private IServiceEchange proxyEchange;
 	@EJB
@@ -41,13 +43,31 @@ public class ObjetManagedBean {
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
+	@PostConstruct
+	public void init() {
+		System.out.println("dans post construct");
+		loadAllPropositions();
+	}
+	
 	private Proposition selectedProp;
+	private Proposition obj;
 	private Membre selectedMembre;
 	private Membre membreCourant;
 	private Integer entryId;
+	private List<Proposition> allPropositions;
+
+	public List<Proposition> getAllPropositions() {
+		return allPropositions;
+	}
+
+	public void setAllPropositions(List<Proposition> allPropositions) {
+		this.allPropositions = allPropositions;
+	}
 
 	/**
-	 * Permet de savoir si l'objet qui est affiché est déja dans les favoris du membre en session
+	 * Permet de savoir si l'objet qui est affiché est déja dans les favoris du
+	 * membre en session
+	 * 
 	 * @return false pas dans les favoris // true est dans les favoris
 	 */
 	public boolean dejaFavori() {
@@ -61,20 +81,24 @@ public class ObjetManagedBean {
 		}
 		return false;
 	}
+
 	/**
-	 *  permet d'ajouter l'objet visualisé aux favoris du membre en session
+	 * permet d'ajouter l'objet visualisé aux favoris du membre en session
+	 * 
 	 * @return
 	 */
 	public String ajouterFavori() {
 		membreCourant = identifBean.getMembreConnected();
-		System.out.println("ajout"+membreCourant.getNom()+selectedProp.getIntitule());
+		System.out.println("ajout" + membreCourant.getNom() + selectedProp.getIntitule());
 		if (membreCourant != null) {
 			proxyFavori.addToFavoris(selectedProp, membreCourant);
 		}
 		return "";
 	}
+
 	/**
-	 *  permet de retirer l'objet visualisé aux favoris du membre en session
+	 * permet de retirer l'objet visualisé aux favoris du membre en session
+	 * 
 	 * @return
 	 */
 	public String deleteFavori() {
@@ -85,8 +109,10 @@ public class ObjetManagedBean {
 		return "";
 
 	}
+
 	/**
 	 * charge la proposition en cours et ses informations
+	 * 
 	 * @param proposition
 	 * @return
 	 */
@@ -96,13 +122,40 @@ public class ObjetManagedBean {
 		if (selectedProp != null) {
 			nav = "/fiche.xhtml?faces-redirect=true&id=" + selectedProp.getIdProposition();
 		}
-		
 		return nav;
 	}
-	
-	
+
+	//////// Test_Ayda pr le back
+	public List<Proposition> loadAllPropositions() {
+		Date dbt = new Date();
+		allPropositions = proxyProp.LoadAllPropositions();
+		for (Proposition p : allPropositions) {
+			p.setLocalisations(proxyLocalisation.getPropositionLocalisations(p)); // pr
+																					// p
+																					// ds
+																					// la
+																					// liste
+																					// de
+																					// propositions,
+																					// va
+																					// chercher
+																					// chaque
+																					// localisations
+		}
+		Date fin = new Date();
+		System.out.println("temps - " +( fin.getTime() - dbt.getTime()));
+		return allPropositions;
+	}
+
+	public void loadObject(Proposition prop) {
+		obj = prop;
+		System.out.println(obj.getIntitule());
+		
+	}
+
 	/**
 	 * charge les informations du membre qui possède l'objet visualisé
+	 * 
 	 * @param membre
 	 * @return
 	 */
@@ -114,15 +167,16 @@ public class ObjetManagedBean {
 		}
 		return nav;
 	}
-	
-	public boolean NoteVide(Membre membre){
-		if(proxyEchange.getNoteMoyenne(membre)==-1.0){
+
+	public boolean NoteVide(Membre membre) {
+		if (proxyEchange.getNoteMoyenne(membre) == -1.0) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	public void loadEntry() {
+		System.out.println("coucou load entry");
 		if (entryId != null && entryId != 0) {
 			try {
 				selectedProp = proxyProp.getById(entryId);
@@ -134,16 +188,16 @@ public class ObjetManagedBean {
 			}
 		}
 	}
-	
-	public double getNoteMoyenne(Membre membre){
+
+	public double getNoteMoyenne(Membre membre) {
 		return proxyEchange.getNoteMoyenne(membre);
 	}
-	
-	public List<Envie> getEnviesAutreMembre(Membre membre){
+
+	public List<Envie> getEnviesAutreMembre(Membre membre) {
 		return proxyEnvie.getByMembre(membre);
 	}
-	
-	public List<Localisation> getLocalisationByMembre(Membre membre){
+
+	public List<Localisation> getLocalisationByMembre(Membre membre) {
 		return proxyLocalisation.getMembreLocalisations(membre);
 	}
 
@@ -157,7 +211,7 @@ public class ObjetManagedBean {
 
 	public Proposition getSelectedProp() {
 		selectedProp.setLocalisations(proxyLocalisation.getPropositionLocalisations(selectedProp));
-		
+
 		return selectedProp;
 	}
 
@@ -227,6 +281,14 @@ public class ObjetManagedBean {
 
 	public void setProxyEchange(IServiceEchange proxyEchange) {
 		this.proxyEchange = proxyEchange;
+	}
+
+	public Proposition getObj() {
+		return obj;
+	}
+
+	public void setObj(Proposition obj) {
+		this.obj = obj;
 	}
 
 }

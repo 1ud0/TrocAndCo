@@ -17,5 +17,7 @@ public interface IDaoProposition {
 	List<Proposition> getNouveautes(int nombre, Integer idMembre);
 	List<Proposition> getPropoDispoByMembre(int idMembre);
 	List<Proposition> rechercher(CritereSearch carac, Integer idMembre, int nombreResult);
+	///Test_Ayda
+	List<Proposition> LoadAllPropositions();
 	
 }

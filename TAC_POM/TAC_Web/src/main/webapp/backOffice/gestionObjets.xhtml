@@ -21,6 +21,12 @@
 					<li class="active">Gestion des objets</li>
 				</ol>
 			</section>
+			<style type="text/css">
+#boxObjet {
+	height: 400pt;
+	overflow: auto
+}
+</style>
 
 
 			<!-- Main content -->
@@ -30,10 +36,10 @@
 						<div class="box-header">
 							<h3 class="box-title">Objets</h3>
 
-							
+
 						</div>
 						<!-- /.box-header -->
-						<div class="box-body table-responsive no-padding">
+						<div class="box-body table-responsive no-padding" id="boxObjet">
 							<table class="table table-hover">
 								<tbody>
 									<tr>
@@ -48,74 +54,34 @@
 										<th>Visualisation</th>
 										<th>Edition</th>
 									</tr>
-
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>Casserole</td>
-										<td>11-7-2014</td>
-										<td>Maison</td>
-										<td>Cuisine</td>
-										<td>3</td>
-										<td>maison, travail</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg2"><b>Visualiser</b></a></td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>Casserole</td>
-										<td>11-7-2014</td>
-										<td>Maison</td>
-										<td>Cuisine</td>
-										<td>3</td>
-										<td>maison, travail</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg2"><b>Visualiser</b></a></td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>Casserole</td>
-										<td>11-7-2014</td>
-										<td>Maison</td>
-										<td>Cuisine</td>
-										<td>3</td>
-										<td>maison, travail</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg2"><b>Visualiser</b></a></td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
-									<tr>
-										<td>183</td>
-										<td>John Doe</td>
-										<td>Casserole</td>
-										<td>11-7-2014</td>
-										<td>Maison</td>
-										<td>Cuisine</td>
-										<td>3</td>
-										<td>maison, travail</td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg2"><b>Visualiser</b></a></td>
-										<td><a href="#" class="btn btn-primary btn-block"
-											type="button" data-toggle="modal"
-											data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
-									</tr>
-
-
 								</tbody>
+								<h:form>
+									<ui:repeat var="objet" value="#{mbObjet.allPropositions}">
+										<tbody>
+											<tr>
+												<td>#{objet.idProposition}</td>
+												<td>#{objet.membre.nom}</td>
+												<td>#{objet.intitule}</td>
+												<td>#{objet.dateAjout}</td>
+												<td>#{objet.categorie.intitule}</td>
+												<td>#{objet.sousCategorie.intitule}</td>
+												<td>#{objet.valeur.valeur}</td>
+												<td>#{objet.localisations.get(0).ville}</td> 
+												<td>
+													<h:commandButton  value="Visualiser" onclick="$('#bs-example-modal-lg2').modal('show');" data-toggle="modal" data-target="#bs-example-modal-lg2">
+														<f:ajax event="click" listener="#{mbObjet.loadObject(objet)}" render=":toto" /> 														
+													</h:commandButton>
+													</td>
+
+
+												<td><a href="#" class="btn btn-primary btn-block"
+													type="button" data-toggle="modal"
+													data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
+											</tr>
+										</tbody>
+										<!-- 										</h:commandLink> -->
+									</ui:repeat>
+								</h:form>
 							</table>
 						</div>
 						<!-- /.box-body -->
@@ -124,7 +90,7 @@
 
 			</section>
 			<section class="col-lg-8 connectedSortable">
-				<div class=" modal fade bs-example-modal-lg">
+				<div class="modal fade bs-example-modal-lg">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -227,9 +193,10 @@
 			<!-- /.modal-dialog -->
 			<!-- /.modal-dialog -->
 			<!-- /.modal-dialog -->
-			<!-- /.modal-dialog -->
+			<!-- /.modal-dialog --> 
 			<section class="col-lg-8 connectedSortable">
-				<div class=" modal fade bs-example-modal-lg2">
+				
+				<div class="modal fade" id="bs-example-modal-lg2" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
 							<div class="modal-header">
@@ -246,32 +213,53 @@
 										<h3 class="box-title">Information de l'Objet</h3>
 									</div>
 
+									<h:panelGroup layout="block" id="toto">
 									<div class="box-body">
-										<h4><STRONG>Référence</STRONG></h4>
-										<div class="form-group">#4654</div>
-										<h4><STRONG>Nom Donateur</STRONG></h4>
+										<h4>
+											<STRONG>Référence</STRONG>
+										</h4>
+										#{mbObjet.obj.intitule} #{mbObjet.obj.description}
+										<div class="form-group"></div>
+
+										<h4>
+											<STRONG>Nom Donateur</STRONG>
+										</h4>
 										<div class="form-group">Bobo</div>
-										<h4><STRONG>Intitulé</STRONG></h4>
+										<h4>
+											<STRONG>Intitulé</STRONG>
+										</h4>
 										<div class="form-group">Bobo</div>
-										<h4><STRONG>Date de création de l'objet</STRONG></h4>
+										<h4>
+											<STRONG>Date de création de l'objet</STRONG>
+										</h4>
 										<div class="form-group">1954-12-01</div>
-										<h4><STRONG>Catégorie</STRONG></h4>
+										<h4>
+											<STRONG>Catégorie</STRONG>
+										</h4>
 										<div class="form-group">cat</div>
-										<h4><STRONG>Sous Catégori</STRONG>e</h4>
+										<h4>
+											<STRONG>Sous Catégori</STRONG>e
+										</h4>
 										<div class="form-group">ssCat</div>
-										<h4><STRONG>Valeur</STRONG></h4>
+										<h4>
+											<STRONG>Valeur</STRONG>
+										</h4>
 										<div class="form-group">123</div>
-										<h4><STRONG>Adresses</STRONG></h4>
+										<h4>
+											d <STRONG>Adresses</STRONG>
+										</h4>
 										<div class="form-group">adresse 1</div>
 										<div class="form-group">adresse 2</div>
-										<h4><STRONG>Photos</STRONG></h4>
+										<h4>
+											<STRONG>Photos</STRONG>
+										</h4>
 										<div class="form-group">Liste des photos</div>
 										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
 											modifications</button>
-
-
 									</div>
+									</h:panelGroup>
 									<!-- /.box-body -->
+
 								</div>
 							</div>
 
