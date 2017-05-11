@@ -212,8 +212,13 @@
 									</h:form>
 								</p>
 								<p>
-									<a href="compte-messages.xhtml"><strong>Contacter
-											le propriétaire</strong></a>
+									<h:form>
+									<h:commandLink onclick="openAndJump()">
+									<f:ajax event="click" listener="#{mbMessage.loadNewChat(mbObjet.selectedProp)}" render="fenetreChat" onevent="function(data) { if (data.status === 'success') { 
+   	 									scrollAndFocus() } }"/>
+   	 								<strong>Contactler le propriétaire</strong>
+									</h:commandLink>
+									</h:form>
 								</p>
 							</div>
 
@@ -303,38 +308,30 @@
 			<div class="marginBottom">
 			
 			<div >
-
-
-							<table id="TabLoc" style="visibility: hidden">
-								<thead>
-									<tr>
-										<th>Nom adresse</th>
-										<th>lat</th>
-										<th>lng</th>
-									</tr>
-								</thead>
-								<tbody>
-									<ui:repeat var="local"
-										value="#{mbObjet.selectedProp.localisations}">
-										<tr>
-											<td class="tdNomLoc">#{local.titreAdresse} </td> 
-											<td class="tdLat">#{local.latitude}</td>
-											<td class="tdLng">#{local.longitude}</td>
-										
-										</tr>
-										
-										
-
-									</ui:repeat>
-								</tbody>
-
-								
-
-							</table>
-
-						</div>
-			
+				<table id="TabLoc" style="visibility: hidden">
+					<thead>
+						<tr>
+							<th>Nom adresse</th>
+							<th>lat</th>
+							<th>lng</th>
+						</tr>
+					</thead>
+					<tbody>
+						<ui:repeat var="local"
+							value="#{mbObjet.selectedProp.localisations}">
+							<tr>
+								<td class="tdNomLoc">#{local.titreAdresse} </td> 
+								<td class="tdLat">#{local.latitude}</td>
+								<td class="tdLng">#{local.longitude}</td>							
+							</tr>
+						</ui:repeat>
+					</tbody>	
+				</table>
+			</div>			
 			</div>
+			
+			<ui:include src="/WEB-INF/templates/chat.xhtml" />
+			
 		</ui:define>
 	</ui:composition>
 </h:body>

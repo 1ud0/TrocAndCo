@@ -30,7 +30,7 @@ public class MessageManagedBean implements Serializable {
 	private IServiceMessage proxyMessage;
 	
 	@EJB
-	private IServiceProposition proxyProposition;	
+	private IServiceProposition proxyProposition;
 	
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
@@ -44,6 +44,7 @@ public class MessageManagedBean implements Serializable {
 	private List<Message> chat = new ArrayList<>();
 	private String messageAEnvoyer;
 	List<Message> messagesDuMembre = new ArrayList<>();
+	private Proposition propositionOfInterest;
 	
 	
 	public List<Message> getMessagesDuMembre() {
@@ -69,13 +70,21 @@ public class MessageManagedBean implements Serializable {
 		nouveauMessage.setEmetteur(membreCourant);
 		nouveauMessage.setDateEnvoi(new Date());
 		nouveauMessage.setLu(false);
-		nouveauMessage.setProposition(chat.get(0).getProposition());
-		if(chat.get(0).getEmetteur().getIdMembre()==membreCourant.getIdMembre()){
-			nouveauMessage.setRecepteur(chat.get(0).getRecepteur());
+		
+		if (chat.size()>0){
+			nouveauMessage.setProposition(chat.get(0).getProposition());
+			if(chat.get(0).getEmetteur().getIdMembre()==membreCourant.getIdMembre()){
+				nouveauMessage.setRecepteur(chat.get(0).getRecepteur());
+			}
+			else{
+				nouveauMessage.setRecepteur(chat.get(0).getEmetteur());
+			}
 		}
-		else{
-			nouveauMessage.setRecepteur(chat.get(0).getEmetteur());
+		else {
+			nouveauMessage.setProposition(propositionOfInterest); 
+			nouveauMessage.setRecepteur(propositionOfInterest.getMembre());
 		}
+		
 		nouveauMessage.setTexte(messageAEnvoyer);
 		Message messageAjoute = proxyMessage.envoyerMessage(nouveauMessage);
 		messageAEnvoyer = "";
@@ -121,8 +130,6 @@ public class MessageManagedBean implements Serializable {
 	}
 
 	public void loadChat(Message message){
-		Date dbt = new Date();
-		System.out.println("load chat");
 		membreCourant = identifBean.getMembreConnected();
 		chat = getAllOther(message);
 		for(Message m : chat){
@@ -130,15 +137,16 @@ public class MessageManagedBean implements Serializable {
 				m = proxyMessage.messageLu(m);
 			}
 		}
-		System.out.println(chat);
-		System.out.println(chat.size());
-		Date fin = new Date();
-		System.out.println("temps " + (fin.getTime() - dbt.getTime() + " ms"));
 	}
 	
-	public void refreshChat(Message message){
+	public void loadNewChat(Proposition proposition){
+		propositionOfInterest = proposition;
+		chat = new ArrayList<>();
+	}
+	
+	public void refreshChat(){
 		membreCourant = identifBean.getMembreConnected();
-		message = envoyerMessage();
+		Message message = envoyerMessage();
 		loadChat(message);
 	}
 	
@@ -264,6 +272,16 @@ public class MessageManagedBean implements Serializable {
 
 	public void setMessageAEnvoyer(String messageAEnvoyer) {
 		this.messageAEnvoyer = messageAEnvoyer;
+	}
+
+
+	public Proposition getPropositionOfInterest() {
+		return propositionOfInterest;
+	}
+
+
+	public void setPropositionOfInterest(Proposition propositionOfInterest) {
+		this.propositionOfInterest = propositionOfInterest;
 	}
 	
 	
