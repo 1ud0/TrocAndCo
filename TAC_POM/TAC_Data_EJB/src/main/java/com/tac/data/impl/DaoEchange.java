@@ -83,7 +83,11 @@ public class DaoEchange implements IDaoEchange {
         final String reqGetByMemberId = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre OR e.membre.idMembre = :pidMembre) AND e.dateValidation IS NULL AND e.dateRefus IS NULL AND e.dateAnnul IS NULL";
 		Query queryGetByIdMembre = em.createQuery(reqGetByMemberId);
 		queryGetByIdMembre.setParameter("pidMembre", idMembre);
-		return queryGetByIdMembre.getResultList(); 
+		List<Echange> echanges = queryGetByIdMembre.getResultList(); 
+		for (Echange echange : echanges) {
+			echange.getProposition().getPhotos().size();
+		}
+		return echanges;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -95,6 +99,7 @@ public class DaoEchange implements IDaoEchange {
 		List<Echange> echangesDuChercheur = queryGetByIdMembreChercheur.getResultList();
 		for(Echange echange : echangesDuChercheur){
 			echange.getRdvs().size();
+			echange.getProposition().getPhotos().size();
 		}
 		return echangesDuChercheur;
 	}

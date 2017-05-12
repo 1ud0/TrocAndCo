@@ -17,7 +17,6 @@ import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceProposition;
 import com.tac.entity.Envie;
-import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 import com.tac.exception.DataAccessException;

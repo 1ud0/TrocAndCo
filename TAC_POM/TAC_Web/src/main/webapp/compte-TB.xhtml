@@ -26,6 +26,9 @@
 						<div class="col-md-9 clearfix" id="customer-account">
 
 							<div id="row">
+							
+							
+							<!-- ************ PANEL ECHANGES******************* -->
 								<div class="row">
 									<div class="col-sm-6 col-md-6">
 										<div class="heading">
@@ -105,9 +108,6 @@
 														<ui:repeat var="echange"
 															value="#{mbCompteTB.compteEchangeBean.donDuMembre}">
 															<h:form>
-																<h:commandLink
-																	action="#{mbCompteTB.compteEchangeBean.donDuMembre(echange)}"
-																	value="">
 																	<tr>
 																		<td>#{echange.proposition.intitule}</td>
 																		<td><h:panelGroup
@@ -126,18 +126,17 @@
 																		<td><h:commandLink action="#{mbEchange.loadEchangeDonneur(echange)}" 
 																		value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink></td>
 																	</tr>
-																</h:commandLink>
 															</h:form>
 														</ui:repeat>
-
 													</h:panelGroup>
-
 												</tbody>
 											</table>
 										</div>
 										</h:panelGroup>
 									</div>
 								</div>
+								
+								<!-- ***************** PANEL MESSAGES ********************** -->
 								<div class="row">
 									<div class="col-sm-6 col-md-6 clearfix echanges">
 										<div class="heading">
@@ -155,20 +154,17 @@
 												<ui:repeat var="discussion"
 													value="#{mbMessage.messagesDuMembre}">
 													<tbody>
-													
 														<tr
 															class="#{mbMessage.dernierMessage(discussion).lu or mbMessage.dernierMessage(discussion).emetteur.idMembre==mbIdentif.membreConnected.idMembre ? 'lu' : '' }">
 															<td class="mailbox-subject">#{discussion.proposition.intitule}</td>
 															<td class="mailbox-subject">
 																<h:commandLink value="#{mbMessage.avecQui(discussion)}" onclick="openAndJump()">
-									<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat" onevent="function(data) { if (data.status === 'success') { 
-   	 									scrollAndFocus() } }"/>
-								</h:commandLink>
+																	<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat" onevent="function(data) { if (data.status === 'success') {scrollAndFocus() } }"/>
+																</h:commandLink>
 															</td>
 															<td class="mailbox-attachment"></td>
 															<td class="mailbox-date">#{mbMessage.depuisQuand(discussion)}</td>
 														</tr>
-
 													</tbody>
 												</ui:repeat>
 												</h:form>
@@ -177,121 +173,128 @@
 										</h:panelGroup>
 									</div>
 
+								<!-- ********************** PANEL RDV ************************** -->
 									<div class="col-sm-6 col-md-6 clearfix echanges">
 										<div class="heading">
 											<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
 										</div>
 										<h:panelGroup rendered="#{mbCompteTB.rdvIncoming.size()==0}">
-										<div>Aucun pour le moment.</div>
-										
-										<br></br>
+											<div>Aucun pour le moment.</div><br></br>
 										</h:panelGroup>
 										<h:panelGroup rendered="#{mbCompteTB.rdvIncoming.size()!=0}">
+											<div class="table-responsive">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>Commentaires</th>
+															<th>Date / lieu</th>
+														</tr>
+													</thead>
+													<tbody>
+													<ui:repeat var="rdv" value="#{mbCompteTB.rdvIncoming}">
+														<tr>
+															<td>#{rdv.commentaire}</td>
+															<td>
+																<h:outputText value="#{rdv.dateRdv}"> 
+																	<f:convertDateTime pattern="dd/MM/yyyy hh:mm"/>
+																</h:outputText>
+																<br></br>#{rdv.lieu}
+															</td>
+															<td><a href="/TrocAndCo/compte-calendrier.xhtml"
+																class="btn btn-template-main btn-sm">Voir</a>
+															</td>
+														</tr>
+														</ui:repeat>
+													</tbody>
+												</table>
+											</div>
+										</h:panelGroup>
+									</div>
+								</div>
+								
+								<!-- ******************* PANEL EVAL ************************* -->
+								<div class="row">
+									<div class="col-sm-12 col-md-12 clearfix echanges">
+										<div class="heading">
+											<h4 class="text-uppercase">Mes évaluations</h4>
+										</div>
+										
 										<div class="table-responsive">
 											<table class="table table-hover">
 												<thead>
 													<tr>
-														<th>Commentaires</th>
-														<th>Date / lieu</th>
+														<th>Intitulé</th>
+														<th>Note et commentaire</th>
+														<th>Qui ?</th>
 													</tr>
 												</thead>
 												<tbody>
-												<ui:repeat var="rdv" value="#{mbCompteTB.rdvIncoming}">
-													<tr>
-														<td>#{rdv.commentaire}</td>
-														<td> <h:outputText value="#{rdv.dateRdv}"> <f:convertDateTime pattern="dd/MM/yyyy hh:mm"/> </h:outputText>  <br></br>#{rdv.lieu}</td>
-														<td><a href="/TrocAndCo/compte-calendrier.xhtml"
-															class="btn btn-template-main btn-sm">Voir</a></td>
-													</tr>
-													</ui:repeat>
+													<h:panelGroup>
+														<ui:repeat var="eval"
+															value="#{mbCompteTB.echangesMembreCoDonneur}">
+															<h:form>
+	
+																<tr>
+																	<td><a href="#">#{eval.proposition.intitule}</a></td>
+																	<td>
+																		<div class="col-sm-9">
+																			<div class="review-block-rate">
+																				<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
+																					<span class="glyphicon glyphicon-star"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
+																					<span class="glyphicon glyphicon-star-empty"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
+																					<span class="glyphicon glyphicon-star"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
+																					<span class="glyphicon glyphicon-star-empty"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
+																					<span class="glyphicon glyphicon-star"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
+																					<span class="glyphicon glyphicon-star-empty"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
+																					<span class="glyphicon glyphicon-star"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
+																					<span class="glyphicon glyphicon-star-empty"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
+																					<span class="glyphicon glyphicon-star"></span>
+																				</h:panelGroup>
+																				<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
+																					<span class="glyphicon glyphicon-star-empty"></span>
+																				</h:panelGroup>
+																			</div>
+																			<br />
+																			<div class="review-block-description">#{eval.comDonneur}</div>
+																		</div>
+																	</td>
+																	<td class="imageAvatarSize"><img
+																		class="img-responsive img-circle"
+																		src="#{eval.membre.avatar}" alt=""></img></td>
+																	<td><a href="compte-evaluations.xhtml"
+																		class="btn btn-template-main btn-sm">Voir</a></td>
+																</tr>
+	
+															</h:form>
+														</ui:repeat>
+													</h:panelGroup>
 												</tbody>
 											</table>
 										</div>
-										</h:panelGroup>
 									</div>
-								</div>
-								<div class="row">
-								<div class="col-sm-12 col-md-12 clearfix echanges">
-									<div class="heading">
-										<h4 class="text-uppercase">Mes évaluations</h4>
-									</div>
-									
-									<div class="table-responsive">
-										<table class="table table-hover">
-											<thead>
-												<tr>
-													<th>Intitulé</th>
-													<th>Note et commentaire</th>
-													<th>Qui ?</th>
-												</tr>
-											</thead>
-											<tbody>
-												<h:panelGroup>
-													<ui:repeat var="eval"
-														value="#{mbCompteTB.echangesMembreCoDonneur}">
-														<h:form>
-
-															<tr>
-																<td><a href="#">#{eval.proposition.intitule}</a></td>
-																<td>
-																	<div class="col-sm-9">
-																		<div class="review-block-rate">
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
-																				<span class="glyphicon glyphicon-star"></span>
-																			</h:panelGroup>
-																			<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
-																				<span class="glyphicon glyphicon-star-empty"></span>
-																			</h:panelGroup>
-																		</div>
-																		<br />
-																		<div class="review-block-description">#{eval.comDonneur}</div>
-																	</div>
-																</td>
-																<td class="imageAvatarSize"><img
-																	class="img-responsive img-circle"
-																	src="#{eval.membre.avatar}" alt=""></img></td>
-																<td><a href="compte-evaluations.xhtml"
-																	class="btn btn-template-main btn-sm">Voir</a></td>
-															</tr>
-
-														</h:form>
-													</ui:repeat>
-												</h:panelGroup>
-											</tbody>
-										</table>
-									</div>
-								</div>
 								</div>
 							</div>
 
 						</div>
 						<!-- ***Je finis la ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////-->
-						<!-- /caroussel -->
 
+						<!--  *********************** PANEL SUGGESTIONS ************************* -->
 						<div class="container">
 							<div class="col-sm-12 col-md-9">
 								<h3>Des suggestions pour vos envies ?</h3>
@@ -306,9 +309,12 @@
 														styleClass="img-responsive" />
 												</div>
 												<div class="texteArticle">
-													<span class="categorie"><h:outputText
-															value="#{prop.intitule}" /> </span> <span class="nomArticle"><h:outputText
-															value="#{prop.description}" /></span>
+													<span class="categorie">
+														<h:outputText value="#{prop.intitule}" /> 
+													</span> 
+													<span class="nomArticle">
+														<h:outputText value="#{prop.description}" />
+													</span>
 												</div>
 											</div>
 										</div>

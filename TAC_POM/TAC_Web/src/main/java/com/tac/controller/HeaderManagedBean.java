@@ -1,7 +1,6 @@
 package com.tac.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -14,7 +13,6 @@ import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceMessage;
 import com.tac.entity.Categorie;
-import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.util.CritereSearch;
 

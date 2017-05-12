@@ -1,9 +1,9 @@
 package com.tac.controller;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
@@ -38,6 +38,13 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	private List<Echange> donDuMembre;
 	private String status;
 
+	@PostConstruct
+	public void init() {
+		System.out.println("dans le construct compte echange");
+		membreCourant = identifBean.getMembreConnected();
+		echangeDuMembre = proxyEchange.getByMembreChercheur(membreCourant.getIdMembre());
+		donDuMembre = proxyEchange.getByMembreDonneur(membreCourant.getIdMembre());
+	}
 
 	/**
 	 *  Permet de connaitre quel est le status
@@ -59,59 +66,7 @@ public class CompteMesEchangesManagedBean implements Serializable {
 		return status;
 	}
 
-	/**
-	 * return une liste des échanges du membre
-	 * 
-	 * @return
-	 */
-	public List<Echange> getEchangeDuMembre() {
-		membreCourant = identifBean.getMembreConnected();
-		echangeDuMembre = proxyEchange.getByMembreChercheur(membreCourant.getIdMembre());
-		for (Echange echange : echangeDuMembre) {
-			Proposition prop = proxyEchange.getPropByEchange(echange);
-			echange.setProposition(prop);
-			prop.setPhotos(proxyObjet.getByProposition(prop));
-			
-		}
-		return echangeDuMembre;
-	}
-
-	/**
-	 * ici on récupère les echanges du membre dont il est le donnateur!
-	 * 
-	 * @return
-	 */
-	public List<Echange> getDonDuMembre() {
-		membreCourant = identifBean.getMembreConnected();
-		donDuMembre = proxyEchange.getByMembreDonneur(membreCourant.getIdMembre());
-		for (Echange echange : donDuMembre) {
-			Proposition prop = proxyEchange.getPropByEchange(echange);
-			echange.setProposition(prop);
-			prop.setPhotos(proxyObjet.getByProposition(prop));
-		}
-		return donDuMembre;
-	}
-
-
-
-
-
-	public Echange getSelectedEchange() {
-		return selectedEchange;
-	}
-
-	public void setSelectedEchange(Echange selectedEchange) {
-		this.selectedEchange = selectedEchange;
-	}
-
-	public Proposition getSelectedProposition() {
-		return selectedProposition;
-	}
-
-	public void setSelectedProposition(Proposition selectedProposition) {
-		this.selectedProposition = selectedProposition;
-	}
-
+	//getters & setters
 	public IServiceEchange getProxyEchange() {
 		return proxyEchange;
 	}
@@ -144,12 +99,44 @@ public class CompteMesEchangesManagedBean implements Serializable {
 		this.identifBean = identifBean;
 	}
 
+	public Echange getSelectedEchange() {
+		return selectedEchange;
+	}
+
+	public void setSelectedEchange(Echange selectedEchange) {
+		this.selectedEchange = selectedEchange;
+	}
+
+	public Proposition getSelectedProposition() {
+		return selectedProposition;
+	}
+
+	public void setSelectedProposition(Proposition selectedProposition) {
+		this.selectedProposition = selectedProposition;
+	}
+
 	public Membre getMembreCourant() {
 		return membreCourant;
 	}
 
 	public void setMembreCourant(Membre membreCourant) {
 		this.membreCourant = membreCourant;
+	}
+
+	public List<Echange> getEchangeDuMembre() {
+		return echangeDuMembre;
+	}
+
+	public void setEchangeDuMembre(List<Echange> echangeDuMembre) {
+		this.echangeDuMembre = echangeDuMembre;
+	}
+
+	public List<Echange> getDonDuMembre() {
+		return donDuMembre;
+	}
+
+	public void setDonDuMembre(List<Echange> donDuMembre) {
+		this.donDuMembre = donDuMembre;
 	}
 
 	public String getStatus() {
@@ -160,14 +147,6 @@ public class CompteMesEchangesManagedBean implements Serializable {
 		this.status = status;
 	}
 
-
-
-	public void setDonDuMembre(List<Echange> donDuMembre) {
-		this.donDuMembre = donDuMembre;
-	}
-
-	public void setEchangeDuMembre(List<Echange> echangeDuMembre) {
-		this.echangeDuMembre = echangeDuMembre;
-	}
+	
 
 }

@@ -9,7 +9,6 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
 import javax.faces.bean.ViewScoped;
 import javax.servlet.http.Part;
 
@@ -82,10 +81,8 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	@PostConstruct
 	public void loadPropositionDuMembre() {
+		System.out.println("dans le construct compte objet");
 		proposDuMembre = proxyObjet.getPropDispoByMembre(identifBean.getMembreConnected());
-		for (Proposition proposition : proposDuMembre) {
-			proposition.setPhotos(proxyObjet.getByProposition(proposition));
-		}
 		allCategories = rechercheBean.getCategoriesMere();
 		allValeurs = rechercheBean.getValeurs();
 		allEtats = rechercheBean.getEtats();
@@ -96,7 +93,7 @@ public class CompteObjetsManagedBean implements Serializable {
 	public void listenerChargementSousCat() {
 		for (Categorie cat : allCategories) {
 			if (idCatSelected == cat.getIdCategorie()) {
-				categorieSelectedNouveauObjet=cat;
+				categorieSelectedNouveauObjet = cat;
 				sousCategoriesSelected = categorieSelectedNouveauObjet.getSousCategories();
 				break;
 			}
@@ -104,7 +101,7 @@ public class CompteObjetsManagedBean implements Serializable {
 	}
 
 	public void listenerInitObjet() {
-		idCatSelected=1;
+		idCatSelected = 1;
 		propositionSelected = new Proposition();
 		categorieSelectedNouveauObjet = new Categorie();
 		sousCategorieSelectedNouveauObjet = new Categorie();
@@ -116,7 +113,7 @@ public class CompteObjetsManagedBean implements Serializable {
 
 	public void listnerSelectionObjet(Proposition proposition) {
 		propositionSelected = proposition;
-		idCatSelected=propositionSelected.getCategorie().getIdCategorie();
+		idCatSelected = propositionSelected.getCategorie().getIdCategorie();
 		listenerChargementSousCat();
 		idAdressesSelected = getidAdresseProp();
 	}
@@ -146,8 +143,7 @@ public class CompteObjetsManagedBean implements Serializable {
 		if (file3 != null) {
 			uploadPhoto3();
 		}
-		String nav = "";
-		return nav;
+		return "";
 	}
 
 	private void updateLocalisationProposition() {
@@ -163,8 +159,7 @@ public class CompteObjetsManagedBean implements Serializable {
 	public String updateObjet() {
 		updateLocalisationProposition();
 		propositionSelected = proxyObjet.updateProposition(propositionSelected);
-		String nav = "";
-		return nav;
+		return "";
 	}
 
 	private List<String> getidAdresseProp() {

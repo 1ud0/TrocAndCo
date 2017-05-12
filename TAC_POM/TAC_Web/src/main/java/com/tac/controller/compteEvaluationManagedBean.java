@@ -8,7 +8,6 @@ import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.RequestScoped;
-import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceLocalisation;
@@ -69,33 +68,8 @@ public class compteEvaluationManagedBean implements Serializable {
 		}
 		if (total != 0) {
 			pourcentage = (int) ((nombreDeFois * 100) / total);
-
 		}
 		return pourcentage;
-	}
-
-	public IdentificationManagedBean getIdentifBean() {
-		return identifBean;
-	}
-
-	public void setIdentifBean(IdentificationManagedBean identifBean) {
-		this.identifBean = identifBean;
-	}
-
-	public List<Echange> getEchangesQuandDonneur(Membre membre) {
-		return proxyEchange.getByMembreDonneurFini(membre);
-	}
-
-	public List<Echange> getEchangesQuandAcheteur(Membre membre) {
-		return proxyEchange.getByMembreChercheurFini(membre);
-	}
-
-	public Membre getMembreCourant() {
-		return membreCourant;
-	}
-
-	public void setMembreCourant(Membre membreCourant) {
-		this.membreCourant = membreCourant;
 	}
 
 	public IServiceEchange getProxyEchange() {
@@ -112,6 +86,22 @@ public class compteEvaluationManagedBean implements Serializable {
 
 	public void setProxyLocalisation(IServiceLocalisation proxyLocalisation) {
 		this.proxyLocalisation = proxyLocalisation;
+	}
+
+	public IdentificationManagedBean getIdentifBean() {
+		return identifBean;
+	}
+
+	public void setIdentifBean(IdentificationManagedBean identifBean) {
+		this.identifBean = identifBean;
+	}
+
+	public Membre getMembreCourant() {
+		return membreCourant;
+	}
+
+	public void setMembreCourant(Membre membreCourant) {
+		this.membreCourant = membreCourant;
 	}
 
 	public double getNoteMoyenne() {
@@ -137,5 +127,6 @@ public class compteEvaluationManagedBean implements Serializable {
 	public void setEchangesQuandDonneur(List<Echange> echangesQuandDonneur) {
 		this.echangesQuandDonneur = echangesQuandDonneur;
 	}
+
 
 }

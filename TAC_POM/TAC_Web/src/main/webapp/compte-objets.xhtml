@@ -213,7 +213,7 @@
 													<h:selectOneMenu styleClass="selectpicker form-control"
 														value="#{mbCompteObjet.propositionSelected.valeur.idValeur}">
 														<f:selectItems value="#{mbCompteObjet.allValeurs}"
-															var="valeur" itemLabel="${valeur.intitule}"
+															var="valeur" itemLabel="${valeur.valeur}"
 															itemValue="${valeur.idValeur}" />
 													</h:selectOneMenu>
 												</div>
@@ -381,7 +381,7 @@
 													<h:selectOneMenu styleClass="selectpicker form-control"
 														value="#{mbCompteObjet.valeurSelected.idValeur}">
 														<f:selectItems value="#{mbCompteObjet.allValeurs}"
-															var="valeur" itemLabel="${valeur.intitule}"
+															var="valeur" itemLabel="${valeur.valeur}"
 															itemValue="${valeur.idValeur}" />
 													</h:selectOneMenu>
 												</div>

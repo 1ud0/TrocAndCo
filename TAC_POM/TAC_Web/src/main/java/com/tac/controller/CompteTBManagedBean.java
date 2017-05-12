@@ -55,7 +55,9 @@ public class CompteTBManagedBean implements Serializable {
 		echangesMembreCoAcheteur = proxyEchange.getByMembreChercheurFini(membreCourant);
 		suggestions = proxySearch.findSuggestion(membreCourant);
 	}
-
+	
+	
+	//getters & setters
 	public IServiceEchange getProxyEchange() {
 		return proxyEchange;
 	}

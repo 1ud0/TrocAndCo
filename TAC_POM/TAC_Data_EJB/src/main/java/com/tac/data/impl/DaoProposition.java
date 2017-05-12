@@ -117,7 +117,11 @@ public class DaoProposition implements IDaoProposition {
         final String req = QUERY_PROP_DISPO + " AND p.membre_id = :pid";
 		Query query = em.createNativeQuery(req, Proposition.class);
 		query.setParameter("pid", idMembre);
-		return query.getResultList();
+		List<Proposition> props = query.getResultList();
+		for (Proposition proposition : props) {
+			proposition.getPhotos().size();
+		}
+		return props;
 	}
 
 	@SuppressWarnings("unchecked")
