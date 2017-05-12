@@ -210,18 +210,19 @@ System.out.println("load echange acquereur avant redirection");
 	}
 
 	public String ajouterEchange() {
+		if(echangePropose.getPrix()!= null){
 		echangePropose.setProposition(selectedProp);
 		echangePropose.setMembre(membreCourant);
 		try {
 			echangePropose = proxyEchange.initierEchange(echangePropose);
 			return "/echangeAttenteValidation.xhtml?faces-redirect=true";
 		} catch (NotEnoughCreditException e) {
-			System.out.println("MORT");
-			System.out.println(e.getMessage());
+
 			showAlertModif = true;
 			return "";
 		}
-		
+		}
+		return "";
 	}
 	
 	public void hideAlert(){
