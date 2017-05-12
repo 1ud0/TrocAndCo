@@ -2,21 +2,26 @@ package com.tac.controller;
 
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
+import javax.faces.bean.ViewScoped;
+import javax.faces.context.FacesContext;
+import javax.servlet.http.HttpServletRequest;
 
 import com.tac.business.api.IServiceCompte;
 import com.tac.business.api.IServiceEchange;
+import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceProposition;
 import com.tac.entity.Echange;
+import com.tac.entity.Envie;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
 @ManagedBean(name = "mbProfil")
-@RequestScoped
+@ViewScoped
 public class ProfilManagedBean {
 
 	@EJB
@@ -27,86 +32,82 @@ public class ProfilManagedBean {
 	private IServiceProposition proxyProposition;
 	@EJB
 	private IServiceEchange proxyEchange;
+	@EJB
+	private IServiceEnvie proxyEnvie;
 
-	@ManagedProperty(value="#{mbIdentif}")
+	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
-	
+
 	private Membre membreCourant;
 	private Proposition selectedProp;
+	private double noteMoyenneMembre;
+	private List<Envie> enviesMembre;
+	private List<Proposition> propositionsMembre;
+	private List<Echange> echangesDonneur;
+	private List<Echange> echangesAcheteur;
+	private int credit;
+	private int nbNote;
+	private int[] tableauNote;
 
-	public String loadProposition(Proposition proposition) {
+
+	public int getNoteMoyenne(Membre membre) {
+		return (int) proxyEchange.getNoteMoyenne(membre);
+	}
+
+	public void loadingPage() {
+		Integer idMembre = null;
+		try {
+			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
+					.getRequest();
+			idMembre = Integer.parseInt(request.getParameter("numero"));
+		} catch (Exception e) {
+
+		}
+		if (!FacesContext.getCurrentInstance().isPostback()) {
+			if (idMembre != null && idMembre != 0) {
+				membreCourant = proxyCompte.getById(idMembre);
+				noteMoyenneMembre = proxyEchange.getNoteMoyenne(membreCourant);
+				enviesMembre = proxyEnvie.getByMembre(membreCourant);
+				propositionsMembre = proxyProposition.getByMembre(membreCourant);
+				echangesDonneur = proxyEchange.getByMembreDonneurFini(membreCourant);
+				echangesAcheteur = proxyEchange.getByMembreChercheurFini(membreCourant);
+				credit = proxyEchange.totalCredit(membreCourant);
+				nbNote = proxyEchange.getTotalEchangeAvecNote(membreCourant);
+				tableauNote = proxyEchange.getToutesLesNotes(membreCourant);
+			}
+		}
+
+	}
+
+	public String LoadMembre(Membre membre) {
 		String nav = "";
-		selectedProp = proposition;
-		if (selectedProp != null) {
-			nav = "/fiche.xhtml?faces-redirect=true";
+		if (membre != null) {
+			nav = "/profil.xhtml?faces-redirect=true&numero=" + membre.getIdMembre();
 		}
 		return nav;
 	}
 
-	public IServiceCompte getProxyCompte() {
-		return proxyCompte;
-	}
-
-	public void setProxyCompte(IServiceCompte proxyCompte) {
-		this.proxyCompte = proxyCompte;
-	}
-
-
-	/**
-	 * donne le membre courant
-	 * et charge ses propositions
-	 * @return
-	 */
-	public Membre getMembreCourant() {
-		membreCourant = identifBean.getMembreConnected();
-		membreCourant.setLocalisations(proxyLocalisation.getMembreLocalisations(membreCourant));
-		List<Proposition> propositions = proxyProposition.getByMembre(membreCourant);
-		for (Proposition proposition : propositions) {
-			proposition.setPhotos(proxyProposition.getByProposition(proposition));
-			proposition.setLocalisations(proxyLocalisation.getPropositionLocalisations(proposition));
-
+	public boolean NoteVide() {
+		if (noteMoyenneMembre == -1.0) {
+			return true;
 		}
-
-		membreCourant.setPropositions(propositions);
-
-		return membreCourant;
+		return false;
 	}
 
-	public int getNombreNoteValeur(int noteATester, Membre membre) {
-		int[] tableauNote = proxyEchange.getToutesLesNotes(membre);
+	public int getNombreNoteValeur(int noteATester) {
 		int taille = tableauNote.length;
 		int nombreDeCetteNote = 0;
-		int pourcentage =0;
+		int pourcentage = 0;
 		for (int i = 0; i < taille; i++) {
 			if (tableauNote[i] == noteATester) {
 				nombreDeCetteNote = nombreDeCetteNote + 1;
 			}
 		}
-		if(taille!=0){
+		if (taille != 0) {
 			pourcentage = (nombreDeCetteNote * 100) / taille;
-			
+
 		}
 		return pourcentage;
-	}
-
-	public List<Echange> getEchangesQuandDonneur(Membre membre) {
-		return proxyEchange.getByMembreDonneurFini(membre);
-	}
-
-	public List<Echange> getEchangesQuandAcheteur(Membre membre) {
-		return proxyEchange.getByMembreChercheurFini(membre);
-	}
-
-	public int getCredit(Membre membre) {
-		return proxyEchange.totalCredit(membre);
-	}
-
-	public int getNombreNote(Membre membre) {
-		return proxyEchange.getTotalEchangeAvecNote(membre);
-	}
-
-	public int getNoteMoyenne(Membre membre) {
-		return (int) proxyEchange.getNoteMoyenne(membre);
 	}
 
 	public void setMembreCourant(Membre membreCourant) {
@@ -151,6 +152,82 @@ public class ProfilManagedBean {
 
 	public void setSelectedProp(Proposition selectedProp) {
 		this.selectedProp = selectedProp;
+	}
+
+	public IServiceEnvie getProxyEnvie() {
+		return proxyEnvie;
+	}
+
+	public void setProxyEnvie(IServiceEnvie proxyEnvie) {
+		this.proxyEnvie = proxyEnvie;
+	}
+
+	public double getNoteMoyenneMembre() {
+		return noteMoyenneMembre;
+	}
+
+	public void setNoteMoyenneMembre(double noteMoyenneMembre) {
+		this.noteMoyenneMembre = noteMoyenneMembre;
+	}
+
+	public List<Envie> getEnviesMembre() {
+		return enviesMembre;
+	}
+
+	public void setEnviesMembre(List<Envie> enviesMembre) {
+		this.enviesMembre = enviesMembre;
+	}
+
+	public IServiceCompte getProxyCompte() {
+		return proxyCompte;
+	}
+
+	public void setProxyCompte(IServiceCompte proxyCompte) {
+		this.proxyCompte = proxyCompte;
+	}
+
+	public List<Proposition> getPropositionsMembre() {
+		return propositionsMembre;
+	}
+
+	public void setPropositionsMembre(List<Proposition> propositionsMembre) {
+		this.propositionsMembre = propositionsMembre;
+	}
+
+	public Membre getMembreCourant() {
+		return membreCourant;
+	}
+
+	public List<Echange> getEchangesDonneur() {
+		return echangesDonneur;
+	}
+
+	public void setEchangesDonneur(List<Echange> echangesDonneur) {
+		this.echangesDonneur = echangesDonneur;
+	}
+
+	public List<Echange> getEchangesAcheteur() {
+		return echangesAcheteur;
+	}
+
+	public void setEchangesAcheteur(List<Echange> echangesAcheteur) {
+		this.echangesAcheteur = echangesAcheteur;
+	}
+
+	public int getCredit() {
+		return credit;
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
+
+	public int getNbNote() {
+		return nbNote;
+	}
+
+	public void setNbNote(int nbNote) {
+		this.nbNote = nbNote;
 	}
 
 }

@@ -27,4 +27,9 @@ private IDaoMembre proxyDaoMembre;
 		return false;
 	}
 
+	@Override
+	public Membre getById(Integer idMembre) {
+		return proxyDaoMembre.getById(idMembre);
+	}
+
 }

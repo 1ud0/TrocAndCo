@@ -40,18 +40,19 @@ public class ObjetManagedBean {
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
-	
 	private Proposition selectedProp;
-	private Membre selectedMembre;
+	private Membre owner;
 	private Membre membreCourant;
 	private Integer entryId;
 	private boolean favori;
+	private double noteMoyenneOwner;
+	private List<Envie> enviesOwner;
 
 	@PostConstruct
 	public void init() {
-		
+
 	}
-	
+
 	public void toggleFavori() {
 		if (favori) {
 			proxyFavori.deleteFavori(selectedProp, membreCourant);
@@ -79,72 +80,52 @@ public class ObjetManagedBean {
 		String nav = "";
 		selectedProp = proposition;
 		if (selectedProp != null) {
-			nav = "/fiche.xhtml?faces-redirect=true&id=" + selectedProp.getIdProposition();
+			nav = "/fiche.xhtml?faces-redirect=true&ref=" + selectedProp.getIdProposition();
 		}
 		return nav;
 	}
 
-
-	/**
-	 * charge les informations du membre qui possède l'objet visualisé
-	 * 
-	 * @param membre
-	 * @return
-	 */
-	public String LoadMembre(Membre membre) {
-		String nav = "";
-		selectedMembre = membre;
-		selectedMembre.setLocalisations(proxyLocalisation.getMembreLocalisations(selectedMembre));
-		if (selectedMembre != null) {
-			nav = "/profil.xhtml?faces-redirect=true";
-		}
-		return nav;
-	}
-
-	public boolean NoteVide(Membre membre) {
-		if (proxyEchange.getNoteMoyenne(membre) == -1.0) {
+	public boolean NoteVide() {
+		if (noteMoyenneOwner == -1.0) {
 			return true;
 		}
 		return false;
 	}
 
 	public void loadEntry() {
-		
 		try {
 			HttpServletRequest request = (HttpServletRequest) FacesContext.getCurrentInstance().getExternalContext()
 					.getRequest();
-			entryId = Integer.parseInt(request.getParameter("id"));
+			entryId = Integer.parseInt(request.getParameter("ref"));
 		} catch (Exception e) {
 			// catch misère
 		}
-		if(!FacesContext.getCurrentInstance().isPostback()) {
-		if (entryId != null && entryId != 0) {
-			try {
-				selectedProp = proxyProp.getById(entryId);
-				membreCourant = identifBean.getMembreConnected();
-				if (membreCourant != null) {
-					favori = proxyFavori.isFavorite(selectedProp, membreCourant);
+		if (!FacesContext.getCurrentInstance().isPostback()) {
+			if (entryId != null && entryId != 0) {
+				try {
+					selectedProp = proxyProp.getById(entryId);
+					loadDataOwner();
+					membreCourant = identifBean.getMembreConnected();
+					if (membreCourant != null) {
+						favori = proxyFavori.isFavorite(selectedProp, membreCourant);
+					}
+				} catch (DataAccessException e) {
+					String message = "Erreur lors du chargement de la page : " + e.getMessage();
+					FacesContext.getCurrentInstance().addMessage(null,
+							new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
+					selectedProp = null;
 				}
-			} catch (DataAccessException e) {
-				String message = "Erreur lors du chargement de la page : " + e.getMessage();
-				FacesContext.getCurrentInstance().addMessage(null,
-						new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
-				selectedProp = null;
 			}
 		}
+	}
+
+	private void loadDataOwner() {
+		if (selectedProp != null) {
+			owner = selectedProp.getMembre();
+			owner.setLocalisations(proxyLocalisation.getMembreLocalisations(owner));
+			noteMoyenneOwner = proxyEchange.getNoteMoyenne(owner);
+			enviesOwner = proxyEnvie.getByMembre(owner);
 		}
-	}
-
-	public double getNoteMoyenne(Membre membre) {
-		return proxyEchange.getNoteMoyenne(membre);
-	}
-
-	public List<Envie> getEnviesAutreMembre(Membre membre) {
-		return proxyEnvie.getByMembre(membre);
-	}
-
-	public List<Localisation> getLocalisationByMembre(Membre membre) {
-		return proxyLocalisation.getMembreLocalisations(membre);
 	}
 
 	public IServiceProposition getProxyProp() {
@@ -161,14 +142,6 @@ public class ObjetManagedBean {
 
 	public void setSelectedProp(Proposition selectedProp) {
 		this.selectedProp = selectedProp;
-	}
-
-	public Membre getSelectedMembre() {
-		return selectedMembre;
-	}
-
-	public void setSelectedMembre(Membre selectedMembre) {
-		this.selectedMembre = selectedMembre;
 	}
 
 	public IServiceLocalisation getProxyLocalisation() {
@@ -233,6 +206,30 @@ public class ObjetManagedBean {
 
 	public void setFavori(boolean favori) {
 		this.favori = favori;
+	}
+
+	public Membre getOwner() {
+		return owner;
+	}
+
+	public void setOwner(Membre owner) {
+		this.owner = owner;
+	}
+
+	public double getNoteMoyenneOwner() {
+		return noteMoyenneOwner;
+	}
+
+	public void setNoteMoyenneOwner(double noteMoyenneOwner) {
+		this.noteMoyenneOwner = noteMoyenneOwner;
+	}
+
+	public List<Envie> getEnviesOwner() {
+		return enviesOwner;
+	}
+
+	public void setEnviesOwner(List<Envie> enviesOwner) {
+		this.enviesOwner = enviesOwner;
 	}
 
 }

@@ -113,13 +113,10 @@
 								</div>
 
 								<div class="box" id="details">
-
 									<h4>Details</h4>
 									<p>
 										<h:outputText value="#{mbObjet.selectedProp.description}" />
 									</p>
-
-
 									<blockquote>
 										<p>
 											<em>Etat : <h:outputText
@@ -133,9 +130,7 @@
 													value="#{mbObjet.selectedProp.sousCategorie.intitule}" />
 											</em>
 										</p>
-
 									</blockquote>
-
 								</div>
 							</div>
 						</div>
@@ -146,25 +141,16 @@
 					<!-- *** LEFT COLUMN END *** -->
 					<h:form id="myMap">
 						<script type="text/javascript">
-
 							lat= #{mbObjet.selectedProp.localisations.get(0).latitude};
 							lng= #{mbObjet.selectedProp.localisations.get(0).longitude};
 							intitule = "#{mbObjet.selectedProp.intitule}";
 						</script>
-						
 					</h:form>
+					
 					<div class="col-md-3 objetside">
-
-
-
 						<div style='overflow: hidden; height: 280px;'>
 							<div id='gmap_canvas' style='height: 440px;'></div>
-							
-
-
-
 						</div>
-
 
 						<!-- partie sur le propriétaire -->
 
@@ -177,24 +163,24 @@
 									<div class="col-sm-4 col-md-6 ">
 										<div class="image">
 											<a href=""> <img
-												src="#{mbObjet.selectedProp.membre.avatar}" alt=""
+												src="#{mbObjet.owner.avatar}" alt=""
 												class="img-responsive img-circle tailleMaxImage"></img>
 											</a>
 										</div>
 									</div>
 									<div class="col-sm-4 col-md-6 ">
 										<h4>
-											<h:outputText value="#{mbObjet.selectedProp.membre.pseudo}" />
+											<h:outputText value="#{mbObjet.owner.pseudo}" />
 										</h4>
 										<h:panelGroup
-											rendered="#{mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+											rendered="#{mbObjet.NoteVide()}">
 											<p class="rating-num">-/5</p>
 										</h:panelGroup>
 										<h:panelGroup
-											rendered="#{!mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+											rendered="#{!mbObjet.NoteVide()}">
 											<p class="rating-num">
 												<h:outputText
-													value="#{mbObjet.getNoteMoyenne(mbObjet.selectedProp.membre)}" />
+													value="#{mbObjet.noteMoyenneOwner}" />
 												/5
 											</p>
 										</h:panelGroup>
@@ -209,9 +195,10 @@
 								<p>
 									<h:form>
 										<h:commandLink
-											action="#{mbObjet.LoadMembre(mbObjet.selectedProp.membre)}"
+											action="#{mbProfil.LoadMembre(mbObjet.owner)}"
 											value="">
 											<strong>Voir le profil du propriétaire</strong>
+											<f:param name="status" value="check"/>
 										</h:commandLink>
 									</h:form>
 								</p>
@@ -239,13 +226,13 @@
 					<div id="demo" class="collapse">
 						<div class="row">
 							<!-- Premiere envie -->
-							<h:panelGroup rendered="#{empty mbEnvieFavori.getEnviesDuMembre(mbObjet.selectedProp.membre)}">
+							<h:panelGroup rendered="#{empty mbObjet.enviesOwner}">
 								<br></br>
 								<div class="col-md-6 col-sm-12 ">Ce membre ne possède pas
 									encore d'envie.</div>
 							</h:panelGroup>
 							<ui:repeat var="envie"
-								value="#{mbObjet.getEnviesAutreMembre(mbObjet.selectedProp.membre)}"
+								value="#{mbObjet.enviesOwner}"
 								varStatus="envieStatut">
 								<div class="col-md-6 col-sm-12 ">
 									<div class="box-simple boxEnvie">
@@ -256,14 +243,13 @@
 												<div class="col-md-10 col-sm-10">#{envie.intitule}</div>
 												<div class="col-md-2 col-sm-2">
 
-													<h:panelGroup rendered="#{!mbEnvie.valeurVide(envie)}">
+													<h:panelGroup rendered="#{!envie.valeur == null}">
 														<label> #{envie.valeur.valeur}</label>
-														<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 													</h:panelGroup>
-													<h:panelGroup rendered="#{mbEnvie.valeurVide(envie)}">
+													<h:panelGroup rendered="#{envie.valeur == null}">
 														<label> ?</label>
-														<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 													</h:panelGroup>
+													<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 
 												</div>
 											</h3>
@@ -283,7 +269,7 @@
 													class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
 													<h4>Adresses:</h4>
 													<ui:repeat var="adresse"
-														value="#{mbObjet.getLocalisationByMembre(mbObjet.selectedProp.membre)}">
+														value="#{mbObjet.owner.localisations}">
 														<div class="row">
 
 															<p>

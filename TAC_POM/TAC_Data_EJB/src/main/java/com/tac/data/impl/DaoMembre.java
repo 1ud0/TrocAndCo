@@ -20,7 +20,7 @@ public class DaoMembre implements IDaoMembre{
 	
 	@Override
 	public Membre identifyMembre(String mail, String mdp) {
-		final String reqIdentification ="SELECT m FROM Membre m WHERE m.mail = :pmail AND m.password = :pmdp";
+		final String reqIdentification ="SELECT DISTINCT m FROM Membre m LEFT JOIN FETCH m.localisations WHERE m.mail = :pmail AND m.password = :pmdp";
 		Query queryIdentification = em.createQuery(reqIdentification);
 		queryIdentification.setParameter("pmail", mail);
 		queryIdentification.setParameter("pmdp",mdp);
@@ -58,11 +58,14 @@ public class DaoMembre implements IDaoMembre{
 
 	@Override
 	public Membre getById(Integer id) {
-		final String reqGetById = "SELECT m FROM Membre m WHERE m.idMembre = :pid";
+		final String reqGetById = "SELECT DISTINCT m FROM Membre m LEFT JOIN FETCH m.localisations WHERE m.idMembre = :pid";
 			Query queryGetById = em.createQuery(reqGetById);
 		queryGetById.setParameter("pid", id);
-		Membre membreById = (Membre) queryGetById.getSingleResult();
-		return membreById;
+		try {
+			return (Membre) queryGetById.getSingleResult();
+		} catch (Exception e) {
+			return null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")

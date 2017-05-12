@@ -21,19 +21,15 @@ import com.tac.exception.NotEnoughCreditException;
 @SessionScoped
 public class EchangeManagedBean {
 
-	
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
 
 	@EJB
 	IServiceProposition proxyProposition;
-
 	@EJB
 	IServiceValeur proxyValeur;
-
 	@EJB
 	IServiceEchange proxyEchange;
-
 	@EJB
 	IServiceCompte proxyCompteMembre;
 

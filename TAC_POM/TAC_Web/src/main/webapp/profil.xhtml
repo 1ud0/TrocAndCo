@@ -15,6 +15,10 @@
 		</ui:define>
 		
 		<ui:define name="content">
+			<f:metadata>
+				<f:event listener="#{mbProfil.loadingPage()}" type="preRenderView"></f:event>
+			</f:metadata>
+		
 			<!-- *** DEBUT DU CORPS DE LA PAGE *** _________________________________________________________ -->
 
 			<div class="container">
@@ -54,52 +58,52 @@
 
 						<div class="row">
 							<div class="col-xs-6 col-md-6 text-center">
-								<h:panelGroup rendered="#{mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+								<h:panelGroup rendered="#{mbProfil.NoteVide()}">
 									<p class="rating-num">
 										-
 									</p>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{!mbObjet.NoteVide(mbObjet.selectedProp.membre)}">
+									<h:panelGroup rendered="#{!mbProfil.NoteVide()}">
 									<p class="rating-num">
-										<h:outputText value="#{mbObjet.getNoteMoyenne(mbObjet.selectedProp.membre)}" />
+										<h:outputText value="#{mbProfil.noteMoyenneMembre}" />
 										
 									</p>
 									</h:panelGroup>
 								<div class="rating">
 								
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) ge 1}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre ge 1}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) lt 1}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre lt 1}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) ge 2}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre ge 2}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) lt 2}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre lt 2}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) ge 3}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre ge 3}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) lt 3}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre lt 3}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) ge 4}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre ge 4}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) lt 4}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre lt 4}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) ge 5}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre ge 5}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbObjet.selectedProp.membre) lt 5}">
+									<h:panelGroup rendered="#{mbProfil.noteMoyenneMembre lt 5}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
 								</div>
 								<div>
-									<span class="glyphicon glyphicon-user"></span> #{mbProfil.getNombreNote(mbObjet.selectedProp.membre)}
+									<span class="glyphicon glyphicon-user"></span> #{mbProfil.nbNote}
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-6">
@@ -111,7 +115,7 @@
 										<div class="progress progress-striped">
 											<div class="progress-bar progress-bar-success"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(5, mbObjet.selectedProp.membre)}%">
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(5)}%">
 												<span class="sr-only">80%</span>
 											</div>
 										</div>
@@ -124,7 +128,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-success"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(4, mbObjet.selectedProp.membre)}%">
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(4)}%">
 												<span class="sr-only">60%</span>
 											</div>
 										</div>
@@ -137,7 +141,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-info"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(3, mbObjet.selectedProp.membre)}%">
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(3)}%">
 												<span class="sr-only">40%</span>
 											</div>
 										</div>
@@ -150,7 +154,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-warning"
 												role="progressbar" aria-valuenow="20" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(2, mbObjet.selectedProp.membre)}%">
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(2)}%">
 												<span class="sr-only">20%</span>
 											</div>
 										</div>
@@ -163,7 +167,7 @@
 										<div class="progress">
 											<div class="progress-bar progress-bar-danger"
 												role="progressbar" aria-valuenow="80" aria-valuemin="0"
-												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(1, mbObjet.selectedProp.membre)}%">
+												aria-valuemax="100" style="width: #{mbProfil.getNombreNoteValeur(1)}%">
 												<span class="sr-only">15%</span>
 											</div>
 										</div>
@@ -201,13 +205,13 @@
 							<div class="carousel slide" id="myCarousel">
 								<div class="item active">
 									<div class="row">
-										<ui:repeat var="prop" value="#{mbProfil.membreCourant.propositions}">
+										<ui:repeat var="prop" value="#{mbProfil.propositionsMembre}">
 										<h:form>
 											<div class=" col-md-3 col-sm-9 ">
 												<!-- produit 1 DEBUT -->
 												<div class="product ">
 
-													<h:commandLink action="#{mbProfil.loadProposition(prop)}"
+													<h:commandLink action="#{mbObjet.loadProposition(prop)}"
 														value="">
 														<div class="image ">
 															<img src="#{prop.photos.get(0).url}" alt=""
@@ -244,13 +248,6 @@
 
 
 				<!--*** Ses Envies*** _________________________________________________________ -->
-				<!--
-				<div class="container">
-					<button type="button" class="btn btn-template-main"
-						data-toggle="collapse" data-target="#demo">Consulter ses
-						envies</button>
-						<br></br>
-						  -->
 
 				<div class="row">
 					<div class="col-md-12">
@@ -264,13 +261,13 @@
 								</div>
 
 								<div id="demo" class="collapse">
-								<h:panelGroup rendered="#{empty mbEnvieFavori.getEnviesDuMembre(mbObjet.selectedProp.membre)}">
+								<h:panelGroup rendered="#{empty mbProfil.enviesMembre}">
 								<br></br>
 								<div class="col-md-6 col-sm-12 ">Ce membre ne possède pas
 									encore d'envie.</div>
 							</h:panelGroup>
 									<!-- Premiere envie -->
-									<ui:repeat var="envie" value="#{mbObjet.getEnviesAutreMembre(mbObjet.selectedProp.membre)}"
+									<ui:repeat var="envie" value="#{mbProfil.enviesMembre}"
 				varStatus="envieStatut">
 						<div class="col-md-6 col-sm-12 ">
 							<div class="box-simple boxEnvie active">
@@ -280,34 +277,32 @@
 									<h3>
 										<div class="col-md-10 col-sm-10">#{envie.intitule}</div>
 										<div class="col-md-2 col-sm-2">
-											
-												<h:panelGroup rendered="#{!mbEnvie.valeurVide(envie)}">
-									<label> #{envie.valeur.valeur}</label> <img
-										src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
-										</h:panelGroup>
-										<h:panelGroup rendered="#{mbEnvie.valeurVide(envie)}">
-									<label> ?</label> <img
-										src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
-										</h:panelGroup>
-										
+											<h:panelGroup rendered="#{!envie.valeur == null}">
+												<label> #{envie.valeur.valeur}</label>
+											</h:panelGroup>
+											<h:panelGroup rendered="#{envie.valeur == null}">
+												<label> ?</label> 
+											</h:panelGroup>
+											<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 										</div>
 									</h3>
 									<div class="row">
 										<div class="col-md-6 col-sm-12 orientationTextLeft">
 											<h4>Détails:</h4>
 											<p>
-												<label> Catégorie: </label> <label class="italic">
-													#{envie.categorie.intitule}</label> <br /> <label> Sous-catégorie: </label> <label
-													class="italic"> #{envie.sousCategorie.intitule} </label> <br /> <label>
-													Distance: </label> <label class="italic"> moins de #{envie.distance} km </label>
+												<label>Catégorie: </label> 
+												<label class="italic">#{envie.categorie.intitule}</label> <br /> 
+												<label>Sous-catégorie: </label> 
+												<label class="italic"> #{envie.sousCategorie.intitule} </label> <br /> 
+												<label>Distance: </label> 
+												<label class="italic"> moins de #{envie.distance} km </label>
 											</p>
 										</div>
 										<div class="col-md-6 col-sm-12 borderLeft orientationTextLeft">
 											<h4>Adresses:</h4>
 											<ui:repeat var="adresse"
-											value="#{mbObjet.getLocalisationByMembre(mbObjet.selectedProp.membre)}">
+												value="#{mbProfil.membreCourant.localisations}">
 											<div class="row">
-
 												<p>
 													<span class="glyphicon glyphicon-map-marker"
 														aria-hidden="true"></span> <label>#{adresse.adresse}<br /> #{adresse.ville}
@@ -345,7 +340,7 @@
 								</div>
 								<div id="collapse1" class="panel-collapse collapse">
 									<ul class="list-group">
-										<ui:repeat var="eval" value="#{mbProfil.getEchangesQuandDonneur(mbObjet.selectedProp.membre)}">
+										<ui:repeat var="eval" value="#{mbProfil.echangesDonneur}">
 										<li class="list-group-item">
 											<div class="review-block">
 
@@ -400,7 +395,7 @@
 											</div>
 										</li>
 										</ui:repeat>
-										<ui:repeat var="eval" value="#{mbProfil.getEchangesQuandAcheteur(mbObjet.selectedProp.membre)}">
+										<ui:repeat var="eval" value="#{mbProfil.echangesAcheteur}">
 										<li class="list-group-item">
 											<div class="review-block">
 
