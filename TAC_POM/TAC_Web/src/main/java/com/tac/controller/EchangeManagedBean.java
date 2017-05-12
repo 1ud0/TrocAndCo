@@ -105,7 +105,6 @@ System.out.println("load echange acquereur avant redirection");
 		} else {
 			nav = "/echangeAttenteValidation.xhtml?faces-redirect=true";
 		}
-		System.out.println("nav:"+nav);
 
 		return nav;
 	}
@@ -166,7 +165,6 @@ System.out.println("load echange acquereur avant redirection");
 
 	public String refuserEchange() {
 		echangeCourant = proxyEchange.refuserEchange(echangeCourant);
-		System.out.println(echangeCourant.getDateRefus());
 		return loadEchangeDonneur(echangeCourant);
 	}
 
@@ -207,18 +205,19 @@ System.out.println("load echange acquereur avant redirection");
 	}
 
 	public String ajouterEchange() {
+		if(echangePropose.getPrix()!= null){
 		echangePropose.setProposition(selectedProp);
 		echangePropose.setMembre(membreCourant);
 		try {
 			echangePropose = proxyEchange.initierEchange(echangePropose);
 			return "/echangeAttenteValidation.xhtml?faces-redirect=true";
 		} catch (NotEnoughCreditException e) {
-			System.out.println("MORT");
-			System.out.println(e.getMessage());
+
 			showAlertModif = true;
 			return "";
 		}
-		
+		}
+		return "";
 	}
 	
 	public void hideAlert(){

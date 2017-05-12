@@ -10,6 +10,7 @@ import javax.persistence.Query;
 
 import com.tac.data.api.IDaoEchange;
 import com.tac.entity.Echange;
+import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
 @Remote(IDaoEchange.class)
@@ -57,19 +58,22 @@ public class DaoEchange implements IDaoEchange {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Echange> getByMembreDonneur(Integer idMembreDonneur) {
-		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur";
+		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur ORDER BY e.dateinit desc";
 		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
 		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembreDonneur);
 		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
+		for(Echange echange : echangesDuDonneur){
+			echange.getRdvs().size();
+		}
 		return echangesDuDonneur;
 	}
 	
 	@SuppressWarnings("unchecked")
 	@Override
-	public List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur){
-		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre.idMembre= :pidMembreDonneur AND e.dateAcceptation IS NULL AND e.dateRefus IS NULL AND e.dateAnnul IS NULL";
+	public List<Echange> getByMembreDonneurDateAcceptNull(Membre membre){
+		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.proposition.membre= :MembreDonneur AND e.dateAcceptation IS NULL AND e.dateRefus IS NULL AND e.dateAnnul IS NULL";
 		Query queryGetByIdMembreDonneur = em.createQuery(reqGetByMemberId);
-		queryGetByIdMembreDonneur.setParameter("pidMembreDonneur", idMembreDonneur);
+		queryGetByIdMembreDonneur.setParameter("MembreDonneur", membre);
 		return queryGetByIdMembreDonneur.getResultList(); 
 	}
 	
@@ -85,10 +89,13 @@ public class DaoEchange implements IDaoEchange {
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Echange> getByMembreChercheur(Integer idMembreChercheur) {
-		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.membre.idMembre= :pidMembre";
+		final String reqGetByMemberId = "SELECT e FROM Echange e WHERE e.membre.idMembre= :pidMembre ORDER BY e.dateinit desc";
 		Query queryGetByIdMembreChercheur = em.createQuery(reqGetByMemberId);
 		queryGetByIdMembreChercheur.setParameter("pidMembre", idMembreChercheur);
 		List<Echange> echangesDuChercheur = queryGetByIdMembreChercheur.getResultList();
+		for(Echange echange : echangesDuChercheur){
+			echange.getRdvs().size();
+		}
 		return echangesDuChercheur;
 	}
 

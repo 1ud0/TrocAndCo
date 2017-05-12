@@ -31,6 +31,6 @@ public interface IServiceEchange {
 	Echange getEchangeByProp(Proposition proposition);
 	List<Echange> getByMembreDonneur(Integer idMembreDonneur);
 	List<Echange> getByMembreChercheur(Integer idMembreChercheur);
-	List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur);
+	List<Echange> getByMembreDonneurDateAcceptNull(Membre membre);
 	List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre);
 }

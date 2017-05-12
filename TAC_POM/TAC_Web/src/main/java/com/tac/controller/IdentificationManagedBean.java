@@ -51,9 +51,6 @@ public class IdentificationManagedBean implements Serializable {
 		return nav;
 	}
 
-
-	
-
 	public String seDeconnecter() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
 		session.invalidate();
@@ -62,7 +59,7 @@ public class IdentificationManagedBean implements Serializable {
 	}
 	
 	public int getNbNouveauxEchanges() {
-		List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected.getIdMembre());
+		List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected);
 		return echanges.size();
 	}
 	

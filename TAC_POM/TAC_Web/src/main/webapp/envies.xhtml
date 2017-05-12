@@ -2,28 +2,20 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:ui="http://java.sun.com/jsf/facelets">
-
 <h:head>
 	<title>COMPTE - MES ECHANGES</title>
 </h:head>
 <h:body bgcolor='white'>
-
-
-
 	<ui:composition template="/WEB-INF/templates/templateEnvies.xhtml">
-
 		<ui:define name="headPerso">
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
 			</f:metadata>
 		</ui:define>
-
 		<ui:define name="content">
 			<h:panelGroup layout="block" id="enviesAndFavoris">
 				<h:form>
-
 					<h:panelGroup name="affichageFavoris">
-
 						<ui:repeat var="favori" value="#{mbEnvieFavori.favoris}">
 							<div class=" col-md-3 col-sm-9 ">
 								<div class="product ">
@@ -33,7 +25,6 @@
 											<h:graphicImage value="#{favori.photos.get(0).url}"
 												styleClass="img-responsive image1" />
 										</h:commandLink>
-
 									</div>
 									<!-- /.image -->
 									<div class="text">
@@ -56,17 +47,12 @@
 											<h:outputText value="#{favori.valeur.valeur}" />
 											<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>
 										</p>
-
 									</div>
 									<!-- /.text -->
 								</div>
 							</div>
 						</ui:repeat>
-
-
 					</h:panelGroup>
-
-
 					<!-- Premier package envie+propositions -->
 					<ui:repeat var="envie" value="#{mbEnvieFavori.envies}"
 						varStatus="envieStatut">
@@ -84,8 +70,7 @@
 												<div class="col-sm-2">
 													<h:commandLink action="#{mbEnvieFavori.deleteEnvie(envie)}"
 														value="">
-														<span class="glyphicon glyphicon-trash"
-															style="color: red"></span>
+														<span class="glyphicon glyphicon-trash" style="color: red"></span>
 													</h:commandLink>
 												</div>
 											</div>
@@ -103,9 +88,7 @@
 													<img src="img/custom/feuille.png" class="iconeFeuille"
 														alt=""></img>
 												</h:panelGroup>
-
 											</div>
-
 											<div class="row">
 												<div class="col-md-6 col-sm-12 orientationTextLeft">
 													<h4>Détails:</h4>
@@ -119,7 +102,6 @@
 															<label class="italic">moins de #{envie.distance}
 																km </label>
 														</h:panelGroup>
-
 													</p>
 												</div>
 												<div
@@ -128,17 +110,14 @@
 													<ui:repeat var="adresse"
 														value="#{mbEnvieFavori.localisationByMembre}">
 														<div class="row">
-
 															<p>
 																<span class="glyphicon glyphicon-map-marker"
 																	aria-hidden="true"></span> <label>#{adresse.adresse}
-																	<br /> #{adresse.codePostal}
+																	<br /> #{adresse.codePostal} #{adresse.ville}
 																</label>
-
 															</p>
 														</div>
 													</ui:repeat>
-
 												</div>
 											</div>
 										</div>
@@ -152,7 +131,6 @@
 								<div class="col-md-12 col-sm-12 ">
 									<h4>SUGGESTIONS</h4>
 									<div class="row dernieresEntrees">
-
 										<ui:repeat var="prop"
 											value="#{mbEnvieFavori.loadPropositions(envie)}">
 											<div class="col-sm-3">
