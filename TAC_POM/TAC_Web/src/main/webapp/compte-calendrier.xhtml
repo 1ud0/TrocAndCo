@@ -7,19 +7,19 @@
 <h:head>
 	<title>COMPTE - MON CALENDRIER</title>
 
+
 </h:head>
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
-
-		<ui:define name="headPerso">
+<ui:define name="headPerso">
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
 			</f:metadata>
 			<script type="text/javascript" src="js/calendrier.js"></script>
 			<script type="text/javascript" src="js/affichageCalendrier.js">	</script>
 		</ui:define>
-
+		
 		<ui:define name="content">
 
 			<div class="introRubrique">
