@@ -156,6 +156,8 @@
 										<ui:repeat var="prop"
 											value="#{mbEnvieFavori.loadPropositions(envie)}">
 											<div class="col-sm-3">
+											<div class="product ">
+											
 												<h:commandLink action="#{mbObjet.loadProposition(prop)}"
 													value="">
 													<div class="image ">
@@ -184,6 +186,7 @@
 													</div>
 													<!-- /.text -->
 												</h:commandLink>
+												</div>
 											</div>
 										</ui:repeat>
 									</div>
