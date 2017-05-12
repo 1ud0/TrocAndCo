@@ -9,8 +9,11 @@ import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
 import javax.persistence.Query;
 
+import com.tac.entity.Categorie;
 import com.tac.entity.Message;
 import com.tac.entity.Proposition;
+
+import javassist.compiler.ast.CastExpr;
 
 
 public class Test {
@@ -21,13 +24,20 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-        final String req = "SELECT m FROM Message m WHERE m.emetteur.idMembre = 6 GROUP BY m.recepteur, m.proposition";
+		final String req = "SELECT p.categorie, COUNT(*) FROM Proposition p GROUP BY p.categorie";
 		Query query = em.createQuery(req);
-		List<Message> messages = query.getResultList();
-		
-		for (Message m : messages) {
-			System.out.println(m.getTexte());
+		 List<Object[]> bob = query.getResultList();
+		 for (Object[] objects : bob) {
+			 Categorie categorie = (Categorie) objects[0];
+			 	System.out.println(categorie.getIntitule());
+			 Long count = (Long) objects[1];
+			 System.out.println(count);
 		}
+        
+      
+		
+	
+		
         
         
         tx.commit();

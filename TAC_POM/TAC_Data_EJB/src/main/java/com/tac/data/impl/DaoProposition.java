@@ -80,6 +80,8 @@ public class DaoProposition implements IDaoProposition {
 		Query query = em.createNativeQuery(QUERY_PROP_DISPO, Proposition.class);
 		return query.getResultList();
 	}
+	
+
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -106,6 +108,7 @@ public class DaoProposition implements IDaoProposition {
 		Query query = em.createQuery(req);
 		return query.getResultList();
 	}
+	
 	
 	
 	@SuppressWarnings("unchecked")
@@ -277,6 +280,23 @@ public class DaoProposition implements IDaoProposition {
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Object[]> getAllPropsByCatMere() {
+		System.out.println("test entrée");
+		final String req = "SELECT p.categorie, COUNT(*) FROM Proposition p GROUP BY p.categorie";
+		Query query = em.createQuery(req);
+		 List<Object[]> bob = query.getResultList();
+		 for (Object[] objects : bob) {
+			 Categorie categorie = (Categorie) objects[0];
+
+			 Long count = (Long) objects[1];
+		
+		}
+		return query.getResultList();
+
 	}
 
 

@@ -1,6 +1,7 @@
 package com.tac.controller.back;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -12,6 +13,7 @@ import com.tac.business.api.IServiceCategorie;
 import com.tac.business.api.IServiceEtat;
 import com.tac.business.api.IServiceTag;
 import com.tac.business.api.IServiceValeur;
+import com.tac.business.api.back.IServiceParam;
 import com.tac.entity.Categorie;
 import com.tac.entity.Etat;
 import com.tac.entity.Tag;
@@ -34,14 +36,20 @@ public class ParamManagedBean implements Serializable {
 	private IServiceCategorie proxyCategorie;
 	@EJB
 	private IServiceValeur proxyValeur;
+	@EJB
+	private IServiceParam proxyParam;
 
 	private Categorie selectedCategorie =new Categorie();
 	private Tag selectedTag = new Tag();
 	private Valeur selectedValeur= new Valeur();
 	private Etat selectedEtat = new Etat();
 	private String intituleSelectedCatM = "";
-	
 	private String intituleCatM="";
+	/**
+	 * Pour Graph
+	 */
+	private List<Categorie> listCategoriesGraph = new ArrayList<>();
+	private List<Long> listLongGraph = new ArrayList<>();
 
 
 	@PostConstruct
@@ -51,6 +59,7 @@ public class ParamManagedBean implements Serializable {
 		getAllCategoriesFilles();
 		getAllValeurs();
 		getAllTag();
+		getAllPropsByCatMere();
 	}
 	
 	public String ajoutCategorieM(){
@@ -59,8 +68,19 @@ public class ParamManagedBean implements Serializable {
 		selectedCategorie = proxyCategorie.addCategorie(selectedCategorie);
 		String nav = "";
 		return nav;
-		
 	}
+	
+	public void getAllPropsByCatMere(){
+		List<Object[]> objectsGraph = proxyParam.getAllPropsByCatMere();
+		System.out.println(objectsGraph.size());
+		for (Object[] object : objectsGraph) {
+			listCategoriesGraph.add( (Categorie)object[0]);
+			listLongGraph.add((Long) object[1]);
+			
+		}
+	}
+	
+	
 
 	public void loadCategorieM(Categorie categorie) {
 		selectedCategorie = categorie;
@@ -147,6 +167,62 @@ public class ParamManagedBean implements Serializable {
 
 	public void setIntituleSelectedCatM(String intituleSelectedCatM) {
 		this.intituleSelectedCatM = intituleSelectedCatM;
+	}
+
+	public IServiceEtat getProxyEtat() {
+		return proxyEtat;
+	}
+
+	public void setProxyEtat(IServiceEtat proxyEtat) {
+		this.proxyEtat = proxyEtat;
+	}
+
+	public IServiceTag getProxyTag() {
+		return proxyTag;
+	}
+
+	public void setProxyTag(IServiceTag proxyTag) {
+		this.proxyTag = proxyTag;
+	}
+
+	public IServiceCategorie getProxyCategorie() {
+		return proxyCategorie;
+	}
+
+	public void setProxyCategorie(IServiceCategorie proxyCategorie) {
+		this.proxyCategorie = proxyCategorie;
+	}
+
+	public IServiceValeur getProxyValeur() {
+		return proxyValeur;
+	}
+
+	public void setProxyValeur(IServiceValeur proxyValeur) {
+		this.proxyValeur = proxyValeur;
+	}
+
+	public IServiceParam getProxyParam() {
+		return proxyParam;
+	}
+
+	public void setProxyParam(IServiceParam proxyParam) {
+		this.proxyParam = proxyParam;
+	}
+
+	public List<Categorie> getListCategoriesGraph() {
+		return listCategoriesGraph;
+	}
+
+	public void setListCategoriesGraph(List<Categorie> listCategoriesGraph) {
+		this.listCategoriesGraph = listCategoriesGraph;
+	}
+
+	public List<Long> getListLongGraph() {
+		return listLongGraph;
+	}
+
+	public void setListLongGraph(List<Long> listLongGraph) {
+		this.listLongGraph = listLongGraph;
 	}
 
 }

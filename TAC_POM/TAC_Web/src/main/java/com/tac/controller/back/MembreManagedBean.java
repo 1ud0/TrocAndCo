@@ -13,40 +13,44 @@ import com.tac.business.api.back.IServiceMembreBO;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 
-
-
 @ManagedBean(name = "mbBackMembre")
 @SessionScoped
 public class MembreManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
-	
+
 	@EJB
 	private IServiceMembreBO proxyMembre;
-	
+
 	@EJB
 	private IServiceLocalisation proxyLocalisation;
-	
+
 	private Integer entryId;
 	private Membre selectedMembre = new Membre();
 
-	public List<Membre> getAllMembresActifs(){
-		return proxyMembre.getAllActif();
+	public List<Membre> getAllMembresActifs() {
+		List<Membre> membres = proxyMembre.getAllActif();
+		for (Membre membre : membres) {
+			membre.setLocalisations(proxyLocalisation.getMembreLocalisations(membre));
+			
+		}
 		
+		return membres;
+
 	}
-	public List<Membre> getAllMembresRadies(){
+
+	public List<Membre> getAllMembresRadies() {
 		return proxyMembre.getAllRadie();
-		
+
 	}
-	
+
 	@PostConstruct
 	public void init() {
 		System.out.println("dans lePC MembreManagedBean");
 		getAllMembresActifs();
 		getAllMembresRadies();
 	}
-	
+
 	public String loadMembre(Membre membre) {
 		String nav = "";
 		selectedMembre = membre;
@@ -56,44 +60,49 @@ public class MembreManagedBean implements Serializable {
 		System.out.println(selectedMembre.getNom());
 		return nav;
 	}
-	
 
 	public void loadEntry() {
 		if (entryId != null && entryId != 0) {
 			selectedMembre = proxyMembre.getIdMembre(entryId);
-			System.out.println(entryId);
-			System.out.println(selectedMembre.getIdMembre());
+
 		}
 	}
-	
+
 	public void testMembre() {
 		System.out.println(selectedMembre.getPseudo());
 	}
-	
+
 	public IServiceMembreBO getProxyMembre() {
 		return proxyMembre;
 	}
+
 	public void setProxyMembre(IServiceMembreBO proxyMembre) {
 		this.proxyMembre = proxyMembre;
 	}
+
 	public Membre getSelectedMembre() {
 		selectedMembre.setLocalisations(proxyLocalisation.getMembreLocalisations(selectedMembre));
 		return selectedMembre;
 	}
+
 	public void setSelectedMembre(Membre selectedMembre) {
 		this.selectedMembre = selectedMembre;
 	}
+
 	public Integer getEntryId() {
 		return entryId;
 	}
+
 	public void setEntryId(Integer entryId) {
 		this.entryId = entryId;
 	}
+
 	public IServiceLocalisation getProxyLocalisation() {
 		return proxyLocalisation;
 	}
+
 	public void setProxyLocalisation(IServiceLocalisation proxyLocalisation) {
 		this.proxyLocalisation = proxyLocalisation;
 	}
-	
+
 }
