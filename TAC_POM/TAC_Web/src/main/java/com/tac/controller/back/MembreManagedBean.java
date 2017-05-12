@@ -36,6 +36,11 @@ public class MembreManagedBean implements Serializable {
 		
 	}
 	
+	public Membre getMembre(){
+		return proxyMembre.getMembre(selectedMembre);
+		
+	}
+	
 	@PostConstruct
 	public void coucou() {
 		System.out.println("postconstruct -> MembreManagedBean");
@@ -64,6 +69,8 @@ public class MembreManagedBean implements Serializable {
 	public void testMembre() {
 		System.out.println(selectedMembre.getPseudo());
 	}
+	
+	
 	
 	public IServiceMembreBO getProxyMembre() {
 		return proxyMembre;

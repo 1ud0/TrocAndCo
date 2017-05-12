@@ -11,5 +11,6 @@ public interface IServiceMembreBO {
 	List<Membre> getAllActif();
 	List<Membre> getAllRadie();
 	Membre getIdMembre(int IdMembre);
+	Membre getMembre(Membre membre);
 
 }

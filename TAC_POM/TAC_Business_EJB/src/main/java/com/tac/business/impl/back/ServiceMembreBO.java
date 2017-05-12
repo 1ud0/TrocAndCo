@@ -40,6 +40,11 @@ public class ServiceMembreBO implements IServiceMembreBO{
 		return proxyMembre.getById(IdMembre);
 	}
 
+	@Override
+	public Membre getMembre(Membre membre) {
+		return proxyMembre.getById(membre.getIdMembre());
+	}
+
 
 	
 }
