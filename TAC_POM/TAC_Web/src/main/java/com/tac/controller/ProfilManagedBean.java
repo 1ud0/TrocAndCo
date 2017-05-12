@@ -50,6 +50,11 @@ public class ProfilManagedBean {
 	private int[] tableauNote;
 
 
+	@PostConstruct
+	public void init() {
+		System.out.println("dans le construct profil");
+	}
+	
 	public int getNoteMoyenne(Membre membre) {
 		return (int) proxyEchange.getNoteMoyenne(membre);
 	}

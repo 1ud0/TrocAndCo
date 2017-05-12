@@ -170,7 +170,7 @@
 													</tr>
 												</thead>
 												<tbody>
-												<ui:repeat var="rdv" value="#{mbCompteTB.rdvAVenir()}">
+												<ui:repeat var="rdv" value="#{mbCompteTB.rdvIncoming}">
 													<tr>
 														<td>#{rdv.commentaire}</td>
 														<td> <h:outputText value="#{rdv.dateRdv}"> <f:convertDateTime pattern="dd/MM/yyyy hh:mm"/> </h:outputText>  <br></br>#{rdv.lieu}</td>
@@ -199,7 +199,7 @@
 											<tbody>
 												<h:panelGroup>
 													<ui:repeat var="eval"
-														value="#{mbCompteTB.getEchangesQuandDonneur(mbCompteTB.membreCourant)}">
+														value="#{mbCompteTB.echangesMembreCoDonneur}">
 														<h:form>
 
 															<tr>
@@ -267,7 +267,7 @@
 								<h3>Des suggestions pour vos envies ?</h3>
 								<div class="row dernieresEntrees">
 
-									<ui:repeat var="prop" value="#{mbCompteTB.propositions}">
+									<ui:repeat var="prop" value="#{mbCompteTB.suggestions}">
 										<div class="col-sm-3">
 											<div class="article">
 												<div class="photo">

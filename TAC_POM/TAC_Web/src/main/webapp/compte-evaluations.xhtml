@@ -49,52 +49,52 @@
 
 						<div class="row">
 							<div class="col-xs-6 col-md-6 text-center">
-								<h:panelGroup rendered="#{mbObjet.NoteVide(mbIdentif.membreConnected)}">
+								<h:panelGroup rendered="#{mbCompteEvaluation.NoteVide()}">
 									<p class="rating-num">
 										-
 									</p>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{!mbObjet.NoteVide(mbIdentif.membreConnected)}">
+									<h:panelGroup rendered="#{!mbCompteEvaluation.NoteVide()}">
 									<p class="rating-num">
-										<h:outputText value="#{mbObjet.getNoteMoyenne(mbIdentif.membreConnected)}" />
+										<h:outputText value="#{mbCompteEvaluation.noteMoyenne}" />
 										
 									</p>
 									</h:panelGroup>
 								<div class="rating">
 								
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 1}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne ge 1}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 1}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne lt 1}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 2}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne ge 2}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 2}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne lt 2}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 3}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne ge 3}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 3}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne lt 3}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 4}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne ge 4}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 4}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne lt 4}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) ge 5}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne ge 5}">
 									<span class="glyphicon glyphicon-star"></span>
 									</h:panelGroup>
-									<h:panelGroup rendered="#{mbProfil.getNoteMoyenne(mbIdentif.membreConnected) lt 5}">
+									<h:panelGroup rendered="#{mbCompteEvaluation.noteMoyenne lt 5}">
 									<span class="glyphicon glyphicon-star-empty"></span>
 									</h:panelGroup>
 								</div>
 								<div>
-									<span class="glyphicon glyphicon-user"></span> #{mbCompteEvaluation.echangesQuandChercheur.size()+mbCompteEvaluation.echangesQuandDonneur.size()}
+									<span class="glyphicon glyphicon-user"></span> #{mbCompteEvaluation.echangesQuandChercheur.size() + mbCompteEvaluation.echangesQuandDonneur.size()}
 								</div>
 							</div>
 							<div class="col-xs-6 col-md-6">

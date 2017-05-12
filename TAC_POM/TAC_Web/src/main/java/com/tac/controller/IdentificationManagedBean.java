@@ -32,6 +32,7 @@ public class IdentificationManagedBean implements Serializable {
 	private Membre membreConnected;
 	private int nbNouveauxMessages;
 	private int nbNouveauxEchanges;
+	private int credit;
 
 	public void securePage() {
 		if (membreConnected == null) {
@@ -45,17 +46,13 @@ public class IdentificationManagedBean implements Serializable {
 		String nav = "";
 		membreConnected = proxyIdentification.identification(mail, mdp);
 		if (membreConnected != null) {
-			loadDataMembre();
 			nav = "/compte-TB.xhtml?faces-redirect=true";
 		}
 		return nav;
 	}
 
-	private void loadDataMembre() {
-		List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected.getIdMembre());
-		nbNouveauxEchanges = echanges.size();
-		nbNouveauxMessages = proxyMessage.messageNonLuQuandRecepteur(membreConnected).size();
-	}
+
+	
 
 	public String seDeconnecter() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
@@ -63,7 +60,24 @@ public class IdentificationManagedBean implements Serializable {
 		String redirection = "/accueil.xhtml?faces-redirect=true";
 		return redirection;
 	}
+	
+	public int getNbNouveauxEchanges() {
+		List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected.getIdMembre());
+		return echanges.size();
+	}
+	
+	public int getNbNouveauxMessages() {
+		return proxyMessage.messageNonLuQuandRecepteur(membreConnected).size();
+	}
 
+	public int getCredit() {
+		return proxyEchange.totalCredit(membreConnected);
+	}
+
+	public void setCredit(int credit) {
+		this.credit = credit;
+	}
+	
 	public String getMail() {
 		return mail;
 	}
@@ -112,17 +126,13 @@ public class IdentificationManagedBean implements Serializable {
 		this.proxyEchange = proxyEchange;
 	}
 
-	public int getNbNouveauxMessages() {
-		return nbNouveauxMessages;
-	}
+	
 
 	public void setNbNouveauxMessages(int nbNouveauxMessages) {
 		this.nbNouveauxMessages = nbNouveauxMessages;
 	}
 
-	public int getNbNouveauxEchanges() {
-		return nbNouveauxEchanges;
-	}
+	
 
 	public void setNbNouveauxEchanges(int nbNouveauxEchanges) {
 		this.nbNouveauxEchanges = nbNouveauxEchanges;

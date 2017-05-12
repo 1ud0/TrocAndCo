@@ -50,7 +50,7 @@ public class ObjetManagedBean {
 
 	@PostConstruct
 	public void init() {
-
+		System.out.println("dans le construct objet");
 	}
 
 	public void toggleFavori() {

@@ -3,11 +3,11 @@ package com.tac.controller;
 import java.io.Serializable;
 import java.util.List;
 
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.RequestScoped;
-
+import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceLocalisation;
@@ -20,10 +20,8 @@ import com.tac.entity.Rdv;
 
 
 
-
-
 @ManagedBean(name="mbCompteTB")
-@RequestScoped
+@ViewScoped
 public class CompteTBManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -38,54 +36,24 @@ public class CompteTBManagedBean implements Serializable {
 	
 	@ManagedProperty(value="#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
-	
-	@ManagedProperty(value="#{mbMessage}")
-	private MessageManagedBean messageBean;
-	
 	@ManagedProperty(value="#{mbCompteEchange}")
 	private CompteMesEchangesManagedBean compteEchangeBean;
 
 	private Membre membreCourant;
+	private List<Rdv> rdvIncoming;
+	private List<Echange> echangesMembreCoDonneur;
+	private List<Echange> echangesMembreCoAcheteur;
+	private List<Proposition> suggestions;
 
-	public Membre getMembreCourant() {
+	@PostConstruct
+	public void init() {
 		membreCourant = identifBean.getMembreConnected();
-		membreCourant.setLocalisations(proxyLocalisation.getMembreLocalisations(membreCourant));
 		List<Echange> echanges = proxyEchange.getByMembre(membreCourant);
 		membreCourant.setEchanges(echanges);
-		return membreCourant;
-	}
-
-	public List<Rdv> rdvAVenir(){
-		return proxyRdv.getByMembreIdEtMembrePropositionPasEncorePasse(identifBean.getMembreConnected().getIdMembre());
-	}
-	
-	public IdentificationManagedBean getIdentifBean() {
-		return identifBean;
-	}
-
-	public void setIdentifBean(IdentificationManagedBean identifBean) {
-		this.identifBean = identifBean;
-	}
-
-	public MessageManagedBean getMessageBean() {
-		return messageBean;
-	}
-
-	public void setMessageBean(MessageManagedBean messageBean) {
-		this.messageBean = messageBean;
-	}
-
-	public CompteMesEchangesManagedBean getCompteEchangeBean() {
-		return compteEchangeBean;
-	}
-
-	public void setCompteEchangeBean(CompteMesEchangesManagedBean compteEchangeBean) {
-		this.compteEchangeBean = compteEchangeBean;
-	}
-
-
-	public void setMembreCourant(Membre membreCourant) {
-		this.membreCourant = membreCourant;
+		rdvIncoming = proxyRdv.getByMembreIdEtMembrePropositionPasEncorePasse(membreCourant.getIdMembre());
+		echangesMembreCoDonneur = proxyEchange.getByMembreDonneurFini(membreCourant);
+		echangesMembreCoAcheteur = proxyEchange.getByMembreChercheurFini(membreCourant);
+		suggestions = proxySearch.findSuggestion(membreCourant);
 	}
 
 	public IServiceEchange getProxyEchange() {
@@ -104,14 +72,6 @@ public class CompteTBManagedBean implements Serializable {
 		this.proxyLocalisation = proxyLocalisation;
 	}
 
-	public List<Echange> getEchangesQuandDonneur(Membre membre) {
-		return proxyEchange.getByMembreDonneurFini(membre);
-	}
-
-	public List<Echange> getEchangesQuandAcheteur(Membre membre) {
-		return proxyEchange.getByMembreChercheurFini(membre);
-	}
-
 	public IServiceRecherche getProxySearch() {
 		return proxySearch;
 	}
@@ -120,18 +80,70 @@ public class CompteTBManagedBean implements Serializable {
 		this.proxySearch = proxySearch;
 	}
 
-	public List<Proposition> getPropositions() {
-		return proxySearch.findSuggestion(identifBean.getMembreConnected());
-	}
-
 	public IServiceRdv getProxyRdv() {
 		return proxyRdv;
 	}
 
-
-
 	public void setProxyRdv(IServiceRdv proxyRdv) {
 		this.proxyRdv = proxyRdv;
 	}
+
+	public IdentificationManagedBean getIdentifBean() {
+		return identifBean;
+	}
+
+	public void setIdentifBean(IdentificationManagedBean identifBean) {
+		this.identifBean = identifBean;
+	}
+
+	public Membre getMembreCourant() {
+		return membreCourant;
+	}
+
+	public void setMembreCourant(Membre membreCourant) {
+		this.membreCourant = membreCourant;
+	}
+
+	public List<Rdv> getRdvIncoming() {
+		return rdvIncoming;
+	}
+
+	public void setRdvIncoming(List<Rdv> rdvIncoming) {
+		this.rdvIncoming = rdvIncoming;
+	}
+
+	public List<Echange> getEchangesMembreCoDonneur() {
+		return echangesMembreCoDonneur;
+	}
+
+	public void setEchangesMembreCoDonneur(List<Echange> echangesMembreCoDonneur) {
+		this.echangesMembreCoDonneur = echangesMembreCoDonneur;
+	}
+
+	public List<Echange> getEchangesMembreCoAcheteur() {
+		return echangesMembreCoAcheteur;
+	}
+
+	public void setEchangesMembreCoAcheteur(List<Echange> echangesMembreCoAcheteur) {
+		this.echangesMembreCoAcheteur = echangesMembreCoAcheteur;
+	}
+
+	public List<Proposition> getSuggestions() {
+		return suggestions;
+	}
+
+	public void setSuggestions(List<Proposition> suggestions) {
+		this.suggestions = suggestions;
+	}
+
+	public CompteMesEchangesManagedBean getCompteEchangeBean() {
+		return compteEchangeBean;
+	}
+
+	public void setCompteEchangeBean(CompteMesEchangesManagedBean compteEchangeBean) {
+		this.compteEchangeBean = compteEchangeBean;
+	}
+	
+
 
 }

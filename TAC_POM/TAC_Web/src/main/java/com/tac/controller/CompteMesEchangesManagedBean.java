@@ -34,9 +34,9 @@ public class CompteMesEchangesManagedBean implements Serializable {
 	private Echange selectedEchange;
 	private Proposition selectedProposition;
 	private Membre membreCourant;
-	private List<Echange> echangeDuMembre = new ArrayList<>();
-	private List<Echange> donDuMembre = new ArrayList<>();
-	private String status = "";
+	private List<Echange> echangeDuMembre;
+	private List<Echange> donDuMembre;
+	private String status;
 
 
 	/**
