@@ -21,10 +21,10 @@
 				</ol>
 			</section>
 			<style type="text/css">
-#boxObjet {
-	height: 400pt;
-	overflow: auto
-}</style>
+			#boxObjet {
+				height: 400pt;
+				overflow: auto
+			}</style>
 
 			<!-- _________________________________Main content___________________________ -->
 			<section class="content">
@@ -115,20 +115,20 @@
 										<br />
 										<h4>Intitulé</h4>
 										<div class="input-group">
-											<input type="text" class="form-control"></input> <span
-												class="input-group-addon"><i class="fa fa-check"></i></span>
+										<h:inputText value="text" class="form-control"/>
+							<span class="input-group-addon"><i class="fa fa-check"></i></span>
 										</div>
 										<br />
 										<h4>Catégorie</h4>
 										<div class="form-group " id="catDeLObjetNouveau">
 											<h:selectOneMenu styleClass="selectpicker form-control"
-												value="#{mbCompteObjet.categorieSelected.idCategorie}">
-												<f:selectItems value="#{mbCompteObjet.allCategorie}"
+												value="#{mbObjBack.catSelect.idCategorie}">
+												<f:selectItems value="#{mbObjBack.categoriesMere}"
 													var="categorie" itemLabel="${categorie.intitule}"
 													itemValue="${categorie.idCategorie}" />
 												<f:ajax event="change" execute="@form"
 													render=":formAjoutObjet:ComboSousCatNouveau"
-													listener="#{mbCompteObjet.listenerChargementSousCat()}"></f:ajax>
+													listener="#{mbObjBack.listenerSouCat()}"></f:ajax>
 											</h:selectOneMenu>
 										</div>
 										<br />
@@ -136,9 +136,9 @@
 										<div class="form-group">
 											<h:selectOneMenu  id="ComboSousCatNouveau"
 												styleClass="selectpicker form-control"
-												value="#{mbCompteObjet.sousCategorieSelected.idCategorie}">
+												value="#{mbObjBack.souCatSelect.idCategorie}">
 												<f:selectItems
-													value="#{mbCompteObjet.sousCategoriesSelected}"
+													value="#{mbObjBack.categoriesFille}"
 													var="categorie" itemLabel="${categorie.intitule}"
 													itemValue="${categorie.idCategorie}" />
 											</h:selectOneMenu>
@@ -147,17 +147,20 @@
 										<h4>Valeurs</h4>
 										<div class="form-group">
 											<h:selectOneMenu styleClass="selectpicker form-control"
-												value="#{mbCompteObjet.valeurSelected.idValeur}">
-												<f:selectItems value="#{mbCompteObjet.allValeur}"
+												value="#{mbObjBack.valSelect.idValeur}">
+								    	<f:selectItems value="#{mbObjBack.valeurs}"
 													var="valeur" itemLabel="${valeur.intitule}"
 													itemValue="${valeur.idValeur}" />
 											</h:selectOneMenu>
 										</div>
-
-											<h:commandButton actionListener="#{mbObjBack.modifierInfosBack()}"
+										
+										
+										<h:form>
+											<h:commandButton action="#{mbObjBack.modifierInfosBack()}"
 												value="Sauvegarder modifications"
-												styleClass="btn btn-block btn-info btn-lg" onclick="$('#myForm').validator()">
+												styleClass="btn btn-block btn-info btn-lg" >
 												</h:commandButton>
+										</h:form>
 									</div>
 								</div>
 							</div>
@@ -170,7 +173,7 @@
 			</section>
 <!-- __________________________________FIN MODALE EDITER__________________________________________________________ -->
 
-<!-- __________________________________DEBUT MODALE VALIDATIO?__________________________________________________________ -->
+<!-- __________________________________DEBUT MODALE VALIDATION__________________________________________________________ -->
 			<section class="col-lg-8 connectedSortable">
 
 				<div class="modal fade" id="bs-example-modal-lg2" role="dialog">

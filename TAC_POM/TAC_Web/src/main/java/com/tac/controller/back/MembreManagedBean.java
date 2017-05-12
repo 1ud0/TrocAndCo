@@ -7,7 +7,7 @@ import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
-
+import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.back.IServiceMembreBO;
 import com.tac.entity.Membre;
@@ -15,7 +15,7 @@ import com.tac.entity.Membre;
 
 
 @ManagedBean(name = "mbBackMembre")
-@SessionScoped
+@ViewScoped
 public class MembreManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
