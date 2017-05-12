@@ -126,7 +126,7 @@ public class ServiceEchange implements IServiceEchange {
 	@Override
 	public int totalCredit(Membre membre) {
 		int totalCredit = proxyEchange.getCreditEnPlus(membre.getIdMembre())+proxyEchange.getCreditEnMoins(membre.getIdMembre());
-		if(proxyProposition.getByMembre(membre.getIdMembre()) != null){
+		if(!proxyProposition.getByMembre(membre.getIdMembre()).isEmpty()){
 			totalCredit=totalCredit+5;
 		}
 		return totalCredit;
