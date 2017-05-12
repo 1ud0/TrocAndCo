@@ -31,6 +31,12 @@
 										<div class="heading">
 											<h4 class="text-uppercase">Mes acquisitions</h4>
 										</div>
+										<h:panelGroup rendered="#{mbCompteTB.compteEchangeBean.echangeDuMembre.size()==0}">
+										<div>Aucune pour le moment.</div>
+										
+										<br></br>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{mbCompteTB.compteEchangeBean.echangeDuMembre.size()!=0}">
 										<div class="table-responsive">
 											<table class="table table-hover">
 												<thead>
@@ -74,11 +80,18 @@
 												</tbody>
 											</table>
 										</div>
+										</h:panelGroup>
 									</div>
 									<div class="col-sm-6 col-md-6">
 										<div class="heading">
 											<h4 class="text-uppercase">Mes dons</h4>
 										</div>
+										<h:panelGroup rendered="#{mbCompteTB.compteEchangeBean.donDuMembre.size()==0}">
+										<div>Aucun pour le moment.</div>
+										
+										<br></br>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{mbCompteTB.compteEchangeBean.donDuMembre.size()!=0}">
 										<div class="table-responsive">
 											<table class="table table-hover">
 												<thead>
@@ -122,13 +135,20 @@
 												</tbody>
 											</table>
 										</div>
+										</h:panelGroup>
 									</div>
 								</div>
-								<div class="rox">
+								<div class="row">
 									<div class="col-sm-6 col-md-6 clearfix echanges">
 										<div class="heading">
 											<h4 class="text-uppercase">Mes messages</h4>
 										</div>
+										<h:panelGroup rendered="#{mbMessage.messagesDuMembre.size()==0}">
+										<div>Aucun pour le moment.</div>
+										
+										<br></br>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{mbMessage.messagesDuMembre.size()!=0}">
 										<div class="table-responsive mailbox-messages">
 											<table class="table table-hover">
 												<h:form>
@@ -139,12 +159,11 @@
 														<tr
 															class="#{mbMessage.dernierMessage(discussion).lu or mbMessage.dernierMessage(discussion).emetteur.idMembre==mbIdentif.membreConnected.idMembre ? 'lu' : '' }">
 															<td class="mailbox-subject">#{discussion.proposition.intitule}</td>
-															<td class="mailbox-subject"><h:commandLink
-																value="#{mbMessage.debutDernierMessage(discussion)}"
-																onclick="$('#sidebar_secondary').addClass('popup-box-on')">
-																<f:ajax event="click"
-																	listener="#{mbMessage.loadChat(discussion)}"
-																	render="fenetreChat" /> </h:commandLink>
+															<td class="mailbox-subject">
+																<h:commandLink value="#{mbMessage.avecQui(discussion)}" onclick="openAndJump()">
+									<f:ajax event="click" listener="#{mbMessage.loadChat(discussion)}" render="fenetreChat" onevent="function(data) { if (data.status === 'success') { 
+   	 									scrollAndFocus() } }"/>
+								</h:commandLink>
 															</td>
 															<td class="mailbox-attachment"></td>
 															<td class="mailbox-date">#{mbMessage.depuisQuand(discussion)}</td>
@@ -155,12 +174,19 @@
 												</h:form>
 											</table>
 										</div>
+										</h:panelGroup>
 									</div>
 
 									<div class="col-sm-6 col-md-6 clearfix echanges">
 										<div class="heading">
 											<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
 										</div>
+										<h:panelGroup rendered="#{mbCompteTB.rdvAVenir().size()==0}">
+										<div>Aucun pour le moment.</div>
+										
+										<br></br>
+										</h:panelGroup>
+										<h:panelGroup rendered="#{mbCompteTB.rdvAVenir().size()!=0}">
 										<div class="table-responsive">
 											<table class="table table-hover">
 												<thead>
@@ -181,12 +207,15 @@
 												</tbody>
 											</table>
 										</div>
+										</h:panelGroup>
 									</div>
 								</div>
+								<div class="row">
 								<div class="col-sm-12 col-md-12 clearfix echanges">
 									<div class="heading">
 										<h4 class="text-uppercase">Mes évaluations</h4>
 									</div>
+									
 									<div class="table-responsive">
 										<table class="table table-hover">
 											<thead>
@@ -256,6 +285,7 @@
 										</table>
 									</div>
 								</div>
+								</div>
 							</div>
 
 						</div>
@@ -290,6 +320,8 @@
 					</div>
 				</div>
 			</div>
+			
+			<ui:include src="/WEB-INF/templates/chat.xhtml" />
 			
 		</ui:define>
 	</ui:composition>
