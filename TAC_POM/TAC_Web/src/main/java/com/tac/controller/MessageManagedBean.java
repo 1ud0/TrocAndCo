@@ -137,6 +137,7 @@ public class MessageManagedBean implements Serializable {
 				m = proxyMessage.messageLu(m);
 			}
 		}
+		identifBean.loadDataMembre();
 	}
 	
 	public void loadNewChat(Proposition proposition){

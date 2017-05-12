@@ -109,7 +109,6 @@ System.out.println("load echange acquereur avant redirection");
 		} else {
 			nav = "/echangeAttenteValidation.xhtml?faces-redirect=true";
 		}
-		System.out.println("nav:"+nav);
 
 		return nav;
 	}
@@ -165,12 +164,12 @@ System.out.println("load echange acquereur avant redirection");
 
 	public String accepterEchange() {
 		echangeCourant = proxyEchange.accepterEchange(echangeCourant);
+		identifBean.loadDataMembre();
 		return loadEchangeDonneur(echangeCourant);
 	}
 
 	public String refuserEchange() {
 		echangeCourant = proxyEchange.refuserEchange(echangeCourant);
-		System.out.println(echangeCourant.getDateRefus());
 		return loadEchangeDonneur(echangeCourant);
 	}
 

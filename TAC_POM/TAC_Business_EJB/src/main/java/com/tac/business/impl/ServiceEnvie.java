@@ -32,12 +32,12 @@ public class ServiceEnvie implements IServiceEnvie{
 
 	@Override
 	public List<Envie> getByList(Liste liste) {
-		return proxyDaoEnvie.getByListeId(liste.getIdListe());
+		return proxyDaoEnvie.getByListe(liste);
 	}
 
 	@Override
 	public List<Envie> getByMembre(Membre membre) {
-		return proxyDaoEnvie.getByMembreId(membre.getIdMembre());
+		return proxyDaoEnvie.getByMembre(membre);
 	}
 
 	@Override

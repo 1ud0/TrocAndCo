@@ -48,8 +48,8 @@ public class IdentificationManagedBean implements Serializable {
 		}
 		return nav;
 	}
-
-	private void loadDataMembre() { 
+	
+	public void loadDataMembre() { 
 		nbNouveauxEchanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected).size();
 		nbNouveauxMessages = proxyMessage.messageNonLuQuandRecepteur(membreConnected).size();
 	}
