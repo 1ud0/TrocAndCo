@@ -7,7 +7,6 @@
 	<title>COMPTE - MES ECHANGES</title>
 </h:head>
 <h:body>
-
 	<ui:composition template="/WEB-INF/templates/templateBack.xhtml">
 		<ui:define name="contentBO">
 
@@ -22,21 +21,18 @@
 				</ol>
 			</section>
 			<style type="text/css">
-#boxObjet {
-	height: 550pt;
-	overflow: auto
-}
-</style>
 
+			#boxObjet {
+				height: 400pt;
+				overflow: auto
+			}</style>
 
-			<!-- Main content -->
+			<!-- _________________________________Main content___________________________ -->
 			<section class="content">
 				<div class="col-xs-12">
 					<div class="box">
 						<div class="box-header">
 							<h3 class="box-title">Objets</h3>
-
-
 						</div>
 						<!-- /.box-header -->
 						<div class="box-body table-responsive no-padding" id="boxObjet">
@@ -56,7 +52,7 @@
 									</tr>
 								</tbody>
 								<h:form>
-									<ui:repeat var="objet" value="#{mbObjet.allPropositions}">
+									<ui:repeat var="objet" value="#{mbObjBack.allPropositions}">
 										<tbody>
 											<tr>
 												<td>#{objet.idProposition}</td>
@@ -79,20 +75,19 @@
 													data-target=".bs-example-modal-lg"><b>Editer</b></a></td>
 											</tr>
 										</tbody>
-										<!-- 										</h:commandLink> -->
 									</ui:repeat>
 								</h:form>
 							</table>
 						</div>
-						<!-- /.box-body -->
 					</div>
 				</div>
-
+<!-- __________________________________DEBUT MODALE EDITER__________________________________________________________ -->
 			</section>
 			<section class="col-lg-8 connectedSortable">
 				<div class="modal fade bs-example-modal-lg">
 					<div class="modal-dialog">
 						<div class="modal-content">
+						<h:form id="formAjoutObjet">
 							<div class="modal-header">
 								<button type="button" class="close" data-dismiss="modal"
 									aria-label="Close">
@@ -111,89 +106,82 @@
 										<h4>Possesseur</h4>
 
 										<div class="form-group">
-											<select
-												class="form-control select2 select2-hidden-accessible"
-												style="width: 100%;" tabindex="-1" aria-hidden="true">
-												<option selected="selected"></option>
-												<option>adh1</option>
-												<option>adh1</option>
-												<option>adh1</option>
-												<option>adh1</option>
-												<option>adh1</option>
-												<option>adh1</option>
-											</select>
+											<h:selectOneMenu styleClass="selectpicker form-control"
+												value="#{mbBackMembre.selectedMembre.idMembre}">
+												<f:selectItems value="#{mbBackMembre.allMembresActifs}"
+													var="membre" itemLabel="${membre.pseudo}"
+													itemValue="${membre.idMembre}" />
+											</h:selectOneMenu>
 										</div>
 										<br />
 										<h4>Intitulé</h4>
 										<div class="input-group">
-											<input type="text" class="form-control"></input> <span
-												class="input-group-addon"><i class="fa fa-check"></i></span>
+										<h:inputText value="text" class="form-control"/>
+							<span class="input-group-addon"><i class="fa fa-check"></i></span>
 										</div>
 										<br />
 										<h4>Catégorie</h4>
-										<div class="form-group">
-											<select
-												class="form-control select2 select2-hidden-accessible"
-												style="width: 100%;" tabindex="-1" aria-hidden="true">
-												<option selected="selected"></option>
-												<option>Cat</option>
-												<option>Cat</option>
-												<option>Cat</option>
-												<option>Cat</option>
-												<option>Cat</option>
-												<option>Cat</option>
-											</select>
+										<div class="form-group " id="catDeLObjetNouveau">
+											<h:selectOneMenu styleClass="selectpicker form-control"
+												value="#{mbObjBack.catSelect.idCategorie}">
+												<f:selectItems value="#{mbObjBack.categoriesMere}"
+													var="categorie" itemLabel="${categorie.intitule}"
+													itemValue="${categorie.idCategorie}" />
+												<f:ajax event="change" execute="@form"
+													render=":formAjoutObjet:ComboSousCatNouveau"
+													listener="#{mbObjBack.listenerSouCat()}"></f:ajax>
+											</h:selectOneMenu>
 										</div>
 										<br />
 										<h4>Sous-catégories</h4>
 										<div class="form-group">
-											<select
-												class="form-control select2 select2-hidden-accessible"
-												style="width: 100%;" tabindex="-1" aria-hidden="true">
-												<option selected="selected"></option>
-												<option>sscat</option>
-												<option>sscat</option>
-												<option>sscat</option>
-												<option>sscat</option>
-												<option>sscat</option>
-												<option>sscat</option>
-											</select>
+											<h:selectOneMenu  id="ComboSousCatNouveau"
+												styleClass="selectpicker form-control"
+												value="#{mbObjBack.souCatSelect.idCategorie}">
+												<f:selectItems
+													value="#{mbObjBack.categoriesFille}"
+													var="categorie" itemLabel="${categorie.intitule}"
+													itemValue="${categorie.idCategorie}" />
+											</h:selectOneMenu>
 										</div>
 										<br />
 										<h4>Valeurs</h4>
 										<div class="form-group">
-											<select
-												class="form-control select2 select2-hidden-accessible"
-												style="width: 100%;" tabindex="-1" aria-hidden="true">
-												<option selected="selected"></option>
-												<option>val 1</option>
-												<option>val 1</option>
-												<option>val 1</option>
-												<option>val 1</option>
-												<option>val 1</option>
-											</select>
+											<h:selectOneMenu styleClass="selectpicker form-control"
+												value="#{mbObjBack.valSelect.idValeur}">
+								    	<f:selectItems value="#{mbObjBack.valeurs}"
+													var="valeur" itemLabel="${valeur.intitule}"
+													itemValue="${valeur.idValeur}" />
+											</h:selectOneMenu>
 										</div>
-
-
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
-
-
+										
+										
+										<h:form>
+											<h:commandButton action="#{mbObjBack.modifierInfosBack()}"
+												value="Sauvegarder modifications"
+												styleClass="btn btn-block btn-info btn-lg" >
+												</h:commandButton>
+										</h:form>
 									</div>
-									<!-- /.box-body -->
 								</div>
 							</div>
-
+						</h:form>
 						</div>
 						<!-- /.modal-content -->
 					</div>
 					<!-- /.modal-dialog -->
 				</div>
 			</section>
+<<<<<<< HEAD
 			<!-- /.modal-dialog -->
 
+=======
+<!-- __________________________________FIN MODALE EDITER__________________________________________________________ -->
+
+<!-- __________________________________DEBUT MODALE VALIDATION__________________________________________________________ -->
+>>>>>>> refs/remotes/origin/Aydam
 			<section class="col-lg-8 connectedSortable">
-				
+
 				<div class="modal fade" id="bs-example-modal-lg2" role="dialog">
 					<div class="modal-dialog">
 						<div class="modal-content">
@@ -206,67 +194,68 @@
 							</div>
 							<div class="modal-body">
 								<div class="box box-info">
-
 									<div class="box-header with-border">
 										<h3 class="box-title">Information de l'Objet</h3>
 									</div>
-
 									<h:panelGroup layout="block" id="toto">
-									<div class="box-body">
-										<h4>
-											<STRONG>Référence</STRONG>
-										</h4>
-										#{mbObjet.obj.intitule} #{mbObjet.obj.description}
-										<div class="form-group"></div>
-
-										<h4>
-											<STRONG>Nom Donateur</STRONG>
-										</h4>
-										<div class="form-group">Bobo</div>
-										<h4>
-											<STRONG>Intitulé</STRONG>
-										</h4>
-										<div class="form-group">Bobo</div>
-										<h4>
-											<STRONG>Date de création de l'objet</STRONG>
-										</h4>
-										<div class="form-group">1954-12-01</div>
-										<h4>
-											<STRONG>Catégorie</STRONG>
-										</h4>
-										<div class="form-group">cat</div>
-										<h4>
-											<STRONG>Sous Catégori</STRONG>e
-										</h4>
-										<div class="form-group">ssCat</div>
-										<h4>
-											<STRONG>Valeur</STRONG>
-										</h4>
-										<div class="form-group">123</div>
-										<h4>
-											d <STRONG>Adresses</STRONG>
-										</h4>
-										<div class="form-group">adresse 1</div>
-										<div class="form-group">adresse 2</div>
-										<h4>
-											<STRONG>Photos</STRONG>
-										</h4>
-										<div class="form-group">Liste des photos</div>
-										<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-											modifications</button>
-									</div>
+										<div class="box-body">
+											<h4>
+												<STRONG>Référence</STRONG>
+											</h4>
+											#{mbObjBack.obj.idProposition}
+											<div class="form-group"></div>
+											<h4>
+												<STRONG>Nom Donateur</STRONG>
+											</h4>
+											<div class="form-group">#{mbObjBack.obj.membre.nom}</div>
+											<h4>
+												<STRONG>Intitulé</STRONG>
+											</h4>
+											<div class="form-group">#{mbObjBack.obj.intitule}</div>
+											<h4>
+												<STRONG>Date de création de l'objet</STRONG>
+											</h4>
+											<div class="form-group">#{mbObjBack.obj.dateAjout}</div>
+											<h4>
+												<STRONG>Catégorie</STRONG>
+											</h4>
+											<div class="form-group">#{mbObjBack.obj.categorie.intitule}
+											</div>
+											<h4>
+												<STRONG>Sous Catégori</STRONG>e
+											</h4>
+											<div class="form-group">#{mbObjBack.obj.sousCategorie.intitule}</div>
+											<h4>
+												<STRONG>Valeur</STRONG>
+											</h4>
+											<div class="form-group">#{mbObjBack.obj.valeur.valeur}</div>
+											<h4>
+												<STRONG>Adresses</STRONG>
+											</h4>
+											<ui:repeat var="loc" value="#{mbObjBack.obj.localisations}">
+												<div class="form-group">
+													<STRONG>#{loc.titreAdresse}</STRONG> #{loc.adresse}
+													#{loc.codePostal} #{loc.ville}
+												</div>
+											</ui:repeat>
+											<h4>
+												<STRONG>Photos</STRONG>
+											</h4>
+											<ui:repeat var="img" value="#{mbObjBack.obj.photos}">
+												<div class="form-group">
+													<img src="../#{img.url}" style="height: 100px" />
+												</div>
+											</ui:repeat>
+											<button type="button" class="btn btn-block btn-info btn-lg">Fermer</button>
+										</div>
 									</h:panelGroup>
-									<!-- /.box-body -->
-
 								</div>
 							</div>
-
 						</div>
-						<!-- /.modal-content -->
 					</div>
-					<!-- /.modal-dialog -->
 				</div>
 			</section>
+<!-- __________________________________FIN MODALE VALIDATION__________________________________________________________ -->
 
 		</ui:define>
 	</ui:composition>

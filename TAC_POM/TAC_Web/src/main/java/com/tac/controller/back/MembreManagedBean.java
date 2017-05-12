@@ -6,15 +6,14 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.back.IServiceMembreBO;
-import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 
 @ManagedBean(name = "mbBackMembre")
-@SessionScoped
+@ViewScoped
 public class MembreManagedBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
@@ -41,7 +40,10 @@ public class MembreManagedBean implements Serializable {
 
 	public List<Membre> getAllMembresRadies() {
 		return proxyMembre.getAllRadie();
-
+	}
+	
+	public Membre getMembre(){
+		return proxyMembre.getMembre(selectedMembre);
 	}
 
 	@PostConstruct
@@ -71,7 +73,7 @@ public class MembreManagedBean implements Serializable {
 	public void testMembre() {
 		System.out.println(selectedMembre.getPseudo());
 	}
-
+	
 	public IServiceMembreBO getProxyMembre() {
 		return proxyMembre;
 	}
