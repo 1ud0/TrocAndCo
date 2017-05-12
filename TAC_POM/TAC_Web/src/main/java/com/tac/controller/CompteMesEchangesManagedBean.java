@@ -71,6 +71,7 @@ public class CompteMesEchangesManagedBean implements Serializable {
 			Proposition prop = proxyEchange.getPropByEchange(echange);
 			echange.setProposition(prop);
 			prop.setPhotos(proxyObjet.getByProposition(prop));
+			
 		}
 		return echangeDuMembre;
 	}

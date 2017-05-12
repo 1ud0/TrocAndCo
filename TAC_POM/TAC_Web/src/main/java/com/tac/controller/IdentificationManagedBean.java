@@ -10,10 +10,8 @@ import javax.servlet.http.HttpSession;
 import com.tac.business.api.IServiceEchange;
 import com.tac.business.api.IServiceIdentification;
 import com.tac.business.api.IServiceMessage;
-import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import java.io.Serializable;
-import java.util.List;
 
 @SuppressWarnings("serial")
 @ManagedBean(name = "mbIdentif")
@@ -51,9 +49,8 @@ public class IdentificationManagedBean implements Serializable {
 		return nav;
 	}
 
-	private void loadDataMembre() {
-		List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected.getIdMembre());
-		nbNouveauxEchanges = echanges.size();
+	private void loadDataMembre() { 
+		nbNouveauxEchanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected).size();
 		nbNouveauxMessages = proxyMessage.messageNonLuQuandRecepteur(membreConnected).size();
 	}
 

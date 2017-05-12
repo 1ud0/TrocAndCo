@@ -3,6 +3,7 @@ package com.tac.data.api;
 import java.util.List;
 
 import com.tac.entity.Echange;
+import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
 public interface IDaoEchange {
@@ -24,7 +25,7 @@ public interface IDaoEchange {
 	int getCreditEnPlus(Integer idMembre);
 	Proposition getbyEchange(Echange echange);
 	Echange getEchangeByProp(Proposition proposition);
-	List<Echange> getByMembreDonneurDateAcceptNull(Integer idMembreDonneur);
+	List<Echange> getByMembreDonneurDateAcceptNull(Membre membre);
 	List<Echange> getAll();
 	List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre);
 	long getNbEchangesFinis();

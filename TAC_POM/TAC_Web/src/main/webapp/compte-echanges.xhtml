@@ -71,7 +71,7 @@
 											<span class="label label-success">Effectué</span>
 											</h:panelGroup>
 											</td>
-											<td>22/06/2013</td>
+											<td> <h:panelGroup rendered="#{echange.rdvs.size() == 0}">N/A</h:panelGroup> <h:outputText value="#{echange.rdvs.get(0).dateRdv}" rendered="#{echange.rdvs.size()>0}" > <f:convertDateTime pattern="dd/MM/yyyy"/> </h:outputText> </td>
 											<td><h:form>
 											<h:commandLink action="#{mbEchange.loadEchangeAcquereur(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 
 										</h:form>
@@ -136,7 +136,7 @@
 											<span class="label label-success">Effectué</span>
 											</h:panelGroup>
 											</td>
-											<td>22/06/2013</td>
+											<td><h:panelGroup rendered="#{echange.rdvs.size() == 0}">N/A</h:panelGroup> <h:outputText value="#{echange.rdvs.get(0).dateRdv}" rendered="#{echange.rdvs.size()>0}" > <f:convertDateTime pattern="dd/MM/yyyy"/> </h:outputText></td>
 											<td><h:form>
 											<h:commandLink action="#{mbEchange.loadEchangeDonneur(echange)}" value="" styleClass="btn btn-template-main btn-sm">Voir</h:commandLink> 
 										</h:form>

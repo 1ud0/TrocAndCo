@@ -68,8 +68,8 @@ public class RdvManagedBean {
 			rdv.setEchange(echangeSelected);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
-			calendar.set(calendar.HOUR_OF_DAY, heure);
-			calendar.set(calendar.MINUTE, minute);
+			calendar.set(Calendar.HOUR_OF_DAY, heure);
+			calendar.set(Calendar.MINUTE, minute);
 			date = calendar.getTime();
 
 			rdv.setDateRdv(date);
@@ -79,6 +79,22 @@ public class RdvManagedBean {
 		}
 	}
 
+	public void addRdvEchange(Echange echange) {
+		if (date != null && echange.getIdEchange() != 0){
+		
+			rdv.setEchange(echange);
+			Calendar calendar = Calendar.getInstance();
+			calendar.setTime(date);
+			calendar.set(Calendar.HOUR_OF_DAY, heure);
+			calendar.set(Calendar.MINUTE, minute);
+			date = calendar.getTime();
+
+			rdv.setDateRdv(date);
+			
+				proxyRdv.addRdv(rdv);
+			
+		}
+	}
 	public List<Rdv> getList() {
 		return list;
 	}
