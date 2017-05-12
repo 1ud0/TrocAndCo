@@ -181,12 +181,12 @@
 										<div class="heading">
 											<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
 										</div>
-										<h:panelGroup rendered="#{mbCompteTB.rdvAVenir().size()==0}">
+										<h:panelGroup rendered="#{mbCompteTB.rdvIncoming.size()==0}">
 										<div>Aucun pour le moment.</div>
 										
 										<br></br>
 										</h:panelGroup>
-										<h:panelGroup rendered="#{mbCompteTB.rdvAVenir().size()!=0}">
+										<h:panelGroup rendered="#{mbCompteTB.rdvIncoming.size()!=0}">
 										<div class="table-responsive">
 											<table class="table table-hover">
 												<thead>
