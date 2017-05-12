@@ -8,7 +8,7 @@ import com.tac.exception.DataAccessException;
 import com.tac.util.CritereSearch;
 
 public interface IDaoProposition {
-
+	List<Object[]> getAllPropsByCatMere();
 	Proposition addProposition(Proposition proposition);
 	Proposition updateProposition(Proposition proposition);
 	Proposition getById(int idProposition) throws DataAccessException;
@@ -20,5 +20,6 @@ public interface IDaoProposition {
 	///Test_Ayda
 	List<Proposition> LoadAllPropositions();
 	long getNbPropDispo();
+	
 	
 }

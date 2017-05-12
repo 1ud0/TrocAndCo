@@ -66,10 +66,11 @@
 
 										<th>ID</th>
 										<th>Intitulé Catégorie mère</th>
-										
+										<th></th>
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtCat"><b>Ajouter</b></a></th>
+
 									</tr>
 									<ui:repeat var="categorieM"
 										value="#{mbBackParam.allCategoriesMere}">
@@ -80,11 +81,20 @@
 													<span>#{categorieM.intitule}</span>
 												</div>
 											</td>
-											<td>
-											<h:commandButton styleClass="btn btn-primary btn-warning" value="Modifier" onclick="$('#bs-example-modal-lg-modCat').modal('show');" data-toggle="modal" data-target="#bs-example-modal-lg-modCat">
-														<f:ajax event="click" listener="#{mbBackParam.loadCategorieM(categorieM)}" render=":totoCatM" /> 														
-													</h:commandButton>
-										</td>
+											<td><h:commandButton
+													styleClass="btn btn-primary btn-warning" value="Modifier"
+													onclick="$('#bs-example-modal-lg-modCat').modal('show');"
+													data-toggle="modal"
+													data-target="#bs-example-modal-lg-modCat">
+													<f:ajax event="click"
+														listener="#{mbBackParam.loadCategorieM(categorieM)}"
+														render=":totoCatM" />
+												</h:commandButton></td>
+											<td><h:commandButton
+													styleClass="btn btn-primary btn-danger" value="Supprimer"
+													onclick="#">
+
+												</h:commandButton></td>
 										</tr>
 									</ui:repeat>
 								</table>
@@ -107,6 +117,8 @@
 
 										<th>ID</th>
 										<th>Intitulé état</th>
+										<th></th>
+									
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal"
@@ -121,9 +133,15 @@
 													<span>#{etat.intitule}</span>
 												</div>
 											</td>
-											<td><a href="#" class="btn btn-block btn-warning"
+											
+											<td><a href="#" class="btn btn-block btn-warning" style="width: 100px" 
 												type="button" data-toggle="modal"
 												data-target=".bs-example-modal-lg-modEtat"><b>Modifier</b></a></td>
+											<td><h:commandButton type="button"
+													styleClass="btn btn-primary btn-danger" value="Supprimer"
+													onclick="#">
+
+												</h:commandButton></td>
 										</tr>
 									</ui:repeat>
 								</table>
@@ -144,9 +162,11 @@
 
 										<th>Valeur</th>
 										<th>Descriptif</th>
+										<th></th>
 										<th style="width: 40px"><a href="#"
-											class="btn btn-primary btn-block" type="button"
+											class="btn btn-primary btn-block" type="button" 
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtVal"><b>Ajouter</b></a></th>
+
 									</tr>
 									<ui:repeat var="valeur" value="#{mbBackParam.allValeurs}">
 										<tr>
@@ -156,9 +176,14 @@
 													<span>#{valeur.intitule}</span>
 												</div>
 											</td>
-											<td><a href="#" class="btn btn-block btn-warning"
+											<td><a href="#" class="btn btn-block btn-warning" style="width: 100px"
 												type="button" data-toggle="modal"
 												data-target=".bs-example-modal-lg-modVal"><b>Modifier</b></a></td>
+											<td><h:commandButton
+													styleClass="btn btn-primary btn-danger" value="Supprimer"
+													onclick="#">
+
+												</h:commandButton></td>
 										</tr>
 									</ui:repeat>
 								</table>
@@ -181,6 +206,7 @@
 										<th style="width: 10px">ID</th>
 										<th>Intitulé Tag</th>
 										<th>Sous-catégorie rattachée</th>
+										<th></th>
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal" data-target=".bs-example-modal-lg-ajtTag"><b>Ajouter</b></a></th>
@@ -197,6 +223,11 @@
 											<td><a href="#" class="btn btn-block btn-warning"
 												type="button" data-toggle="modal"
 												data-target=".bs-example-modal-lg-modTag"><b>Modifier</b></a></td>
+												<td><h:commandButton
+													styleClass="btn btn-primary btn-danger" value="Supprimer"
+													onclick="#">
+
+												</h:commandButton></td>
 										</tr>
 									</ui:repeat>
 								</table>
@@ -218,6 +249,7 @@
 										<th style="width: 10px">#</th>
 										<th>Sous Catégorie</th>
 										<th>Catégorie mères</th>
+										<th></th>
 										<th style="width: 40px"><a href="#"
 											class="btn btn-primary btn-block" type="button"
 											data-toggle="modal"
@@ -236,6 +268,11 @@
 											<td><a href="#" class="btn btn-block btn-warning"
 												type="button" data-toggle="modal"
 												data-target=".bs-example-modal-lg-modssCat"><b>Modifier</b></a></td>
+												<td><h:commandButton
+													styleClass="btn btn-primary btn-danger" value="Supprimer"
+													onclick="#">
+
+												</h:commandButton></td>
 										</tr>
 									</ui:repeat>
 								</table>
@@ -294,7 +331,8 @@
 			<!-- /.modal-dialog Modification catégorie mère -->
 			<section class="col-lg-8 connectedSortable">
 				<h:form id="formModifcatM">
-					<div class=" modal fade" id="bs-example-modal-lg-modCat" role="dialog">
+					<div class=" modal fade" id="bs-example-modal-lg-modCat"
+						role="dialog">
 						<div class="modal-dialog">
 
 							<div class="modal-content">
@@ -313,19 +351,19 @@
 										</div>
 										<h4>Intitulé de la catégorie</h4>
 										<h:panelGroup layout="block" id="totoCat">
-										<div class="box-body">
-											<div class="input-group">
-											
-										
-												<h:inputText styleClass="form-control" 
-													value="#{mbBackParam.selectedCategorie.intitule}"></h:inputText>
-												<span class="input-group-addon">
-												<i class="fa fa-check"></i></span>
+											<div class="box-body">
+												<div class="input-group">
+
+
+													<h:inputText styleClass="form-control"
+														value="#{mbBackParam.selectedCategorie.intitule}"></h:inputText>
+													<span class="input-group-addon"> <i
+														class="fa fa-check"></i></span>
+												</div>
+												<br />
+												<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
+													modifications</button>
 											</div>
-											<br />
-											<button type="button" class="btn btn-block btn-info btn-lg">Sauvegarder
-												modifications</button>
-										</div>
 										</h:panelGroup>
 									</div>
 								</div>

@@ -6,7 +6,7 @@ var valLng1;
 var infowindow;
 
 function init_map() {
-	var bounds = new google.maps.LatLngBounds();
+	
 	mylat = document.getElementsByClassName("tdLat");
 	mylng = document.getElementsByClassName("tdLng");
 var val= mylat[0].innerHTML;
