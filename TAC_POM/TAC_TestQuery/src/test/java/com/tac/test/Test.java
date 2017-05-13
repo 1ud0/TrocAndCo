@@ -24,21 +24,13 @@ public class Test {
         EntityTransaction tx = em.getTransaction();
         tx.begin();
         
-		final String req = "SELECT p.categorie, COUNT(*) FROM Proposition p GROUP BY p.categorie";
-		Query query = em.createQuery(req);
-		 List<Object[]> bob = query.getResultList();
-		 for (Object[] objects : bob) {
-			 Categorie categorie = (Categorie) objects[0];
-			 	System.out.println(categorie.getIntitule());
-			 Long count = (Long) objects[1];
-			 System.out.println(count);
+        final String req = "SELECT c FROM Categorie c WHERE EXISTS (SELECT t FROM Tag t WHERE t.intitule LIKE :ptitre AND t.categorie = c))";
+        Query query = em.createQuery(req);
+        query.setParameter("ptitre", "%vieux%");
+        List<Categorie> cats = query.getResultList();
+        for (Categorie categorie : cats) {
+			System.out.println(categorie.getIntitule());
 		}
-        
-      
-		
-	
-		
-        
         
         tx.commit();
         em.close();
