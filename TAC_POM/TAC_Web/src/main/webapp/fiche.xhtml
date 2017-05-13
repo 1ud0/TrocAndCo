@@ -84,8 +84,9 @@
 											</h3>
 										</div>
 										<p class="price">
-											<img src="img/custom/feuille.png" ></img>
-											<h:outputText value=" #{mbObjet.selectedProp.valeur.valeur}" />
+										<h:outputText value=" #{mbObjet.selectedProp.valeur.valeur}" />
+											<img src="img/custom/feuille.png" class="marginLeft10"></img>
+											
 										</p>
 										<p class="text-center">
 
@@ -179,9 +180,8 @@
 										<h:panelGroup
 											rendered="#{!mbObjet.NoteVide()}">
 											<p class="rating-num">
-												<h:outputText
-													value="#{mbObjet.noteMoyenneOwner}" />
-												/5
+												<h:outputText value="#{mbObjet.noteMoyenneOwner}/5" />
+
 											</p>
 										</h:panelGroup>
 									</div>
@@ -206,8 +206,8 @@
 									<h:form>
 									<h:commandLink onclick="openAndJump()">
 									<f:ajax event="click" listener="#{mbMessage.loadNewChat(mbObjet.selectedProp)}" render="fenetreChat" onevent="function(data) { if (data.status === 'success') { 
-   	 									scrollAndFocus() } }"/>
-   	 								<strong>Contactler le propriétaire</strong>
+   	 									scrollAndFocus() } }" />
+   	 								<strong>Contacter le propriétaire</strong>
 									</h:commandLink>
 									</h:form>
 								</p>

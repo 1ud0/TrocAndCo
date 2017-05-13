@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceMessage;
 import com.tac.business.api.IServiceProposition;
+import com.tac.entity.Echange;
 import com.tac.entity.Membre;
 import com.tac.entity.Message;
 import com.tac.entity.Proposition;
@@ -122,7 +123,22 @@ public class MessageManagedBean implements Serializable {
 
 	public void loadNewChat(Proposition proposition) {
 		propositionOfInterest = proposition;
-		chat = new ArrayList<>();
+		List<Message> conversation = proxyMessage.getConversationAboutProposition(proposition.getMembre().getIdMembre(), membreCourant.getIdMembre(), proposition.getIdProposition());
+		if(conversation.size()>0){
+			chat = conversation;
+		} else {
+			chat = new ArrayList<>();
+		}	
+	}
+	
+	public void loadChatEchange(Echange echange) {
+		propositionOfInterest = echange.getProposition();
+		List<Message> conversation = proxyMessage.getConversationAboutProposition(echange.getProposition().getMembre().getIdMembre(), echange.getMembre().getIdMembre(), echange.getProposition().getIdProposition());
+		if(conversation.size()>0){
+			chat = conversation;
+		} else {
+			chat = new ArrayList<>();
+		}	
 	}
 
 	public void refreshChat() {

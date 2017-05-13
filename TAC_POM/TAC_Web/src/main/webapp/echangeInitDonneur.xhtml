@@ -20,49 +20,22 @@
 			<div class="row alignVertical">
 				<div class="col-md-6 col-sm-12">
 					<div class="orientationImageEchange orientationCenter ">
-						<span class="prix">En échange de :</span>
+						<span class="prix">En échange de :
+						#{mbEchange.echangeCourant.prix} <img alt="feuille" src="img/custom/feuille.png"/> </span>
 					</div>
 				</div>
-				<div class="col-md-6 col-sm-12">
-
-					<div class="row">
-						<div class=" col-sm-12">
-							<h:panelGroup rendered="#{mbEchange.echangeCourant.prix != null}">
-								<p class="price">
-									<span class="prix">#{mbEchange.echangeCourant.prix}</span><img alt="feuille" src="img/custom/feuille.png"/>
-								</p>
-							</h:panelGroup>
-							<h:panelGroup layout="block" styleClass="product" id="produitDuDonneur" rendered="#{mbEchange.echangeCourant.prix == null}">
-								<div class="orientationCenter">
-									<div>
-										<img src="img/custom/casserole.jpg" alt=""
-											class="img-responsive MaxHeightImg200 " />
-									</div>
-								</div>
-								<!-- /.image -->
-								<div class="text">
-									<h3>
-										<a href="shop-detail.html">Casserole</a>
-									</h3>
-									<p class="price">
-										3<img src="img/custom/feuille.png" alt="" />
-									</p>
-								</div>
-								<!-- /.text -->
-							</h:panelGroup>
-						</div>
-					</div>
-				</div>
+				
 				</div>
 				<h:form>
 					<div class="row">
 						<div class="text-center col-sm-8">
 							<br></br><br></br>
 							<h:commandLink action="#{mbEchange.accepterEchange()}" value="" styleClass="btn btn-vert btn-lg">Accepter</h:commandLink>
-							<h:commandLink action="#{mbEchange.refuserEchange()}" value="" styleClass="btn btn-vert btn-lg">Refuser</h:commandLink>
+							<h:commandLink action="#{mbEchange.refuserEchange()}" value="" styleClass="btn btn-vert btn-lg marginLeft10">Refuser</h:commandLink>
 						</div>
 					</div>
 				</h:form>
+				
 		</ui:define>
 	</ui:composition>
 </h:body>

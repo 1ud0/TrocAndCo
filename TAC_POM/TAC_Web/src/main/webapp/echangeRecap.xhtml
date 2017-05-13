@@ -9,78 +9,67 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateEchange.xhtml">
-	
+
 		<ui:define name="headPerso">
-		
+
 		</ui:define>
-		
+
 		<ui:define name="content">
 			<div class="resumeEchange">
-			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'annule'}">
-				Statut de l'échange : <span class="label label-danger">Annulé</span><br></br>
+				<h:panelGroup rendered="#{mbEchange.statusEchange() == 'annule'}">
+				Statut de l'échange : <span class="label label-danger">Annulé</span>
+					<br></br>
 				Date de l'annulation :
-				<h:outputText value="#{mbEchange.echangeCourant.dateAnnul}" >
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
-				</h:outputText>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'refus'}">
-				Statut de l'échange : <span class="label label-warning">Refusé</span><br></br>
+				<h:outputText value="#{mbEchange.echangeCourant.dateAnnul}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+					</h:outputText>
+					<div>
+						Initialement prévu pour #{mbEchange.echangeCourant.prix}<img
+							alt="feuille" src="img/custom/feuille.png" class="marginLeft10" />
+					</div>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mbEchange.statusEchange() == 'refus'}">
+				Statut de l'échange : <span class="label label-warning">Refusé</span>
+					<br></br>
 				Date de refus :
-				<h:outputText value="#{mbEchange.echangeCourant.dateRefus}" >
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
-				</h:outputText>
-			</h:panelGroup>
-			<h:panelGroup rendered="#{mbEchange.statusEchange() == 'effectue'}">
-				Statut de l'échange : <span class="label label-success">Effectué</span><br></br>
+				<h:outputText value="#{mbEchange.echangeCourant.dateRefus}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+					</h:outputText>
+					<div>
+						Initialement prévu pour #{mbEchange.echangeCourant.prix}<img
+							alt="feuille" src="img/custom/feuille.png" class="marginLeft10" />
+					</div>
+				</h:panelGroup>
+				<h:panelGroup rendered="#{mbEchange.statusEchange() == 'effectue'}">
+				Statut de l'échange : <span class="label label-success">Effectué</span>
+					<br></br>
 				Date de validation :
-				<h:outputText value="#{mbEchange.echangeCourant.dateValidation}" >
-					<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris"/>
-				</h:outputText>
-			</h:panelGroup>
+				<h:outputText value="#{mbEchange.echangeCourant.dateValidation}">
+						<f:convertDateTime pattern="dd/MM/yyyy" timeZone="Europe/Paris" />
+					</h:outputText>
+					<h:panelGroup
+						rendered="#{mbEchange.echangeCourant.membre.idMembre==mbIdentif.membreConnected.idMembre}">
+						<div class="">
+							Acquis en échange de #{mbEchange.echangeCourant.prix}<img
+								alt="feuille" src="img/custom/feuille.png" class="marginLeft10" />
+
+						</div>
+					</h:panelGroup>
+
+					<h:panelGroup
+						rendered="#{mbEchange.echangeCourant.membre.idMembre!=mbIdentif.membreConnected.idMembre}">
+						<div class="">
+							Donné en échange de #{mbEchange.echangeCourant.prix}<img
+								alt="feuille" src="img/custom/feuille.png" class="marginLeft10" />
+
+						</div>
+					</h:panelGroup>
+				</h:panelGroup>
 			</div>
 			<div class="row ">
 				<!--  -->
-				<div class="col-md-6 col-sm-12">
-					<h:panelGroup rendered="#{mbEchange.echangeCourant.membre.idMembre==mbIdentif.membreConnected.idMembre}">
-					<div class="">
-						<span class="prix">Acquis en échange de </span>
-					</div>
-					</h:panelGroup>
-					
-					<h:panelGroup rendered="#{mbEchange.echangeCourant.membre.idMembre!=mbIdentif.membreConnected.idMembre}">
-					<div class="">
-						<span class="prix">Donné en échange de </span>
-					</div>
-					</h:panelGroup>
-				</div>
-				<div class="col-md-6 col-sm-12">
-							
-					
-							<h:panelGroup rendered="#{mbEchange.echangeCourant.prix != null}">
-								<p class="price">
-									<span class="prix">#{mbEchange.echangeCourant.prix}</span><img alt="feuille" src="img/custom/feuille.png"/>
-								</p>
-							</h:panelGroup>
-							<h:panelGroup layout="block" styleClass="product" id="produitDuDonneur" rendered="#{mbEchange.echangeCourant.prix == null}">
-								<div class="">
-									<div>
-										<img src="img/custom/casserole.jpg" alt=""
-											class="img-responsive MaxHeightImg200 " />
-									</div>
-								</div>
-								<!-- /.image -->
-								<div class="text">
-									<h3 >
-										<a href="shop-detail.html">Casserole</a>
-									</h3>
-									<p class="price">
-										3<img src="img/custom/feuille.png" alt="" class="iconeFeuille"/>
-									</p>
-								</div>
-								<!-- /.text -->
-							</h:panelGroup>
-					
-				</div>
+				<div class="col-md-6 col-sm-12"></div>
+				<div class="col-md-6 col-sm-12"></div>
 				<a href="#{mbEchange.retourTB}">Retour au tableau de bord</a>
 			</div>
 		</ui:define>

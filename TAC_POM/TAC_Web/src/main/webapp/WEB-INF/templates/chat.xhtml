@@ -19,19 +19,20 @@
 				<h:form id="fenetreChat">
 				<div class="popup-head">
 					<div class="popup-head-left pull-left">
-						<a target="_blank" href="fiche.xhtml?id=#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.idProposition : mbObjet.selectedProp.idProposition}"> <img
+						<a target="_blank" href="fiche.xhtml?ref=#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.idProposition : mbObjet.selectedProp==null ? mbEchange.selectedProp.idProposition : mbObjet.selectedProp.idProposition}"> <img
 							class="md-user-image md-object" alt="objet echange" title=""
-							src="#{mbMessage.chat.size()>0 ? mbMessage.propAvecPhotos(mbMessage.chat.get(0).proposition.idProposition).photos.get(0).url : mbObjet.selectedProp.photos.get(0).url}"></img>
-							<h1>#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.intitule : mbObjet.selectedProp.intitule}</h1></a>
+							src="#{mbMessage.chat.size()>0 ? mbMessage.propAvecPhotos(mbMessage.chat.get(0).proposition.idProposition).photos.get(0).url : mbObjet.selectedProp==null ? mbEchange.selectedProp.photos.get(0).url : mbObjet.selectedProp.photos.get(0).url}"></img>
+							<h1>#{mbMessage.chat.size()>0 ? mbMessage.chat.get(0).proposition.intitule : mbObjet.selectedProp==null ? mbEchange.selectedProp.intitule : mbObjet.selectedProp.intitule}</h1></a>
 					</div>
 					<div class="pull-right">
 						<button data-widget="remove" id="removeClass" onclick="document.getElementById('fenetreChat:boutonCache').click()"
 							class="chat-header-button pull-right" type="button">	
 							<i class="glyphicon glyphicon-remove"></i>
 						</button>
-						<h:button id="boutonCache" value="close" onclick="$('#sidebar_secondary').removeClass('popup-box-on')" style="display:none">
+						<h:button id="boutonCache" value="close" onclick="$('#sidebar_secondary').removeClass('popup-box-on')" style="display:none" outcome="#{view.viewId eq '/fiche.xhtml' ? 'fiche.xhtml?ref='.concat(mbObjet.selectedProp.idProposition) : view.viewId}">
 	
 						</h:button>
+						
 					</div>
 				</div>
 
