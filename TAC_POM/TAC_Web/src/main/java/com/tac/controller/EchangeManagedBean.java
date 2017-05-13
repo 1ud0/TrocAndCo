@@ -92,7 +92,7 @@ public class EchangeManagedBean {
 
 		membreCourant = identifBean.getMembreConnected();
 		membreAutre = selectedProp.getMembre();
-System.out.println("load echange acquereur avant redirection");
+		System.out.println("load echange acquereur avant redirection");
 		String nav = "";
 		if (echange.getDateAnnul() != null || echange.getDateRefus() != null
 				|| (echange.getDateValidation() != null && echange.getComChercheur() != null)) {
@@ -205,22 +205,22 @@ System.out.println("load echange acquereur avant redirection");
 	}
 
 	public String ajouterEchange() {
-		if(echangePropose.getPrix()!= null){
-		echangePropose.setProposition(selectedProp);
-		echangePropose.setMembre(membreCourant);
-		try {
-			echangePropose = proxyEchange.initierEchange(echangePropose);
-			return "/echangeAttenteValidation.xhtml?faces-redirect=true";
-		} catch (NotEnoughCreditException e) {
+		if (echangePropose.getPrix() != null) {
+			echangePropose.setProposition(selectedProp);
+			echangePropose.setMembre(membreCourant);
+			try {
+				echangePropose = proxyEchange.initierEchange(echangePropose);
+				return "/echangeAttenteValidation.xhtml?faces-redirect=true";
+			} catch (NotEnoughCreditException e) {
 
-			showAlertModif = true;
-			return "";
-		}
+				showAlertModif = true;
+				return "";
+			}
 		}
 		return "";
 	}
-	
-	public void hideAlert(){
+
+	public void hideAlert() {
 		showAlertModif = false;
 	}
 

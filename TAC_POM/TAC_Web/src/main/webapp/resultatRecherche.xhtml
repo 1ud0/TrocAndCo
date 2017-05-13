@@ -288,48 +288,52 @@ _________________________________________________________ -->
 									<div class="row ">
 										<div class="col-sm-6 col-md-6 ">
 											<h4>Description:</h4>
-											<p>
-												<label> Catégorie: </label> <label class="italic"> 
-													<h:selectOneMenu value="#{mbRecherche.idCatModale}">
+											<label> Catégorie: </label>
+											<div class="form-group selecteur">
+												<label class="italic pull-right"> 
+													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbRecherche.idCatModale}">
 														<f:selectItem itemLabel="" itemValue="#{null}"/>
 														<f:selectItems value="#{mbRecherche.categoriesMere}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
 														<f:ajax event="change" listener="#{mbRecherche.listenerDDLCat()}" render="formAddEnvie"></f:ajax>
 													</h:selectOneMenu>
 												</label>
-											</p>
-											<p>
-												<label> Sous-catégorie: </label> <label class="italic">
-													<h:selectOneMenu value="#{mbRecherche.idSousCatModale}">
+											</div>
+											<label> Sous-catégorie: </label>
+											<div class="form-group selecteur">
+												<label class="italic pull-right">
+													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbRecherche.idSousCatModale}">
 														<f:selectItem itemLabel="" itemValue="#{null}"/>
 														<f:selectItems value="#{mbRecherche.categoriesFille}" var="currentCat" itemLabel="#{currentCat.intitule}" itemValue="#{currentCat.idCategorie}"/>
 													</h:selectOneMenu>
 												</label>
-											</p>
-											<p class="price">
-												<label> Valeur max: </label><label class="italic">
-													<h:selectOneMenu value="#{mbRecherche.valeurMaxSelected}">
+											</div>
+											<label> Valeur max: </label> <img src="img/custom/feuille orange.png" alt=""/>
+											<div class="form-group selecteur">
+												<label class="italic pull-right">
+													<h:selectOneMenu  styleClass="selectpicker form-control" value="#{mbRecherche.valeurMaxSelected}">
 														<f:selectItems value="#{mbRecherche.valeurs}" var="currentVal" itemLabel="#{currentVal.valeur}" itemValue="#{currentVal.valeur}"/>
 													</h:selectOneMenu>
-												 </label>
-												 <img src="img/custom/feuille orange.png" alt=""/>
-											</p>
-											<p>
-												<label>Distance max: </label> <label class="italic">
-													 <h:selectOneMenu value="#{mbRecherche.distanceModale}">
+												</label>
+												
+											</div>
+											<label>Distance max: </label>
+											<div class="form-group selecteur">
+												<label class="italic pull-right">
+													 <h:selectOneMenu styleClass="selectpicker form-control" value="#{mbRecherche.distanceModale}">
 														<f:selectItems value="#{mbRecherche.distances}" var="currentDist" itemLabel="#{currentDist.texte}" itemValue="#{currentDist.valeur}"/>
 													</h:selectOneMenu>
 												</label>
-											</p>
-											<p>
-												<label>Nom: </label> <h:inputText id="intituleEnvie" value="#{mbRecherche.intituleModale}" required="true" requiredMessage="Entrer un intitule"/><br />
-												<h:message for="intituleEnvie" style="color: red;"/>
-											</p>
+											</div>
+											<label>Nom: </label> 
+											<div>
+												<h:inputText styleClass="pull-right" id="intituleEnvie" value="#{mbRecherche.intituleModale}"/><br />
+											</div>
 										</div>
 										<div class="col-sm-6 col-md-6 borderLeft">
 											<h4>Ajouter à vos listes d'envies:</h4>
 											<div>
-												<div class="input-group" id="selecteur">
-													<h:selectOneMenu value="#{mbRecherche.idListeSelected}">
+												<div class="form-group selecteur" id="selecteur">
+													<h:selectOneMenu styleClass="selectpicker form-control" value="#{mbRecherche.idListeSelected}">
 														<f:selectItems value="#{mbRecherche.listes}" var="currentListe" itemLabel="#{currentListe.titreListe}" itemValue="#{currentListe.idListe}"/>
 													</h:selectOneMenu>
 												</div>

@@ -123,6 +123,7 @@ public class ServiceRecherche implements IServiceRecherche {
 		Membre membre = envie.getListe().getMembre();
 		Integer idMembre = membre == null ? null : membre.getIdMembre();
 		CritereSearch carac = new CritereSearch();
+		carac.setIntitule(envie.getIntitule());
 		carac.setCat(envie.getCategorie());
 		carac.setSousCat(envie.getSousCategorie());
 		Integer distance = envie.getDistance();

@@ -102,6 +102,7 @@ public class ObjetManagedBean {
 		if (!FacesContext.getCurrentInstance().isPostback()) {
 			if (entryId != null && entryId != 0) {
 				try {
+					System.out.println("dans le loader fiche objet");
 					selectedProp = proxyProp.getById(entryId);
 					loadDataOwner();
 					membreCourant = identifBean.getMembreConnected();

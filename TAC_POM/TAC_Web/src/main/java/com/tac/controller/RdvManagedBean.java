@@ -39,6 +39,7 @@ public class RdvManagedBean {
 
 	@PostConstruct
 	public void loadData() {
+		System.out.println("dans le construct rdv");
 		membreSelected = identifBean.getMembreConnected();
 		if (membreSelected != null) {
 			echanges = proxyEchange.getByMembreDonneurChercheurDateAcceptNull(membreSelected.getIdMembre());
@@ -62,9 +63,9 @@ public class RdvManagedBean {
 	}
 
 	public void addRdv() {
-		if (date != null && echangeSelected.getIdEchange()!= 0) {
-		echangeSelected = proxyEchange.getByNumero(echangeSelected);
-		
+		if (date != null && echangeSelected.getIdEchange() != 0) {
+			echangeSelected = proxyEchange.getByNumero(echangeSelected);
+
 			rdv.setEchange(echangeSelected);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
@@ -73,15 +74,15 @@ public class RdvManagedBean {
 			date = calendar.getTime();
 
 			rdv.setDateRdv(date);
-			
-				proxyRdv.addRdv(rdv);
-			
+
+			proxyRdv.addRdv(rdv);
+
 		}
 	}
 
 	public void addRdvEchange(Echange echange) {
-		if (date != null && echange.getIdEchange() != 0){
-		
+		if (date != null && echange.getIdEchange() != 0) {
+
 			rdv.setEchange(echange);
 			Calendar calendar = Calendar.getInstance();
 			calendar.setTime(date);
@@ -90,11 +91,12 @@ public class RdvManagedBean {
 			date = calendar.getTime();
 
 			rdv.setDateRdv(date);
-			
-				proxyRdv.addRdv(rdv);
-			
+
+			proxyRdv.addRdv(rdv);
+
 		}
 	}
+
 	public List<Rdv> getList() {
 		return list;
 	}

@@ -64,6 +64,7 @@ public class DaoEchange implements IDaoEchange {
 		List<Echange> echangesDuDonneur = queryGetByIdMembreDonneur.getResultList();
 		for(Echange echange : echangesDuDonneur){
 			echange.getRdvs().size();
+			echange.getProposition().getPhotos().size();
 		}
 		return echangesDuDonneur;
 	}
