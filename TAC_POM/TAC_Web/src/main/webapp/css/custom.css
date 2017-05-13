@@ -985,6 +985,7 @@ p.taillePolice150 {
  .price{
  	display: flex;
  	align-items: center;
+ 	justify-content: center;
  }
  
  .resumeEchange{
@@ -1000,4 +1001,9 @@ p.taillePolice150 {
  	font-style: 900;
  	color: #333333;
  }
+ 
+ .marginLeft10 {
+ 	margin-left: 10px;
+ }
+ 
  
