@@ -235,6 +235,31 @@ public class Proposition implements Serializable {
 	public void setDateSuppression(Date dateSuppression) {
 		this.dateSuppression = dateSuppression;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((idProposition == null) ? 0 : idProposition.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Proposition other = (Proposition) obj;
+		if (idProposition == null) {
+			if (other.idProposition != null)
+				return false;
+		} else if (!idProposition.equals(other.idProposition))
+			return false;
+		return true;
+	}
 	
 	
 

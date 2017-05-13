@@ -1,7 +1,10 @@
 
 package com.tac.data.impl;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.ejb.Remote;
 import javax.ejb.Stateless;
@@ -133,11 +136,32 @@ public class DaoProposition implements IDaoProposition {
 			query.setMaxResults(nombreResult);
 		}
 		List<Proposition> props = query.getResultList();
-		for (Proposition proposition : props) {
+		Set<Proposition> setss = new HashSet<>(props);
+		if (carac.getIntitule() != null && !carac.getIntitule().equals("")) {
+			Set<Proposition> matchesTag = getPropTagMatches(carac.getIntitule(), idMembre);
+			setss.addAll(matchesTag);
+		}
+		for (Proposition proposition : setss) {
 			List<Localisation> locs = proposition.getLocalisations();
 			locs.size();
 		}
- 		return query.getResultList();
+ 		return new ArrayList<>(setss);
+	}
+
+	private Set<Proposition> getPropTagMatches(String intitule, Integer idMembre) {
+		String requete = "SELECT DISTINCT p FROM Proposition p LEFT JOIN FETCH p.photos "
+				+ "WHERE (p.categorie.intitule LIKE :ptitle OR p.sousCategorie.intitule LIKE :ptitle OR p.sousCategorie IN "
+				+ "(SELECT c FROM Categorie c WHERE EXISTS (SELECT t FROM Tag t WHERE t.intitule LIKE :ptitle AND t.categorie = c)))";
+		if (idMembre != null) {
+			requete += " AND p.membre.idMembre != :pid";
+		}
+		Query query = em.createQuery(requete);
+		if (idMembre != null) {
+			query.setParameter("pid", idMembre);
+		}
+		query.setParameter("ptitle", "%" + intitule + "%");
+		List<Proposition> props = query.getResultList();
+		return new HashSet<>(props);
 	}
 
 	//methode pour set les paramètres de la requete

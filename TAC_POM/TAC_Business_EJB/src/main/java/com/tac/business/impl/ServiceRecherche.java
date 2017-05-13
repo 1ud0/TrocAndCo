@@ -12,7 +12,6 @@ import com.tac.data.api.IDaoCategorie;
 import com.tac.data.api.IDaoLocalisation;
 import com.tac.data.api.IDaoProposition;
 import com.tac.data.api.IDaoSuggestion;
-import com.tac.entity.Categorie;
 import com.tac.entity.Envie;
 import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
@@ -42,21 +41,6 @@ public class ServiceRecherche implements IServiceRecherche {
 		return proxyProposition.getNouveautes(20, null);
 	}
 
-	public List<Proposition> testseek(CritereSearch carac) {
-		System.out.println("intitule : " + carac.getIntitule());
-		System.out.println("cat : " + carac.getCat());
-		System.out.println("souscat : " + carac.getSousCat());
-		System.out.println("dep : " + carac.getDepartement());
-		System.out.println("dist : " + carac.getDistanceMax());
-		System.out.println("etat : " + carac.getEtat());
-		for (String  elem : carac.getLieux()) {
-			System.out.println("lieu : " + elem);
-		}
-		for (String coucou : carac.getValeurs()) {
-			System.out.println("val : " + coucou);
-		}
-		return null;
-	}
 
 	@Override
 	public List<Proposition> rechercher(CritereSearch carac, Membre membre) {
