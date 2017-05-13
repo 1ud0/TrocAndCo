@@ -52,7 +52,7 @@ public class EchangeManagedBean {
 	private Echange echangePropose;
 
 	private Echange echangeCourant;
-	private String retourTB = "/compte-TB.xhtml?faces-redirect=true";
+	private String retourTB = "compte-TB.xhtml?faces-redirect=true";
 
 	public String loadPropositionEtMembre(Proposition proposition) {
 		membreCourant = identifBean.getMembreConnected();
