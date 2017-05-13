@@ -50,6 +50,15 @@ public class IdentificationManagedBean implements Serializable {
 		}
 		return nav;
 	}
+	
+	public void connexion() {
+		membreConnected = proxyIdentification.identification(mail, mdp);
+		if (membreConnected != null) {
+			ConfigurableNavigationHandler nav = (ConfigurableNavigationHandler) FacesContext.getCurrentInstance()
+					.getApplication().getNavigationHandler();
+			nav.performNavigation("/compte-TB.xhtml?faces-redirect=true");
+		}
+	}
 
 	public String seDeconnecter() {
 		HttpSession session = (HttpSession) FacesContext.getCurrentInstance().getExternalContext().getSession(true);
