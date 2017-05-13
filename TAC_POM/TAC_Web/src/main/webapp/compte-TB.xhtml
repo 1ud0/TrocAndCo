@@ -51,7 +51,7 @@
 												<tbody>
 													<h:panelGroup>
 														<ui:repeat var="echange"
-															value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}">
+															value="#{mbCompteTB.compteEchangeBean.echangeDuMembre}" size="#{mbCompteTB.compteEchangeBean.echangeDuMembre.size() > 3 ? 3 : mbCompteTB.compteEchangeBean.echangeDuMembre.size() }">
 															<h:form>
 																<h:commandLink
 																	action="#{mbCompteTB.compteEchangeBean.echangeDuMembre(echange)}"
@@ -106,7 +106,7 @@
 												<tbody>
 													<h:panelGroup>
 														<ui:repeat var="echange"
-															value="#{mbCompteTB.compteEchangeBean.donDuMembre}">
+															value="#{mbCompteTB.compteEchangeBean.donDuMembre}" size="#{mbCompteTB.compteEchangeBean.donDuMembre.size() > 3 ? 3 : mbCompteTB.compteEchangeBean.donDuMembre.size()}">
 															<h:form>
 																	<tr>
 																		<td>#{echange.proposition.intitule}</td>
@@ -152,7 +152,7 @@
 											<table class="table table-hover">
 												<h:form>
 												<ui:repeat var="discussion"
-													value="#{mbMessage.messagesDuMembre}">
+													value="#{mbMessage.messagesDuMembre}" size="#{mbMessage.messagesDuMembre.size() > 5 ? 5 : mbMessage.messagesDuMembre.size()}">
 													<tbody>
 														<tr
 															class="#{mbMessage.dernierMessage(discussion).lu or mbMessage.dernierMessage(discussion).emetteur.idMembre==mbIdentif.membreConnected.idMembre ? 'lu' : '' }">
@@ -191,7 +191,7 @@
 														</tr>
 													</thead>
 													<tbody>
-													<ui:repeat var="rdv" value="#{mbCompteTB.rdvIncoming}">
+													<ui:repeat var="rdv" value="#{mbCompteTB.rdvIncoming}" size="#{mbCompteTB.rdvIncoming.size() > 5 ? 5 : mbCompteTB.rdvIncoming.size()}">
 														<tr>
 															<td>#{rdv.commentaire}</td>
 															<td>
@@ -231,7 +231,7 @@
 												<tbody>
 													<h:panelGroup>
 														<ui:repeat var="eval"
-															value="#{mbCompteTB.echangesMembreCoDonneur}">
+															value="#{mbCompteTB.echangesMembreCoDonneur}" size="#{mbCompteTB.echangesMembreCoDonneur.size() > 5 ? 5 : mbCompteTB.echangesMembreCoDonneur.size()}">
 															<h:form>
 	
 																<tr>
