@@ -260,5 +260,18 @@ public class DaoEchange implements IDaoEchange {
 			return 0;
 		}
 	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	@Override
+	public List<Object[]> getAllEchangeFinisByMois() {
+        final String req = "SELECT COUNT(e.idEchange), DATE_FORMAT(e.dateValidation,'%m/%Y') FROM Echange e WHERE e.dateValidation IS NOT NULL GROUP BY DATE_FORMAT(e.dateValidation,'%m/%Y') ORDER BY e.dateValidation ";
+		Query query = em.createQuery(req);
+		List<Object[]> bob = query.getResultList();
+		 for (Object[] objects : bob) {
+			 Long count = (Long) objects[0];
+			 String mois = (String) objects[1];
+		}
+		return query.getResultList();
+	}
 
 }

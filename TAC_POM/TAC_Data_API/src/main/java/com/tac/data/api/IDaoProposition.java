@@ -9,6 +9,7 @@ import com.tac.util.CritereSearch;
 
 public interface IDaoProposition {
 	List<Object[]> getAllPropsByCatMere();
+	List<Object[]> getAllPropsByMois();
 	Proposition addProposition(Proposition proposition);
 	Proposition updateProposition(Proposition proposition);
 	Proposition getById(int idProposition) throws DataAccessException;

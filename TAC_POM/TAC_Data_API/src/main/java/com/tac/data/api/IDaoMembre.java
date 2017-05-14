@@ -17,4 +17,5 @@ public interface IDaoMembre {
 	List<Membre> getAllActif();
 	List<Membre> getAllRadie();
 	long getNbMembres();
+	List<Object[]> getAllMembreByMois();
 }

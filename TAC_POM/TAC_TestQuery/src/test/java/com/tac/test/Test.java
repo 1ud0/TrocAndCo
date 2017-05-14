@@ -30,10 +30,10 @@ public class Test {
         List<Categorie> cats = query.getResultList();
         for (Categorie categorie : cats) {
 			System.out.println(categorie.getIntitule());
-		}
         
         tx.commit();
         em.close();
         emf.close();
+        }
 	}
 }

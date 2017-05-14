@@ -29,4 +29,5 @@ public interface IDaoEchange {
 	List<Echange> getAll();
 	List<Echange> getByMembreDonneurChercheurDateAcceptNull(Integer idMembre);
 	long getNbEchangesFinis();
+	List<Object[]> getAllEchangeFinisByMois();
 }

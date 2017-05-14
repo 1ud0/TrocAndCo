@@ -39,48 +39,88 @@ public class ParamManagedBean implements Serializable {
 	@EJB
 	private IServiceParam proxyParam;
 
-	private Categorie selectedCategorie =new Categorie();
+	private Categorie selectedCategorie = new Categorie();
 	private Tag selectedTag = new Tag();
-	private Valeur selectedValeur= new Valeur();
+	private Valeur selectedValeur = new Valeur();
 	private Etat selectedEtat = new Etat();
 	private String intituleSelectedCatM = "";
-	private String intituleCatM="";
+	private String intituleCatM = "";
 	/**
 	 * Pour Graph
 	 */
 	private List<Categorie> listCategoriesGraph = new ArrayList<>();
 	private List<Long> listLongGraph = new ArrayList<>();
 
+	private List<Long> listLongNbMembreByMois = new ArrayList<>();
+	private List<String> listStringNbMembreByMois = new ArrayList<>();
 
+	private List<Long> listLongNbPropByMois = new ArrayList<>();
+	private List<String> listStringNbPropByMois = new ArrayList<>();
+
+	private List<Object[]> objectsMembre = new ArrayList<Object[]>();
+	private List<Object[]> objectsProp = new ArrayList<Object[]>();
+	
+	
+	private List<Long> listechangeGraph= new ArrayList<>();
+	private List<String> listMoisEchange = new ArrayList<>();
+	
+	
 	@PostConstruct
 	public void init() {
-		System.out.println("dans lePC MembreManagedBean");
 		getAllCategoriesMere();
 		getAllCategoriesFilles();
 		getAllValeurs();
 		getAllTag();
+
 		getAllPropsByCatMere();
+
+		getAllMembreByMois();
+		getAllPropsByMois();
+		getAllEchangeFinisByMois();
+		
+		
 	}
 	
-	public String ajoutCategorieM(){
+	private void getAllEchangeFinisByMois() {
+		List<Object[]> objectsGraph = proxyParam.getAllEchangeFinisByMois();
+		for (Object[] object : objectsGraph) {
+			listechangeGraph.add((Long) object[0]);
+			listMoisEchange.add((String) object[1]);
+		}
+
+	}
+
+	private void getAllPropsByMois() {
+		objectsProp = proxyParam.getAllPropsByMois();
+		 for (Object[] object : objectsProp) {
+		 listLongNbPropByMois.add((Long) object[0]);
+		 listStringNbPropByMois.add((String) object[1]);
+		 }
+	}
+
+	private void getAllMembreByMois() {
+		objectsMembre = proxyParam.getAllMembreByMois();
+		 for (Object[] object : objectsMembre) {
+		 listLongNbMembreByMois.add((Long) object[0]);
+		 listStringNbMembreByMois.add((String) object[1]);
+		 }
+	}
+
+	public void getAllPropsByCatMere() {
+		List<Object[]> objectsGraph = proxyParam.getAllPropsByCatMere();
+		for (Object[] object : objectsGraph) {
+			listCategoriesGraph.add((Categorie) object[0]);
+			listLongGraph.add((Long) object[1]);
+		}
+	}
+
+	public String ajoutCategorieM() {
 		selectedCategorie.setIntitule(intituleCatM);
 		System.out.println(selectedCategorie.getIntitule());
 		selectedCategorie = proxyCategorie.addCategorie(selectedCategorie);
 		String nav = "";
 		return nav;
 	}
-	
-	public void getAllPropsByCatMere(){
-		List<Object[]> objectsGraph = proxyParam.getAllPropsByCatMere();
-		System.out.println(objectsGraph.size());
-		for (Object[] object : objectsGraph) {
-			listCategoriesGraph.add( (Categorie)object[0]);
-			listLongGraph.add((Long) object[1]);
-			
-		}
-	}
-	
-	
 
 	public void loadCategorieM(Categorie categorie) {
 		selectedCategorie = categorie;
@@ -224,5 +264,71 @@ public class ParamManagedBean implements Serializable {
 	public void setListLongGraph(List<Long> listLongGraph) {
 		this.listLongGraph = listLongGraph;
 	}
+
+	public List<Long> getListLongNbMembreByMois() {
+		return listLongNbMembreByMois;
+	}
+
+	public void setListLongNbMembreByMois(List<Long> listLongNbMembreByMois) {
+		this.listLongNbMembreByMois = listLongNbMembreByMois;
+	}
+
+	public List<String> getListStringNbMembreByMois() {
+		return listStringNbMembreByMois;
+	}
+
+	public void setListStringNbMembreByMois(List<String> listStringNbMembreByMois) {
+		this.listStringNbMembreByMois = listStringNbMembreByMois;
+	}
+
+	public List<Long> getListLongNbPropByMois() {
+		return listLongNbPropByMois;
+	}
+
+	public void setListLongNbPropByMois(List<Long> listLongNbPropByMois) {
+		this.listLongNbPropByMois = listLongNbPropByMois;
+	}
+
+	public List<String> getListStringNbPropByMois() {
+		return listStringNbPropByMois;
+	}
+
+	public void setListStringNbPropByMois(List<String> listStringNbPropByMois) {
+		this.listStringNbPropByMois = listStringNbPropByMois;
+	}
+
+	public List<Object[]> getObjectsMembre() {
+		return objectsMembre;
+	}
+
+	public void setObjectsMembre(List<Object[]> objectsMembre) {
+		this.objectsMembre = objectsMembre;
+	}
+
+	public List<Object[]> getObjectsProp() {
+		return objectsProp;
+	}
+
+	public void setObjectsProp(List<Object[]> objectsProp) {
+		this.objectsProp = objectsProp;
+	}
+
+	public List<Long> getListechangeGraph() {
+		return listechangeGraph;
+	}
+
+	public void setListechangeGraph(List<Long> listechangeGraph) {
+		this.listechangeGraph = listechangeGraph;
+	}
+
+	public List<String> getListMoisEchange() {
+		return listMoisEchange;
+	}
+
+	public void setListMoisEchange(List<String> listMoisEchange) {
+		this.listMoisEchange = listMoisEchange;
+	}
+
+
 
 }
