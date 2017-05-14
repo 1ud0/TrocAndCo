@@ -116,123 +116,129 @@ _________________________________________________________ -->
 
 
 			<section class="bar background-white no-mb">
-				<div class="container">
-					<div class="heading text-center">
-						<img src="img/custom/arrivage.png" alt="manieres"></img><br></br>
-						<h2>Ca vient d'arriver</h2>
-						<p>De nouveaux objets sont disponibles sur notre plateforme,
-							profitez en!</p>
-					</div>
-					<div class="col-md-12">
-						<div class="row dernieresEntrees">
-							<div class="carousel multi-item-carousel slide" id="myCarousel">
-								<div class="carousel-inner">
-									<div class="item active">
-										<div class="row">
-											<ui:repeat var="prop"
-												value="#{mbAccueil.lasts}" size="4"
-												offset="0">
-												<div class="col-sm-3">
-													<div class="article">
-														<div class="photo">
-															<h:graphicImage value="#{prop.photos.get(0).url}"
-																alt="E1" styleClass="img-responsive"
-																rendered="#{not empty prop.photos}"></h:graphicImage>
+				<h:form>
+					<div class="container">
+						<div class="heading text-center">
+							<img src="img/custom/arrivage.png" alt="manieres"></img><br></br>
+							<h2>Ca vient d'arriver</h2>
+							<p>De nouveaux objets sont disponibles sur notre plateforme,
+								profitez en!</p>
+						</div>
+						<div class="col-md-12">
+							<div class="row dernieresEntrees">
+								<div class="carousel multi-item-carousel slide" id="myCarousel">
+									<div class="carousel-inner">
+										<div class="item active">
+											<div class="row">
+												<ui:repeat var="prop" value="#{mbAccueil.lasts}" size="4"
+													offset="0">
+													<div class="col-sm-3">
+														<div class="article">
+															<div class="photo">
+																<h:graphicImage value="#{prop.photos.get(0).url}"
+																	alt="E1" styleClass="img-responsive"
+																	rendered="#{not empty prop.photos}"></h:graphicImage>
 
-															<h:graphicImage styleClass="img-responsive"
-																value="img/texture-turquoise.png"
-																rendered="#{empty prop.photos}">
-															</h:graphicImage>
-														</div>
-														<div class="texteArticle">
-															<span class="categorie"> <h:outputText
-																	value="#{prop.intitule}" />
-															</span> <span class="nomArticle"><h:outputText
-																	value="#{prop.description}" /> </span>
-														</div>
-														<div class="timer text-center">
-															<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-															<h:outputText
-																value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+																<h:graphicImage styleClass="img-responsive"
+																	value="img/texture-turquoise.png"
+																	rendered="#{empty prop.photos}">
+																</h:graphicImage>
+															</div>
+															<div class="texteArticle">
+																<span class="categorie"> <h:commandLink
+																		action="#{mbObjet.loadProposition(prop)}"
+																		value="#{prop.intitule}" />
+																</span> <span class="nomArticle"><h:outputText
+																		value="#{prop.description}" /> </span>
+															</div>
+															<div class="timer text-center">
+																<span class="glyphicon glyphicon-time"
+																	aria-hidden="true"></span>
+																<h:outputText
+																	value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+															</div>
 														</div>
 													</div>
-												</div>
-											</ui:repeat>
+												</ui:repeat>
+											</div>
 										</div>
-									</div>
-									<div class="item">
-										<div class="row">
-											<ui:repeat var="prop"
-												value="#{mbAccueil.lasts}" size="8"
-												offset="4">
-												<div class="col-sm-3">
-													<div class="article">
-														<div class="photo">
-															<img src="#{prop.photos.get(0).url}" alt="E1"
-																class="img-responsive"></img>
-														</div>
-														<div class="texteArticle">
-															<span class="categorie"> <h:outputText
-																	value="#{prop.intitule}" />
-															</span> <span class="nomArticle"><h:outputText
-																	value="#{prop.description}" /> </span>
-														</div>
-														<div class="timer text-center">
-															<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-															<h:outputText
-																value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+										<div class="item">
+											<div class="row">
+												<ui:repeat var="prop" value="#{mbAccueil.lasts}" size="8"
+													offset="4">
+													<div class="col-sm-3">
+														<div class="article">
+															<div class="photo">
+																<img src="#{prop.photos.get(0).url}" alt="E1"
+																	class="img-responsive"></img>
+															</div>
+															<div class="texteArticle">
+																<span class="categorie"> <h:commandLink
+																		action="#{mbObjet.loadProposition(prop)}"
+																		value="#{prop.intitule}" />
+																</span> <span class="nomArticle"><h:outputText
+																		value="#{prop.description}" /> </span>
+															</div>
+															<div class="timer text-center">
+																<span class="glyphicon glyphicon-time"
+																	aria-hidden="true"></span>
+																<h:outputText
+																	value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+															</div>
 														</div>
 													</div>
-												</div>
-											</ui:repeat>
+												</ui:repeat>
+											</div>
 										</div>
-									</div>
-									<div class="item">
-										<div class="row">
-											<ui:repeat var="prop"
-												value="#{mbAccueil.lasts}" size="12"
-												offset="8">
-												<div class="col-sm-3">
-													<div class="article">
-														<div class="photo">
-															<img src="#{prop.photos.get(0).url}" alt="E1"
-																class="img-responsive"></img>
-														</div>
-														<div class="texteArticle">
-															<span class="categorie"> <h:outputText
-																	value="#{prop.intitule}" />
-															</span> <span class="nomArticle"><h:outputText
-																	value="#{prop.description}" /> </span>
-														</div>
-														<div class="timer text-center">
-															<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-															<h:outputText
-																value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+										<div class="item">
+											<div class="row">
+												<ui:repeat var="prop" value="#{mbAccueil.lasts}" size="12"
+													offset="8">
+													<div class="col-sm-3">
+														<div class="article">
+															<div class="photo">
+																<img src="#{prop.photos.get(0).url}" alt="E1"
+																	class="img-responsive"></img>
+															</div>
+															<div class="texteArticle">
+																<span class="categorie"> <h:commandLink
+																		action="#{mbObjet.loadProposition(prop)}"
+																		value="#{prop.intitule}" />
+																</span> <span class="nomArticle"><h:outputText
+																		value="#{prop.description}" /> </span>
+															</div>
+															<div class="timer text-center">
+																<span class="glyphicon glyphicon-time"
+																	aria-hidden="true"></span>
+																<h:outputText
+																	value="#{mbAccueil.dureeAjout(prop.dateAjout)}" />
+															</div>
 														</div>
 													</div>
-												</div>
-											</ui:repeat>
+												</ui:repeat>
+											</div>
 										</div>
 									</div>
 								</div>
 							</div>
+							<a class="left carousel-control" href="#myCarousel"
+								data-slide="prev"><i
+								class="glyphicon glyphicon-chevron-left"></i></a> <a
+								class="right carousel-control" href="#myCarousel"
+								data-slide="next"><i
+								class="glyphicon glyphicon-chevron-right"></i></a>
 						</div>
-						<a class="left carousel-control" href="#myCarousel"
-							data-slide="prev"><i class="glyphicon glyphicon-chevron-left"></i></a>
-						<a class="right carousel-control" href="#myCarousel"
-							data-slide="next"><i
-							class="glyphicon glyphicon-chevron-right"></i></a>
-					</div>
-					<!-- *** BLOG HOMEPAGE END *** -->
-					<div class="row">
-						<div class="text-center">
-							<h:form>
-								<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}"
-									styleClass="btn btn-blanc btn-lg" value="En voir plus" />
-							</h:form>
+						<!-- *** BLOG HOMEPAGE END *** -->
+						<div class="row">
+							<div class="text-center">
+								<h:form>
+									<h:commandButton action="#{mbRecherche.seekAndNotDestroy()}"
+										styleClass="btn btn-blanc btn-lg" value="En voir plus" />
+								</h:form>
+							</div>
 						</div>
 					</div>
-				</div>
+				</h:form>
 			</section>
 
 
@@ -279,8 +285,7 @@ _________________________________________________________ -->
 
 								<h4>
 									<span class="counter"><h:outputText
-											value="#{mbAccueil.nbPropDispo}" /></span><br></br>Objets
-									proposés
+											value="#{mbAccueil.nbPropDispo}" /></span><br></br>Objets proposés
 								</h4>
 							</div>
 						</div>
