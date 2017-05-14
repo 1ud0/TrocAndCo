@@ -60,7 +60,7 @@
 						<div class="row objet" id="productMain">
 							<div class="col-sm-5">
 								<div id="mainImage">
-									<img src="#{mbObjet.selectedProp.photos.get(0).url}" alt="" class="img-responsive" id="grossePhoto"></img>
+									<img src="#{empty mbObjet.selectedProp.photos ? 'img/camera-flat.png' : mbObjet.selectedProp.photos.get(0).url}" alt="" class="img-responsive" id="grossePhoto"></img>
 								</div>
 
 								<br></br>

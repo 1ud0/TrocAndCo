@@ -221,7 +221,7 @@ _________________________________________________________ -->
 													<h:commandLink action="#{mbObjet.loadProposition(prop)}"
 														value="">
 														<div class="image ">
-															<img src="#{prop.photos.get(0).url}" alt=""
+															<img src="#{empty prop.photos ? 'img/camera-flat.png' : prop.photos.get(0).url}" alt=""
 																class="img-responsive image1"></img>
 														</div>
 														<!-- /.image -->
