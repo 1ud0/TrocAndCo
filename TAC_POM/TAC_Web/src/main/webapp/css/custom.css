@@ -240,6 +240,9 @@ box-sizing: border-box;
 .article img{
 	border-top-left-radius: 10px;
 	border-top-right-radius: 10px;
+	padding-left: 2px;
+	padding-right: 2px;
+	padding-top: 1px;
 }
 
 .categorie{
