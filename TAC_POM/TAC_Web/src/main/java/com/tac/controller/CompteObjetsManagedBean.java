@@ -125,7 +125,9 @@ public class CompteObjetsManagedBean implements Serializable {
 		propositionSelected.setSousCategorie(sousCategorieSelectedNouveauObjet);
 		propositionSelected.setValeur(valeurSelected);
 		propositionSelected.setEtat(etatSelected);
+		if(descriptionSelected != null){
 		propositionSelected.setDescription(descriptionSelected);
+		}
 		propositionSelected.setIntitule(intituleSelected);
 		propositionSelected = proxyObjet.addProposition(propositionSelected);
 		adressesSelected = GetListAdressesSelected(idAdressesSelected);
