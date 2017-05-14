@@ -38,11 +38,9 @@ public class CompteTBManagedBean implements Serializable {
 	private IdentificationManagedBean identifBean;
 	@ManagedProperty(value="#{mbCompteEchange}")
 	private CompteMesEchangesManagedBean compteEchangeBean;
-
 	private Membre membreCourant;
 	private List<Rdv> rdvIncoming;
-	private List<Echange> echangesMembreCoDonneur;
-	private List<Echange> echangesMembreCoAcheteur;
+	private List<Echange> echangesMembreEval;
 	private List<Proposition> suggestions;
 
 	@PostConstruct
@@ -51,11 +49,9 @@ public class CompteTBManagedBean implements Serializable {
 		List<Echange> echanges = proxyEchange.getByMembre(membreCourant);
 		membreCourant.setEchanges(echanges);
 		rdvIncoming = proxyRdv.getByMembreIdEtMembrePropositionPasEncorePasse(membreCourant.getIdMembre());
-		echangesMembreCoDonneur = proxyEchange.getByMembreDonneurFini(membreCourant);
-		echangesMembreCoAcheteur = proxyEchange.getByMembreChercheurFini(membreCourant);
-		suggestions = proxySearch.findSuggestion(membreCourant);
-	}
-	
+		echangesMembreEval = proxyEchange.getByMembreFini(membreCourant.getIdMembre());
+		suggestions = proxySearch.findSuggestion(membreCourant);		
+	}	
 	
 	//getters & setters
 	public IServiceEchange getProxyEchange() {
@@ -114,21 +110,17 @@ public class CompteTBManagedBean implements Serializable {
 		this.rdvIncoming = rdvIncoming;
 	}
 
-	public List<Echange> getEchangesMembreCoDonneur() {
-		return echangesMembreCoDonneur;
+	
+
+	public List<Echange> getEchangesMembreEval() {
+		return echangesMembreEval;
 	}
 
-	public void setEchangesMembreCoDonneur(List<Echange> echangesMembreCoDonneur) {
-		this.echangesMembreCoDonneur = echangesMembreCoDonneur;
+
+	public void setEchangesMembreEval(List<Echange> echangesMembreEval) {
+		this.echangesMembreEval = echangesMembreEval;
 	}
 
-	public List<Echange> getEchangesMembreCoAcheteur() {
-		return echangesMembreCoAcheteur;
-	}
-
-	public void setEchangesMembreCoAcheteur(List<Echange> echangesMembreCoAcheteur) {
-		this.echangesMembreCoAcheteur = echangesMembreCoAcheteur;
-	}
 
 	public List<Proposition> getSuggestions() {
 		return suggestions;

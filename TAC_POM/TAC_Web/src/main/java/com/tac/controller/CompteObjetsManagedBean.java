@@ -82,12 +82,14 @@ public class CompteObjetsManagedBean implements Serializable {
 	@PostConstruct
 	public void loadPropositionDuMembre() {
 		System.out.println("dans le construct compte objet");
-		proposDuMembre = proxyObjet.getPropDispoByMembre(identifBean.getMembreConnected());
 		allCategories = rechercheBean.getCategoriesMere();
 		allValeurs = rechercheBean.getValeurs();
 		allEtats = rechercheBean.getEtats();
 		adressesDuMembre = rechercheBean.getAdresses();
-
+	}
+	
+	public void loadingListeProposition(){
+		proposDuMembre = proxyObjet.getPropDispoByMembre(identifBean.getMembreConnected());
 	}
 
 	public void listenerChargementSousCat() {
@@ -143,7 +145,8 @@ public class CompteObjetsManagedBean implements Serializable {
 		if (file3 != null) {
 			uploadPhoto3();
 		}
-		return "";
+		String nav = "/compte-objets.xhtml?faces-redirect=true";
+		return nav;
 	}
 
 	private void updateLocalisationProposition() {
@@ -192,13 +195,15 @@ public class CompteObjetsManagedBean implements Serializable {
 		propositionSelected = proposition;
 	}
 
-	public void suppressionProposition() {
+	public String suppressionProposition() {
 		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
 			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
 		}
 		proxyFavori.deleteAllFavori(propositionSelected);
 
 		proxyObjet.deleteProposition(propositionSelected);
+		String nav = "/compte-objets.xhtml?faces-redirect=true";
+		return nav;
 	}
 
 	// upload des photos

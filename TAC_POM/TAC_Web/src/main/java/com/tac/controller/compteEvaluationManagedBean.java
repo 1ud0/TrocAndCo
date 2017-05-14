@@ -61,7 +61,7 @@ public class compteEvaluationManagedBean implements Serializable {
 			total = total + 1;
 		}
 		for (Echange echange : echangesQuandDonneur) {
-			if (echange.getNoteChercheur() == noteATester) {
+			if (echange.getNoteDonneur() == noteATester) {
 				nombreDeFois = nombreDeFois + 1;
 			}
 			total = total + 1;
