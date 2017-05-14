@@ -243,10 +243,10 @@
 												<div class="col-md-10 col-sm-10">#{envie.intitule}</div>
 												<div class="col-md-2 col-sm-2">
 
-													<h:panelGroup rendered="#{!envie.valeur == null}">
+													<h:panelGroup rendered="#{not empty envie.valeur}">
 														<label> #{envie.valeur.valeur}</label>
 													</h:panelGroup>
-													<h:panelGroup rendered="#{envie.valeur == null}">
+													<h:panelGroup rendered="#{empty envie.valeur}">
 														<label> ?</label>
 													</h:panelGroup>
 													<img src="img/custom/feuille.png" class="iconeFeuille" alt=""></img>

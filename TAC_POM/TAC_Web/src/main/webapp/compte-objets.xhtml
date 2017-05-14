@@ -13,13 +13,14 @@
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
 
 		<ui:define name="headPerso">
+			<script src="js/laDanseDesModales.js"></script>
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
 			</f:metadata>
 		</ui:define>
 
 		<ui:define name="content">
-			<div id="objets">
+			<h:panelGroup layout="block" id="objets">
 				<div class="row products">
 					<ui:repeat var="proposition"
 						value="#{mbCompteObjet.proposDuMembre}">
@@ -35,19 +36,12 @@
 									<!-- /.image -->
 									<div class="text">
 										<h3>${proposition.intitule}</h3>
-										<h:commandButton value="modification"
-											onclick="$('#modalObjet').modal('show');"
-											styleClass="btn btn-default">
-											<f:ajax
-												render=":libelleSelected :panelModifImages1 :panelModifImages2 :panelModifImages3 :formModifObjet"
-												execute="@form" event="click"
-												listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}" />
+										<h:commandButton value="modification" onclick="$('#modalObjet').modal('show');" styleClass="btn btn-default">
+											<f:ajax	render=":libelleSelected :panelModifImages1 :panelModifImages2 :panelModifImages3 :formModifObjet"
+												execute="@form" event="click" listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}" />
 										</h:commandButton>
-										<h:commandButton value="suppression"
-											onclick="$('#suppressionObjet').modal('show');"
-											styleClass="btn btn-default">
-											<f:ajax event="click"
-												listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}" />
+										<h:commandButton value="suppression" styleClass="btn btn-default">
+											<f:ajax event="click" listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}" onevent="showModalSupp"/>
 										</h:commandButton>
 									</div>
 									<!-- /.text -->
@@ -57,16 +51,12 @@
 					</ui:repeat>
 					<!-- produits FIN  -->
 				</div>
-			</div>
+				</h:panelGroup>
 			<!-- DEBUT BOUTON AJOUTER -->
 
 			<div class="col-md-12 col-sm-12 CentrerBoutons">
-				<h:commandButton value="Ajouter un objet"
-					onclick="$('#modalAjoutObjet').modal('show');"
-					styleClass="btn btn-default">
-					<f:ajax event="click"
-						listener="#{mbCompteObjet.listenerInitObjet()}"
-						render="formAjoutObjet"></f:ajax>
+				<h:commandButton value="Ajouter un objet" onclick="$('#modalAjoutObjet').modal('show');" styleClass="btn btn-default">
+					<f:ajax event="click" listener="#{mbCompteObjet.listenerInitObjet()}" render="formAjoutObjet"></f:ajax>
 				</h:commandButton>
 			</div>
 
@@ -334,7 +324,8 @@
 
 
 													<h:selectOneMenu styleClass="selectpicker form-control"
-														value="#{mbCompteObjet.idCatSelected}">														
+														value="#{mbCompteObjet.idCatSelected}">		
+														<f:selectItem itemLabel="" itemValue="#{null}"/>												
 														<f:selectItems value="#{mbCompteObjet.allCategories}"
 															var="categorie" itemLabel="${categorie.intitule}"
 															itemValue="${categorie.idCategorie}" />
@@ -412,9 +403,9 @@
 										</div>
 									</div>
 									<div class="modal-footer">
-										<h:commandButton action="#{mbCompteObjet.ajoutProposition()}"
-											value="Valider" styleClass="btn btn-vert btn-lg"
-											onclick="$('#modalAjoutObjet').modal('hide');"></h:commandButton>
+										<h:commandButton value="Valider" styleClass="btn btn-vert btn-lg" onclick="$('#modalAjoutObjet').modal('hide');">
+											<f:ajax listener="#{mbCompteObjet.ajoutProposition()}" event="click" render="objets" execute="@form"></f:ajax>
+										</h:commandButton>
 
 										<button type="button" class="btn btn-vert btn-lg"
 											data-dismiss="modal">Annuler</button>
@@ -450,10 +441,9 @@
 									</div>
 								</div>
 								<div class="modal-footer">
-									<h:commandButton
-										action="#{mbCompteObjet.suppressionProposition()}"
-										value="Valider" styleClass="btn btn-vert btn-lg"
-										onclick="$('#modalObjet').modal('hide');"></h:commandButton>
+									<h:commandButton value="Valider" styleClass="btn btn-vert btn-lg">
+										<f:ajax listener="#{mbCompteObjet.suppressionProposition()}" render="objets" execute="@this" event="click" onevent="hideModalSupp"/>
+									</h:commandButton>
 
 									<button type="button" class="btn btn-vert btn-lg"
 										data-dismiss="modal">Annuler</button>

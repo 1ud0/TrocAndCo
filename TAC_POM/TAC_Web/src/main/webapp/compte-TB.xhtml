@@ -299,27 +299,27 @@
 							<div class="col-sm-12 col-md-9">
 								<h3>Des suggestions pour vos envies ?</h3>
 								<div class="row dernieresEntrees">
-
-									<ui:repeat var="prop" value="#{mbCompteTB.suggestions}">
-										<div class="col-sm-3">
-											<div class="article">
-												<div class="photo">
-													<h:graphicImage
-														value="#{prop.photos.size() > 0 ? prop.photos.get(0).url : 'img/camera-flat.png'}"
-														styleClass="img-responsive" />
-												</div>
-												<div class="texteArticle">
-													<span class="categorie">
-														<h:outputText value="#{prop.intitule}" /> 
-													</span> 
-													<span class="nomArticle">
-														<h:outputText value="#{prop.description}" />
-													</span>
+									<h:form>
+										<ui:repeat var="prop" value="#{mbCompteTB.suggestions}">
+											<div class="col-sm-3">
+												<div class="article">
+													<div class="photo">
+														<h:graphicImage
+															value="#{prop.photos.size() > 0 ? prop.photos.get(0).url : 'img/camera-flat.png'}"
+															styleClass="img-responsive" />
+													</div>
+													<div class="texteArticle">
+														<span class="categorie">
+															<h:commandLink action="#{mbObjet.loadProposition(prop)}" value="#{prop.intitule}" />
+														</span> 
+														<span class="nomArticle">
+															<h:outputText value="#{prop.description}" />
+														</span>
+													</div>
 												</div>
 											</div>
-										</div>
-									</ui:repeat>
-
+										</ui:repeat>
+									</h:form>
 								</div>
 							</div>
 						</div>

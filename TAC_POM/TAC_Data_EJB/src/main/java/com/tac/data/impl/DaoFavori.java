@@ -54,16 +54,18 @@ public class DaoFavori implements IDaoFavori {
 	public List<Proposition> getFavorisByMembre(Membre membre) {
 		membre = em.merge(membre);
 		List<Proposition> propositions = membre.getFavoris();
-		for (Proposition p : propositions) {
-			List<Localisation> localisations = p.getLocalisations();
-			List<Photo> photos = p.getPhotos();
-			localisations.size();
-			photos.size();
+		if (propositions != null) {
+			for (Proposition p : propositions) {
+				List<Localisation> localisations = p.getLocalisations();
+				List<Photo> photos = p.getPhotos();
+				localisations.size();
+				photos.size();
+			}
 		}
 		return propositions;
-
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
 	public boolean isAlreadyFavorite(Proposition proposition, Membre membre) {
 		final String requete = "SELECT m FROM Membre m WHERE :prop MEMBER OF m.favoris AND m.idMembre = :pid";

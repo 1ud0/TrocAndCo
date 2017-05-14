@@ -87,9 +87,8 @@ public class CompteObjetsManagedBean implements Serializable {
 		allValeurs = rechercheBean.getValeurs();
 		allEtats = rechercheBean.getEtats();
 		adressesDuMembre = rechercheBean.getAdresses();
-
 	}
-
+	
 	public void listenerChargementSousCat() {
 		for (Categorie cat : allCategories) {
 			if (idCatSelected == cat.getIdCategorie()) {
@@ -101,7 +100,6 @@ public class CompteObjetsManagedBean implements Serializable {
 	}
 
 	public void listenerInitObjet() {
-		idCatSelected = 1;
 		propositionSelected = new Proposition();
 		categorieSelectedNouveauObjet = new Categorie();
 		sousCategorieSelectedNouveauObjet = new Categorie();
@@ -118,7 +116,7 @@ public class CompteObjetsManagedBean implements Serializable {
 		idAdressesSelected = getidAdresseProp();
 	}
 
-	public String ajoutProposition() {
+	public void ajoutProposition() {
 		propositionSelected.setMembre(identifBean.getMembreConnected());
 		propositionSelected.setLocalisations(adressesSelected);
 		propositionSelected.setCategorie(categorieSelectedNouveauObjet);
@@ -143,7 +141,7 @@ public class CompteObjetsManagedBean implements Serializable {
 		if (file3 != null) {
 			uploadPhoto3();
 		}
-		return "";
+		proposDuMembre.add(propositionSelected);
 	}
 
 	private void updateLocalisationProposition() {
@@ -190,14 +188,16 @@ public class CompteObjetsManagedBean implements Serializable {
 	// suppression d'une proposition
 	public void listnerSelectionObjetPourSuppression(Proposition proposition) {
 		propositionSelected = proposition;
+		System.out.println("chgmt prop selected : " + propositionSelected.getIntitule());
 	}
 
 	public void suppressionProposition() {
+		System.out.println("dans la suppression");
 		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
 			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
 		}
 		proxyFavori.deleteAllFavori(propositionSelected);
-
+		proposDuMembre.remove(propositionSelected);
 		proxyObjet.deleteProposition(propositionSelected);
 	}
 

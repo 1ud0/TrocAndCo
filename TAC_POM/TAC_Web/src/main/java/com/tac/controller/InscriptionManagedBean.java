@@ -2,6 +2,8 @@ package com.tac.controller;
 
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import javax.ejb.EJB;
@@ -38,6 +40,20 @@ public class InscriptionManagedBean {
 			nav = "/compte-TB.xhtml?faces-redirect=true";
 		}
 		return nav;
+	}
+	
+	public void demo() {
+		newMembre.setNom("Norris");
+		newMembre.setPrenom("chuck");
+		Calendar cal = new GregorianCalendar(1950, 01, 01);
+		newMembre.setDateNaissance(cal.getTime());
+		Localisation loc = new Localisation();
+		loc.setAdresse("Rue du coup de pied tournoyant de la grue");
+		loc.setCodePostal("74000");
+		loc.setVille("Annecy");
+		List<Localisation> locs = new ArrayList<>();
+		locs.add(loc);
+		newMembre.setLocalisations(locs);
 	}
 	
 	public IServiceInscription getProxy() {
