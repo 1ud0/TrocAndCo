@@ -12,14 +12,14 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateCompte.xhtml">
-<ui:define name="headPerso">
+		<ui:define name="headPerso">
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
 			</f:metadata>
 			<script type="text/javascript" src="js/calendrier.js"></script>
 			<script type="text/javascript" src="js/affichageCalendrier.js">	</script>
 		</ui:define>
-		
+
 		<ui:define name="content">
 
 			<div class="introRubrique">
@@ -27,62 +27,127 @@
 				<p class="text-muted">Consultez la liste des rendez vous pour
 					les échanges à venir et les échanges passés.</p>
 			</div>
-			<div id="divCalendrierRdv">
-				<div id="wrapper">
-					<DIV hidden="true">
-						<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
-							varStatus="nbRdv" id="repetRdv">
-
-							<h:outputText value="lieu : #{rdv.lieu} "
-								id="lieuRdv#{nbRdv.index}" />
-							<br></br>
-
-							<h:outputText value="#{rdv.dateRdv.date}"
-								id="rdvDay#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.month}"
-								id="rdvMonth#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.year + 1900}"
-								id="rdvYear#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.hours}"
-								id="rdvHours#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.minutes}"
-								id="rdvMinutes#{nbRdv.index}" />
 
 
-						</ui:repeat>
-					</DIV>
+			<div class="row">
+				<div id="divCalendrierRdv" style="display: block" class="col-sm-12">
+					<div id="wrapper">
+						<DIV hidden="true">
+							<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
+								varStatus="nbRdv" id="repetRdv">
+
+								<h:outputText
+									value="lieu : #{rdv.lieu} commentaire : #{rdv.commentaire}"
+									id="lieuRdv#{nbRdv.index}" />
+								<br></br>
+
+								<h:outputText value="#{rdv.dateRdv.date}"
+									id="rdvDay#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.month}"
+									id="rdvMonth#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.year + 1900}"
+									id="rdvYear#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.hours}"
+									id="rdvHours#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.minutes}"
+									id="rdvMinutes#{nbRdv.index}" />
 
 
-					<div id="myScheduler"></div>
-				</div>
-				<h:form id="evenement">
-					<div class="row container">
-						<h:inputText id="inputDate" value="#{mbRdv.date}"
-							p:placeholder="jj/MM/aaaa" size="10">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText>
-						<h:inputText value="#{mbRdv.heure}" p:placeholder="HH" size="2" />
-						<h:inputText value="#{mbRdv.minute}" p:placeholder="mm" size="2" />
+							</ui:repeat>
+						</DIV>
+
+
+						<div id="myScheduler"></div>
 					</div>
-					<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
-						p:placeholder="Lieu" />
-					<h:inputText id="inputCommentaire" value="#{mbRdv.rdv.commentaire}"
-						p:placeholder="Commentaire..." />
+
+				</div>
 
 
-					<h:selectOneMenu value="#{mbRdv.echangeSelected.idEchange}">
-						<f:selectItem itemLabel="Sélectionner l'échange" itemValue="0" />
-						<f:selectItems value="#{mbRdv.echanges}" var="currentEchange"
-							itemLabel="#{currentEchange.proposition.intitule} + #{currentEchange.idEchange}"
-							itemValue="#{currentEchange.idEchange}" />
-					</h:selectOneMenu>
-					<h:commandButton styleClass="btn btn-vert btn-lg" action="#{mbRdv.addRdv()}"
-						value="Enregistrer le rendez-vous" />
-				</h:form>
+				<div class="col-md-12">
+					<div class="box">
+						<h3 class="text-uppercase">Ajouter un rendez-vous</h3>
+
+						<p>Votre calendrier permet d'organiser vos futurs échanges en
+							leur fixant une date de rendez-vous.</p>
+						<hr></hr>
+
+
+						<h:form id="evenement">
+							<div class="row">
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="inputDate">Date du RDV</label>
+										<h:inputText id="inputDate" value="#{mbRdv.date}"
+											p:placeholder="jj/mm/aaaa" size="10"
+											styleClass="form-control">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:inputText>
+									</div>
+								</div>
+
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="heure">Heure</label>
+										<h:inputText id="heure" value="#{mbRdv.heure}"
+											p:placeholder="HH" size="2" styleClass="form-control" />
+
+									</div>
+								</div>
+								<div class="col-sm-2">
+									<div class="form-group">
+										<label for="minute">Minute</label>
+										<h:inputText id="minute" value="#{mbRdv.minute}"
+											p:placeholder="mm" size="2" styleClass="form-control" />
+									</div>
+								</div>
+								<div class="col-sm-4">
+									<div class="form-group">
+										<label for="inputLieu">Lieu de RDV</label>
+										<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
+											p:placeholder="Lieu" styleClass="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-10">
+									<div class="form-group">
+										<label for="inputCommentaire">Commentaire</label>
+										<h:inputText id="inputCommentaire"
+											value="#{mbRdv.rdv.commentaire}"
+											p:placeholder="Commentaire..." styleClass="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-4">
+									<div>
+										<label>Echange</label>
+									</div>
+									<div class="form-group selecteur">
+
+										<h:selectOneMenu value="#{mbRdv.echangeSelected.idEchange}"
+											styleClass="selectpicker form-control">
+											<f:selectItem itemLabel="Sélectionner l'échange"
+												itemValue="0" />
+											<f:selectItems value="#{mbRdv.echanges}" var="currentEchange"
+												itemLabel="#{currentEchange.proposition.intitule}"
+												itemValue="#{currentEchange.idEchange}" />
+										</h:selectOneMenu>
+									</div>
+
+								</div>
+							</div>
+							<h:commandButton styleClass="btn btn-vert btn-lg"
+								action="#{mbRdv.addRdvEchange(mbEchange.echangeCourant)}"
+								value="Enregistrer le rendez-vous" />
+						</h:form>
+
+					</div>
+				</div>
 			</div>
 
 		</ui:define>
