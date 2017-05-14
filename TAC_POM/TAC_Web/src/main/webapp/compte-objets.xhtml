@@ -53,6 +53,7 @@
 				</div>
 				</h:panelGroup>
 			<!-- DEBUT BOUTON AJOUTER -->
+			<h:form>
 
 			<div class="col-md-12 col-sm-12 CentrerBoutons">
 				<h:commandButton value="Ajouter un objet" onclick="$('#modalAjoutObjet').modal('show');" styleClass="btn btn-default">
@@ -60,12 +61,12 @@
 				</h:commandButton>
 			</div>
 
+			</h:form>
 
 			<!-- ******************************MODALE MODIFIER DEBUT****************************** -->
 
 			<div class="modal fade" id="modalObjet" role="dialog">
-				<div class="modal-dialog">
-
+				<div class="modal-dialog modal-lg">
 					<!-- Modal content-->
 					<div class="modal-content">
 						<h:panelGroup id="modifObjet">
@@ -73,7 +74,8 @@
 								<button type="button" class="close" data-dismiss="modal">x</button>
 								<h4 class="modal-title">
 									Modification de la proposition :
-									<h:outputLabel value="#{mbCompteObjet.propositionSelected.intitule}"
+									<h:outputLabel
+										value="#{mbCompteObjet.propositionSelected.intitule}"
 										id="libelleSelected" />
 								</h4>
 							</div>
@@ -147,7 +149,8 @@
 													<label>Intitulé:</label>
 												</div>
 												<div>
-													<h:inputText value="#{mbCompteObjet.propositionSelected.intitule}"
+													<h:inputText
+														value="#{mbCompteObjet.propositionSelected.intitule}"
 														styleClass="form-control" />
 												</div>
 											</div>
@@ -189,8 +192,9 @@
 												<div class="form-group selecteur" id="etatDeLObjet">
 													<h:selectOneMenu styleClass="selectpicker form-control"
 														value="#{mbCompteObjet.propositionSelected.etat.idEtat}">
-														<f:selectItems value="#{mbCompteObjet.allEtats}" var="etat"
-															itemLabel="${etat.intitule}" itemValue="${etat.idEtat}" />
+														<f:selectItems value="#{mbCompteObjet.allEtats}"
+															var="etat" itemLabel="${etat.intitule}"
+															itemValue="${etat.idEtat}" />
 													</h:selectOneMenu>
 												</div>
 											</div>
@@ -253,7 +257,7 @@
 			<!-- ******************************MODALE AJOUTER DEBUT****************************** -->
 
 			<div class="modal fade" id="modalAjoutObjet" role="dialog">
-				<div class="modal-dialog">
+				<div class="modal-dialog modal-lg">
 
 					<!-- Modal content-->
 					<div class="modal-content">
@@ -269,9 +273,8 @@
 										<div class="col-sm-4">
 											<div class="image ">
 												<h:panelGroup id="panelAjoutImages1" layout="block">
-													<img
-														src="img/camera-flat.png"
-														class="img-responsive" alt="Appareil-photo"></img>
+													<img src="img/camera-flat.png" class="img-responsive"
+														alt="Appareil-photo"></img>
 												</h:panelGroup>
 												<h:inputFile styleClass="marginBottom15"
 													value="#{mbCompteObjet.file1}"></h:inputFile>
@@ -281,28 +284,27 @@
 										<div class="col-sm-4">
 											<div class="image ">
 												<h:panelGroup id="panelAjoutImages2" layout="block">
-													<img
-														src="img/camera-flat.png"
-														class="img-responsive" alt="Appareil-photo"></img>
+													<img src="img/camera-flat.png" class="img-responsive"
+														alt="Appareil-photo"></img>
 												</h:panelGroup>
-												<h:inputFile styleClass="marginBottom15"
+												<h:inputFile styleClass="marginBottom15 "
 													value="#{mbCompteObjet.file2}"></h:inputFile>
+													
 											</div>
 
 										</div>
 										<div class="col-sm-4">
 											<div class="image ">
 												<h:panelGroup id="panelAjoutImages3" layout="block">
-													<img
-														src="img/camera-flat.png"
-														class="img-responsive" alt="Appareil-photo"></img>
+													<img src="img/camera-flat.png" class="img-responsive"
+														alt="Appareil-photo"></img>
 												</h:panelGroup>
 												<h:inputFile styleClass="marginBottom15"
 													value="#{mbCompteObjet.file3}"></h:inputFile>
 											</div>
 
 										</div>
-										
+
 									</div>
 									<br></br>
 									<div class="row">
@@ -358,8 +360,9 @@
 												<div class="form-group selecteur" id="etatDeLObjetNouveau">
 													<h:selectOneMenu styleClass="selectpicker form-control"
 														value="#{mbCompteObjet.etatSelected.idEtat}">
-														<f:selectItems value="#{mbCompteObjet.allEtats}" var="etat"
-															itemLabel="${etat.intitule}" itemValue="${etat.idEtat}" />
+														<f:selectItems value="#{mbCompteObjet.allEtats}"
+															var="etat" itemLabel="${etat.intitule}"
+															itemValue="${etat.idEtat}" />
 													</h:selectOneMenu>
 												</div>
 											</div>
@@ -453,8 +456,6 @@
 					</div>
 				</div>
 			</div>
-
-
 			<!-- ******************************MODALE SUPPRIMER FIN****************************** -->
 		</ui:define>
 	</ui:composition>

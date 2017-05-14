@@ -171,6 +171,12 @@ public class ServiceEchange implements IServiceEchange {
 		return proxyEchange.updateEchange(echange);
 	}
 
+	@Override
+	public List<Echange> getByMembreFini(Integer idMembre) {
+		
+		return proxyEchange.getByMembreFini(idMembre);
+	}
+
 
 
 }

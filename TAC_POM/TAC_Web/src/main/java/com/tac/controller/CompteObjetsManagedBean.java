@@ -89,6 +89,7 @@ public class CompteObjetsManagedBean implements Serializable {
 		adressesDuMembre = rechercheBean.getAdresses();
 	}
 	
+		
 	public void listenerChargementSousCat() {
 		for (Categorie cat : allCategories) {
 			if (idCatSelected == cat.getIdCategorie()) {
@@ -193,14 +194,15 @@ public class CompteObjetsManagedBean implements Serializable {
 		System.out.println("chgmt prop selected : " + propositionSelected.getIntitule());
 	}
 
-	public void suppressionProposition() {
-		System.out.println("dans la suppression");
+	public String suppressionProposition() {
 		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
 			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
 		}
 		proxyFavori.deleteAllFavori(propositionSelected);
 		proposDuMembre.remove(propositionSelected);
 		proxyObjet.deleteProposition(propositionSelected);
+		String nav = "/compte-objets.xhtml?faces-redirect=true";
+		return nav;
 	}
 
 	// upload des photos

@@ -274,4 +274,14 @@ public class DaoEchange implements IDaoEchange {
 		return query.getResultList();
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public List<Echange> getByMembreFini(Integer idMembre) {
+		final String reqGetEchangeEval = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
+		Query queryGetByIdMembre = em.createQuery(reqGetEchangeEval);
+		queryGetByIdMembre.setParameter("pidMembre", idMembre);
+		List<Echange> echanges = queryGetByIdMembre.getResultList();
+		return echanges;
+	}
+
 }

@@ -143,6 +143,7 @@ INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_insc
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (22,'Gullum','Smeagol','1937-08-18','2017-04-11','img/imgAvatar/avatar1.png','Gullum.Smeagol@gmail.com','0694645541',NULL,NULL,NULL,'Gullum','pass',2);
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (23,'Agnes','Diallo','1985-08-18','2017-04-11','img/imgAvatar/avatar agnes3.jpg','Agnes.Diallo@gmail.com','0694645541',NULL,NULL,NULL,'Agnes','pass',2);
 INSERT INTO `membre` (`id_membre`, `nom`, `prenom`, `date_naissance`, `date_inscription`, `avatar`, `mail`, `telephone`, `date_desinscription`, `date_radiation`, `motif_radiation`, `pseudo`, `password`, `compte_id`) VALUES (24,'Sebastien','Pericard','1985-08-18','2017-04-11','img/imgAvatar/avatar seb.jpg','Seb.Pericard@gmail.com','0694645541',NULL,NULL,NULL,'Seb','pass',2);
+
 /*============================*/
 /*		TABLE PROPOSITION	  */
 /*============================*/

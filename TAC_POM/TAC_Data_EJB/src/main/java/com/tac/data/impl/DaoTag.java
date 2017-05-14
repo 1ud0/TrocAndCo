@@ -9,7 +9,6 @@ import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
 import com.tac.data.api.IDaoTag;
-import com.tac.entity.Categorie;
 import com.tac.entity.Tag;
 
 @Remote(IDaoTag.class)
