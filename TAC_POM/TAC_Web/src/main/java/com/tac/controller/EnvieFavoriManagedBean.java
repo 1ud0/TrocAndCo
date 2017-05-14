@@ -1,13 +1,16 @@
 package com.tac.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ManagedProperty;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
+
 import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceFavori;
 import com.tac.business.api.IServiceListe;
@@ -15,13 +18,11 @@ import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceRecherche;
 import com.tac.entity.Envie;
 import com.tac.entity.Liste;
-import com.tac.entity.Localisation;
 import com.tac.entity.Membre;
 import com.tac.entity.Proposition;
 
-
 @ManagedBean(name = "mbEnvieFavori")
-@SessionScoped
+@ViewScoped
 public class EnvieFavoriManagedBean {
 
 	@EJB
@@ -42,31 +43,55 @@ public class EnvieFavoriManagedBean {
 	private Proposition selectedProp;
 	private List<Envie> envies;
 	private List<Proposition> favoris;
+	private Map<Envie, List<Proposition>> mesEnvies;
+	private List<Liste> mesListes;
+	private List<Proposition> mesFavoris;
+	private boolean favoriShowing = true;
 
+	@PostConstruct
+	public void init() {
+		System.out.println("dans le construct envie");
+		membreCourant = identifBean.getMembreConnected();
+		if (membreCourant != null) {
+			mesEnvies = new HashMap<>();
+			mesListes = proxyListe.getByMembre(membreCourant);
+			for (Liste liste : mesListes) {
+				for (Envie envie : liste.getEnvies()) {
+					mesEnvies.put(envie, proxyRecherche.rechercherEnvie(envie));
+				}
+			}
+			mesFavoris = proxyFavori.getFavorisMembre(membreCourant);
+			favoris = mesFavoris;
+		}
+	}
+
+	public List<Proposition> getSuggestions(Envie envie) {
+		List<Proposition> props = mesEnvies.get(envie);
+		return props;
+	}
+	
+	public void loadFavoris() {
+		favoris = mesFavoris;
+		favoriShowing = true;
+		envies = new ArrayList<>();
+	}
 	
 
-
-	
 	public List<Proposition> loadPropositions(Envie envie) {
 		return proxyRecherche.rechercherEnvie(envie);
 	}
-	
-	public void deleteEnvie(Envie envie){
+
+	public void deleteEnvie(Envie envie) {
 		proxyEnvie.deleteEnvie(envie);
 		envies.remove(envie);
 	}
-	
-	public void deleteFavoris(Proposition proposition){
+
+	public void deleteFavoris(Proposition proposition) {
 		membreCourant = identifBean.getMembreConnected();
-		if(membreCourant != null){
-		proxyFavori.deleteFavori(proposition, membreCourant);
-		favoris.remove(proposition);
+		if (membreCourant != null) {
+			proxyFavori.deleteFavori(proposition, membreCourant);
+			favoris.remove(proposition);
 		}
-	}
-	
-	public void chargerFavoris() {
-		viderTout();
-		favoris = proxyFavori.getFavorisMembre(getMembreCourant());
 	}
 
 	public boolean isEnvieDeLaListe(Envie envie, Liste liste) {
@@ -76,50 +101,19 @@ public class EnvieFavoriManagedBean {
 		return false;
 	}
 
-	public List<Localisation> getLocalisationByMembre() {
-		membreCourant = identifBean.getMembreConnected();
-		if(membreCourant != null){
-		return proxyLocalisation.getMembreLocalisations(membreCourant);
-		}
-		return null;
-	}
 
 	public void chargerEnvie(Liste liste) {
-		viderTout();
-		envies = proxyEnvie.getByList(liste);
-	}
-
-	public void viderTout() {
-		envies = new ArrayList<>();
+		envies = liste.getEnvies();
+		favoriShowing = false;
 		favoris = new ArrayList<>();
 	}
 
-	public int nombreEnviesByListe(Liste listeActuelle) {
-		return listeActuelle.getEnvies().size();
-	}
-
-	public int nombreFavoris() {
-		return proxyFavori.getFavorisMembre(getMembreCourant()).size();
-	}
-
-	public List<Liste> getListesByMembre() {
-		membreCourant = identifBean.getMembreConnected();
-		if(membreCourant != null){
-
-		return proxyListe.getByMembre(membreCourant);
-		}
-		return null;
-	}
 
 	public boolean valeurVide(Envie envie) {
 		if (envie.getValeur() == null) {
 			return true;
 		}
 		return false;
-	}
-	
-	public List<Envie> getEnviesDuMembre(Membre membre){
-		return proxyEnvie.getByMembre(membre);
 	}
 
 	public IServiceEnvie getProxyEnvie() {
@@ -154,6 +148,14 @@ public class EnvieFavoriManagedBean {
 		this.proxyFavori = proxyFavori;
 	}
 
+	public IServiceRecherche getProxyRecherche() {
+		return proxyRecherche;
+	}
+
+	public void setProxyRecherche(IServiceRecherche proxyRecherche) {
+		this.proxyRecherche = proxyRecherche;
+	}
+
 	public IdentificationManagedBean getIdentifBean() {
 		return identifBean;
 	}
@@ -163,7 +165,7 @@ public class EnvieFavoriManagedBean {
 	}
 
 	public Membre getMembreCourant() {
-		return identifBean.getMembreConnected();
+		return membreCourant;
 	}
 
 	public void setMembreCourant(Membre membreCourant) {
@@ -171,7 +173,6 @@ public class EnvieFavoriManagedBean {
 	}
 
 	public Proposition getSelectedProp() {
-
 		return selectedProp;
 	}
 
@@ -194,5 +195,38 @@ public class EnvieFavoriManagedBean {
 	public void setFavoris(List<Proposition> favoris) {
 		this.favoris = favoris;
 	}
+
+	public Map<Envie, List<Proposition>> getMesEnvies() {
+		return mesEnvies;
+	}
+
+	public void setMesEnvies(Map<Envie, List<Proposition>> mesEnvies) {
+		this.mesEnvies = mesEnvies;
+	}
+
+	public List<Liste> getMesListes() {
+		return mesListes;
+	}
+
+	public void setMesListes(List<Liste> mesListes) {
+		this.mesListes = mesListes;
+	}
+
+	public boolean isFavoriShowing() {
+		return favoriShowing;
+	}
+
+	public void setFavoriShowing(boolean favoriShowing) {
+		this.favoriShowing = favoriShowing;
+	}
+
+	public List<Proposition> getMesFavoris() {
+		return mesFavoris;
+	}
+
+	public void setMesFavoris(List<Proposition> mesFavoris) {
+		this.mesFavoris = mesFavoris;
+	}
+
 
 }

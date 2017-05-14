@@ -17,16 +17,15 @@
 					<h3 class="panel-title">Mes Listes d'envies</h3>
 				</div>
 				<!--Categorie du menu debut-->
-				<h:form>
+				<h:form id="menuGauche">
 					<!--Liste des favoris-->
 
 					<div class="panel-body">
 						<ul class="nav nav-pills nav-stacked category-menu">
-							<li><h:commandLink
-									action="#{mbEnvieFavori.chargerFavoris()}"
-									value="Liste de mes Favoris">
-									<h:outputText value="#{mbEnvieFavori.nombreFavoris()}"
+							<li><h:commandLink value="Liste de mes Favoris">
+									<h:outputText value="#{mbEnvieFavori.mesFavoris.size()}"
 										class="badge pull-right" />
+									<f:ajax listener="#{mbEnvieFavori.loadFavoris()}" render="enviesAndFavoris menuGauche" execute="@this" event="click"/>
 								</h:commandLink>
 								<div>
 									<ul>
@@ -44,14 +43,11 @@
 
 					<div class="panel-body">
 						<ul class="nav nav-pills nav-stacked category-menu">
-							<ui:repeat var="liste" value="#{mbEnvieFavori.listesByMembre}"
+							<ui:repeat var="liste" value="#{mbEnvieFavori.mesListes}"
 								varStatus="listeStatut">
-								<li><h:commandLink
-										action="#{mbEnvieFavori.chargerEnvie(liste)}"
-										value="#{liste.titreListe}">
-										<h:outputText
-											value="#{mbEnvieFavori.nombreEnviesByListe(liste)}"
-											class="badge pull-right" />
+								<li><h:commandLink value="#{liste.titreListe}">
+										<h:outputText value="#{liste.envies.size()}" class="badge pull-right" />
+										<f:ajax listener="#{mbEnvieFavori.chargerEnvie(liste)}" execute="@this" render="enviesAndFavoris menuGauche" event="click"/>
 									</h:commandLink> <h:panelGroup>
 										<ul>
 											<ui:repeat var="envie" value="#{mbEnvieFavori.envies}">

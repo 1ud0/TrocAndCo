@@ -49,8 +49,7 @@ public class DaoListe implements IDaoListe{
 		final String req = "SELECT DISTINCT l FROM Liste l LEFT JOIN FETCH l.envies WHERE l.membre.idMembre = :pid";
 		Query query = em.createQuery(req);
 		query.setParameter("pid", idMembre);
-		List<Liste> listes= query.getResultList();
-		return listes;
+		return query.getResultList();
 	}
 
 }
