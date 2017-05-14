@@ -45,75 +45,118 @@
 				</h:form>
 			</div>
 
-			<button onclick="toggleCalendrier()" class="btn btn-vert btn-lg">Calendrier</button>
+
 		</ui:define>
 
 		<ui:define name="content2">
 
-			<script type="text/javascript">
-			function toggleCalendrier() {
-				cal = document.getElementById("divCalendrierRdv");
-				if(cal.style.display == "none"){
-					cal.style.display = "block";
-					}else{
-						cal.style.display = "none";
-						}				
-			}
-			</script>
+			<div class="row">
+				<div id="divCalendrierRdv" style="display: block" class="col-sm-8">
+					<div id="wrapper">
+						<DIV hidden="true">
+							<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
+								varStatus="nbRdv" id="repetRdv">
 
-			<div id="divCalendrierRdv" style="display: none" class="col-sm-12">
-				<div id="wrapper">
-					<DIV hidden="true">
-						<ui:repeat var="rdv" value="#{mbRdv.allRdvByMembre}"
-							varStatus="nbRdv" id="repetRdv">
+								<h:outputText
+									value="lieu : #{rdv.lieu} commentaire : #{rdv.commentaire}"
+									id="lieuRdv#{nbRdv.index}" />
+								<br></br>
 
-							<h:outputText value="lieu : #{rdv.lieu} "
-								id="lieuRdv#{nbRdv.index}" />
-							<br></br>
-
-							<h:outputText value="#{rdv.dateRdv.date}"
-								id="rdvDay#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.month}"
-								id="rdvMonth#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.year + 1900}"
-								id="rdvYear#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.hours}"
-								id="rdvHours#{nbRdv.index}" />
-							<br></br>
-							<h:outputText value="#{rdv.dateRdv.minutes}"
-								id="rdvMinutes#{nbRdv.index}" />
+								<h:outputText value="#{rdv.dateRdv.date}"
+									id="rdvDay#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.month}"
+									id="rdvMonth#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.year + 1900}"
+									id="rdvYear#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.hours}"
+									id="rdvHours#{nbRdv.index}" />
+								<br></br>
+								<h:outputText value="#{rdv.dateRdv.minutes}"
+									id="rdvMinutes#{nbRdv.index}" />
 
 
-						</ui:repeat>
-					</DIV>
+							</ui:repeat>
+						</DIV>
 
 
-					<div id="myScheduler"></div>
-				</div>
-				<h:form id="evenement">
-					<div class="row container">
-						<h:inputText id="inputDate" value="#{mbRdv.date}"
-							p:placeholder="jj/MM/aaaa" size="10">
-							<f:convertDateTime pattern="dd/MM/yyyy" />
-						</h:inputText>
-						<h:inputText value="#{mbRdv.heure}" p:placeholder="HH" size="2" />
-						<h:inputText value="#{mbRdv.minute}" p:placeholder="mm" size="2" />
+						<div id="myScheduler"></div>
 					</div>
-					<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
-						p:placeholder="Lieu" />
-					<h:inputText id="inputCommentaire" value="#{mbRdv.rdv.commentaire}"
-						p:placeholder="Commentaire..." />
+
+				</div>
 
 
+				<div class="col-md-4">
+					<div class="box">
+						<h3 class="text-uppercase">Ajouter un rendez-vous</h3>
 
-					<h:commandButton styleClass="btn btn-vert btn-lg"
-						action="#{mbRdv.addRdvEchange(mbEchange.echangeCourant)}"
-						value="Enregistrer le rendez-vous" />
-				</h:form>
+						<p>Votre calendrier permet d'organiser vos futurs échanges en
+							leur fixant une date de rendez-vous.</p>
+						<hr></hr>
+
+
+						<h:form id="evenement">
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="inputDate">Date du RDV</label>
+										<h:inputText id="inputDate" value="#{mbRdv.date}"
+											p:placeholder="jj/mm/aaaa" size="10"
+											styleClass="form-control">
+											<f:convertDateTime pattern="dd/MM/yyyy" />
+										</h:inputText>
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-3">
+									<div class="form-group">
+										<label for="heure">Heure</label>
+										<h:inputText id="heure" value="#{mbRdv.heure}"
+											p:placeholder="HH" size="2" styleClass="form-control" />
+
+									</div>
+								</div>
+								<div class="col-sm-3">
+									<div class="form-group">
+										<label for="minute">Minute</label>
+										<h:inputText id="minute" value="#{mbRdv.minute}"
+											p:placeholder="mm" size="2" styleClass="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-6">
+									<div class="form-group">
+										<label for="inputLieu">Lieu de RDV</label>
+										<h:inputText id="inputLieu" value="#{mbRdv.rdv.lieu}"
+											p:placeholder="Lieu" styleClass="form-control" />
+									</div>
+								</div>
+							</div>
+							<div class="row">
+								<div class="col-sm-12">
+									<div class="form-group">
+										<label for="inputCommentaire">Commentaire</label>
+										<h:inputText id="inputCommentaire"
+											value="#{mbRdv.rdv.commentaire}"
+											p:placeholder="Commentaire..." styleClass="form-control" />
+									</div>
+								</div>
+							</div>
+
+
+							<h:commandButton styleClass="btn btn-vert btn-lg"
+								action="#{mbRdv.addRdvEchange(mbEchange.echangeCourant)}"
+								value="Enregistrer le rendez-vous" />
+						</h:form>
+
+					</div>
+				</div>
 			</div>
+
 		</ui:define>
 	</ui:composition>
 </h:body>
