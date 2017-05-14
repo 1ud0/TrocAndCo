@@ -13,22 +13,22 @@ import com.tac.entity.Membre;
 
 @Remote(IDaoMembre.class)
 @Stateless
-public class DaoMembre implements IDaoMembre{
+public class DaoMembre implements IDaoMembre {
 
-	@PersistenceContext(unitName="TAC_Data_EJB")
+	@PersistenceContext(unitName = "TAC_Data_EJB")
 	EntityManager em;
-	
+
 	@Override
 	public Membre identifyMembre(String mail, String mdp) {
-		final String reqIdentification ="SELECT m FROM Membre m WHERE m.mail = :pmail AND m.password = :pmdp";
+		final String reqIdentification = "SELECT m FROM Membre m WHERE m.mail = :pmail AND m.password = :pmdp";
 		Query queryIdentification = em.createQuery(reqIdentification);
 		queryIdentification.setParameter("pmail", mail);
-		queryIdentification.setParameter("pmdp",mdp);
-		Membre memberIdentified = null;		
-		try{
+		queryIdentification.setParameter("pmdp", mdp);
+		Membre memberIdentified = null;
+		try {
 			memberIdentified = (Membre) queryIdentification.getSingleResult();
-		}catch (Exception e){
-			
+		} catch (Exception e) {
+
 		}
 		return memberIdentified;
 	}
@@ -44,7 +44,7 @@ public class DaoMembre implements IDaoMembre{
 
 	@Override
 	public Membre addMembre(Membre newMembre) {
-		em.persist(newMembre);			
+		em.persist(newMembre);
 		return newMembre;
 	}
 
@@ -53,13 +53,11 @@ public class DaoMembre implements IDaoMembre{
 		em.merge(membre);
 		return membre;
 	}
-	
-
 
 	@Override
 	public Membre getById(Integer id) {
 		final String reqGetById = "SELECT m FROM Membre m WHERE m.idMembre = :pid";
-			Query queryGetById = em.createQuery(reqGetById);
+		Query queryGetById = em.createQuery(reqGetById);
 		queryGetById.setParameter("pid", id);
 		Membre membreById = (Membre) queryGetById.getSingleResult();
 		return membreById;
@@ -70,7 +68,7 @@ public class DaoMembre implements IDaoMembre{
 	public List<Membre> getAll() {
 		final String reqGetAll = "SELECT m FROM Membre m";
 		Query queryGetAll = em.createQuery(reqGetAll);
-		List<Membre> membres= queryGetAll.getResultList();
+		List<Membre> membres = queryGetAll.getResultList();
 		return membres;
 	}
 
@@ -88,12 +86,13 @@ public class DaoMembre implements IDaoMembre{
 		Membre membreChecked = (Membre) query.getSingleResult();
 		return membreChecked;
 	}
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Membre> getAllActif() {
 		final String reqGetAll = "SELECT m FROM Membre m WHERE m.dateRadiation is NULL";
 		Query queryGetAll = em.createQuery(reqGetAll);
-		List<Membre> membres= queryGetAll.getResultList();
+		List<Membre> membres = queryGetAll.getResultList();
 		return membres;
 	}
 
@@ -102,7 +101,7 @@ public class DaoMembre implements IDaoMembre{
 	public List<Membre> getAllRadie() {
 		final String reqGetAll = "SELECT m FROM Membre m WHERE m.dateRadiation is NOT NULL";
 		Query queryGetAll = em.createQuery(reqGetAll);
-		List<Membre> membres= queryGetAll.getResultList();
+		List<Membre> membres = queryGetAll.getResultList();
 		return membres;
 	}
 
@@ -111,10 +110,23 @@ public class DaoMembre implements IDaoMembre{
 		final String reqGetAll = "SELECT COUNT(m.idMembre) FROM Membre m";
 		Query query = em.createQuery(reqGetAll);
 		try {
-			return (long)query.getSingleResult();
+			return (long) query.getSingleResult();
 		} catch (Exception e) {
 			return 0;
 		}
+	}
+	
+	@SuppressWarnings({ "unchecked", "unused" })
+	@Override
+	public List<Object[]> getAllMembreByMois() {
+		final String req = "SELECT COUNT(m.idMembre), DATE_FORMAT(m.dateInscription,'%m/%Y') FROM Membre m GROUP BY DATE_FORMAT(m.dateInscription,'%m/%Y') ORDER BY m.dateInscription";
+		Query query = em.createQuery(req);
+		List<Object[]> bob = query.getResultList();
+		 for (Object[] objects : bob) {
+			 Long count = (Long) objects[0];
+			 String mois = (String) objects[1];
+		}
+		return query.getResultList();
 	}
 
 }

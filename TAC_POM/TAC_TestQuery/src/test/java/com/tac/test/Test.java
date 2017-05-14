@@ -23,16 +23,16 @@ public class Test {
         EntityManager em = emf.createEntityManager();
         EntityTransaction tx = em.getTransaction();
         tx.begin();
-        
-		final String req = "SELECT p.categorie, COUNT(*) FROM Proposition p GROUP BY p.categorie";
+        final String req = "SELECT COUNT(e.idEchange), DATE_FORMAT(e.dateValidation,'%m/%Y') FROM Echange e WHERE e.dateValidation IS NOT NULL GROUP BY DATE_FORMAT(e.dateValidation,'%m/%Y') ORDER BY e.dateValidation ";
 		Query query = em.createQuery(req);
-		 List<Object[]> bob = query.getResultList();
+		List<Object[]> bob = query.getResultList();
 		 for (Object[] objects : bob) {
-			 Categorie categorie = (Categorie) objects[0];
-			 	System.out.println(categorie.getIntitule());
-			 Long count = (Long) objects[1];
+			 Long count = (Long) objects[0];
 			 System.out.println(count);
+			 String mois = (String) objects[1];
+			 System.out.println(mois);
 		}
+
         
       
 		

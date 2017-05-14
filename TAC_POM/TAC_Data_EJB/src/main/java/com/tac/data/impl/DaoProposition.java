@@ -282,21 +282,31 @@ public class DaoProposition implements IDaoProposition {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "unused" })
 	@Override
 	public List<Object[]> getAllPropsByCatMere() {
-		System.out.println("test entrée");
 		final String req = "SELECT p.categorie, COUNT(*) FROM Proposition p GROUP BY p.categorie";
 		Query query = em.createQuery(req);
 		 List<Object[]> bob = query.getResultList();
 		 for (Object[] objects : bob) {
 			 Categorie categorie = (Categorie) objects[0];
-
 			 Long count = (Long) objects[1];
-		
 		}
 		return query.getResultList();
 
+	}
+
+	@SuppressWarnings({ "unchecked", "unused" })
+	@Override
+	public List<Object[]> getAllPropsByMois() {
+		final String req = "SELECT COUNT(p.idProposition), DATE_FORMAT(p.dateAjout,'%m/%Y') FROM Proposition p GROUP BY DATE_FORMAT(p.dateAjout,'%m/%Y') ORDER BY p.dateAjout";
+		Query query = em.createQuery(req);
+		List<Object[]> bob = query.getResultList();
+		 for (Object[] objects : bob) {
+			 Long count = (Long) objects[0];
+			 String mois = (String) objects[1];
+		}
+		return query.getResultList();
 	}
 
 
