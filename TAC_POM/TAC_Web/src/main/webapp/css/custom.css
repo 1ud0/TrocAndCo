@@ -177,7 +177,7 @@ text-decoration: none;
 	padding-right: 30px;
 }
 
-/*M Manières de troquer */
+/*M ManiÃ¨res de troquer */
 
 .heading h2{
 	font-weight: 600;
@@ -794,7 +794,7 @@ aside {
 }
 
 .product .image img {
-	height: 200px;
+	
 }
 
 #echanges .miniIcone {
@@ -1009,4 +1009,21 @@ p.taillePolice150 {
  	margin-left: 10px;
  }
  
+ 
+ .product a :hover{
+ 	text-decoration: none !important;
+ }
+ 
+ 
+ .sidebar-menu input[type=checkbox],  .sidebar-menu input[type=radio] {
+  transform: scale(1.3);
+}
+
+.panel.sidebar-menu .panel-body label{
+	font-size: 1em;
+}
+
+.mesObjets img {
+	max-height: 200px;
+}
  
