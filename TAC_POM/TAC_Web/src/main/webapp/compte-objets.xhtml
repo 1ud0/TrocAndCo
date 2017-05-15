@@ -407,7 +407,7 @@
 									</div>
 									<div class="modal-footer">
 										<h:commandButton value="Valider" styleClass="btn btn-vert btn-lg" onclick="$('#modalAjoutObjet').modal('hide');">
-											<f:ajax listener="#{mbCompteObjet.ajoutProposition()}" event="click" render="objets" execute="@form"></f:ajax>
+											<f:ajax listener="#{mbCompteObjet.ajoutProposition()}" event="click" render=":objets :creditMembre" execute="@form"></f:ajax>
 										</h:commandButton>
 
 										<button type="button" class="btn btn-vert btn-lg"

@@ -13,6 +13,7 @@ import javax.faces.bean.ViewScoped;
 
 import com.tac.business.api.IServiceEnvie;
 import com.tac.business.api.IServiceFavori;
+import com.tac.business.api.IServiceIdentification;
 import com.tac.business.api.IServiceListe;
 import com.tac.business.api.IServiceLocalisation;
 import com.tac.business.api.IServiceRecherche;
@@ -34,7 +35,9 @@ public class EnvieFavoriManagedBean {
 	@EJB
 	private IServiceFavori proxyFavori;
 	@EJB
-	private IServiceRecherche proxyRecherche;
+	private IServiceRecherche proxyRecherche;	
+	@EJB
+	private IServiceIdentification proxyIdentif;
 
 	@ManagedProperty(value = "#{mbIdentif}")
 	private IdentificationManagedBean identifBean;
@@ -52,6 +55,7 @@ public class EnvieFavoriManagedBean {
 	public void init() {
 		System.out.println("dans le construct envie");
 		membreCourant = identifBean.getMembreConnected();
+		membreCourant = proxyIdentif.identification(membreCourant.getMail(), membreCourant.getPassword());
 		if (membreCourant != null) {
 			mesEnvies = new HashMap<>();
 			mesListes = proxyListe.getByMembre(membreCourant);
