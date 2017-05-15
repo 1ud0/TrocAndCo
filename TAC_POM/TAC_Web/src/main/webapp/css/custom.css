@@ -1000,6 +1000,11 @@ p.taillePolice150 {
 	
  }
  
+ .evaluationEchange{
+ 	margin-top : 50px;
+ 	margin-left: 30px;
+ }
+ 
  .prixInit{
  	font-size: 2.25em;
  	font-style: 900;
@@ -1034,8 +1039,8 @@ p.taillePolice150 {
 	max-height: 200px;
 }
  
-.jaune {
-	background-color: #fab414;
+.gris {
+	background-color: #e6e6e6;
 	padding-top: 10px;
 	padding-bottom: 10px;
 	margin: 0px;
