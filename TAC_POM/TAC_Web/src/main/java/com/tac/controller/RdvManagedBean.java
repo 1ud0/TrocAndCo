@@ -76,7 +76,6 @@ public class RdvManagedBean {
 			rdv.setDateRdv(date);
 
 			proxyRdv.addRdv(rdv);
-
 		}
 	}
 
