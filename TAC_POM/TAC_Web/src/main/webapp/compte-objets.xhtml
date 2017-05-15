@@ -36,11 +36,11 @@
 									<!-- /.image -->
 									<div class="text">
 										<h3>${proposition.intitule}</h3>
-										<h:commandButton value="modification" onclick="$('#modalObjet').modal('show');" styleClass="btn btn-default">
+										<h:commandButton value="modification" onclick="$('#modalObjet').modal('show');" styleClass="btn btn-template-main btn-sm">
 											<f:ajax	render=":libelleSelected :panelModifImages1 :panelModifImages2 :panelModifImages3 :formModifObjet"
 												execute="@form" event="click" listener="#{mbCompteObjet.listnerSelectionObjet(proposition)}" />
 										</h:commandButton>
-										<h:commandButton value="suppression" styleClass="btn btn-default">
+										<h:commandButton value="suppression" styleClass="btn btn-template-main btn-sm">
 											<f:ajax event="click" listener="#{mbCompteObjet.listnerSelectionObjetPourSuppression(proposition)}" onevent="showModalSupp"/>
 										</h:commandButton>
 									</div>
@@ -56,7 +56,7 @@
 			<h:form>
 
 			<div class="col-md-12 col-sm-12 CentrerBoutons">
-				<h:commandButton value="Ajouter un objet" onclick="$('#modalAjoutObjet').modal('show');" styleClass="btn btn-default">
+				<h:commandButton value="Ajouter un objet" onclick="$('#modalAjoutObjet').modal('show');" styleClass="btn btn-template-main btn-sm">
 					<f:ajax event="click" listener="#{mbCompteObjet.listenerInitObjet()}" render="formAjoutObjet"></f:ajax>
 				</h:commandButton>
 			</div>
