@@ -41,7 +41,7 @@ _________________________________________________________ -->
 									<div class="panel panel-default sidebar-menu">
 										<div class="panel-heading">
 											<h3 class="panel-title">
-												<f:ajax render=":filterSeek :results">
+												<f:ajax render=":filterSeek :results nombreResult">
 													<h:commandLink action="#{mbRecherche.listenerCat(null)}"
 														value="Catégories" />
 												</f:ajax>
@@ -49,7 +49,7 @@ _________________________________________________________ -->
 										</div>
 										<div class="panel-body">
 											<ul class="nav nav-pills nav-stacked category-menu">
-												<f:ajax render=":filterSeek :results">
+												<f:ajax render=":filterSeek :results nombreResult">
 
 													<ui:repeat var="entry" value="#{mbRecherche.catsEntries}">
 														<li><h:commandLink
@@ -112,7 +112,7 @@ _________________________________________________________ -->
 												styleClass="btn btn-default btn-sm btn-template-main"
 												value="APPLIQUER"
 												onclick="javascript:window.location='#recherche'">
-												<f:ajax render=":filterSeek :results" execute="@form" />
+												<f:ajax render=":filterSeek :results nombreResult" execute="@form" />
 											</h:commandButton>
 
 										</div>
@@ -142,7 +142,7 @@ _________________________________________________________ -->
 												styleClass="btn btn-default btn-sm btn-template-main"
 												value="APPLIQUER"
 												onclick="javascript:window.location='#recherche'">
-												<f:ajax render=":filterSeek :results" execute="@form" />
+												<f:ajax render=":filterSeek :results nombreResult" execute="@form" />
 											</h:commandButton>
 
 
@@ -161,7 +161,7 @@ _________________________________________________________ -->
 													<f:selectItems var="etat" value="#{mbRecherche.etats}"
 														itemLabel="#{etat.intitule}" itemValue="#{etat.idEtat}" />
 													<f:selectItem itemLabel="Tous" itemValue="0" />
-													<f:ajax render=":filterSeek :results" execute="@this" />
+													<f:ajax render=":filterSeek :results nombreResult" execute="@this" />
 												</h:selectOneRadio>
 											</div>
 
@@ -191,17 +191,19 @@ _________________________________________________________ -->
 									id="btnReset"
 									styleClass="btn btn-default btn-sm btn-template-main pull-right"
 									value="REINITIALISER LES FILTRES">
-									<f:ajax render=":filterSeek :results" execute="@form" />
+									<f:ajax render=":filterSeek :results nombreResult" execute="@form" />
 								</h:commandButton>
 							</h:form>
-							<h5 class="text">
-								Résultat de la recherche :
-								<h:outputText value="#{mbRecherche.propositions.size()}" />
-								objet<h:outputText value="s"
-									rendered="#{mbRecherche.propositions.size() > 1}"  />
-								trouvé<h:outputText value="s"
-									rendered="#{mbRecherche.propositions.size() > 1}" />
-							</h5>
+							<h:panelGroup id="nombreResult">
+								<h5 class="text">
+									Résultat de la recherche :
+									<h:outputText value="#{mbRecherche.propositions.size()}" />
+									objet<h:outputText value="s"
+										rendered="#{mbRecherche.propositions.size() > 1}"  />
+									trouvé<h:outputText value="s"
+										rendered="#{mbRecherche.propositions.size() > 1}" />
+								</h5>
+							</h:panelGroup>
 
 							<br /> <br /> <br />
 

@@ -77,17 +77,16 @@
 
 			</div>
 			
-			
-			<h:inputHidden id="showAlert" value="#{mbEchange.showAlertModif}" />
+			<h:inputSecret id="showAlert" value="#{mbEchange.showAlertModif}" />
 			<h:outputScript rendered="#{mbEchange.showAlertModif}">
 				$.notify({
 					title: '<strong>Attention!</strong>',
 					icon: 'glyphicon glyphicon-alert',
-					message: "Crédit insufisant."
+					message: "Crédit insuffisant."
 				},{
 					type: 'warning'
 				});
-				document.getElementById("proposition:showAlert").value = false;
+				document.getElementById("proposition:btnHide");
 			</h:outputScript>
 			
 			</h:form>
@@ -176,7 +175,7 @@
 										<h:commandButton value="Ajouter un objet"
 											onclick="$('#modalAjoutObjet').modal('show');"
 											styleClass="btn btn-default">
-											<f:ajax event="click" listener="#{mbCompteObjet.listenerAjoutObjet()}" render="formAjoutObjet"></f:ajax>
+											<f:ajax event="click" listener="#{mbCompteObjet.ajoutProposition()}" render="formAjoutObjet"></f:ajax>
 										</h:commandButton>
 									</div>
 								</div>
