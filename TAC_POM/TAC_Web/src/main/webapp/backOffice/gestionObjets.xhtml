@@ -23,7 +23,7 @@
 			<style type="text/css">
 
 			#boxObjet {
-				height: 400pt;
+				height: 580pt;
 				overflow: auto
 			}</style>
 
@@ -65,7 +65,7 @@
 												<td>#{objet.localisations.get(0).ville}</td> 
 												<td>
 													<h:commandButton styleClass="btn btn-primary btn-block" value="Visualiser" onclick="$('#bs-example-modal-lg2').modal('show');" data-toggle="modal" data-target="#bs-example-modal-lg2">
-														<f:ajax event="click" listener="#{mbObjet.loadObject(objet)}" render=":toto" /> 														
+														<f:ajax event="click" listener="#{mbObjBack.loadObject(objet)}" render=":toto" /> 														
 													</h:commandButton>
 													</td>
 
@@ -172,14 +172,13 @@
 					<!-- /.modal-dialog -->
 				</div>
 			</section>
-<<<<<<< HEAD
+
 			<!-- /.modal-dialog -->
 
-=======
 <!-- __________________________________FIN MODALE EDITER__________________________________________________________ -->
 
 <!-- __________________________________DEBUT MODALE VALIDATION__________________________________________________________ -->
->>>>>>> refs/remotes/origin/Aydam
+
 			<section class="col-lg-8 connectedSortable">
 
 				<div class="modal fade" id="bs-example-modal-lg2" role="dialog">
