@@ -20,6 +20,7 @@
 		</ui:define>
 
 		<ui:define name="content">
+			<h:form id="formObjet">
 			<h:panelGroup layout="block" id="objets">
 				<div class="row products mesObjets">
 					<ui:repeat var="proposition"
@@ -27,7 +28,6 @@
 						<!-- produits DEBUT -->
 						<div class="col-sm-6 col-md-6">
 							<div class="product ">
-								<h:form id="formObjet">
 									<div class="image ">
 										<img
 											src="#{proposition.photos.size()>0 ? proposition.photos.get(0).url : 'img/camera-flat.png'}"
@@ -45,13 +45,13 @@
 										</h:commandButton>
 									</div>
 									<!-- /.text -->
-								</h:form>
 							</div>
 						</div>
 					</ui:repeat>
 					<!-- produits FIN  -->
 				</div>
 				</h:panelGroup>
+				</h:form>
 			<!-- DEBUT BOUTON AJOUTER -->
 			<h:form>
 
@@ -407,7 +407,7 @@
 									</div>
 									<div class="modal-footer">
 										<h:commandButton value="Valider" styleClass="btn btn-vert btn-lg" onclick="$('#modalAjoutObjet').modal('hide');">
-											<f:ajax listener="#{mbCompteObjet.ajoutProposition()}" event="click" render="objets" execute="@form"></f:ajax>
+											<f:ajax listener="#{mbCompteObjet.ajoutProposition()}" event="click" render=":formObjet:objets" execute="@form" />
 										</h:commandButton>
 
 										<button type="button" class="btn btn-vert btn-lg"
@@ -445,7 +445,7 @@
 								</div>
 								<div class="modal-footer">
 									<h:commandButton value="Valider" styleClass="btn btn-vert btn-lg">
-										<f:ajax listener="#{mbCompteObjet.suppressionProposition()}" render="objets" execute="@this" event="click" onevent="hideModalSupp"/>
+										<f:ajax listener="#{mbCompteObjet.suppressionProposition()}" render=":formObjet:objets" execute="@this" event="click" onevent="hideModalSupp"/>
 									</h:commandButton>
 
 									<button type="button" class="btn btn-vert btn-lg"

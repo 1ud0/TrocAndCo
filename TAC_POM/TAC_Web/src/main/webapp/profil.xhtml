@@ -191,14 +191,14 @@
 						<div class="panel panel-default">
 							<div class="panel-heading">
 								<h4 class="panel-title">
-									<a data-toggle="collapse" href="#carousselObjet">Ses objets</a>
+									<a href="#carousselObjet">Ses objets</a>
 								</h4>
 							</div>
 						</div>
 					</div>
 				</div>
 				<!-- /caroussel -->
-				<div id="carousselObjet" class="collapse">
+				<div id="carousselObjet">
 					<div class="col-sm-12 ">
 
 						<div class="row dernieresEntrees">
@@ -213,7 +213,7 @@
 
 													<h:commandLink action="#{mbObjet.loadProposition(prop)}"
 														value="">
-														<div class="image ">
+														<div class="image">
 															<img src="#{prop.photos.get(0).url}" alt=""
 																class="img-responsive image1"></img>
 														</div>

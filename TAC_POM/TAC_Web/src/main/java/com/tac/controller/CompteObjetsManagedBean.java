@@ -101,6 +101,7 @@ public class CompteObjetsManagedBean implements Serializable {
 	}
 
 	public void listenerInitObjet() {
+		idCatSelected = null;
 		propositionSelected = new Proposition();
 		categorieSelectedNouveauObjet = new Categorie();
 		sousCategorieSelectedNouveauObjet = new Categorie();
@@ -143,6 +144,13 @@ public class CompteObjetsManagedBean implements Serializable {
 		}
 		if (file3 != null) {
 			uploadPhoto3();
+		}
+		if (file1 == null && file2 == null && file3 == null) {
+			Photo photoAAjouter = new Photo();
+			photoAAjouter.setUrl("img/camera-flat.png");
+			photoAAjouter.setProposition(propositionSelected);
+			propositionSelected.getPhotos().add(photoAAjouter);
+			proxyPhoto.addPhoto(photoAAjouter);
 		}
 		proposDuMembre.add(propositionSelected);
 	}
@@ -194,15 +202,13 @@ public class CompteObjetsManagedBean implements Serializable {
 		System.out.println("chgmt prop selected : " + propositionSelected.getIntitule());
 	}
 
-	public String suppressionProposition() {
+	public void suppressionProposition() {
 		for (Localisation oldLocalisation : getAdresseByProposition(propositionSelected)) {
 			proxyLocaliserProposition.deleteLocalisationAUneProposition(propositionSelected, oldLocalisation);
 		}
 		proxyFavori.deleteAllFavori(propositionSelected);
 		proposDuMembre.remove(propositionSelected);
 		proxyObjet.deleteProposition(propositionSelected);
-		String nav = "/compte-objets.xhtml?faces-redirect=true";
-		return nav;
 	}
 
 	// upload des photos

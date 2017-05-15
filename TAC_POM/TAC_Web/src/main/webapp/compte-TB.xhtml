@@ -35,7 +35,7 @@
 											<h4 class="text-uppercase">Mes acquisitions</h4>
 										</div>
 										<h:panelGroup rendered="#{mbCompteTB.compteEchangeBean.echangeDuMembre.size()==0}">
-										<div>Aucune pour le moment.</div>
+										<div class="italic">Aucune pour le moment.</div>
 										
 										<br></br>
 										</h:panelGroup>
@@ -90,7 +90,7 @@
 											<h4 class="text-uppercase">Mes dons</h4>
 										</div>
 										<h:panelGroup rendered="#{mbCompteTB.compteEchangeBean.donDuMembre.size()==0}">
-										<div>Aucun pour le moment.</div>
+										<div class="italic">Aucun pour le moment.</div>
 										
 										<br></br>
 										</h:panelGroup>
@@ -143,7 +143,7 @@
 											<h4 class="text-uppercase">Mes messages</h4>
 										</div>
 										<h:panelGroup rendered="#{mbMessage.messagesDuMembre.size()==0}">
-										<div>Aucun pour le moment.</div>
+										<div class="italic">Aucun pour le moment.</div>
 										
 										<br></br>
 										</h:panelGroup>
@@ -179,7 +179,7 @@
 											<h4 class="text-uppercase">Mes rendez-vous à venir</h4>
 										</div>
 										<h:panelGroup rendered="#{mbCompteTB.rdvIncoming.size()==0}">
-											<div>Aucun pour le moment.</div><br></br>
+											<div class="italic">Aucun pour le moment.</div><br></br>
 										</h:panelGroup>
 										<h:panelGroup rendered="#{mbCompteTB.rdvIncoming.size()!=0}">
 											<div class="table-responsive">
@@ -219,73 +219,79 @@
 											<h4 class="text-uppercase">Mes évaluations</h4>
 										</div>
 										
-										<div class="table-responsive">
-											<table class="table table-hover">
-												<thead>
-													<tr>
-														<th>Intitulé</th>
-														<th>Note et commentaire</th>
-														<th>Qui ?</th>
-													</tr>
-												</thead>
-												<tbody>
-													<h:panelGroup>
-														<ui:repeat var="eval"
-															value="#{mbCompteTB.echangesMembreEval}" size="#{mbCompteTB.echangesMembreEval.size() > 5 ? 5 : mbCompteTB.echangesMembreEval.size()}">
-															<h:form>	
-																<tr>
-																	<td><a href="#">#{eval.proposition.intitule}</a></td>
-																	<td>
-																		<div class="col-sm-9">
-																			<div class="review-block-rate">
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre? eval.noteDonneur : eval.noteChercheur) ge 1}">
-																					<span class="glyphicon glyphicon-star"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 1}">
-																					<span class="glyphicon glyphicon-star-empty"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 2}">
-																					<span class="glyphicon glyphicon-star"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 2}">
-																					<span class="glyphicon glyphicon-star-empty"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 3}">
-																					<span class="glyphicon glyphicon-star"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 3}">
-																					<span class="glyphicon glyphicon-star-empty"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 4}">
-																					<span class="glyphicon glyphicon-star"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 4}">
-																					<span class="glyphicon glyphicon-star-empty"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 5}">
-																					<span class="glyphicon glyphicon-star"></span>
-																				</h:panelGroup>
-																				<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 5}">
-																					<span class="glyphicon glyphicon-star-empty"></span>
-																				</h:panelGroup>
+										<h:panelGroup rendered="#{empty mbCompteTB.echangesMembreEval}">
+											<span class="italic">Aucune évalutation pour le moment</span>
+										</h:panelGroup>
+										
+										<h:panelGroup rendered="#{not empty mbCompteTB.echangesMembreEval}">
+											<div class="table-responsive">
+												<table class="table table-hover">
+													<thead>
+														<tr>
+															<th>Intitulé</th>
+															<th>Note et commentaire</th>
+															<th>Qui ?</th>
+														</tr>
+													</thead>
+													<tbody>
+														<h:panelGroup>
+															<ui:repeat var="eval"
+																value="#{mbCompteTB.echangesMembreEval}" size="#{mbCompteTB.echangesMembreEval.size() > 5 ? 5 : mbCompteTB.echangesMembreEval.size()}">
+																<h:form>	
+																	<tr>
+																		<td><a href="#">#{eval.proposition.intitule}</a></td>
+																		<td>
+																			<div class="col-sm-9">
+																				<div class="review-block-rate">
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre? eval.noteDonneur : eval.noteChercheur) ge 1}">
+																						<span class="glyphicon glyphicon-star"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 1}">
+																						<span class="glyphicon glyphicon-star-empty"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 2}">
+																						<span class="glyphicon glyphicon-star"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 2}">
+																						<span class="glyphicon glyphicon-star-empty"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 3}">
+																						<span class="glyphicon glyphicon-star"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 3}">
+																						<span class="glyphicon glyphicon-star-empty"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 4}">
+																						<span class="glyphicon glyphicon-star"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 4}">
+																						<span class="glyphicon glyphicon-star-empty"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) ge 5}">
+																						<span class="glyphicon glyphicon-star"></span>
+																					</h:panelGroup>
+																					<h:panelGroup rendered="#{(eval.membre.idMembre==mbIdentif.membreConnected.idMembre?  eval.noteDonneur : eval.noteChercheur) lt 5}">
+																						<span class="glyphicon glyphicon-star-empty"></span>
+																					</h:panelGroup>
+																				</div>
+																				<br />
+																				<div class="review-block-description">#{eval.membre.idMembre==mbIdentif.membreConnected.idMembre? eval.comDonneur : eval.comChercheur}</div>
 																			</div>
-																			<br />
-																			<div class="review-block-description">#{eval.membre.idMembre==mbIdentif.membreConnected.idMembre? eval.comDonneur : eval.comChercheur}</div>
-																		</div>
-																	</td>
-																	<td class="imageAvatarSize"><img
-																		class="img-responsive img-circle"
-																		src="#{eval.membre.idMembre==mbIdentif.membreConnected.idMembre? eval.proposition.membre.avatar : eval.membre.avatar}" alt=""></img></td>
-																	<td><a href="compte-evaluations.xhtml"
-																		class="btn btn-template-main btn-sm">Voir</a></td>
-																</tr>
-	
-															</h:form>
-														</ui:repeat>
-													</h:panelGroup>
-												</tbody>
-											</table>
-										</div>
+																		</td>
+																		<td class="imageAvatarSize"><img
+																			class="img-responsive img-circle"
+																			src="#{eval.membre.idMembre==mbIdentif.membreConnected.idMembre? eval.proposition.membre.avatar : eval.membre.avatar}" alt=""></img></td>
+																		<td><a href="compte-evaluations.xhtml"
+																			class="btn btn-template-main btn-sm">Voir</a></td>
+																	</tr>
+		
+																</h:form>
+															</ui:repeat>
+														</h:panelGroup>
+													</tbody>
+												</table>
+											</div>
+										</h:panelGroup>
 									</div>
 								</div>
 							</div>

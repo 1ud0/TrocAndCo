@@ -78,6 +78,7 @@ public class ObjetManagedBean {
 	public String loadProposition(Proposition proposition) {
 		String nav = "";
 		selectedProp = proposition;
+		System.out.println(selectedProp);
 		if (selectedProp != null) {
 			nav = "/fiche.xhtml?faces-redirect=true&ref=" + selectedProp.getIdProposition();
 		}

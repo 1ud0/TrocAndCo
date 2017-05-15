@@ -3,6 +3,7 @@ package com.tac.controller;
 import javax.ejb.EJB;
 import javax.faces.application.ConfigurableNavigationHandler;
 import javax.faces.bean.ManagedBean;
+import javax.faces.bean.ManagedProperty;
 import javax.faces.bean.SessionScoped;
 import javax.faces.context.FacesContext;
 import javax.servlet.http.HttpSession;
@@ -12,6 +13,8 @@ import com.tac.business.api.IServiceIdentification;
 import com.tac.business.api.IServiceMessage;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
+import com.tac.util.CritereSearch;
+
 import java.io.Serializable;
 import java.util.List;
 
@@ -26,6 +29,7 @@ public class IdentificationManagedBean implements Serializable {
 	private IServiceMessage proxyMessage;
 	@EJB
 	private IServiceEchange proxyEchange;
+	
 
 	private String mail = "bob.toto@toto.com";
 	private String mdp = "pass";
