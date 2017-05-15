@@ -27,8 +27,8 @@ public class IdentificationManagedBean implements Serializable {
 	@EJB
 	private IServiceEchange proxyEchange;
 
-	private String mail = "bob.toto@toto.com";
-	private String mdp = "pass";
+	private String mail;
+	private String mdp;
 	private Membre membreConnected;
 	private int nbNouveauxMessages;
 	private int nbNouveauxEchanges;
