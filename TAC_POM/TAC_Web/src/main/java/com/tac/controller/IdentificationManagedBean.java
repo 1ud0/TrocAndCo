@@ -12,7 +12,10 @@ import com.tac.business.api.IServiceIdentification;
 import com.tac.business.api.IServiceMessage;
 import com.tac.entity.Echange;
 import com.tac.entity.Membre;
+import com.tac.entity.Message;
+
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 
 @SuppressWarnings("serial")
@@ -50,7 +53,7 @@ public class IdentificationManagedBean implements Serializable {
 		}
 		return nav;
 	}
-	
+
 	public void connexion() {
 		membreConnected = proxyIdentification.identification(mail, mdp);
 		if (membreConnected != null) {
@@ -66,14 +69,28 @@ public class IdentificationManagedBean implements Serializable {
 		String redirection = "/accueil.xhtml?faces-redirect=true";
 		return redirection;
 	}
-	
+
 	public int getNbNouveauxEchanges() {
 		List<Echange> echanges = proxyEchange.getByMembreDonneurDateAcceptNull(membreConnected);
 		return echanges.size();
 	}
-	
+
 	public int getNbNouveauxMessages() {
-		return proxyMessage.messageNonLuQuandRecepteur(membreConnected).size();
+		List<Message> messages = proxyMessage.messageNonLuQuandRecepteur(membreConnected);
+		List<Message> messagesansrepet = new ArrayList<>();
+		for (Message message : messages) {
+			boolean messageDifferent = true;
+			for (Message message2 : messagesansrepet) {
+				if (message.getEmetteur().getIdMembre() == message2.getEmetteur().getIdMembre() && message
+						.getProposition().getIdProposition() == message2.getProposition().getIdProposition()) {
+					messageDifferent = false;
+				}
+			}
+			if(messageDifferent){
+				messagesansrepet.add(message);
+			}
+		}
+		return messagesansrepet.size();
 	}
 
 	public int getCredit() {
@@ -83,7 +100,7 @@ public class IdentificationManagedBean implements Serializable {
 	public void setCredit(int credit) {
 		this.credit = credit;
 	}
-	
+
 	public String getMail() {
 		return mail;
 	}
@@ -132,13 +149,9 @@ public class IdentificationManagedBean implements Serializable {
 		this.proxyEchange = proxyEchange;
 	}
 
-	
-
 	public void setNbNouveauxMessages(int nbNouveauxMessages) {
 		this.nbNouveauxMessages = nbNouveauxMessages;
 	}
-
-	
 
 	public void setNbNouveauxEchanges(int nbNouveauxEchanges) {
 		this.nbNouveauxEchanges = nbNouveauxEchanges;
