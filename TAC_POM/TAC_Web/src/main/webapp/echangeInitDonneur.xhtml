@@ -9,40 +9,46 @@
 <h:body bgcolor='white'>
 
 	<ui:composition template="/WEB-INF/templates/templateEchange.xhtml">
-		
+
 		<ui:define name="headPerso">
 			<f:metadata>
 				<f:event listener="#{mbIdentif.securePage()}" type="preRenderView"></f:event>
-			</f:metadata>		
+			</f:metadata>
 		</ui:define>
-		
+
 		<ui:define name="content">
-			<div class="row alignVertical">
+			<div class="row resumeEchange">
 				<div class="col-md-12 col-sm-12">
 					<div class="">
-					<div class="box">
-						<h3 class="text-uppercase">Nouvelle offre d'échange !</h3>
+						<div class="box">
+							<h3 class="text-uppercase">Nouvelle offre d'échange !</h3>
+						</div>
+						<h3>#{mbEchange.echangeCourant.membre.pseudo} est intéressé
+							par votre objet :
+							#{mbEchange.echangeCourant.proposition.intitule.toLowerCase()} !</h3>
+						<h3>
+							Notre membre vous propose un échange contre
+							#{mbEchange.echangeCourant.prix} <img alt="feuille"
+								src="img/custom/feuille.png" />
+						</h3>
+					</div>
+				</div>
+				<div class="col-sm-12">
+					<h:form>
+						<div class="row">
+							<div >
 
-						<p>Votre calendrier permet d'organiser vos futurs échanges en
-							leur fixant une date de rendez-vous.</p>
+								<h:commandLink action="#{mbEchange.accepterEchange()}" value=""
+									styleClass="btn btn-vert btn-lg">Accepter</h:commandLink>
+								<h:commandLink action="#{mbEchange.refuserEchange()}" value=""
+									styleClass="btn btn-vert btn-lg marginLeft10">Refuser</h:commandLink>
+							</div>
 						</div>
-						<h3>#{mbEchange.echangeCourant.membre.pseudo} est intéressé par votre #{mbEchange.echangeCourant.proposition.intitule.toLowerCase()} !</h3>
-						<h3>Notre membre vous propose un échange contre 
-						#{mbEchange.echangeCourant.prix} <img alt="feuille" src="img/custom/feuille.png"/> </h3>
-					</div>
+					</h:form>
 				</div>
-				
-				</div>
-				<h:form>
-					<div class="row">
-						<div class="">
-							<br></br><br></br>
-							<h:commandLink action="#{mbEchange.accepterEchange()}" value="" styleClass="btn btn-vert btn-lg">Accepter</h:commandLink>
-							<h:commandLink action="#{mbEchange.refuserEchange()}" value="" styleClass="btn btn-vert btn-lg marginLeft10">Refuser</h:commandLink>
-						</div>
-					</div>
-				</h:form>
-				
+			</div>
+
+
 		</ui:define>
 	</ui:composition>
 </h:body>

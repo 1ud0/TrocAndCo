@@ -132,6 +132,7 @@ public class EchangeManagedBean {
 
 	public String noterEchange() {
 		String nav = "";
+		
 		echangeCourant = proxyEchange.getByNumero(echangeCourant);
 		System.out.println("note :" + note);
 		if (membreCourant.getPseudo().equals(echangeCourant.getMembre().getPseudo())) {
@@ -141,6 +142,7 @@ public class EchangeManagedBean {
 			System.out.println("note du chercheur" + noteChercheur);
 			echangeCourant.setNoteChercheur(noteChercheur);
 			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			commentaire="";
 			nav = loadEchangeAcquereur(echangeCourant);
 		} else {
 			echangeCourant.setComDonneur(commentaire);
@@ -148,6 +150,7 @@ public class EchangeManagedBean {
 			System.out.println("note du donneur" + noteDonneur);
 			echangeCourant.setNoteDonneur(noteDonneur);
 			echangeCourant = proxyEchange.noterEchange(echangeCourant);
+			commentaire = "";
 			nav = loadEchangeDonneur(echangeCourant);
 		}
 		System.out.println("nav eval" + nav);
