@@ -358,61 +358,6 @@
 													</div>
 													<div class="col-sm-9">
 														<div class="review-block-rate">
-															<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
-															<span class="glyphicon glyphicon-star"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
-															<span class="glyphicon glyphicon-star-empty"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
-															<span class="glyphicon glyphicon-star"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
-															<span class="glyphicon glyphicon-star-empty"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
-															<span class="glyphicon glyphicon-star"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
-															<span class="glyphicon glyphicon-star-empty"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
-															<span class="glyphicon glyphicon-star"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
-															<span class="glyphicon glyphicon-star-empty"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
-															<span class="glyphicon glyphicon-star"></span>
-															</h:panelGroup>
-															<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
-															<span class="glyphicon glyphicon-star-empty"></span>
-															</h:panelGroup>
-														</div>
-														<div class="review-block-description">#{eval.comChercheur}</div>
-													</div>
-												</div>
-											</div>
-										</li>
-										</ui:repeat>
-										<ui:repeat var="eval" value="#{mbProfil.echangesAcheteur}">
-										<li class="list-group-item">
-											<div class="review-block">
-
-												<div class="row">
-													<div class="col-sm-3">
-														<img
-															src="#{eval.proposition.membre.avatar}"
-															class="img-rounded" style="height: 100px"></img>
-														<div class="review-block-name">
-															<a href="#">#{eval.proposition.membre.pseudo}</a>
-														</div>
-														<div class="review-block-date">
-															<h:outputText value="#{eval.dateValidation}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText>
-														</div>
-													</div>
-													<div class="col-sm-9">
-														<div class="review-block-rate">
 															<h:panelGroup rendered="#{eval.noteDonneur ge 1}">
 															<span class="glyphicon glyphicon-star"></span>
 															</h:panelGroup>
@@ -445,6 +390,61 @@
 															</h:panelGroup>
 														</div>
 														<div class="review-block-description">#{eval.comDonneur}</div>
+													</div>
+												</div>
+											</div>
+										</li>
+										</ui:repeat>
+										<ui:repeat var="eval" value="#{mbProfil.echangesAcheteur}">
+										<li class="list-group-item">
+											<div class="review-block">
+
+												<div class="row">
+													<div class="col-sm-3">
+														<img
+															src="#{eval.proposition.membre.avatar}"
+															class="img-rounded" style="height: 100px"></img>
+														<div class="review-block-name">
+															<a href="#">#{eval.proposition.membre.pseudo}</a>
+														</div>
+														<div class="review-block-date">
+															<h:outputText value="#{eval.dateValidation}"><f:convertDateTime pattern="dd-MM-yyyy"/></h:outputText>
+														</div>
+													</div>
+													<div class="col-sm-9">
+														<div class="review-block-rate">
+															<h:panelGroup rendered="#{eval.noteChercheur ge 1}">
+															<span class="glyphicon glyphicon-star"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur lt 1}">
+															<span class="glyphicon glyphicon-star-empty"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur ge 2}">
+															<span class="glyphicon glyphicon-star"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur lt 2}">
+															<span class="glyphicon glyphicon-star-empty"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur ge 3}">
+															<span class="glyphicon glyphicon-star"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur lt 3}">
+															<span class="glyphicon glyphicon-star-empty"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur ge 4}">
+															<span class="glyphicon glyphicon-star"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur lt 4}">
+															<span class="glyphicon glyphicon-star-empty"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur ge 5}">
+															<span class="glyphicon glyphicon-star"></span>
+															</h:panelGroup>
+															<h:panelGroup rendered="#{eval.noteChercheur lt 5}">
+															<span class="glyphicon glyphicon-star-empty"></span>
+															</h:panelGroup>
+														</div>
+														<div class="review-block-description">#{eval.comChercheur}</div>
 													</div>
 												</div>
 											</div>
