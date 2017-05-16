@@ -207,10 +207,7 @@ _________________________________________________________ -->
 														class="btn btn-vert btn-lg">
 														Enregistrer <span class="glyphicon glyphicon-floppy-disk"></span>
 													</button>
-													<h:commandButton value="Demo">
-														<f:ajax event="click" render=":formInscription"
-															listener="#{mbInscription.demo()}" />
-													</h:commandButton>
+													<button type="button" id="btnDemo">Demo</button>
 												</div>
 											</div>
 										</fieldset>
@@ -269,6 +266,7 @@ _________________________________________________________ -->
 			</div>
 			<script
 				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAFZnM_O8BFFutbT4s_XlCFPA5XH9DSwsQ"></script>
+				<script type="text/javascript" src="js/testInscription.js"></script>
 			<script src="js/geocoding.js"></script>
 		</ui:define>
 	</ui:composition>

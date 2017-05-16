@@ -113,7 +113,7 @@
 								<div class="col-sm-3">
 									<div class="form-group">
 										<label for="heure">Heure</label>
-										<h:inputText id="heure" value="#{mbRdv.heure}"
+										<h:inputText id="inputHeure" value="#{mbRdv.heure}"
 											p:placeholder="HH" size="2" styleClass="form-control" />
 
 									</div>
@@ -121,7 +121,7 @@
 								<div class="col-sm-3">
 									<div class="form-group">
 										<label for="minute">Minute</label>
-										<h:inputText id="minute" value="#{mbRdv.minute}"
+										<h:inputText id="inputMinute" value="#{mbRdv.minute}"
 											p:placeholder="mm" size="2" styleClass="form-control" />
 									</div>
 								</div>
@@ -151,10 +151,13 @@
 								action="#{mbRdv.addRdvEchange(mbEchange.echangeCourant)}"
 								value="Enregistrer le rendez-vous" />
 						</h:form>
-
+			<button type="button" id="btnDemo">Démo</button>
 					</div>
 				</div>
 			</div>
+			
+			<script type="text/javascript" src="js/testRdv.js">
+			</script>
 		</ui:define>
 	</ui:composition>
 </h:body>

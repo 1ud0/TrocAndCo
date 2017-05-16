@@ -42,21 +42,6 @@ public class InscriptionManagedBean {
 		return nav;
 	}
 	
-	public void demo() {
-		newMembre.setPrenom("Benoit");
-		newMembre.setNom("Chauvet");
-		Calendar cal = new GregorianCalendar(1979, 05, 01);
-		newMembre.setDateNaissance(cal.getTime());
-		newMembre.setMail("benChauvet@gmail.com");
-		lieu.setAdresse("17 rue d'oslo");
-		lieu.setCodePostal("75018");
-		lieu.setVille("Paris");
-		newMembre.setPseudo("Ben");
-		newMembre.setPassword("pass");
-		
-
-	}
-	
 	public IServiceInscription getProxy() {
 		return proxy;
 	}

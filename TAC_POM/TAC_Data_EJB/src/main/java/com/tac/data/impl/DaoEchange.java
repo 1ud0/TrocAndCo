@@ -108,16 +108,16 @@ public class DaoEchange implements IDaoEchange {
 	@SuppressWarnings("unchecked")
 	@Override
 	public Double getNoteMoyenneMembre(Integer idMembre) {
-		final String reqGetMoyNote = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
+		final String reqGetMoyNote = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteChercheur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteDonneur IS NOT NULL)";
 		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
 		queryGetMoyNote.setParameter("pidMembre", idMembre);
 		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
 		Double totalNote = 0.0;
 		for (Echange echange : echangesDuMembre) {
 			if (echange.getMembre().getIdMembre() == idMembre) {
-				totalNote = totalNote + echange.getNoteChercheur();
-			} else {
 				totalNote = totalNote + echange.getNoteDonneur();
+			} else {
+				totalNote = totalNote + echange.getNoteChercheur();
 			}
 		}
 		Double noteMoyenne;
@@ -153,7 +153,7 @@ public class DaoEchange implements IDaoEchange {
 	@SuppressWarnings("unchecked")
 	@Override
 	public int[] getToutesLesNotes(int idMembre) {
-		final String reqGetMoyNote = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteDonneur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteChercheur IS NOT NULL)";
+		final String reqGetMoyNote = "SELECT e FROM Echange e WHERE (e.proposition.membre.idMembre= :pidMembre AND e.noteChercheur IS NOT NULL) OR (e.membre.idMembre = :pidMembre AND e.noteDonneur IS NOT NULL)";
 		Query queryGetMoyNote = em.createQuery(reqGetMoyNote);
 		queryGetMoyNote.setParameter("pidMembre", idMembre);
 		List<Echange> echangesDuMembre = queryGetMoyNote.getResultList();
@@ -161,10 +161,10 @@ public class DaoEchange implements IDaoEchange {
 		int i = 0;
 		for (Echange echange : echangesDuMembre) {
 			if (echange.getMembre().getIdMembre() == idMembre) {
-				tableauNote[i] = echange.getNoteChercheur();
+				tableauNote[i] = echange.getNoteDonneur();
 
 			} else {
-				tableauNote[i] = echange.getNoteDonneur();
+				tableauNote[i] = echange.getNoteChercheur();
 
 			}
 			i = i + 1;
