@@ -47,7 +47,7 @@ public class EchangeManagedBean {
 	private String note;
 	private String commentaire;
 	private String status;
-	private Boolean showAlertModif;
+
 
 	private Echange echangePropose;
 
@@ -209,7 +209,6 @@ public class EchangeManagedBean {
 	}
 
 	public String ajouterEchange() {
-		showAlertModif = false;
 		if (echangePropose.getPrix() != null) {
 			echangePropose.setProposition(selectedProp);
 			echangePropose.setMembre(membreCourant);
@@ -217,17 +216,13 @@ public class EchangeManagedBean {
 				echangePropose = proxyEchange.initierEchange(echangePropose);
 				return "/echangeAttenteValidation.xhtml?faces-redirect=true";
 			} catch (NotEnoughCreditException e) {
-
-				showAlertModif = true;
+				System.out.println("pas de crédit");
 				return "";
 			}
 		}
 		return "";
 	}
 
-	public void hideAlert() {
-		showAlertModif = false;
-	}
 
 	public String statusEchange() {
 		if (echangeCourant.getDateAnnul() != null) {
@@ -403,13 +398,6 @@ public class EchangeManagedBean {
 		this.status = status;
 	}
 
-	public Boolean getShowAlertModif() {
-		return showAlertModif;
-	}
-
-	public void setShowAlertModif(Boolean showAlertModif) {
-		this.showAlertModif = showAlertModif;
-	}
 
 	public String getRetourTB() {
 		return retourTB;
