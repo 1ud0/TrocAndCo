@@ -409,7 +409,9 @@
 										<h:commandButton value="Valider" styleClass="btn btn-vert btn-lg" onclick="$('#modalAjoutObjet').modal('hide');">
 											<f:ajax listener="#{mbCompteObjet.ajoutProposition()}" event="click" render=":formObjet:objets" execute="@form" />
 										</h:commandButton>
-
+										<h:commandButton value="Demo">
+											<f:ajax event="click" render=":formAjoutObjet" listener="#{mbCompteObjet.demo()}"/>
+										</h:commandButton>
 										<button type="button" class="btn btn-vert btn-lg"
 											data-dismiss="modal">Annuler</button>
 									</div>

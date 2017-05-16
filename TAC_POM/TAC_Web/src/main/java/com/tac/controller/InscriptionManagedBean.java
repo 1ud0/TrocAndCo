@@ -43,17 +43,18 @@ public class InscriptionManagedBean {
 	}
 	
 	public void demo() {
-		newMembre.setNom("Norris");
-		newMembre.setPrenom("chuck");
-		Calendar cal = new GregorianCalendar(1950, 01, 01);
+		newMembre.setPrenom("Benoit");
+		newMembre.setNom("Chauvet");
+		Calendar cal = new GregorianCalendar(1979, 05, 01);
 		newMembre.setDateNaissance(cal.getTime());
-		Localisation loc = new Localisation();
-		loc.setAdresse("Rue du coup de pied tournoyant de la grue");
-		loc.setCodePostal("74000");
-		loc.setVille("Annecy");
-		List<Localisation> locs = new ArrayList<>();
-		locs.add(loc);
-		newMembre.setLocalisations(locs);
+		newMembre.setMail("benChauvet@gmail.com");
+		lieu.setAdresse("17 rue d'oslo");
+		lieu.setCodePostal("75018");
+		lieu.setVille("Paris");
+		newMembre.setPseudo("Ben");
+		newMembre.setPassword("pass");
+		
+
 	}
 	
 	public IServiceInscription getProxy() {

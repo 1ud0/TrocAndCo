@@ -223,7 +223,7 @@ public class CompteObjetsManagedBean implements Serializable {
 	public void uploadPhoto3() {
 		uploadPhoto(file3);
 	}
-
+	
 	public String uploadPhoto(Part fileAUploader) {
 		String path = Thread.currentThread().getContextClassLoader().getResource("bidon.txt").getPath();
 		path = path.split("WEB-INF")[0] + "img/imgProposition/";
@@ -268,6 +268,19 @@ public class CompteObjetsManagedBean implements Serializable {
 		}
 		return null;
 	}
+	
+	// SEB
+	public void demo() {
+		intituleSelected = "Canard en bois";
+		idCatSelected = 12;
+		listenerChargementSousCat();
+		sousCategorieSelectedNouveauObjet.setIdCategorie(72);
+		etatSelected.setIdEtat(2);
+		valeurSelected.setIdValeur(2);
+		descriptionSelected = "Magnifique canard en bois, pour informaticien cherchant un Rubber Duck d'exception!!";
+	}
+	
+	// FIN SEB
 
 	// GETTER SETTER
 	public IServiceProposition getProxyObjet() {

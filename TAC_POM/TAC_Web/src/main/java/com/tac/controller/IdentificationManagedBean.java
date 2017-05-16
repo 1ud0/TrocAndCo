@@ -29,7 +29,6 @@ public class IdentificationManagedBean implements Serializable {
 	private IServiceMessage proxyMessage;
 	@EJB
 	private IServiceEchange proxyEchange;
-	
 
 	private String mail;
 	private String mdp;
@@ -87,11 +86,26 @@ public class IdentificationManagedBean implements Serializable {
 					messageDifferent = false;
 				}
 			}
-			if(messageDifferent){
+			if (messageDifferent) {
 				messagesansrepet.add(message);
 			}
 		}
 		return messagesansrepet.size();
+	}
+
+	public void demoBen() {
+		mail = "benChauvet@gmail.com";
+		mdp = "pass";
+	}
+
+	public void demoAgnes() {
+		mail = "agnes.diallo@gmail.com";
+		mdp = "pass";
+	}
+
+	public void demoRaph() {
+		mail = "raph.lulu@gmail.com";
+		mdp = "pass";
 	}
 
 	public int getCredit() {
